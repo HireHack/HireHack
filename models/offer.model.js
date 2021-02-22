@@ -28,6 +28,17 @@ const offerSchema = new mongoose.Schema({
     },
 });
 
+offerSchema.methods.getAddress = function () {
+    const {
+        streetName,
+        number,
+        zipCode,
+        city,
+        country
+    } = this.address
+    return `${streetName} nº${number}, ${zipCode} ${city} (${country})`
+}
+
 const Offer = mongoose.model("Offer", offerSchema);
 
 module.exports = Offer;
