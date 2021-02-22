@@ -1,0 +1,99 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
+
+const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+const SALT_ROUNDS = 10
+
+const candidateSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    surname: {
+        type: String,
+        required: true,
+    },
+    age: {
+        type: Number,
+        min: 18,
+        max: 120,
+    },
+    address: {
+        streetName: String,
+        number: Number,
+        zipCode: Number,
+        city: String,
+        country: String
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true,
+        match: [EMAIL_PATTERN, "Es necesario añadir un correo electrónico"],
+    },
+    password: {
+        type: String,
+        required: true,
+        match: [PASSWORD_PATTERN, "Es necesario añadir una contraseña"],
+    },
+    resume: {
+        type: String,
+    },
+    skills: {
+        type: [String],
+        enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
+    },
+    picture: {
+        type: String
+    },
+    //TO DO: crear tipo CV
+    offers_applied: {
+        // Relacionar candidato con oferta
+    },
+    status_candidature: {
+        // Relacionar candidato con empresa
+    },
+    linkedinProfile: {
+        type: String,
+        validate: {
+            validator: (text) => {
+                return text.indexOf("https://www.linkedin.com/") === 0;
+            },
+            message: "El enlace de tu perfil a LinkedIn debe comenzar por https://www.linkedin.com/",
+        },
+    },
+});
+
+candidateSchema.methods.getAddress = function () {
+    const {
+        streetName,
+        number,
+        zipCode,
+        city,
+        country
+    } = this.address
+    return `${streetName} nº${number}, ${zipCode} ${city} (${country})`
+}
+
+candidateSchema.methods.checkPassword = function (passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+}
+
+candidateSchema.pre('save', function (next) {
+    if (this.isModified('password')) {
+        bcrypt.hash(this.password, SALT_ROUNDS)
+            .then((hash) => {
+                this.password = hash
+                next();
+            })
+    } else {
+        next();
+    }
+})
+
+const Candidate = mongoose.model('Candidate', candidateSchema)
+
+module.exports = Candidate
