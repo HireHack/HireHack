@@ -19,14 +19,27 @@ const offerSchema = new mongoose.Schema({
         type: [String],
         enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
     },
-    offers_publishedbyCompany: {
+    offers_publishedByCompany: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Company",
+        required: true
         // Relacionar oferta con empresa
     },
-    candidatesApplies: {
-        //type: [ObjectID]
-        // Relacionar oferta con candidato
+},
+    {
+    timestamps: true,
+    toJSON: {
+        virtuals: true,
     },
-});
+    }
+);
+
+offerSchema.virtual('applications', {
+    ref: 'Application',
+    localField: '_id',
+    foreignField: 'offer'
+})
+
 
 offerSchema.methods.getAddress = function () {
     const {

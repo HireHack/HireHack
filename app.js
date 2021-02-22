@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const hbs = require('hbs');
 const routes = require('./config/routes');
+const createError = require('http-errors');
 require('./config/db.config')
 
 // Express config
@@ -22,7 +23,7 @@ app.use((req, res, next) => {
     next(createError(404));
 })
 
-app.use((erro, req, res, next) => {
+app.use((error, req, res, next) => {
     console.log(error);
     if (!error.status) {
         error = createError(500);

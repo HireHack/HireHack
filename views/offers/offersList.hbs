@@ -1,1 +1,9 @@
 <h1>Offers List</h1>
+{{#each offers}}
+    <ul>
+        <li>{{name}}</li>
+        <li>{{address}}</li>
+        <li>{{skills}}</li>
+    </ul>
+    <a href="/offer-detail/{{_id}}">Ver detalle de la oferta</a>
+{{/each}}

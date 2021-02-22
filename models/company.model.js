@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { company } = require('faker');
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -35,15 +36,8 @@ const companySchema = new mongoose.Schema({
     },
     picture: {
         type: String,
-        default: 'https://winaero.com/blog/wp-content/uploads/2015/05/windows-10-user-account-login-icon.png'
     },
-    offers_published: {
-        // Relacionar oferta con empresa
-    },
-    status_candidature: {
-        // Relacionar candidato con empresa
-    },
-    webSite: {
+    website: {
         type: String,
         validate: {
             validator: (text) => {
@@ -52,7 +46,21 @@ const companySchema = new mongoose.Schema({
             message: "Por favor, introduce una URL válida",
         },
     },
-});
+},
+    {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    }
+);
+
+companySchema.virtual('offers_publishedByCompany', {
+    ref: 'Offer',
+    localField: '_id',
+    foreignField: 'company'
+})
+
 
 companySchema.methods.getAddress = function () {
     const {

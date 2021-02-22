@@ -51,12 +51,6 @@ const candidateSchema = new mongoose.Schema({
         default: 'https://winaero.com/blog/wp-content/uploads/2015/05/windows-10-user-account-login-icon.png'
     },
     //TO DO: crear tipo CV
-    offers_applied: {
-        // Relacionar candidato con oferta
-    },
-    status_candidature: {
-        // Relacionar candidato con empresa
-    },
     linkedinProfile: {
         type: String,
         validate: {
@@ -66,7 +60,20 @@ const candidateSchema = new mongoose.Schema({
             message: "El enlace de tu perfil a LinkedIn debe comenzar por https://www.linkedin.com/",
         },
     },
-});
+},
+    {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
+
+candidateSchema.virtual('applications', {
+    ref: 'Application',
+    localField: '_id',
+    foreignField: 'candidate'
+})
 
 candidateSchema.methods.getAddress = function () {
     const {

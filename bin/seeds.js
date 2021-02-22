@@ -14,22 +14,24 @@ Promise.all([Offer.deleteMany(), Company.deleteMany()])
                     number: Math.floor(Math.random() * 200),
                     zipCode: faker.address.zipCode(),
                     city: faker.address.city(),
-                    country: faker.address.country()
+                    country: faker.address.country(),
                 },
                 email: faker.internet.email(),
                 website: faker.internet.url(),
+                picture: faker.image.business()
             })
             .then((company) => {
                 console.log(`Created companies ${company.name}, website: ${company.website}`);
                 for (let j=0; j<5; j++) {
                     Offer.create({
-                       name: faker.name.jobTitle(),
-                       address: {
+                        name: faker.name.jobTitle(),
+                        offers_publishedByCompany: company._id,
+                        address: {
                         streetName: faker.address.streetName(),
                         number: Math.floor(Math.random() * 200),
                         zipCode: faker.address.zipCode(),
                         city: faker.address.city(),
-                        country: company.country
+                        country: company.address.country
                         },
                         skills: getRandom(
                             ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
@@ -52,8 +54,4 @@ function getRandom(arr, n) {
     taken[x] = --len in taken ? taken[len] : len;
   }
   return result;
-}
-
-function getRandomToo(arr) {
-    return arr[Math.floor(Math.random() * arr.length)]
 }
