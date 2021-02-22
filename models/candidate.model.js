@@ -47,7 +47,8 @@ const candidateSchema = new mongoose.Schema({
         enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
     },
     picture: {
-        type: String
+        type: String,
+        default: 'https://winaero.com/blog/wp-content/uploads/2015/05/windows-10-user-account-login-icon.png'
     },
     //TO DO: crear tipo CV
     offers_applied: {

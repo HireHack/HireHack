@@ -7,8 +7,8 @@ const offerSchema = new mongoose.Schema({
     },
     address: {
         streetName: String,
-        number: Number,
-        zipCode: Number,
+        number: String,
+        zipCode: String,
         city: String,
         country: String
     },
@@ -23,7 +23,7 @@ const offerSchema = new mongoose.Schema({
         // Relacionar oferta con empresa
     },
     candidatesApplies: {
-        type: [ObjectID]
+        //type: [ObjectID]
         // Relacionar oferta con candidato
     },
 });

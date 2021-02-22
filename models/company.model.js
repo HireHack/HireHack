@@ -12,8 +12,8 @@ const companySchema = new mongoose.Schema({
     },
     address: {
         streetName: String,
-        number: Number,
-        zipCode: Number,
+        number: String,
+        zipCode: String,
         city: String,
         country: String
     },
@@ -27,14 +27,15 @@ const companySchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        //required: true,
         match: [PASSWORD_PATTERN, "Es necesario añadir una contraseña"],
     },
     description: {
         type: String,
     },
     picture: {
-        type: String
+        type: String,
+        default: 'https://winaero.com/blog/wp-content/uploads/2015/05/windows-10-user-account-login-icon.png'
     },
     offers_published: {
         // Relacionar oferta con empresa
