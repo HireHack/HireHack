@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const hbs = require('hbs');
 const routes = require('./config/routes');
+require('./config/db.config')
 
 // Express config
 const app = express();
