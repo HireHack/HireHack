@@ -8,11 +8,11 @@ const SALT_ROUNDS = 10
 const candidateSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce tu nombre"],
     },
     surname: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce tu apellido"],
     },
     age: {
         type: Number,
@@ -37,7 +37,7 @@ const candidateSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        match: [PASSWORD_PATTERN, "Es necesario añadir una contraseña"],
+        match: [PASSWORD_PATTERN, "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minuscula y 1 número"],
     },
     resume: {
         type: String,

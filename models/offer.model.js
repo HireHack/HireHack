@@ -23,7 +23,6 @@ const offerSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Company",
         required: true
-        // Relacionar oferta con empresa
     },
 },
     {

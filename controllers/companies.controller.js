@@ -18,7 +18,31 @@ module.exports.signup = (req, res, next) => res.render('companies/signup');
 
 
 module.exports.doSignup = (req, res, next) => {
-
+    function renderWithErrors(errors) {
+        res.status(400).render('companies/signup', {
+            errors: errors,
+            company: req.body
+        })
+    }
+    Company.findOne({ email: req.body.email })
+        .then((company) => {
+            if (company) {
+                renderWithErrors({email: "Ya existe un usuario con este email"})
+            } else {
+                Company.create(req.body)
+                    .then(() => {
+                    res.redirect ('/')
+                    })
+                    .catch((err) => {
+                        if (err instanceof mongoose.Error.ValidationError) {
+                            renderWithErrors(err.errors)
+                        } else {
+                            next (err)
+                        }
+                    })
+            }
+        })
+        .catch((err) => next(err));
 }
 
 
