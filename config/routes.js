@@ -28,6 +28,6 @@ router.post('/company-logout', secureCompany.companyIsAuthenticated, secureCandi
 // OFFERS
 router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
-router.get('/offer-creation', secureCompany.companyIsAuthenticated, offersController.offerCreate);
+router.get('/offer-creation', secureCompany.companyIsAuthenticated, offersController.create);
 
 module.exports = router;
