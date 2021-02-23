@@ -7,6 +7,7 @@ const createError = require('http-errors');
 // const passport = require('passport');
 const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
+const Company = require ('./models/company.model')
 require('./config/db.config');
 // require('./config/passportCandidate.config');
 // require('./config/passportCompany.config');
@@ -32,6 +33,23 @@ app.use((req, res, next) => {
                 if (candidate) {
                     req.currentCandidate = candidate;
                     res.locals.currentCandidate = candidate;
+                    next();
+                } else {
+                    next();
+                }
+            })
+    } else {
+        next()
+    }
+})
+
+app.use((req, res, next) => {
+    if(req.session.currentCompanyId) {
+        Company.findById(req.session.currentCompanyId)
+            .then((company) => {
+                if (company) {
+                    req.currentCompany = company;
+                    res.locals.currentCompany = company;
                     next();
                 } else {
                     next();
