@@ -2,9 +2,7 @@ const mongoose = require('mongoose')
 const Company = require('../models/company.model');
 const Offer = require('../models/offer.model');
 
-module.exports.companyProfile = (req, res, next) => {
-    
-}
+module.exports.companyProfile = (req, res, next) => res.render('companies/companyProfile')
 
 module.exports.login = (req, res, next) => res.render('companies/login');
 
@@ -51,7 +49,7 @@ module.exports.doSignup = (req, res, next) => {
             } else {
                 Company.create(req.body)
                     .then(() => {
-                    res.redirect ('/')
+                    res.redirect ('/company-login')
                     })
                     .catch((err) => {
                         if (err instanceof mongoose.Error.ValidationError) {
@@ -67,5 +65,6 @@ module.exports.doSignup = (req, res, next) => {
 
 
 module.exports.logout = (req, res, next) => {
-
+    req.session.destroy();
+    res.redirect('/');
 }

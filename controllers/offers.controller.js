@@ -22,4 +22,4 @@ module.exports.offerDetail = (req, res, next) => {
         })
 };
 
-module.exports.offerCreation = (req, res, next) => res.render('offers/offerCreation');
+module.exports.create = (req, res, next) => res.render('offers/offerCreation');
