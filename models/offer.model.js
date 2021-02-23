@@ -6,23 +6,27 @@ const offerSchema = new mongoose.Schema({
         required: true,
     },
     address: {
-        streetName: String,
-        number: String,
-        zipCode: String,
-        city: String,
-        country: String
+        type: String // Test
+        // Test
+        // streetName: String,
+        // number: String,
+        // zipCode: String,
+        // city: String,
+        // country: String
     },
     description: {
         type: String,
     },
     skills: {
-        type: [String],
-        enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
+        type: String // Test
+        // Test
+        // type: [String],
+        // enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
     },
     offers_publishedByCompany: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Company",
-        required: true
+        //required: true
     },
 },
     {

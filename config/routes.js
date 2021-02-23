@@ -27,5 +27,6 @@ router.post('/company-logout', companiesController.logout);
 router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
 router.get('/offer-creation', offersController.offerCreation);
+router.post('/offer-creation', offersController.offerDoCreation);
 
 module.exports = router;
