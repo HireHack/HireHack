@@ -4,7 +4,12 @@ const logger = require('morgan');
 const hbs = require('hbs');
 const routes = require('./config/routes');
 const createError = require('http-errors');
-require('./config/db.config')
+// const passport = require('passport');
+const session = require('./config/session.config');
+const Candidate = require('./models/candidate.model');
+require('./config/db.config');
+// require('./config/passportCandidate.config');
+// require('./config/passportCompany.config');
 
 // Express config
 const app = express();
@@ -12,9 +17,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(logger('dev'));
+app.use(session);
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
+
+// Session config
+app.use((req, res, next) => {
+    if(req.session.currentCandidateId) {
+        Candidate.findById(req.session.currentCandidateId)
+            .then((candidate) => {
+                if (candidate) {
+                    req.currentCandidate = candidate;
+                    res.locals.currentCandidate = candidate;
+                    next();
+                } else {
+                    next();
+                }
+            })
+    } else {
+        next()
+    }
+})
 
 app.use('/', routes);
 

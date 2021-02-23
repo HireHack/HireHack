@@ -9,7 +9,7 @@ const SALT_ROUNDS = 10
 const companySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce un nombre"],
     },
     address: {
         streetName: String,
@@ -29,7 +29,7 @@ const companySchema = new mongoose.Schema({
     password: {
         type: String,
         //required: true,
-        match: [PASSWORD_PATTERN, "Es necesario añadir una contraseña"],
+        match: [PASSWORD_PATTERN, "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minuscula y 1 número"],
     },
     description: {
         type: String,
@@ -81,7 +81,7 @@ companySchema.pre('save', function (next) {
     if (this.isModified('password')) {
         bcrypt.hash(this.password, SALT_ROUNDS)
             .then((hash) => {
-                this.password = hash
+                this.password = hash;
                 next();
             })
     } else {
