@@ -12,8 +12,10 @@
     "faker": "^5.4.0",
     "hbs": "^4.1.1",
     "http-errors": "^1.8.0",
+    "mongo": "^0.1.0",
     "mongoose": "^5.11.17",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1"
   },
   "devDependencies": {},
   "scripts": {
