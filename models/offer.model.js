@@ -18,10 +18,9 @@ const offerSchema = new mongoose.Schema({
         type: String,
     },
     skills: {
-        type: String // Test
-        // Test
-        // type: [String],
-        // enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
+        type: [String],
+        // TODO (extra): mix enum with [String] to allow users either to add new skills or select them from a select input.
+        //enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
     },
     offers_publishedByCompany: {
         type: mongoose.SchemaTypes.ObjectId,

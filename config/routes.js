@@ -14,6 +14,8 @@ router.post('/candidate-signup', candidatesController.doSignup);
 router.get('/candidate-login', candidatesController.login);
 router.post('/candidate-login', candidatesController.doLogin);
 router.post('/candidate-logout', candidatesController.logout);
+/* Edit candidate profile route */
+/* Delete candidate profile route */
 
 // COMPANIES
 router.get('/company-profile', companiesController.companyProfile);
@@ -22,11 +24,15 @@ router.post('/company-signup', companiesController.doSignup);
 router.get('/company-login', companiesController.login);
 router.post('/company-login', companiesController.doLogin);
 router.post('/company-logout', companiesController.logout);
+/* Edit company profile route */
+/* Delete company profile route */
 
 // OFFERS
 router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
-router.get('/offer-creation', offersController.offerCreation);
-router.post('/offer-creation', offersController.offerDoCreation);
+router.get('/offer-creation', offersController.create);
+router.post('/offer-creation', offersController.doCreate);
+/* Edit offer route */
+/* Delete offer route */
 
 module.exports = router;

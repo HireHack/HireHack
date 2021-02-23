@@ -12,8 +12,16 @@
             </div>
             <div class="form-group">
                 <label for="address-input"> Lugar de la oferta: </label>
-                <input class="form-control {{#if errors.address}}is-invalid{{/if}}" type="text" name="address"
-                    id="address-input">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address"
+                    id="address-input" placeholder="Calle">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address"
+                    id="address-input" placeholder="Número">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address"
+                    id="address-input" placeholder="Código Postal">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address"
+                    id="address-input" placeholder="Ciudad">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address"
+                    id="address-input" placeholder="País">
                 {{#if errors.address}}
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
@@ -26,7 +34,9 @@
             <div class="form-group">
                 <label for="skills-input"> Requisitios: </label>
                 <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
-                    id="skills-input">
+                    id="skills-input"
+                    placeholder="creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
+                <div class="form-text text-secondary">Debes añadir mínimo dos requisitos separados por comas.</div>
                 {{#if errors.skills}}
                 <div class="invalid-feedback">{{errors.skills}}</div>
                 {{/if}}
@@ -35,4 +45,3 @@
         </form>
     </div>
 </div>
-<p>¿Ya tienes una cuenta? <a href="/company-login">Iniciar sesión</a></p>

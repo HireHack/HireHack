@@ -20,20 +20,26 @@ module.exports.offerDetail = (req, res, next) => {
         })
 };
 
-module.exports.offerCreation = (req, res, next) => res.render('offers/offerCreation');
+module.exports.create = (req, res, next) => res.render('offers/offerCreation');
 
-module.exports.offerDoCreation = (req, res, next) => {
+module.exports.doCreate = (req, res, next) => {
     function renderWithErrors(errors) {
         res.render('offers/offerCreation', {
             errors: errors,
             offer: req.body
         })
     }
-    console.log('log req.body:', req.body)
-    Offer.create(req.body)
+
+    const offer = req.body
+    if (offer.skills) {
+        offer.skills = offer.skills.split(',');
+    }
+
+    Offer.create(offer)
         .then((createdOffer) => {
             console.log('created offer: ', createdOffer)
-            res.redirect(`/offers-list, createdOffer)
+            res.redirect('/offers-list');
+            // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
         })
         .catch((err) => {
             if (err instanceof mongoose.Error.ValidationError) {
