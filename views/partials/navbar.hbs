@@ -13,31 +13,41 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+                {{#unlessCond}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-signup{{/if}}">{{#if currentCompany}}Mi perfil{{else}}Empresas{{/if}}</a>
+                    <a class="nav-link" href="/company-login">Empresas</a>
                 </li>
-                {{#if currentCompany}}
-                <form action="/company-logout" method="POST">
-                    <li>
-                        <button>Cerrar sesión</button>
-                    </li>
-                </form>
+                <li class="nav-item">
+                    <a class="nav-link" href="/candidate-login">Candidatos</a>
+                </li>
                 {{else}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/candidate-signup" tabindex="-1" aria-disabled="true">Candidatos</a>
-                    </li>
-                {{/if}}
-                {{!-- REVISAR --}}
-                {{#if currentCandidate}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/candidate-profile">Mi perfil</a>
-                </li>
-                <form action="/candidate-logout" method="POST">
-                    <li>
-                        <button>Cerrar sesión</button>
-                    </li>
-                </form>
-                {{/if}} 
+                    {{#if currentCompany}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}">{{#if
+                                    currentCompany}}Mi perfil{{else}}Empresas{{/if}}</a>
+                            </li>
+                            {{#if currentCompany}}
+                                <form action="/company-logout" method="POST">
+                                    <li>
+                                        <button>Cerrar sesión</button>
+                                    </li>
+                                </form>
+                            {{/if}}
+                        {{else}}
+                        {{#if currentCandidate}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/{{#if currentCandidate}}candidate-profile{{else}}candidate-login{{/if}}" tabindex="-1" aria-disabled="true">{{#if currentCandidate}}Mi perfil{{else}}Candidatos{{/if}}</a>
+                            </li>
+                            {{#if currentCandidate}}
+                                <form action="/candidate-logout" method="POST">
+                                    <li>
+                                        <button>Cerrar sesión</button>
+                                    </li>
+                                </form>
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                {{/unlessCond}}
             </ul>
             {{!-- <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

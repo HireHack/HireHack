@@ -41,6 +41,7 @@ module.exports.doSignup = (req, res, next) => {
             candidate: req.body
         })
     }
+    console.log(req.body)
     Candidate.findOne({ email: req.body.email })
         .then((candidate) => {
             if (candidate) {

@@ -35,8 +35,10 @@ router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
 router.get('/offer-creation', offersController.create);
 router.post('/offer-creation', secureCompany.companyIsAuthenticated, offersController.doCreate);
-/* Edit offer route */
-/* Delete offer route */
+/* Edit offer route GET */
+/* Edit offer route POST */
+router.post('/delete-offer/:id', offersController.delete);
+
 
 
 module.exports = router;

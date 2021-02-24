@@ -24,6 +24,12 @@ app.use(session);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerHelper('unlessCond', (currentCandidate, currentCompany, options) => {
+    if(currentCandidate || currentCompany) {
+      return options.fn();
+    }
+    return options.inverse();
+  });
 
 // Session config
 app.use((req, res, next) => {

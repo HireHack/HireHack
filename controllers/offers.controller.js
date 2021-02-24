@@ -51,3 +51,8 @@ module.exports.doCreate = (req, res, next) => {
         })
 }
 
+module.exports.delete = (req, res, next) => {
+    Offer.findByIdAndDelete({_id: req.params.id /*offers_publishedByCompany: req.currentUser.id*/}) // To ensure only the creator can detele the offer
+        .then(() => res.redirect('/offers-list'))
+        .catch((err) => next(err));
+}
