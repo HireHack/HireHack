@@ -63,19 +63,16 @@ hbs.registerPartials(__dirname + '/views/partials');
 //PASSPORT
 app.use((req, res, next) => {
   console.log(req.user)
+  if (!req.user.surname) {
+    req.currentCompany = req.user;
+    res.locals.currentCompany = req.user;
+    next()
+  } 
   req.currentCandidate = req.user;
   res.locals.currentCandidate = req.user;
-
   next()
 })
 
-app.use((req, res, next) => {
-  console.log(req.user)
-  req.currentCompany = req.user;
-  res.locals.currentCompany = req.user;
-
-  next()
-})
 
 app.use('/', routes);
 

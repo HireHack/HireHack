@@ -43,6 +43,25 @@ module.exports.doLoginGoogle = (req, res, next) => {
     })(req, res, next)
 }
 
+// module.exports.doLoginLinkedin = (req, res, next) => {
+//     passport.authenticate('linkedin-auth-candidates', (error, candidate, validations) => {
+//         if (error) {
+//             next(error)
+//         } else if (!candidate) {
+//             res.status(400).render('candidates/login', {candidate: req.body, errors: validations.error})
+//         } else {
+//             req.login(candidate, (loginErr) => {
+//                 if (!loginErr) {
+//                     res.redirect('/candidate-profile')
+                    
+//                 } else {
+//                     next(loginErr)
+//                 }
+//             })
+//         }
+//     })(req, res, next)
+// }
+
 module.exports.signup = (req, res, next) => res.render('candidates/signup');
 
 module.exports.doSignup = (req, res, next) => {

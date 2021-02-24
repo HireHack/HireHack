@@ -44,6 +44,7 @@ const candidateSchema = new mongoose.Schema({
     },
     social: {
         google: String,
+        linkedin: String
     },
     skills: {
         type: [String],
