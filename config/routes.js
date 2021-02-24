@@ -8,6 +8,7 @@ const secureCandidate = require ('../middlewares/secureCandidate.middleware')
 
 // MISC
 router.get('/', miscController.home);
+router.get('/main-login', miscController.mainLogin);
 
 // CANDIDATES
 router.get('/candidate-profile', secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.candidateProfile);
