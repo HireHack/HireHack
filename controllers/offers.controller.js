@@ -16,7 +16,7 @@ module.exports.offerDetail = (req, res, next) => {
         .then((offer) => {
             console.log('test')
             console.log(offer.getAddress())
-            res.render('offers/offerDetail', { offer, prettyAddress: offer.getAddress()})
+            res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
         })
 };
 
