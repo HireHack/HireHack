@@ -9,7 +9,6 @@ const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
 const Company = require ('./models/company.model')
 require('./config/db.config');
-// require('./config/passportCandidate.config');
 require('./config/passport.config');
 
 // Express config

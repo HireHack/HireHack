@@ -9,22 +9,21 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 //const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 passport.serializeUser((entity, next) => {
-    next(null, entity.id);
+    next(null, entity);
 })
 
-passport.deserializeUser((id, next) => {
-    Company.findById(id)
-        .then((company) => {
-            console.log('company', company)
-            if (company) {
+passport.deserializeUser((entity, next) => {
+    if (entity.surname) {
+        Candidate.findById(entity.id)
+            .then((candidate) => next(null, candidate))
+            .catch(next)
+    } else {
+        Company.findById(entity.id)
+            .then((company) => {
                 next(null, company)
-            } else {
-                Candidate.findById(id)
-                    .then((candidate) => next(null, candidate))
-                    .catch(next)
-            }
-        })
-        .catch(next)
+            })
+            .catch(next)
+    }
 })
 
 //LOCAL
@@ -146,38 +145,43 @@ passport.use('google-auth-candidates', new GoogleStrategy({
     clientSecret: process.env.GCA_CLIENT_SECRET,
     callbackURL: '/authenticate/google/callback'
 }, (accessToken, refreshToken, profile, next) => {
-        const googleID = profile.id
-        const email = profile.emails[0] ? profile.emails[0].value : undefined
+    const googleID = profile.id
+    const email = profile.emails[0] ? profile.emails[0].value : undefined
 
-        if (googleID && email) {
-            Candidate.findOne({
-                $or: [
-                    { email: email },
-                    {'social.google': googleID}
-                ]
-            }).then(candidate => {
-                if (!candidate) {
-                    const newCandidateInstance = new Candidate({
-                        name: email,
-                        surname: email,
-                        email: email,
-                        social: {
-                            google: googleID
-                        },
-                        //active: true,
-                        password: 'Aa1' + mongoose.Types.ObjectId()
-                    })
-                    return newCandidateInstance.save()
-                        .then(newCandidate => {
-                            next(null, newCandidate)
-                        })
-                } else {
-                    next(null, candidate)
+    if (googleID && email) {
+        Candidate.findOne({
+            $or: [{
+                    email: email
+                },
+                {
+                    'social.google': googleID
                 }
-            }).catch(next)
-        } else {
-            next(null, false, {errors: "Error con el proveedor Oauth"})
-        }
+            ]
+        }).then(candidate => {
+            if (!candidate) {
+                const newCandidateInstance = new Candidate({
+                    name: email,
+                    surname: email,
+                    email: email,
+                    social: {
+                        google: googleID
+                    },
+                    //active: true,
+                    password: 'Aa1' + mongoose.Types.ObjectId()
+                })
+                return newCandidateInstance.save()
+                    .then(newCandidate => {
+                        next(null, newCandidate)
+                    })
+            } else {
+                next(null, candidate)
+            }
+        }).catch(next)
+    } else {
+        next(null, false, {
+            errors: "Error con el proveedor Oauth"
+        })
+    }
 
 }))
 
@@ -223,4 +227,3 @@ passport.use('google-auth-candidates', new GoogleStrategy({
 //             next(null, false, {errors: "Error con el proveedor Oauth"})
 //         }
 // }))
-
