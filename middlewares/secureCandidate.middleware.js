@@ -1,5 +1,5 @@
 module.exports.candidateIsAuthenticated = (req, res, next) => {
-  if (req.session.currentCandidateId) {
+  if (req.candidateIsAuthenticated) {
     next()
   } else {
     res.redirect('/candidate-login')
@@ -7,7 +7,7 @@ module.exports.candidateIsAuthenticated = (req, res, next) => {
 }
 
 module.exports.candidateIsNotAuthenticated = (req, res, next) => {
-  if (req.session.currentCandidateId) {
+  if (req.candidateIsAuthenticated) {
     res.redirect('/candidate-profile')
   } else {
     next()

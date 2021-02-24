@@ -42,6 +42,9 @@ const candidateSchema = new mongoose.Schema({
     resume: {
         type: String,
     },
+    social: {
+        google: String,
+    },
     skills: {
         type: [String],
         enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
