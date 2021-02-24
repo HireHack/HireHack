@@ -16,26 +16,26 @@ const GOOGLE_SCOPES = [
 router.get('/', miscController.home);
 
 // CANDIDATES
-router.get('/candidate-profile',  candidatesController.candidateProfile);
-router.get('/candidate-signup',  candidatesController.signup);
-router.post('/candidate-signup',  candidatesController.doSignup);
-router.get('/candidate-login',  candidatesController.login);
-router.post('/candidate-login',  candidatesController.doLogin);
+router.get('/candidate-profile', secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.candidateProfile);
+router.get('/candidate-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.signup);
+router.post('/candidate-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.doSignup);
+router.get('/candidate-login',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.login);
+router.post('/candidate-login',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth-candidates', {scope: GOOGLE_SCOPES}))
 router.get('/authenticate/google/callback', candidatesController.doLoginGoogle)
-router.post('/candidate-logout',  candidatesController.logout);
+router.post('/candidate-logout',  secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.logout);
 /* Edit candidate profile route */
 /* Delete candidate profile route */
 
 // COMPANIES
-router.get('/company-profile',  companiesController.companyProfile);
-router.get('/company-signup',  companiesController.signup);
-router.post('/company-signup',  companiesController.doSignup);
-router.get('/company-login',  companiesController.login);
-router.post('/company-login', companiesController.doLogin);
+router.get('/company-profile',  secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.companyProfile);
+router.get('/company-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.signup);
+router.post('/company-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.doSignup);
+router.get('/company-login',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.login);
+router.post('/company-login', secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.doLogin);
 router.get('/auth/google', passport.authenticate('google-auth-companies', {scope: GOOGLE_SCOPES}))
 router.get('/auth/google/callback', companiesController.doLoginGoogle)
-router.post('/company-logout',  companiesController.logout);
+router.post('/company-logout',  secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.logout);
 /* Edit company profile route */
 /* Delete company profile route */
 
@@ -43,8 +43,8 @@ router.post('/company-logout',  companiesController.logout);
 // OFFERS
 router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
-router.get('/offer-creation', offersController.create);
-router.post('/offer-creation', secureCompany.companyIsAuthenticated, offersController.doCreate);
+router.get('/offer-creation',  secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, offersController.create);
+router.post('/offer-creation', secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, offersController.doCreate);
 /* Edit offer route */
 /* Delete offer route */
 
