@@ -3,7 +3,10 @@ const passport = require('passport');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 
-module.exports.candidateProfile = (req, res, next) => res.render('candidates/candidateProfile');
+module.exports.candidateProfile = (req, res, next) => {
+    console.log('req.user candidate', req.user)
+    res.render('candidates/candidateProfile');
+}
 
 module.exports.login = (req, res, next) => res.render('candidates/login');
 
@@ -15,7 +18,6 @@ module.exports.doLogin = (req, res, next) => {
         console.log('no hay candidato')
       res.status(400).render('candidates/login', { candidate: req.body, error: validations.error });
     } else {
-        console.log('no hay candidato')
       req.login(candidate, loginErr => {
         if (loginErr) next(loginErr)
         else res.redirect('/candidate-profile')

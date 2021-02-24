@@ -9,8 +9,8 @@ const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
 const Company = require ('./models/company.model')
 require('./config/db.config');
-require('./config/passportCandidate.config');
-require('./config/passportCompany.config');
+// require('./config/passportCandidate.config');
+require('./config/passport.config');
 
 // Express config
 const app = express();
@@ -62,15 +62,23 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 //PASSPORT
 app.use((req, res, next) => {
-  console.log(req.user)
-  if (!req.user.surname) {
-    req.currentCompany = req.user;
-    res.locals.currentCompany = req.user;
+  console.log('app.js', req.user)
+  if (req.user) {
+    if (req.user.surname) {
+      console.log('I have a surname so I am a candidate')
+      req.currentCandidate = req.user;
+      res.locals.currentCandidate = req.user;
+      next()
+    } else {
+      console.log('I guess I am a company')
+      req.currentCompany = req.user;
+      res.locals.currentCompany = req.user;
+      next()
+    }
+  } else {
+    console.log('There is no user logged in')
     next()
-  } 
-  req.currentCandidate = req.user;
-  res.locals.currentCandidate = req.user;
-  next()
+  }
 })
 
 

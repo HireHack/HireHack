@@ -24,6 +24,7 @@ passport.use('local-auth-candidates', new LocalStrategy({
 }, (email, password, next) => {
   Candidate.findOne({ email: email })
     .then((candidate) => {
+
       if (!candidate) {
         next(null, false, { error: "El correo electrónico o la contraseña no son correctos" })
       } else {
