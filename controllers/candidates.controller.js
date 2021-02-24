@@ -48,7 +48,7 @@ module.exports.doSignup = (req, res, next) => {
             } else {
                 Candidate.create(req.body)
                     .then(() => {
-                    res.redirect ('/candidate-profile')
+                    res.redirect ('/candidate-login')
                     })
                     .catch((err) => {
                         if (err instanceof mongoose.Error.ValidationError) {
@@ -65,5 +65,5 @@ module.exports.doSignup = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
     req.session.destroy();
-    res.redirect('/home');
+    res.redirect('/');
 }

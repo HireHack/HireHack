@@ -20,6 +20,7 @@ module.exports.offerDetail = (req, res, next) => {
         })
 };
 
+
 module.exports.create = (req, res, next) => res.render('offers/offerCreation');
 
 module.exports.doCreate = (req, res, next) => {
@@ -49,3 +50,4 @@ module.exports.doCreate = (req, res, next) => {
             }
         })
 }
+
