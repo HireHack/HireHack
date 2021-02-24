@@ -1,33 +1,42 @@
-<h1>Offer Creation Page</h1>
 <h2>Crea una oferta</h2>
 <div class="col mb-2">
     <div class="row">
-        <form action="/company-signup" method="POST">
+        <form action="/offer-creation" method="POST">
             <div class="form-group">
                 <label for="offer-input" name="name"> Nombre de la oferta: </label>
-                <input class="form-control {{#if errors.name}}is-invalid{{/if}}" value="{{offer.name}}" type="text"
-                    name="name" id="offer-input">
+                <input class="form-control {{#if errors.name}}is-invalid{{/if}}" type="text" name="name"
+                    id="offer-input">
                 {{#if errors.name}}
                 <div class="invalid-feedback">{{errors.name}}</div>
                 {{/if}}
             </div>
             <div class="form-group">
                 <label for="address-input"> Lugar de la oferta: </label>
-                <input class="form-control {{#if errors.address}}is-invalid{{/if}}" value="{{offer.skills}}"
-                    type="email" name="address" id="address-input">
-                {{#if errors.email}}
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address.streetName"
+                    id="address-input" placeholder="Calle">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address.number"
+                    id="address-input" placeholder="Número">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address.zipCode"
+                    id="address-input" placeholder="Código Postal">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address.city"
+                    id="address-input" placeholder="Ciudad">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" type="text" name="address.country"
+                    id="address-input" placeholder="País">
+                {{#if errors.address}}
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
             </div>
             <div class="form-group">
                 <label for="offer-input"> Descripción: </label>
-                <textarea name="description" id="offer" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="description" id="offer" cols="30" rows="10"></textarea>
             </div>
 
             <div class="form-group">
-                <label for="description-input"> Requisitios: </label>
-                <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" value="{{offer.skills}}"
-                    type="email" name="address" id="address-input">
+                <label for="skills-input"> Requisitios: </label>
+                <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
+                    id="skills-input"
+                    placeholder="Ej.: creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
+                <div class="form-text text-secondary">Debes añadir mínimo dos requisitos separados por comas.</div>
                 {{#if errors.skills}}
                 <div class="invalid-feedback">{{errors.skills}}</div>
                 {{/if}}
@@ -36,4 +45,3 @@
         </form>
     </div>
 </div>
-<p>¿Ya tienes una cuenta? <a href="/company-login">Iniciar sesión</a></p>

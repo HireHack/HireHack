@@ -16,6 +16,8 @@ router.post('/candidate-signup', secureCandidate.candidateIsNotAuthenticated, se
 router.get('/candidate-login', secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.login);
 router.post('/candidate-login', secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.doLogin);
 router.post('/candidate-logout', secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.logout);
+/* Edit candidate profile route */
+/* Delete candidate profile route */
 
 // COMPANIES
 router.get('/company-profile', secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.companyProfile);
@@ -24,10 +26,17 @@ router.post('/company-signup', secureCompany.companyIsNotAuthenticated, secureCa
 router.get('/company-login', secureCompany.companyIsNotAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.login);
 router.post('/company-login', secureCompany.companyIsNotAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.doLogin);
 router.post('/company-logout', secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.logout);
+/* Edit company profile route */
+/* Delete company profile route */
+
 
 // OFFERS
 router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
-router.get('/offer-creation', secureCompany.companyIsAuthenticated, offersController.create);
+router.get('/offer-creation', offersController.create);
+router.post('/offer-creation', secureCompany.companyIsAuthenticated, offersController.doCreate);
+/* Edit offer route */
+/* Delete offer route */
+
 
 module.exports = router;
