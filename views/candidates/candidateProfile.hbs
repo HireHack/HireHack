@@ -3,3 +3,7 @@
 
 <p>Conectado como {{currentCandidate.name}}</p>
 
+<a class="btn btn-success d-inline" href="/edit-candidate/{{id}}">Editar mi perfil</a>
+<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Candidato</button>
+</form>

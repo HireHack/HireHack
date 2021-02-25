@@ -20,7 +20,7 @@
     <p>Oferta publicada por: <strong>{{offer.offers_publishedByCompany}}</strong></p>
     {{#if currentCompany}}
     <a class="btn btn-success d-inline" href="/edit-offer/{{id}}">Editar Oferta</a>
-    <form class="delete-form d-inline" action="/delete-offer/{{id}}" method="post">
+    <form class="delete-form d-inline" action="/delete-offer/{{offer.id}}" method="post">
         <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar oferta</button>
     </form>
     {{/if}}

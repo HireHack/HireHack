@@ -9,6 +9,8 @@ const secureCandidate = require ('../middlewares/secureCandidate.middleware')
 // MISC
 router.get('/', miscController.home);
 router.get('/main-login', miscController.mainLogin);
+// router.get('/delete-profile', miscController.deleteProfile);
+//router.get('/delete-profile', miscController.doDeleteProfile);
 
 // CANDIDATES
 router.get('/candidate-profile', secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.candidateProfile);
@@ -17,8 +19,9 @@ router.post('/candidate-signup', secureCandidate.candidateIsNotAuthenticated, se
 router.get('/candidate-login', secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.login);
 router.post('/candidate-login', secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.doLogin);
 router.post('/candidate-logout', secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.logout);
-/* Edit candidate profile route */
-/* Delete candidate profile route */
+/* Edit candidate profile route GET */
+/* Edit candidate profile route POST */
+router.post('/delete-candidate/:id', candidatesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
 
 // COMPANIES
 router.get('/company-profile', secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.companyProfile);
@@ -27,8 +30,9 @@ router.post('/company-signup', secureCompany.companyIsNotAuthenticated, secureCa
 router.get('/company-login', secureCompany.companyIsNotAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.login);
 router.post('/company-login', secureCompany.companyIsNotAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.doLogin);
 router.post('/company-logout', secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.logout);
-/* Edit company profile route */
-/* Delete company profile route */
+/* Edit company profile route GET */
+/* Edit company profile route POST */
+router.post('/delete-company/:id', companiesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
 
 
 // OFFERS

@@ -63,8 +63,13 @@ module.exports.doSignup = (req, res, next) => {
         .catch((err) => next(err));
 }
 
-
 module.exports.logout = (req, res, next) => {
     req.session.destroy();
     res.redirect('/');
+}
+
+module.exports.delete = (req, res, next) => {
+    Candidate.findByIdAndDelete({_id: req.params.id})
+        .then(() => res.redirect('/'))
+        .catch((err) => next(err));
 }
