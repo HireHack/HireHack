@@ -1,15 +1,17 @@
 module.exports.companyIsAuthenticated = (req, res, next) => {
-  if (req.companyIsAuthenticated) {
+  if (req.isAuthenticated()) {
+      console.log(req.isAuthenticated())
     next()
   } else {
-    res.redirect('/company-login')
-  }
+      res.redirect('/company-login')
+    }
 }
 
 module.exports.companyIsNotAuthenticated = (req, res, next) => {
-  if (req.companyIsAuthenticated) {
-    res.redirect('/company-profile')
-  } else {
-    next()
-  }
+    if (req.isAuthenticated()) {
+      res.redirect('/company-profile')
+      next()
+    } else {
+      next()
+    }
 }

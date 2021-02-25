@@ -16,26 +16,26 @@ const GOOGLE_SCOPES = [
 router.get('/', miscController.home);
 
 // CANDIDATES
-router.get('/candidate-profile', secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.candidateProfile);
-router.get('/candidate-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.signup);
-router.post('/candidate-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.doSignup);
-router.get('/candidate-login',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.login);
-router.post('/candidate-login',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.doLogin);
+router.get('/candidate-profile', secureCandidate.candidateIsAuthenticated, candidatesController.candidateProfile); //No permitir company
+router.get('/candidate-signup', secureCandidate.candidateIsNotAuthenticated, candidatesController.signup);
+router.post('/candidate-signup', secureCandidate.candidateIsNotAuthenticated, candidatesController.doSignup);
+router.get('/candidate-login', secureCandidate.candidateIsNotAuthenticated, candidatesController.login);
+router.post('/candidate-login', secureCandidate.candidateIsNotAuthenticated, candidatesController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth-candidates', {scope: GOOGLE_SCOPES}))
 router.get('/authenticate/google/callback', candidatesController.doLoginGoogle)
-router.post('/candidate-logout',  secureCandidate.candidateIsAuthenticated, secureCompany.companyIsNotAuthenticated, candidatesController.logout);
+router.post('/candidate-logout', secureCandidate.candidateIsAuthenticated, candidatesController.logout);
 /* Edit candidate profile route */
 /* Delete candidate profile route */
 
 // COMPANIES
-router.get('/company-profile',  secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.companyProfile);
-router.get('/company-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.signup);
-router.post('/company-signup',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.doSignup);
-router.get('/company-login',  secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.login);
-router.post('/company-login', secureCandidate.candidateIsNotAuthenticated, secureCompany.companyIsNotAuthenticated, companiesController.doLogin);
+router.get('/company-profile', secureCompany.companyIsAuthenticated, companiesController.companyProfile); //No permitir candidate
+router.get('/company-signup', secureCompany.companyIsNotAuthenticated, companiesController.signup);
+router.post('/company-signup', secureCompany.companyIsNotAuthenticated, companiesController.doSignup);
+router.get('/company-login', secureCompany.companyIsNotAuthenticated, companiesController.login);
+router.post('/company-login', secureCompany.companyIsNotAuthenticated, companiesController.doLogin);
 router.get('/auth/google', passport.authenticate('google-auth-companies', {scope: GOOGLE_SCOPES}))
 router.get('/auth/google/callback', companiesController.doLoginGoogle)
-router.post('/company-logout',  secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, companiesController.logout);
+router.post('/company-logout', secureCompany.companyIsAuthenticated, companiesController.logout);
 /* Edit company profile route */
 /* Delete company profile route */
 
@@ -43,8 +43,8 @@ router.post('/company-logout',  secureCompany.companyIsAuthenticated, secureCand
 // OFFERS
 router.get('/offers-list', offersController.offersList);
 router.get('/offer-detail/:id', offersController.offerDetail);
-router.get('/offer-creation',  secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, offersController.create);
-router.post('/offer-creation', secureCompany.companyIsAuthenticated, secureCandidate.candidateIsNotAuthenticated, offersController.doCreate);
+router.get('/offer-creation',  secureCompany.companyIsAuthenticated, offersController.create);
+router.post('/offer-creation', secureCompany.companyIsAuthenticated, offersController.doCreate);
 /* Edit offer route */
 /* Delete offer route */
 

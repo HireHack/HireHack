@@ -1,16 +1,17 @@
 module.exports.candidateIsAuthenticated = (req, res, next) => {
-  if (req.candidateIsAuthenticated) {
+    if (req.isAuthenticated()) {
     next()
   } else {
-    res.redirect('/candidate-login')
-  }
+      res.redirect('/candidate-login')
+    }
 }
 
 module.exports.candidateIsNotAuthenticated = (req, res, next) => {
-  if (req.candidateIsAuthenticated) {
-    res.redirect('/candidate-profile')
-  } else {
-    next()
-  }
+    if (req.isAuthenticated()) {
+      res.redirect('/candidate-profile')
+      next()
+    } else {
+      next()
+    }
 }
 

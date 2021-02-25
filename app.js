@@ -61,7 +61,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 //PASSPORT
 app.use((req, res, next) => {
-  console.log('app.js', req.user)
+  //console.log('app.js', req.user)
   if (req.user) {
     if (req.user.surname) {
       console.log('I have a surname so I am a candidate')
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
       next()
     }
   } else {
-    console.log('There is no user logged in')
+    //console.log('There is no user logged in')
     next()
   }
 })
