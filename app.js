@@ -7,14 +7,16 @@ const createError = require('http-errors');
 const passport = require('passport');
 const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
-const Company = require ('./models/company.model')
+const Company = require('./models/company.model')
 require('./config/db.config');
 require('./config/passport.config');
 
 // Express config
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(session);
@@ -81,7 +83,6 @@ app.use((req, res, next) => {
       next()
     }
   } else {
-    //console.log('There is no user logged in')
     next()
   }
 })
@@ -91,16 +92,16 @@ app.use('/', routes);
 
 // Error handler
 app.use((req, res, next) => {
-    next(createError(404));
+  next(createError(404));
 })
 
 app.use((error, req, res, next) => {
-    console.log(error);
-    if (!error.status) {
-        error = createError(500);
-    } 
-    res.status(error.status);
-    res.render('error', error);
+  console.log(error);
+  if (!error.status) {
+    error = createError(500);
+  }
+  res.status(error.status);
+  res.render('error', error);
 })
 
 // Initialization on port
