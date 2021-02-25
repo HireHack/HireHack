@@ -92,6 +92,18 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/');
 }
 
+module.exports.edit = (req, res, next) => {
+     Company.findById(req.params.id)
+         .then((companyToEdit) => res.render('companies/signup', companyToEdit))
+         .catch((err) => console.error(err))
+}
+
+
+module.exports.doEdit = (req, res, next) => {
+    
+}
+
+
 module.exports.delete = (req, res, next) => {
     console.log(req.params.id)
     Company.findByIdAndDelete(req.params.id)
