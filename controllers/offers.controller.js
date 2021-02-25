@@ -51,6 +51,17 @@ module.exports.doCreate = (req, res, next) => {
         })
 }
 
+module.exports.edit = (req, res, next) => {
+    Offer.findById(req.params.id)
+        .then((offerToEdit) => res.render('offers/offerCreation', offerToEdit))
+        .catch((err) => console.error(err))
+}
+
+
+module.exports.doEdit = (req, res, next) => {
+
+}
+
 module.exports.delete = (req, res, next) => {
     Offer.findByIdAndDelete({_id: req.params.id /*offers_publishedByCompany: req.currentUser.id*/}) // To ensure only the creator can detele the offer
         .then(() => res.redirect('/offers-list'))

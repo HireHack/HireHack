@@ -92,6 +92,22 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/');
 }
 
+module.exports.edit = (req, res, next) => {
+     Company.findById(req.params.id)
+         .then((companyToEdit) => res.render('companies/signup', companyToEdit))
+         .catch((err) => console.error(err))
+}
+
+
+module.exports.doEdit = (req, res, next) => {
+    Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then(() => {
+        res.redirect('/company-profile')
+        })
+        .catch((err) => next(err))
+}
+
+
 module.exports.delete = (req, res, next) => {
     console.log(req.params.id)
     Company.findByIdAndDelete(req.params.id)

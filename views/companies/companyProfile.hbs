@@ -6,12 +6,4 @@
 <br>
 <a href="/offers-list/{{_id}}">Ver mis ofertas</a>
 <br>
-<a class="btn btn-success d-inline" href="/edit-company/{{id}}">Editar mi perfil</a>
-<form class="delete-form d-inline" action="/delete-company/{{currentCompany._id}}" method="post">
-    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Empresa</button>
-
-<form action="/company-logout" method="POST">
-    <li>
-        <button>Cerrar sesión</button>
-    </li>
-</form>
+<a class="btn btn-success d-inline" href="/company-edit/{{currentCompany._id}}">Editar mi perfil</a>
