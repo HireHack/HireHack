@@ -61,20 +61,24 @@ module.exports.doSignup = (req, res, next) => {
             company: req.body
         })
     }
-    Company.findOne({ email: req.body.email })
+    Company.findOne({
+            email: req.body.email
+        })
         .then((company) => {
             if (company) {
-                renderWithErrors({email: "Ya existe un usuario con este email"})
+                renderWithErrors({
+                    email: "Ya existe un usuario con este email"
+                })
             } else {
                 Company.create(req.body)
                     .then(() => {
-                    res.redirect ('/company-login')
+                        res.redirect('/company-login')
                     })
                     .catch((err) => {
                         if (err instanceof mongoose.Error.ValidationError) {
                             renderWithErrors(err.errors)
                         } else {
-                            next (err)
+                            next(err)
                         }
                     })
             }
@@ -86,4 +90,11 @@ module.exports.doSignup = (req, res, next) => {
 module.exports.logout = (req, res, next) => {
     req.logout();
     res.redirect('/');
+}
+
+module.exports.delete = (req, res, next) => {
+    console.log(req.params.id)
+    Company.findByIdAndDelete(req.params.id)
+        .then(() => res.redirect('/'))
+        .catch((err) => next(err));
 }

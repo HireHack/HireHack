@@ -1,8 +1,14 @@
-<h1>Company Profile Page</h1>
+<h1>Perfil de Empresa</h1>
 
 <p>Has iniciado sesión como {{currentCompany.name}}</p>
 
 <a href="/offer-creation">Crear Oferta</a>
+<br>
+<a href="/offers-list/{{_id}}">Ver mis ofertas</a>
+<br>
+<a class="btn btn-success d-inline" href="/edit-company/{{id}}">Editar mi perfil</a>
+<form class="delete-form d-inline" action="/delete-company/{{currentCompany._id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Empresa</button>
 
 <form action="/company-logout" method="POST">
     <li>

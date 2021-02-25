@@ -73,6 +73,7 @@ module.exports.doSignup = (req, res, next) => {
             candidate: req.body
         })
     }
+    console.log(req.body)
     Candidate.findOne({ email: req.body.email })
         .then((candidate) => {
             if (candidate) {
@@ -94,8 +95,13 @@ module.exports.doSignup = (req, res, next) => {
         .catch((err) => next(err));
 }
 
-
 module.exports.logout = (req, res, next) => {
     req.logout();
     res.redirect('/');
+}
+
+module.exports.delete = (req, res, next) => {
+    Candidate.findByIdAndDelete({_id: req.params.id})
+        .then(() => res.redirect('/'))
+        .catch((err) => next(err));
 }

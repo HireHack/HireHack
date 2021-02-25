@@ -1,9 +1,17 @@
-<h1>Offers List</h1>
+<h1 class="text-center">Listado de Ofertas</h1>
 {{#each offers}}
-    <ul>
-        <li>{{name}}</li>
-        <li>{{address}}</li>
-        <li>{{skills}}</li>
-    </ul>
+<div class="border rounded p-3 mb-2">
+    <h3>{{name}}</h3>
+    <p><b>Descripción:</b> <br> {{description}}</p>
+    <b>Requisitos:</b>
+    {{#each skills}}
+    {{#if @last}}
+    <span>{{this}}</span>
+    {{else}}
+    <span>{{this}} |</span>
+    {{/if}}
+    {{/each}}
+    <br>
     <a href="/offer-detail/{{_id}}">Ver detalle de la oferta</a>
+</div>
 {{/each}}
