@@ -1,0 +1,14 @@
+{{#if flashMessage}}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+    <div role="alert" aria-live="assertive" aria-atomic="true" class="toast show" data-bs-autohide="true">
+        <div class="toast-header">
+            <strong class="me-auto">Emosi2Compra2</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            "Hola"
+            {{flashMessage}}
+        </div>
+    </div>
+</div>
+{{/if}}

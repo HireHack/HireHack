@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Offer = require('../models/offer.model');
+const flash = require ('connect-flash')
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
