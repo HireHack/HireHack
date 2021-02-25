@@ -37,8 +37,23 @@
                     <label for="website-input" name="website"> Enlace a la página web de la empresa: </label>
                     <input class="form-control" value="{{website}}" type="text" name="website" id="website-input">
                 </div>
-
-            <div>Address</div>
+                
+            <div class="form-group">
+                <label for="address-input"> Lugar de la oferta: </label>
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text"
+                    name="address.streetName" id="address-input" placeholder="Calle">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text"
+                    name="address.number" id="address-input" placeholder="Número">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.zipCode}}" type="text"
+                    name="address.zipCode" id="address-input" placeholder="Código Postal">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.city}}" type="text"
+                    name="address.city" id="address-input" placeholder="Ciudad">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.country}}" type="text"
+                    name="address.country" id="address-input" placeholder="País">
+                {{#if errors.address}}
+                <div class="invalid-feedback">{{errors.address}}</div>
+                {{/if}}
+            </div>
             <div>Picture</div>
 
             {{/if}}

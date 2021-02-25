@@ -44,7 +44,7 @@
             <div class="form-group">
                 <label for="skills-input"> Competencias: </label>
                 <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
-                    id="skills-input"
+                    id="skills-input" value="{{skills}}"
                     placeholder="Ej.: creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
                 <div class="form-text text-secondary">Debes añadir mínimo dos competencias separadas por comas.</div>
                 {{#if errors.skills}}
@@ -54,7 +54,22 @@
 
             <div>Picture</div>
             <div>CV</div>
-            <div>Address</div>
+            <div class="form-group">
+                <label for="address-input"> Dirección: </label>
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text"
+                    name="address.streetName" id="address-input" placeholder="Calle">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text"
+                    name="address.number" id="address-input" placeholder="Número">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.zipCode}}" type="text"
+                    name="address.zipCode" id="address-input" placeholder="Código Postal">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.city}}" type="text"
+                    name="address.city" id="address-input" placeholder="Ciudad">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.country}}" type="text"
+                    name="address.country" id="address-input" placeholder="País">
+                {{#if errors.address}}
+                <div class="invalid-feedback">{{errors.address}}</div>
+                {{/if}}
+            </div>
 
             <div class="form-group">
                 <label for="candidateLinkedin-input" name="linkedin"> Linkedin: </label>
