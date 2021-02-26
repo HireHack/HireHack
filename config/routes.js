@@ -20,7 +20,7 @@ router.get('/main-login', miscController.mainLogin);
 //router.get('/delete-profile', miscController.doDeleteProfile);
 
 // CANDIDATES
-router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile); //No permitir company
+router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
 router.get('/candidate-signup', candidatesController.signup);
 router.post('/candidate-signup', candidatesController.doSignup);
 router.get('/candidate-login', candidatesController.login);
