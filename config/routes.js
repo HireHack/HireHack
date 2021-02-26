@@ -6,6 +6,8 @@ const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
 const secureCompany = require('../middlewares/secureCompany.middleware')
 const secureCandidate = require('../middlewares/secureCandidate.middleware')
+const multer = require('multer')
+//const upload = multer({dest: })
 
 const GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/userinfo.profile",
