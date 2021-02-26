@@ -1,16 +1,16 @@
-<h1>Registro como candidato</h1>
+<h1>{{#if currentCandidate}}Editar perfil{{else}}Registro como candidato{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
-        <form action="/candidate-signup" method="POST">
-        <div class="form-group">
-            <label for="candidateName-input" name="name"> Nombre: </label>
-            <input class="form-control" value="{{candidate.name}}" type="text" name="name"
-                id="candidateName-input" >
-        </div>
-        <div class="form-group">
-            <label for="candidateSurname-input" name="surname"> Apellidos: </label>
-            <input class="form-control" value="{{candidate.surname}}" type="text" name="surname" id="candidateSurname-input">
-        </div>
+        <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST">
+            <div class="form-group">
+                <label for="candidateName-input" name="name"> Nombre: </label>
+                <input class="form-control" value="{{name}}" type="text" name="name" id="candidateName-input">
+            </div>
+            <div class="form-group">
+                <label for="candidateSurname-input" name="surname"> Apellidos: </label>
+                <input class="form-control" value="{{surname}}" type="text" name="surname" id="candidateSurname-input">
+            </div>
+            {{#unless currentCandidate}}
             <div class="form-group">
                 <label for="email-input" name="email"> Email: </label>
                 <input class="form-control {{#if errors.email}}is-invalid{{/if}}" type="email"
@@ -21,15 +21,83 @@
             </div>
             <div class="form-group">
                 <label for="candidatePassword-input" name="password"> Contraseña: </label>
-                <input class="form-control {{#if errors.password}}is-invalid{{/if}}" type="password" name="password" id="candidatePassword-input">
+                <input class="form-control {{#if errors.password}}is-invalid{{/if}}" type="password" name="password"
+                    id="candidatePassword-input">
                 {{#if errors.password}}
                 <div class="invalid-feedback">{{errors.password}}</div>
                 {{/if}}
             </div>
+            {{/unless}}
 
-            <button class="btn btn-primary mt-3" type="submit">Registro</button>
+            {{#if currentCandidate}}
+            <div class="form-group">
+                <label for="candidateAge-input" name="age"> Edad: </label>
+                <input class="form-control" value="{{age}}" type="number" name="age" id="candidateAge-input">
+            </div>
+
+            <div class="form-group">
+                <label for="candidateResume-input" name="resume"> Tu curriculum: </label>
+
+                <textarea name="resume" id="resume" value="{{resume}}" cols="30" rows="10" cols="30"
+                    rows="10"></textarea>
+
+            </div>
+
+            <div class="form-group">
+                <label for="skills-input"> Competencias: </label>
+                <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
+                    id="skills-input" value="{{skills}}"
+
+                    placeholder="Ej.: creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
+                <div class="form-text text-secondary">Debes añadir mínimo dos competencias separadas por comas.</div>
+                {{#if errors.skills}}
+                <div class="invalid-feedback">{{skills}}</div>
+                {{/if}}
+            </div>
+
+            <div>Picture</div>
+            <div>CV</div>
+            
+            <div class="form-group">
+                <label for="address-input"> Dirección: </label>
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text"
+                    name="address.streetName" id="address-input" placeholder="Calle">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text"
+                    name="address.number" id="address-input" placeholder="Número">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.zipCode}}" type="text"
+                    name="address.zipCode" id="address-input" placeholder="Código Postal">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.city}}" type="text"
+                    name="address.city" id="address-input" placeholder="Ciudad">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.country}}" type="text"
+                    name="address.country" id="address-input" placeholder="País">
+                {{#if errors.address}}
+                <div class="invalid-feedback">{{errors.address}}</div>
+                {{/if}}
+            </div>
+
+            <div class="form-group">
+                <label for="candidateLinkedin-input" name="linkedin"> Linkedin: </label>
+                <input class="form-control" value="{{linkedin}}" type="text" name="linkedin"
+                    id="candidateLinkedin-input">
+            </div>
+
+            {{/if}}
+
+            <button class="btn btn-primary mt-3" type="submit">{{#if
+                currentCandidate}}Editar{{else}}Registro{{/if}}</button>
         </form>
     </div>
 </div>
 
+{{#unless currentCandidate}}
 <p>¿Ya tienes una cuenta? <a href="/candidate-login">Iniciar sesión</a></p>
+{{/unless}}
+
+
+{{#if currentCandidate}}
+<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil
+        Candidato</button>
+</form>
+{{/if}}
+

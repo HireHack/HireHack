@@ -5,19 +5,23 @@ const hbs = require('hbs');
 const routes = require('./config/routes');
 const createError = require('http-errors');
 const passport = require('passport');
+const flash = require ('connect-flash')
 const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
-const Company = require ('./models/company.model')
+const Company = require('./models/company.model')
 require('./config/db.config');
 require('./config/passport.config');
 
 // Express config
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(session);
+app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('views', __dirname + '/views');
@@ -30,7 +34,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 //     return options.inverse();
 //   });
 
-// Session config
+// SESSION CONFIG
 // app.use((req, res, next) => {
 //     if(req.session.currentCandidateId) {
 //         Candidate.findById(req.session.currentCandidateId)
@@ -70,37 +74,44 @@ app.use((req, res, next) => {
   //console.log('app.js', req.user)
   if (req.user) {
     if (req.user.surname) {
-      console.log('I have a surname so I am a candidate')
+      //console.log('I have a surname so I am a candidate')
       req.currentCandidate = req.user;
+      //console.log('req.currentCandidate', req.currentCandidate)
       res.locals.currentCandidate = req.user;
+      //console.log('res.locals', res.locals.currentCandidate)
       next()
     } else {
-      console.log('I guess I am a company')
+      //console.log('I guess I am a company')
       req.currentCompany = req.user;
       res.locals.currentCompany = req.user;
       next()
     }
   } else {
-    //console.log('There is no user logged in')
     next()
   }
 })
 
+//FLASH
+app.use((req, res, next) => {
+  res.locals.flashMessage = req.flash('flashMessage')
+
+  next()
+})
 
 app.use('/', routes);
 
 // Error handler
 app.use((req, res, next) => {
-    next(createError(404));
+  next(createError(404));
 })
 
 app.use((error, req, res, next) => {
-    console.log(error);
-    if (!error.status) {
-        error = createError(500);
-    } 
-    res.status(error.status);
-    res.render('error', error);
+  console.log(error);
+  if (!error.status) {
+    error = createError(500);
+  }
+  res.status(error.status);
+  res.render('error', error);
 })
 
 // Initialization on port

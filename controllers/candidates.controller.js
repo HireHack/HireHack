@@ -12,18 +12,21 @@ module.exports.login = (req, res, next) => res.render('candidates/login');
 
 module.exports.doLogin = (req, res, next) => {
     passport.authenticate('local-auth-candidates', (error, candidate, validations) => {
-    if (error) {
-      next(error);
-    } else if (!candidate) {
-        console.log('no hay candidato')
-      res.status(400).render('candidates/login', { candidate: req.body, error: validations.error });
-    } else {
-      req.login(candidate, loginErr => {
-        if (loginErr) next(loginErr)
-        else res.redirect('/candidate-profile')
-      })
-    }
-  })(req, res, next);
+        if (error) {
+            next(error);
+        } else if (!candidate) {
+            console.log('no hay candidato')
+            res.status(400).render('candidates/login', {
+                candidate: req.body,
+                error: validations.error
+            });
+        } else {
+            req.login(candidate, loginErr => {
+                if (loginErr) next(loginErr)
+                else res.redirect('/candidate-profile')
+            })
+        }
+    })(req, res, next);
 }
 
 module.exports.doLoginGoogle = (req, res, next) => {
@@ -31,12 +34,15 @@ module.exports.doLoginGoogle = (req, res, next) => {
         if (error) {
             next(error)
         } else if (!candidate) {
-            res.status(400).render('candidates/login', {candidate: req.body, errors: validations.error})
+            res.status(400).render('candidates/login', {
+                candidate: req.body,
+                errors: validations.error
+            })
         } else {
             req.login(candidate, (loginErr) => {
                 if (!loginErr) {
                     res.redirect('/candidate-profile')
-                    
+
                 } else {
                     next(loginErr)
                 }
@@ -55,7 +61,7 @@ module.exports.doLoginGoogle = (req, res, next) => {
 //             req.login(candidate, (loginErr) => {
 //                 if (!loginErr) {
 //                     res.redirect('/candidate-profile')
-                    
+
 //                 } else {
 //                     next(loginErr)
 //                 }
@@ -74,20 +80,26 @@ module.exports.doSignup = (req, res, next) => {
         })
     }
     console.log(req.body)
-    Candidate.findOne({ email: req.body.email })
+    Candidate.findOne({
+            email: req.body.email
+        })
         .then((candidate) => {
             if (candidate) {
-                renderWithErrors({email: "Ya existe un usuario con este email"})
+                renderWithErrors({
+                    email: "Ya existe un usuario con este email"
+                })
             } else {
                 Candidate.create(req.body)
                     .then(() => {
-                    res.redirect ('/candidate-login')
+                        req.flash('flashMessage', '¡Perfil creado con éxito!')
+
+                        res.redirect('/candidate-login')
                     })
                     .catch((err) => {
                         if (err instanceof mongoose.Error.ValidationError) {
                             renderWithErrors(err.errors)
                         } else {
-                            next (err)
+                            next(err)
                         }
                     })
             }
@@ -100,8 +112,33 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/');
 }
 
+
+module.exports.edit = (req, res, next) => {
+    const candidate = req.body
+    if (candidate.skills) {
+        candiate.skills = candidate.skills.split(',');
+    }
+
+    Candidate.findById(req.params.id)
+        .then((candidateToEdit) => res.render('candidates/signup', candidateToEdit))
+        .catch((err) => console.error(err))
+}
+
+module.exports.doEdit = (req, res, next) => {
+    Candidate.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+        })
+        .then(() => {
+            res.redirect('/candidate-profile')
+        })
+        .catch((err) => next(err))
+}
+
+
 module.exports.delete = (req, res, next) => {
-    Candidate.findByIdAndDelete({_id: req.params.id})
+    Candidate.findByIdAndDelete({
+            _id: req.params.id
+        })
         .then(() => res.redirect('/'))
         .catch((err) => next(err));
 }
