@@ -93,9 +93,7 @@ app.use((req, res, next) => {
 
 //FLASH
 app.use((req, res, next) => {
-  console.log('flash', req.flash('flashMessage'))
   res.locals.flashMessage = req.flash('flashMessage')
-  console.log('res.locals.flashMessage', res.locals.flashMessage)
 
   next()
 })

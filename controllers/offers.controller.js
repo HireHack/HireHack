@@ -60,6 +60,7 @@ module.exports.edit = (req, res, next) => {
 
 
 module.exports.doEdit = (req, res, next) => {
+    console.log("edit")
     Offer.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         })
