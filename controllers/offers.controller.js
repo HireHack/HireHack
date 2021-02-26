@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Offer = require('../models/offer.model');
+const flash = require ('connect-flash')
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
@@ -60,7 +61,14 @@ module.exports.edit = (req, res, next) => {
 
 
 module.exports.doEdit = (req, res, next) => {
-
+    console.log("edit")
+    Offer.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+        })
+        .then(() => {
+            res.redirect(`/offer-detail/${req.params.id}`)
+        })
+        .catch((err) => next(err))
 }
 
 module.exports.delete = (req, res, next) => {

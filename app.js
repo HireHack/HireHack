@@ -5,6 +5,7 @@ const hbs = require('hbs');
 const routes = require('./config/routes');
 const createError = require('http-errors');
 const passport = require('passport');
+const flash = require ('connect-flash')
 const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
 const Company = require('./models/company.model')
@@ -20,6 +21,7 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(session);
+app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('views', __dirname + '/views');
@@ -32,7 +34,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 //     return options.inverse();
 //   });
 
-// Session config
+// SESSION CONFIG
 // app.use((req, res, next) => {
 //     if(req.session.currentCandidateId) {
 //         Candidate.findById(req.session.currentCandidateId)
@@ -73,7 +75,9 @@ app.use((req, res, next) => {
   if (req.user) {
     if (req.user.surname) {
       req.currentCandidate = req.user;
+      //console.log('req.currentCandidate', req.currentCandidate)
       res.locals.currentCandidate = req.user;
+      //console.log('res.locals', res.locals.currentCandidate)
       next()
     } else {
       req.currentCompany = req.user;
@@ -85,6 +89,12 @@ app.use((req, res, next) => {
   }
 })
 
+//FLASH
+app.use((req, res, next) => {
+  res.locals.flashMessage = req.flash('flashMessage')
+
+  next()
+})
 
 app.use('/', routes);
 

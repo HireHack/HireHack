@@ -4,9 +4,9 @@ const miscController = require('../controllers/misc.controller');
 const candidatesController = require('../controllers/candidates.controller');
 const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
-// const secureCompany = require('../middlewares/secureCompany.middleware');
-// const secureCandidate = require('../middlewares/secureCandidate.middleware');
 const secure = require("../middlewares/secure.middleware");
+const multer = require('multer')
+//const upload = multer({dest: })
 
 const GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/userinfo.profile",
@@ -16,8 +16,6 @@ const GOOGLE_SCOPES = [
 // MISC
 router.get('/', miscController.home);
 router.get('/main-login', miscController.mainLogin);
-// router.get('/delete-profile', miscController.deleteProfile);
-//router.get('/delete-profile', miscController.doDeleteProfile);
 
 // CANDIDATES
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);

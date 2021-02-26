@@ -88,8 +88,8 @@ module.exports.doSignup = (req, res, next) => {
                 })
             } else {
                 Candidate.create(req.body)
-                    .then((createdCandidate) => {
-                        console.log('created candidate: ', createdCandidate)
+                    .then(() => {
+                        req.flash('flashMessage', '¡Perfil creado con éxito!')
                         res.redirect('/candidate-login')
                     })
                     .catch((err) => {
