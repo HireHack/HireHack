@@ -15,3 +15,13 @@ module.exports.companyIsNotAuthenticated = (req, res, next) => {
       next()
     }
 }
+
+module.exports.checkRole = (role) => (req, res, next) => {
+  console.log('checkRole secureCompany middleware called')
+  console.log('req.currentCompany: ', req.currentCompany)
+  if (req.companyIsAuthenticated && req.user.role /* o req.user ?*/ === role) {
+    next()
+  } else {
+    next()
+  }
+}

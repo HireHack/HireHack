@@ -15,8 +15,7 @@ module.exports.offersList = (req, res, next) => {
 module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
         .then((offer) => {
-            console.log('test')
-            console.log(offer.getAddress())
+            //console.log(offer.getAddress())
             res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
         })
 };
@@ -45,8 +44,10 @@ module.exports.doCreate = (req, res, next) => {
         })
         .catch((err) => {
             if (err instanceof mongoose.Error.ValidationError) {
+                console.log('catch created offer', err)
                 renderWithErrors(err.errors)
             } else {
+                console.log('next created offer')
                 next(err)
             }
         })

@@ -66,6 +66,10 @@ const candidateSchema = new mongoose.Schema({
             message: "El enlace de tu perfil a LinkedIn debe comenzar por https://www.linkedin.com/",
         },
     },
+    role: {
+        type: String,
+        default: 'CANDIDATE'
+    }
 },
     {
     timestamps: true,
