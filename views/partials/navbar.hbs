@@ -25,6 +25,9 @@
                                     </li>
                                 </form>
                             {{/if}}
+                            <li>
+                                <p>{{currentCompany.name}} | Empresa</p>
+                            </li>
                         {{else}}
                         {{#if currentCandidate}}
                             <li class="nav-item">
@@ -37,6 +40,9 @@
                                     </li>
                                 </form>
                             {{/if}}
+                            <li>
+                                <p>{{currentCandidate.name}} | Candidato</p>
+                            </li>
                         {{/if}}
                     {{/if}}
             </ul>
