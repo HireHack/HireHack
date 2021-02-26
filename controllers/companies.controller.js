@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const passport = require('passport')
+const flash = require('connect-flash')
 const Company = require('../models/company.model');
 const Offer = require('../models/offer.model');
 
@@ -72,6 +73,7 @@ module.exports.doSignup = (req, res, next) => {
             } else {
                 Company.create(req.body)
                     .then(() => {
+                        req.flash('flashMessage', '¡Empresa creada con éxito!')
                         res.redirect('/company-login')
                     })
                     .catch((err) => {
@@ -100,7 +102,12 @@ module.exports.edit = (req, res, next) => {
 
 
 module.exports.doEdit = (req, res, next) => {
-    
+
+    Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then(() => {
+        res.redirect('/company-profile')
+        })
+        .catch((err) => next(err))
 }
 
 
