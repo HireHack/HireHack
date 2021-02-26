@@ -54,7 +54,9 @@ const candidateSchema = new mongoose.Schema({
         type: String,
         default: 'https://winaero.com/blog/wp-content/uploads/2015/05/windows-10-user-account-login-icon.png'
     },
-    //TO DO: crear tipo CV
+    cv: {
+        type: String,
+    },
     linkedinProfile: {
         type: String,
         validate: {
