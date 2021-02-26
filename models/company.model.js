@@ -46,6 +46,10 @@ const companySchema = new mongoose.Schema({
             message: "Por favor, introduce una URL válida",
         },
     },
+    role: {
+        type: String,
+        default: 'COMPANY'
+    }
 },
     {
     timestamps: true,

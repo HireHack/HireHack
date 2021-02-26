@@ -18,7 +18,6 @@ module.exports.doLogin = (req, res, next) => {
     if (error) {
       next(error);
     } else if (!company) {
-        console.log('no hay empresa')
       res.status(400).render('companies/login', { company: req.body, errors: validations.error });
     } else {
       req.login(company, loginErr => {
@@ -71,7 +70,8 @@ module.exports.doSignup = (req, res, next) => {
                 })
             } else {
                 Company.create(req.body)
-                    .then(() => {
+                    .then((createdCompany) => {
+                        console.log('created company: ', createdCompany)
                         res.redirect('/company-login')
                     })
                     .catch((err) => {
