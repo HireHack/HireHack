@@ -10,3 +10,8 @@
 </form>
 
 <a class="btn btn-success d-inline" href="/candidate-edit/{{currentCandidate._id}}">Editar mi perfil</a>
+
+<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Candidato</button>
+</form>
+
