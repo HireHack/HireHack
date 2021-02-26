@@ -6,8 +6,10 @@ const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
 const secureCompany = require('../middlewares/secureCompany.middleware')
 const secureCandidate = require('../middlewares/secureCandidate.middleware')
-const multer = require('multer')
+// const multer = require('multer')
 //const upload = multer({dest: })
+
+const upload = require ('./storage.config')
 
 const GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/userinfo.profile",
@@ -32,7 +34,7 @@ router.get('/authenticate/google', passport.authenticate('google-auth-candidates
 router.get('/authenticate/google/callback', candidatesController.doLoginGoogle)
 router.post('/candidate-logout', secureCandidate.candidateIsAuthenticated, candidatesController.logout);
 router.get('/candidate-edit/:id', secureCandidate.candidateIsAuthenticated, candidatesController.edit)
-router.post('/candidate-edit/:id', secureCandidate.candidateIsAuthenticated, candidatesController.doEdit)
+router.post('/candidate-edit/:id', secureCandidate.candidateIsAuthenticated, upload.single('picture'), candidatesController.doEdit)
 router.post('/delete-candidate/:id', secureCandidate.candidateIsAuthenticated, candidatesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
 
 // COMPANIES

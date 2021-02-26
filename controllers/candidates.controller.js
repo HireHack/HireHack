@@ -125,6 +125,12 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEdit = (req, res, next) => {
+
+    if (req.file) {
+        req.body.picture = req.file.path
+    }
+    console.log(req.file)
+
     Candidate.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         })
