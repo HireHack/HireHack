@@ -1,7 +1,7 @@
 <h1 class=>{{#if currentCompany}}Editar perfil{{else}}Registro como empresa{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
-        <form action="{{#if currentCompany}}/company-edit/{{_id}}{{else}}/company-signup{{/if}}" method="POST">
+        <form action="{{#if currentCompany}}/company-edit/{{_id}}{{else}}/company-signup{{/if}}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="companyName-input" name="name"> Nombre: </label>
                 <input class="form-control {{#if errors.name}}is-invalid{{/if}}" value="{{name}}" type="text" name="name" id="companyName-input">
@@ -29,6 +29,15 @@
             {{/unless}}
 
             {{#if currentCompany}}
+     
+            <div class="form-group">
+                <label for="companyPicture-input" name="picture"> Foto de empresa: </label>
+                <input class="form-control" value="{{picture}}" type="file" name="picture" id="companyPicture-input">
+                {{#if errors.picture}}
+                <div class="invalid-feedback">
+                    {{errors.picture}}
+               {{/if}} 
+                </div>
                 <div class="form-group">
                     <label for="companyDescription-input" name="description"> Descripción de la empresa: </label>
                     <textarea name="description" id="description" value="{{description}}" cols="30" rows="10"></textarea>
@@ -54,7 +63,7 @@
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
             </div>
-            <div>Picture</div>
+
 
             {{/if}}
 

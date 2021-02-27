@@ -6,9 +6,6 @@ const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
 const secureCompany = require('../middlewares/secureCompany.middleware')
 const secureCandidate = require('../middlewares/secureCandidate.middleware')
-// const multer = require('multer')
-//const upload = multer({dest: })
-
 const upload = require ('./storage.config')
 
 const GOOGLE_SCOPES = [
@@ -49,7 +46,7 @@ router.get('/auth/google', passport.authenticate('google-auth-companies', {
 router.get('/auth/google/callback', companiesController.doLoginGoogle)
 router.post('/company-logout', secureCompany.companyIsAuthenticated, companiesController.logout);
 router.get('/company-edit/:id', secureCompany.companyIsAuthenticated, companiesController.edit)
-router.post('/company-edit/:id', secureCompany.companyIsAuthenticated, companiesController.doEdit)
+router.post('/company-edit/:id', secureCompany.companyIsAuthenticated, upload.single('picture'), companiesController.doEdit)
 router.post('/delete-company/:id', secureCompany.companyIsAuthenticated, companiesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
 
 // OFFERS
