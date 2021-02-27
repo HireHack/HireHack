@@ -17,6 +17,7 @@ const GOOGLE_SCOPES = [
 // MISC
 router.get('/', miscController.home);
 router.get('/main-login', miscController.mainLogin);
+router.get('/search', miscController.search)
 
 // CANDIDATES
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
