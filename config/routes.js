@@ -4,8 +4,10 @@ const miscController = require('../controllers/misc.controller');
 const candidatesController = require('../controllers/candidates.controller');
 const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
+const applicationController = require('../controllers/application.controller');
 const secure = require("../middlewares/secure.middleware");
-const multer = require('multer')
+const multer = require('multer');
+const { application } = require('express');
 //const upload = multer({dest: })
 
 const GOOGLE_SCOPES = [
@@ -55,5 +57,9 @@ router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doC
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
+
+// APPLICATION
+router.get('/application-detail', applicationController.detail);
+router.post('/apply/:id', applicationController.apply);
 
 module.exports = router;

@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
+const Application = require('../models/application.model');
 
 module.exports.candidateProfile = (req, res, next) => {
-    res.render('candidates/candidateProfile');
+    Application.find({'candidate': req.currentCandidate.id})
+        .populate('offer')
+        .then((application) => {
+            res.render('candidates/candidateProfile', { application })
+        })
 }
 
 module.exports.login = (req, res, next) => res.render('candidates/login');

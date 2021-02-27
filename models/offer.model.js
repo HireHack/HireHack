@@ -19,11 +19,11 @@ const offerSchema = new mongoose.Schema({
         type: [String],
         //enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
     },
-    // offers_publishedByCompany: {
-    //     type: mongoose.SchemaTypes.ObjectId,
-    //     ref: "Company",
-    //     required: true
-    // },
+    offers_publishedByCompany: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Company",
+        required: true
+    },
 },
     {
     timestamps: true,
