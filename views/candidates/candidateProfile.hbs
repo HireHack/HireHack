@@ -6,12 +6,38 @@
 <form action="/candidate-logout" method="POST">
     <li>
         <button>Cerrar sesión</button>
-    </li>
+    </li
 </form>
+<p>
+    {{currentCandidate.skills}}
+    {{!-- {{#each currentCandidate.skills}}
+    {{#if @last}}
+    <span>{{this}}</span>
+    {{else}}
+    <span>{{this}} |</span>
+    {{/if}}
+    {{/each}} --}}
+</p>
+
+<h2>Mis ofertas</h2>
+{{#each application}}
+<div class="border rounded p-3 mb-2">
+    <h3>{{offer.name}}</h3>
+    <p><b>Descripción:</b> <br> {{offer.description}}</p>
+    <b>Requisitos:</b>
+    {{#each skills}}
+    {{#if @last}}
+    <span>{{this}}</span>
+    {{else}}
+    <span>{{this}} |</span>
+    {{/if}}
+    {{/each}}
+    <br>
+</div>
+{{/each}}
 
 <a class="btn btn-success d-inline" href="/candidate-edit/{{currentCandidate._id}}">Editar mi perfil</a>
 
 <form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
     <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Candidato</button>
 </form>
-

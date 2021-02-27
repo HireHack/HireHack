@@ -24,4 +24,9 @@
         <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar oferta</button>
     </form>
     {{/if}}
+    {{#if currentCandidate}}
+    <form class="delete-form d-inline" action="/apply/{{offer.id}}" method="post">
+        <button type="submit" class="btn btn-danger">Inscribirme</button>
+    </form>
+    {{/if}}
 </div>
