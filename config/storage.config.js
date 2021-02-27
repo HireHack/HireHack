@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'ironhack/emosi2compra2',
+    folder: 'hireHack',
     allowedFormats: ['jpg', 'png', 'pdf']
   }
 })

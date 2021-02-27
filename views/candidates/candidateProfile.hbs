@@ -1,6 +1,13 @@
 <h1>Perfil de Candidato</h1>
 <img src="{{currentCandidate.picture}}" alt="Foto de perfil">
 
+{{#if currentCandidate.cv}}
+
+<a href="{{currentCandidate.cv}}">Tu CV</a>
+
+{{/if}}
+
+
 <p>Conectado como {{currentCandidate.name}}</p>
 
 <form action="/candidate-logout" method="POST">
