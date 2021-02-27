@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'ironhack/emosi2compra2',
-    allowedFormats: ['jpg', 'png']
+    allowedFormats: ['jpg', 'png', 'pdf']
   }
 })
 

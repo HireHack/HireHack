@@ -126,10 +126,17 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.doEdit = (req, res, next) => {
 
-    if (req.file) {
-        req.body.picture = req.file.path
-    }
-    console.log(req.file)
+    // if (req.files.picture) {
+    //     req.body.picture = req.files.picture
+    // }
+
+    // if (req.files.cv) {
+    //     req.body.cv = req.files.cv
+    // }
+    //console.log('req.body', req.body)
+    console.log('req.files', req.files)
+    console.log('req.files[picture][0]', req.files.picture[0].path)
+    //console.log('req.files[cv]', req.files.cv)
 
     Candidate.findByIdAndUpdate(req.params.id, req.body, {
             new: true
