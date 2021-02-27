@@ -102,6 +102,10 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.doEdit = (req, res, next) => {
 
+    if (req.file) {
+        req.body.picture = req.file.path
+    }
+
     Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(() => {
         res.redirect('/company-profile')
