@@ -7,8 +7,7 @@ const offersController = require('../controllers/offers.controller');
 const applicationController = require('../controllers/application.controller');
 const secure = require("../middlewares/secure.middleware");
 const multer = require('multer');
-const { application } = require('express');
-//const upload = multer({dest: })
+const upload = require ('./storage.config');
 
 const GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/userinfo.profile",
@@ -31,7 +30,7 @@ router.get('/authenticate/google', passport.authenticate('google-auth-candidates
 router.get('/authenticate/google/callback', candidatesController.doLoginGoogle)
 router.post('/candidate-logout', secure.checkRole('CANDIDATE'), candidatesController.logout);
 router.get('/candidate-edit/:id', secure.checkRole('CANDIDATE'), candidatesController.edit)
-router.post('/candidate-edit/:id', secure.checkRole('CANDIDATE'), candidatesController.doEdit)
+router.post('/candidate-edit/:id', secure.checkRole('CANDIDATE'), upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'cv',maxCount: 1 }]), candidatesController.doEdit)
 router.post('/delete-candidate/:id', secure.checkRole('CANDIDATE'), candidatesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
 
 // COMPANIES
@@ -46,7 +45,7 @@ router.get('/auth/google', passport.authenticate('google-auth-companies', {
 router.get('/auth/google/callback', companiesController.doLoginGoogle)
 router.post('/company-logout', secure.checkRole('COMPANY'), companiesController.logout);
 router.get('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.edit)
-router.post('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.doEdit)
+router.post('/company-edit/:id', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit)
 router.post('/delete-company/:id', secure.checkRole('COMPANY'), companiesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
 
 // OFFERS

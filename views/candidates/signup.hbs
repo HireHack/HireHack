@@ -1,7 +1,18 @@
 <h1>{{#if currentCandidate}}Editar perfil{{else}}Registro como candidato{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
-        <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST">
+        <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST" enctype="multipart/form-data">
+            {{#if currentCandidate}}    
+            <div class="form-group">
+                <label for="candidatePicture-input" name="picture"> Foto de perfil: </label>
+                <input class="form-control" value="{{picture}}" type="file" name="picture" id="candidatePicture-input">
+                {{#if errors.picture}}
+                <div class="invalid-feedback">
+                    {{errors.picture}}
+                </div>
+                {{/if}}
+            </div>
+            {{/if}}
             <div class="form-group">
                 <label for="candidateName-input" name="name"> Nombre: </label>
                 <input class="form-control" value="{{name}}" type="text" name="name" id="candidateName-input">
@@ -54,9 +65,6 @@
                 <div class="invalid-feedback">{{skills}}</div>
                 {{/if}}
             </div>
-
-            <div>Picture</div>
-            <div>CV</div>
             
             <div class="form-group">
                 <label for="address-input"> Dirección: </label>
@@ -79,6 +87,16 @@
                 <label for="candidateLinkedin-input" name="linkedin"> Linkedin: </label>
                 <input class="form-control" value="{{linkedin}}" type="text" name="linkedin"
                     id="candidateLinkedin-input">
+            </div>
+
+            <div class="form-group">
+                <label for="candidateCV-input" name="cv"> Adjuntar CV: </label>
+                <input class="form-control" value="{{cv}}" type="file" name="cv" id="candidateCv-input">
+                {{#if errors.cv}}
+                <div class="invalid-feedback">
+                    {{errors.cv}}
+                </div>
+                {{/if}}
             </div>
 
             {{/if}}
