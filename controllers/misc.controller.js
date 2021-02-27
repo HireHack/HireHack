@@ -9,9 +9,9 @@ module.exports.home = (req, res, next) => {
 
 module.exports.search = (req, res, next) => {
     //console.log('req.body', req.body)
-    //console.log('req.query', req.query)
-    Offer.find({ "name": req.query.search })
-        .then((offers) => {
+    Offer.find({ "name": req.query.search.toLowerCase() })
+    .then((offers) => {
+            //console.log('req.query', req.query.search)
             res.render('offers/offersList', {offers})
         })
 }

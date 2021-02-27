@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const offerSchema = new mongoose.Schema({
     name: {
         type: String,
+        lowercase: true,
         required: true,
     },
     address: {

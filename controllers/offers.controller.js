@@ -6,6 +6,11 @@ module.exports.offersList = (req, res, next) => {
     Offer.find()
         .populate('offers_publishedByCompany')
         .then((offers) => {
+            //TODO = Poner en mayusculas los titulos de las ofertas (en offersList y en offerDetails)
+            //console.log('typeof', typeof offers)
+            //offers[29].name = offers[29].name.toUpperCase()
+            //offers.forEach((offer) => offer.name.slice(0, 1).toUpperCase() + offer.name.slice(1).toLowerCase())
+            console.log('offers', offers);
             res.render('offers/offersList', {offers})
         })
         .catch((err) => console.error(err))
