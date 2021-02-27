@@ -74,14 +74,12 @@ app.use((req, res, next) => {
   //console.log('app.js', req.user)
   if (req.user) {
     if (req.user.surname) {
-      //console.log('I have a surname so I am a candidate')
       req.currentCandidate = req.user;
       //console.log('req.currentCandidate', req.currentCandidate)
       res.locals.currentCandidate = req.user;
       //console.log('res.locals', res.locals.currentCandidate)
       next()
     } else {
-      //console.log('I guess I am a company')
       req.currentCompany = req.user;
       res.locals.currentCompany = req.user;
       next()

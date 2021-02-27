@@ -19,7 +19,6 @@ module.exports.doLogin = (req, res, next) => {
     if (error) {
       next(error);
     } else if (!company) {
-        console.log('no hay empresa')
       res.status(400).render('companies/login', { company: req.body, errors: validations.error });
     } else {
       req.login(company, loginErr => {

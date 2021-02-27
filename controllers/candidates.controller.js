@@ -4,7 +4,6 @@ const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 
 module.exports.candidateProfile = (req, res, next) => {
-    console.log('req.user candidate', req.user)
     res.render('candidates/candidateProfile');
 }
 
@@ -15,7 +14,6 @@ module.exports.doLogin = (req, res, next) => {
         if (error) {
             next(error);
         } else if (!candidate) {
-            console.log('no hay candidato')
             res.status(400).render('candidates/login', {
                 candidate: req.body,
                 error: validations.error
@@ -79,7 +77,7 @@ module.exports.doSignup = (req, res, next) => {
             candidate: req.body
         })
     }
-    console.log(req.body)
+    console.log('createdUser req.body: ', req.body)
     Candidate.findOne({
             email: req.body.email
         })
@@ -92,7 +90,6 @@ module.exports.doSignup = (req, res, next) => {
                 Candidate.create(req.body)
                     .then(() => {
                         req.flash('flashMessage', '¡Perfil creado con éxito!')
-
                         res.redirect('/candidate-login')
                     })
                     .catch((err) => {
