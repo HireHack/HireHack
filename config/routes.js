@@ -59,7 +59,7 @@ router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doE
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
 
 // APPLICATION
-router.get('/application-detail', applicationController.detail);
+router.get('/application-detail/:id', applicationController.detail);
 router.post('/apply/:id', applicationController.apply);
 
 module.exports = router;

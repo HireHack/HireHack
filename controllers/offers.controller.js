@@ -4,10 +4,9 @@ const flash = require ('connect-flash')
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
+        .populate('company')
         .then((offers) => {
-            res.render('offers/offersList', {
-                offers
-            })
+            res.render('offers/offersList', {offers})
         })
         .catch((err) => console.error(err))
 };
@@ -19,6 +18,22 @@ module.exports.offerDetail = (req, res, next) => {
             res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
         })
 };
+
+//BORRAR
+// module.exports.list = (req, res, next) => {
+//   Post.find(
+//     req.query.title
+//       ? {
+//           title: { $regex: req.query.title, $options: "i" },
+//         }
+//       : {}
+//   )
+//     .populate("user")
+//     .then((posts) => {
+//       res.render("posts/posts", { posts: posts, title: req.query.title });
+//     })
+//     .catch((e) => next(e));
+// };
 
 
 module.exports.create = (req, res, next) => res.render('offers/offerCreation');

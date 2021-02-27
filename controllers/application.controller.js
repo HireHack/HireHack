@@ -4,7 +4,19 @@ const Candidate = require('../models/candidate.model');
 const Application = require('../models/application.model')
 const flash = require ('connect-flash');
 
-module.exports.detail = (req, res, next) => res.render('application/application-detail');
+module.exports.detail = (req, res, next) => {
+    const offer = req.params.id
+    //console.log('idOffer', offer)
+    Offer.findById(offer)
+        .then((offer) => {
+            Application.find({ 'offer': offer._id })
+                .populate('candidate')
+                .then((application) => {
+                    console.log('application', application)
+                    res.render('application/application-detail', { offer, application })
+                })
+        })
+};
 
 module.exports.apply = (req, res, next) => {
 
