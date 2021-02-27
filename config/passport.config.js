@@ -45,7 +45,7 @@ passport.use('local-auth-companies', new LocalStrategy({
                         if (match) {
                             //   if (company.active) {
                             console.log('Company', company);
-                            next(null, company)
+                            next(null, company) // Ya incluye todos los datos después del doble populate
                             //   } else {
                             //     next(null, false, { error: "Tu cuenta no está activa, mira tu email" })
                             //   }

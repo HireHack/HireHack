@@ -2,6 +2,9 @@
 <div class="col mb-2">
     <div class="row">
         <form action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
+            <div>
+                <p>Empresa: {{currentCompany.name}}</p>
+            </div>
             <div class="form-group">
                 <label for="offer-input" name="name"> Nombre de la oferta: </label>
                 <input class="form-control {{#if errors.name}}is-invalid{{/if}}" value="{{name}}" type="text" name="name"

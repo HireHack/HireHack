@@ -1,0 +1,26 @@
+<h1>Vista Candidatura</h1>
+{{#with offer}}
+{{!-- Offer detail --}}
+<div class="border rounded p-3 mb-2">
+    <h3>{{name}}</h3>
+    <p><b>Descripción:</b> <br> {{description}}</p>
+    <b>Requisitos:</b>
+    {{#each skills}}
+    {{#if @last}}
+    <span>{{this}}</span>
+    {{else}}
+    <span>{{this}} |</span>
+    {{/if}}
+    {{/each}}
+    <br>
+    <a href="/edit-offer/{{_id}}">Editar Oferta</a>
+</div>
+{{/with}}
+
+{{!-- Applicants --}}
+{{#each application}}
+<div class="border rounded p-3 mb-2">
+    <h3>{{candidate.name}}</h3>
+    <img src="{{candidate.picture}}" alt="Foto de perfil">
+</div>
+{{/each}}

@@ -26,6 +26,7 @@ Promise.all([Offer.deleteMany(), Company.deleteMany()])
                     Offer.create({
                         name: faker.name.jobTitle(),
                         offers_publishedByCompany: company._id,
+                        description: faker.lorem.paragraph(),
                         address: {
                         streetName: faker.address.streetName(),
                         number: Math.floor(Math.random() * 200),

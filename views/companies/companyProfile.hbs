@@ -3,9 +3,30 @@
 
 <p>Has iniciado sesión como {{currentCompany.name}}</p>
 
+
+{{!-- Skills --}}
+
 <a href="/offer-creation">Crear Oferta</a>
 <br>
-<a href="/offers-list/{{_id}}">Ver mis ofertas</a>
+<h2>Ofertas Publicadas</h2>
+{{#each offers}}
+{{!-- Mostrar oferta --}}
+<div class="border rounded p-3 mb-2">
+    <h3>{{name}}</h3>
+    <p><b>Descripción:</b> <br> {{description}}</p>
+    <b>Requisitos:</b>
+    {{#each skills}}
+    {{#if @last}}
+    <span>{{this}}</span>
+    {{else}}
+    <span>{{this}} |</span>
+    {{/if}}
+    {{/each}}
+    <br>
+    <a href="/edit-offer/{{_id}}">Editar Oferta</a>
+    <a href="/application-detail/{{_id}}">Ver candidatos</a> 
+</div>
+{{/each}}
 <br>
 <a class="btn btn-success d-inline" href="/company-edit/{{currentCompany._id}}">Editar mi perfil</a>
 

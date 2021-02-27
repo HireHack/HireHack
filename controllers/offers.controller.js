@@ -4,21 +4,37 @@ const flash = require ('connect-flash')
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
+        .populate('offers_publishedByCompany')
         .then((offers) => {
-            res.render('offers/offersList', {
-                offers
-            })
+            res.render('offers/offersList', {offers})
         })
         .catch((err) => console.error(err))
 };
 
 module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
+        .populate('offers_publishedByCompany')
         .then((offer) => {
             //console.log(offer.getAddress())
             res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
         })
 };
+
+//BORRAR
+// module.exports.list = (req, res, next) => {
+//   Post.find(
+//     req.query.title
+//       ? {
+//           title: { $regex: req.query.title, $options: "i" },
+//         }
+//       : {}
+//   )
+//     .populate("user")
+//     .then((posts) => {
+//       res.render("posts/posts", { posts: posts, title: req.query.title });
+//     })
+//     .catch((e) => next(e));
+// };
 
 
 module.exports.create = (req, res, next) => res.render('offers/offerCreation');
@@ -31,15 +47,20 @@ module.exports.doCreate = (req, res, next) => {
         })
     }
 
-    const offer = req.body
+    const offer = req.body;
+    console.log('oferta', req.body)
+    offer.offers_publishedByCompany = req.currentCompany.id
+    //{offer, ...offer.offers_publishedByCompany}
+
     if (offer.skills) {
         offer.skills = offer.skills.split(',');
     }
+    const company = req.currentCompany.id
 
     Offer.create(offer)
         .then((createdOffer) => {
             console.log('created offer: ', createdOffer)
-            res.redirect('/offers-list');
+            res.redirect('/company-profile');
             // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
         })
         .catch((err) => {
@@ -54,21 +75,32 @@ module.exports.doCreate = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
+    //Offer.find({'offers_publishedByCompany': req.currentCompany.id})
     Offer.findById(req.params.id)
-        .then((offerToEdit) => res.render('offers/offerCreation', offerToEdit))
-        .catch((err) => console.error(err))
+        .then((offerToEdit) => {
+            if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
+                res.render('offers/offerCreation', offerToEdit);
+            } else {
+                res.render('denied-route');
+            }
+        })
+        .catch((err) => console.error(err));
 }
 
 
 module.exports.doEdit = (req, res, next) => {
     console.log("edit")
-    Offer.findByIdAndUpdate(req.params.id, req.body, {
-            new: true
+    Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        .then((offerToEdit) => {
+            if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
+                res.redirect('/company-profile')
+            } else {
+                res.render('denied-route');
+            }   
         })
-        .then(() => {
-            res.redirect(`/offer-detail/${req.params.id}`)
+        .catch((err) => {
+            next(err)
         })
-        .catch((err) => next(err))
 }
 
 module.exports.delete = (req, res, next) => {
