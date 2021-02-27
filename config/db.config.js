@@ -5,6 +5,8 @@ mongoose
     .then(() => console.log('Successfully connected to the DB'))
     .catch((err) => console.error('Error connecting to the DB', err))
 
+mongoose.set('useFindAndModify', false);
+
 process.on('SIGINT', () => {
     mongoose.connection
         .close()

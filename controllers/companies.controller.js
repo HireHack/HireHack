@@ -5,12 +5,11 @@ const Company = require('../models/company.model');
 const Offer = require('../models/offer.model');
 
 module.exports.companyProfile = (req, res, next) => {
-    Offer.find(/* idCompany */)
+    Offer.find({'offers_publishedByCompany': req.currentCompany.id})
         .then ( offers => 
-            res.render('companies/companyProfile', { offers: offers })
+            res.render('companies/companyProfile', { offers })
         )
-    console.log('req.user company', req.user)
-   
+    console.log('req.user company', req.user) 
 } 
 
 module.exports.login = (req, res, next) => {
