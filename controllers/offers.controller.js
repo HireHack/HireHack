@@ -4,7 +4,7 @@ const flash = require ('connect-flash')
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
-        .populate('company')
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', {offers})
         })
@@ -13,6 +13,7 @@ module.exports.offersList = (req, res, next) => {
 
 module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
+        .populate('offers_publishedByCompany')
         .then((offer) => {
             //console.log(offer.getAddress())
             res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})

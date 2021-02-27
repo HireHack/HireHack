@@ -9,11 +9,11 @@ module.exports.companyProfile = (req, res, next) => {
         .then ( offers => 
             res.render('companies/companyProfile', { offers })
         )
-    console.log('req.user company', req.user) 
+    // console.log('req.user company', req.user) 
 } 
 
 module.exports.login = (req, res, next) => {
-    console.log('req.user login controller', req.user)
+    // console.log('req.user login controller', req.user)
     res.render('companies/login')
 };
 

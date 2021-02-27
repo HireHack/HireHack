@@ -12,7 +12,7 @@ module.exports.detail = (req, res, next) => {
             Application.find({ 'offer': offer._id })
                 .populate('candidate')
                 .then((application) => {
-                    console.log('application', application)
+                    //console.log('application', application)
                     res.render('application/application-detail', { offer, application })
                 })
         })
@@ -31,7 +31,7 @@ module.exports.apply = (req, res, next) => {
             } else {
                 Application.create({candidate: candidate, offer: offer})
                     .then((createdApplication) => {
-                        console.log ('APPcreatedApplication', createdApplication)
+                        //console.log ('APPcreatedApplication', createdApplication)
                         //res.render('candidates/candidateProfile', createdApplication);
                         res.redirect('/candidate-profile')
                     })
