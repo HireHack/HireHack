@@ -45,7 +45,7 @@ offerSchema.methods.getAddress = function () {
         streetName,
         number,
         zipCode,
-        city,
+        cityd,
         country
     } = this.address
     return `${streetName} nº${number}, ${zipCode} ${city} (${country})`
