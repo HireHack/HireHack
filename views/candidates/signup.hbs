@@ -1,7 +1,7 @@
 <h1>{{#if currentCandidate}}Editar perfil{{else}}Registro como candidato{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
-        <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST" enctype="multipart/form-data">
+        <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST" {{#if currentCandidate}}enctype="multipart/form-data"{{/if}}>
             {{#if currentCandidate}}    
             <div class="form-group">
                 <label for="candidatePicture-input" name="picture"> Foto de perfil: </label>
@@ -13,6 +13,7 @@
                 {{/if}}
             </div>
             {{/if}}
+
             <div class="form-group">
                 <label for="candidateName-input" name="name"> Nombre: </label>
                 <input class="form-control" value="{{name}}" type="text" name="name" id="candidateName-input">
@@ -21,6 +22,7 @@
                 <label for="candidateSurname-input" name="surname"> Apellidos: </label>
                 <input class="form-control" value="{{surname}}" type="text" name="surname" id="candidateSurname-input">
             </div>
+
             {{#unless currentCandidate}}
             <div class="form-group">
                 <label for="email-input" name="email"> Email: </label>
@@ -118,4 +120,7 @@
         Candidato</button>
 </form>
 {{/if}}
+
+
+
 

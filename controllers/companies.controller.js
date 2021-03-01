@@ -57,17 +57,21 @@ module.exports.doLoginGoogle = (req, res, next) => {
 module.exports.signup = (req, res, next) => res.render('companies/signup');
 
 module.exports.doSignup = (req, res, next) => {
+    console.log('req.body signup', req.body)
+
     function renderWithErrors(errors) {
         console.log(errors)
         res.status(400).render('companies/signup', {
             errors: errors,
             company: req.body
         })
+        console.log('req.body signup', req.body)
     }
     Company.findOne({
             email: req.body.email
         })
         .then((company) => {
+            console.log('email', req.body.email)
             if (company) {
                 renderWithErrors({
                     email: "Ya existe un usuario con este email"
