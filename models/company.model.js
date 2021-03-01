@@ -51,6 +51,21 @@ const companySchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'COMPANY'
+    },
+    active: {
+        type: Boolean,
+        default: false,
+    },
+    activationToken: {
+        type: String,
+        default: () => {
+            const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let token = '';
+            for (let i = 0; i < 25; i++) {
+                token += characters[Math.floor(Math.random() * characters.length)];
+            }
+            return token;
+        }
     }
 }, {
     timestamps: true,

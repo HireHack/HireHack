@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
-const passport = require('passport')
-const flash = require('connect-flash')
+const passport = require('passport');
+const flash = require('connect-flash');
 const Company = require('../models/company.model');
 const Offer = require('../models/offer.model');
+const { sendCompanyActivationEmail } = require('../config/mailer.config');
 
 module.exports.companyProfile = (req, res, next) => {
     Offer.find({'offers_publishedByCompany': req.currentCompany.id})
@@ -78,8 +79,9 @@ module.exports.doSignup = (req, res, next) => {
                 })
             } else {
                 Company.create(req.body)
-                    .then(() => {
-                        req.flash('flashMessage', '¡Empresa creada con éxito!')
+                    .then((cratedCompany) => {
+                        req.flash('flashMessage', '¡Perfil creado con éxito! - Por favor, ve a tu email para finalizar el registro')
+                        sendCompanyActivationEmail(cratedCompany.email, cratedCompany.activationToken);
                         res.redirect('/company-login')
                     })
                     .catch((err) => {
@@ -93,6 +95,24 @@ module.exports.doSignup = (req, res, next) => {
         })
         .catch((err) => next(err));
 }
+
+module.exports.activate = (req, res, next) => {
+    Company.findOneAndUpdate (
+        { activationToken: req.params.token, active: false },
+        { active: true, activationToken: "active"}
+    )
+        .then((company) => {
+            if(company) {
+                req.flash('flashMessage', 'Tu cuenta ha sido activada - ¡Ya puedes iniciar sesión!');
+                res.redirect('/company-login');
+            } else {
+                req.flash('flashMessage', 'Error al activar tu cuenta, por favor, inténtalo de nuevo.');
+                res.render('companies/signup');
+            }
+        })
+        .catch((err) => next(err));
+}
+
 
 
 module.exports.logout = (req, res, next) => {

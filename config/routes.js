@@ -22,7 +22,7 @@ router.get('/main-login', miscController.mainLogin);
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
 router.get('/candidate-signup', candidatesController.signup);
 router.post('/candidate-signup', candidatesController.doSignup);
-router.get('/activate/:token', candidatesController.activate);
+router.get('/activate-candidate/:token', candidatesController.activate);
 router.get('/candidate-login', candidatesController.login);
 router.post('/candidate-login', candidatesController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth-candidates', {
@@ -38,6 +38,7 @@ router.post('/delete-candidate/:id', secure.checkRole('CANDIDATE'), candidatesCo
 router.get('/company-profile', secure.checkRole('COMPANY'), companiesController.companyProfile);
 router.get('/company-signup', companiesController.signup);
 router.post('/company-signup', companiesController.doSignup);
+router.get('/activate-company/:token', companiesController.activate);
 router.get('/company-login', companiesController.login);
 router.post('/company-login', companiesController.doLogin);
 router.get('/auth/google', passport.authenticate('google-auth-companies', {

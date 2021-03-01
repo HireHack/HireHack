@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
-const { generateTemplate } = require('./mailtemplate.js');
+const { generateCandidateTemplate } = require('./mailtemplate.js');
+const { generateCompanyTemplate } = require('./mailtemplate.js');
 
 const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -9,29 +10,38 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports.sendActivationEmail = (email, token) => {
+module.exports.sendCandidateActivationEmail = (email, token) => {
     transporter.sendMail({
         from: `HireHack <${process.env.NM_USER}>`,
         to: email,
         subject: '¡Gracias por unirte a HireHack!',
-        html: generateTemplate(token)
+        html: generateCandidateTemplate(token)
     });
 }
 
-module.exports.sendPasswordChangeEmail = (email, token) => {
+module.exports.sendCompanyActivationEmail = (email, token) => {
     transporter.sendMail({
         from: `HireHack <${process.env.NM_USER}>`,
         to: email,
-        subjet: 'Confirmar cambio de contraseña',
-        html: generateTemplate(token)
+        subject: '¡Gracias por unirte a HireHack!',
+        html: generateCompanyTemplate(token)
     });
 }
 
-module.exports.sendAccountDeleteEmail = (email, token) => {
+module.exports.sendPasswordUpdateEmail = (email, token) => {
+    transporter.sendMail({
+        from: `HireHack <${process.env.NM_USER}>`,
+        to: email,
+        subjet: 'Confirma tu cambio de contraseña',
+        html: generatePasswordUpdateTemplate(token)
+    });
+}
+
+module.exports.sendDeleteAccountEmail = (email, token) => {
     transporter.sendMail({
         from: `HireHack <${process.env.NM_USER}>`,
         to: email,
         subjet: 'Confirmación de baja en HireHack',
-        html: generateTemplate(token)
+        html: generateDeleteAccountTemplate(token)
     });
 }

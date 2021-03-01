@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
+const flash = require('connect-flash');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
-const { sendActivationEmail } = require('../config/mailer.config');
+const { sendCandidateActivationEmail } = require('../config/mailer.config');
 
 module.exports.candidateProfile = (req, res, next) => {
     Application.find({'candidate': req.currentCandidate.id})
@@ -93,7 +94,7 @@ module.exports.doSignup = (req, res, next) => {
                 Candidate.create(req.body)
                     .then((createdCandidate) => {
                         req.flash('flashMessage', '¡Perfil creado con éxito! - Por favor, ve a tu email para finalizar el registro')
-                        sendActivationEmail(createdCandidate.email, createdCandidate.activationToken);
+                        sendCandidateActivationEmail(createdCandidate.email, createdCandidate.activationToken);
                         res.redirect('/candidate-login')
                     })
                     .catch((err) => {
