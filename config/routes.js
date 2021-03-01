@@ -57,6 +57,7 @@ router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doC
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
+router.get('/search-offers', offersController.search)
 
 // APPLICATION
 router.get('/application-detail/:id', applicationController.detail);

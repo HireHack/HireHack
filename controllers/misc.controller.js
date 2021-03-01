@@ -9,11 +9,25 @@ module.exports.home = (req, res, next) => {
 
 module.exports.search = (req, res, next) => {
     //console.log('req.body', req.body)
-    Offer.find({ "name": req.query.search.toLowerCase() })
+    Offer.find()
     .then((offers) => {
-            //console.log('req.query', req.query.search)
-            res.render('offers/offersList', {offers})
+        const queryContent = req.query.search.toLowerCase().slice(1)
+        //console.log('req.query.search', queryContent)
+        let filteredOffers = []
+        offers.forEach((offer) => {
+            //console.log(offer.name)
+            const nameOffer = offer.name
+            if (nameOffer.includes(queryContent)) {
+                //console.log('offerWithQueries',offer) 
+                filteredOffers.push(offer);
+                }  
         })
+        //console.log('filteredOffers', filteredOffers)
+            return filteredOffers       
+        }
+    )
+    .then((offers) => res.render('offers/offersList', {offers}))
+    
 }
 
 module.exports.mainLogin = (req, res, next) => {

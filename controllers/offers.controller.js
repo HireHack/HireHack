@@ -6,11 +6,7 @@ module.exports.offersList = (req, res, next) => {
     Offer.find()
         .populate('offers_publishedByCompany')
         .then((offers) => {
-            //TODO = Poner en mayusculas los titulos de las ofertas (en offersList y en offerDetails)
-            //console.log('typeof', typeof offers)
-            //offers[29].name = offers[29].name.toUpperCase()
-            //offers.forEach((offer) => offer.name.slice(0, 1).toUpperCase() + offer.name.slice(1).toLowerCase())
-            console.log('offers', offers);
+            //console.log('offers', offers);
             res.render('offers/offersList', {offers})
         })
         .catch((err) => console.error(err))
@@ -24,23 +20,6 @@ module.exports.offerDetail = (req, res, next) => {
             res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
         })
 };
-
-//BORRAR
-// module.exports.list = (req, res, next) => {
-//   Post.find(
-//     req.query.title
-//       ? {
-//           title: { $regex: req.query.title, $options: "i" },
-//         }
-//       : {}
-//   )
-//     .populate("user")
-//     .then((posts) => {
-//       res.render("posts/posts", { posts: posts, title: req.query.title });
-//     })
-//     .catch((e) => next(e));
-// };
-
 
 module.exports.create = (req, res, next) => res.render('offers/offerCreation');
 
@@ -110,6 +89,66 @@ module.exports.doEdit = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
     Offer.findByIdAndDelete({_id: req.params.id /*offers_publishedByCompany: req.currentUser.id*/}) // To ensure only the creator can detele the offer
-        .then(() => res.redirect('/offers-list'))
+        .then(() => res.redirect('/company-profile'))
         .catch((err) => next(err));
+}
+
+module.exports.search = (req, res, next) => {
+    //let query;
+    // switch(true) {
+    //     case req.query.category:
+    //         Offer.find({"category": req.query.category})
+    //         .then((offers) => {
+    //             //console.log ('req.query.category', req.query.category)
+    //             //console.log('offers', offers)
+    //             res.render('offers/offersList', {offers})
+    //         })
+    //         break;
+    //     case req.query.contractType:
+    //         Offer.find({"ContractType": req.query.contractType})
+    //             .then((offers) => {
+    //                 //console.log ('req.query.category', req.query.category)
+    //                 //console.log('offers', offers)
+    //                 res.render('offers/offersList', {offers})
+    //             })
+    //         break;
+    //     default:
+    //         console.log('switch default')
+    //         break;
+    // }
+   
+    if (req.query.category) {
+        Offer.find({category: req.query.category})
+            .then((offers) => {
+                //console.log ('req.query.category', req.query.category)
+                //console.log('offers', offers)
+                res.render('offers/offersList', {offers})
+            })
+    } else if (req.query.contract) {
+        Offer.find({contract: req.query.contract})
+                .then((offers) => {
+                    console.log('offers', offers)
+                    res.render('offers/offersList', {offers})
+                })
+    } else if (req.query.studies) {
+        Offer.find({studies: req.query.studies})
+        .then((offers) => {
+            console.log('offers', offers)
+            res.render('offers/offersList', {offers})
+        })
+    } else if (req.query.experience) {
+        Offer.find({experience: req.query.experience})
+        .then((offers) => {
+            console.log('offers', offers)
+            res.render('offers/offersList', {offers})
+        })
+    } else if (req.query.salary) {
+        Offer.find({salary: req.query.salary})
+        .then((offers) => {
+            console.log('offers', offers)
+            res.render('offers/offersList', {offers})
+        })
+    } else {
+        console.log('else search')
+    }  
 }

@@ -37,7 +37,12 @@ Promise.all([Offer.deleteMany(), Company.deleteMany()])
                         skills: getRandom(
                             ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
                             Math.floor(Math.random()* 6) + 1
-                        )
+                        ),
+                        category: getOneRandom(["Adm.empresas", "Atención al cliente", "Compras, logística y almacen", "Educación y formación", "Finanzas y banca", "Informática y telecomunicaciones", "Ingenieros y tecnicos", "Legal", "Marketing y comunicación", "RR.HH", "Sanidad", "Turismo", "Otros"]),
+                        contract: getOneRandom(["Indefinido", "De duración determinada", "Autónomo", "Otros contractos"]),
+                        studies: getOneRandom(["Sin estudios", "Educación secundaria Obligatoria", "Grado medio", "Grado superior", "Grado"]),
+                        experience: Math.floor(Math.random(faker.random.number()) * 40),
+                        salary: getOneRandom(["6K - 12k", "12K - 20K", "20K - 30K", "+ 30K"]),
                     }). then((offer) => console.log(`Created offer: ${offer.name}, skills: ${offer.skills}`));
                 }
             })
@@ -55,4 +60,8 @@ function getRandom(arr, n) {
     taken[x] = --len in taken ? taken[len] : len;
   }
   return result;
+}
+
+function getOneRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)]
 }

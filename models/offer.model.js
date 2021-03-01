@@ -20,6 +20,25 @@ const offerSchema = new mongoose.Schema({
         type: [String],
         //enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
     },
+    category: {
+        type: String,
+        //enum: ["Adm.empresas", "Atención al cliente", "Compras, logística y almacen", "Educación y formación", "Finanzas y banca", "Informática y telecomunicaciones", "Ingenieros y tecnicos", "Legal", "Marketing y comunicación", "RR.HH", "Sanidad", "Turismo", "Otros"]
+    },
+    contract: {
+        type: String,
+        //enum: ["Indefinido", "De duración determinada", "Autónomo", "Otros contractos"]
+    },
+    studies: {
+        type: String,
+        //enum: ["Sin estudios", "Educación secundaria Obligatoria", "Grado medio", "Grado superior", "Grado"]
+    },
+    experience: {
+        type: Number,
+    },
+    salary: {
+        type: String,
+        //enum: ["6K - 12k", "12K - 20K", "20K - 30K", "+ 30K"]
+    },
     offers_publishedByCompany: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Company",
