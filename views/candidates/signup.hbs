@@ -13,6 +13,7 @@
                 {{/if}}
             </div>
             {{/if}}
+            
             <div class="form-group">
                 <label for="candidateName-input" name="name"> Nombre: </label>
                 <input class="form-control" value="{{name}}" type="text" name="name" id="candidateName-input">
@@ -21,6 +22,7 @@
                 <label for="candidateSurname-input" name="surname"> Apellidos: </label>
                 <input class="form-control" value="{{surname}}" type="text" name="surname" id="candidateSurname-input">
             </div>
+
             {{#unless currentCandidate}}
             <div class="form-group">
                 <label for="email-input" name="email"> Email: </label>
