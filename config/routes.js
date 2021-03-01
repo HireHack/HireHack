@@ -22,6 +22,7 @@ router.get('/main-login', miscController.mainLogin);
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
 router.get('/candidate-signup', candidatesController.signup);
 router.post('/candidate-signup', candidatesController.doSignup);
+router.get('/activate/:token', candidatesController.activate);
 router.get('/candidate-login', candidatesController.login);
 router.post('/candidate-login', candidatesController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth-candidates', {

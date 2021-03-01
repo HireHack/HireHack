@@ -3,6 +3,7 @@ const passport = require('passport');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
+const { sendActivationEmail } = require('../config/mailer.config');
 
 module.exports.candidateProfile = (req, res, next) => {
     Application.find({'candidate': req.currentCandidate.id})
@@ -35,7 +36,7 @@ module.exports.doLogin = (req, res, next) => {
 module.exports.doLoginGoogle = (req, res, next) => {
     passport.authenticate('google-auth-candidates', (error, candidate, validations) => {
         if (error) {
-            next(error)
+            next(error);
         } else if (!candidate) {
             res.status(400).render('candidates/login', {
                 candidate: req.body,
@@ -45,7 +46,6 @@ module.exports.doLoginGoogle = (req, res, next) => {
             req.login(candidate, (loginErr) => {
                 if (!loginErr) {
                     res.redirect('/candidate-profile')
-
                 } else {
                     next(loginErr)
                 }
@@ -83,9 +83,7 @@ module.exports.doSignup = (req, res, next) => {
         })
     }
     console.log('createdUser req.body: ', req.body)
-    Candidate.findOne({
-            email: req.body.email
-        })
+    Candidate.findOne({ email: req.body.email })
         .then((candidate) => {
             if (candidate) {
                 renderWithErrors({
@@ -93,8 +91,9 @@ module.exports.doSignup = (req, res, next) => {
                 })
             } else {
                 Candidate.create(req.body)
-                    .then(() => {
-                        req.flash('flashMessage', '¡Perfil creado con éxito!')
+                    .then((createdCandidate) => {
+                        req.flash('flashMessage', '¡Perfil creado con éxito! - Por favor, ve a tu email para finalizar el registro')
+                        sendActivationEmail(createdCandidate.email, createdCandidate.activationToken);
                         res.redirect('/candidate-login')
                     })
                     .catch((err) => {
@@ -104,6 +103,23 @@ module.exports.doSignup = (req, res, next) => {
                             next(err)
                         }
                     })
+            }
+        })
+        .catch((err) => next(err));
+}
+
+module.exports.activate = (req, res, next) => {
+    Candidate.findOneAndUpdate (
+        { activationToken: req.params.token, active: false },
+        { active: true, activationToken: "active"}
+    )
+        .then((candidate) => {
+            if(candidate) {
+                req.flash('flashMessage', 'Tu cuenta ha sido activada - ¡Ya puedes iniciar sesión!');
+                res.redirect('/candidate-login');
+            } else {
+                req.flash('flashMessage', 'Error al activar tu cuenta, por favor, inténtalo de nuevo.');
+                res.render('candidates/signup');
             }
         })
         .catch((err) => next(err));
