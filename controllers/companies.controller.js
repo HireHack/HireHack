@@ -28,6 +28,9 @@ module.exports.doLogin = (req, res, next) => {
       next(error);
     } else if (!company) {
       res.status(400).render('companies/login', { company: req.body, errors: validations.error });
+    } else if (!company.active) {
+        req.flash('flashMessage', 'Tu cuenta no ha sido verificada todavía. Por favor, ve a tu email para activarla');
+        res.redirect('/company-login');
     } else {
       req.login(company, loginErr => {
           if (loginErr) {

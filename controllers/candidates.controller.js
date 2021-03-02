@@ -29,6 +29,9 @@ module.exports.doLogin = (req, res, next) => {
                 candidate: req.body,
                 error: validations.error
             });
+        } else if (!candidate.active) {
+            req.flash('flashMessage', 'Tu cuenta no ha sido verificada todavía. Por favor, ve a tu email para activarla');
+            res.redirect('/candidate-login');
         } else {
             req.login(candidate, loginErr => {
                 if (loginErr) next(loginErr)
