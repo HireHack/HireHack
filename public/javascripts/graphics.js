@@ -1,15 +1,21 @@
-const apiUrl = 'https://www.themuse.com/api/public/jobs?page=1'
-  
+class APIHandler {
+    constructor(baseUrl) {
+        this.BASE_URL = baseUrl
+    }
+}
+
+const jobsAPI = new APIHandler ('http://localhost:8000')
+
 const getDataInfo = (url) => {
     axios
         .get(url)
         .then((response) => {
             //console.log(response.data.results)
             const generalData = response.data
-            console.log(generalData.results)
+            console.log(generalData)
 
             //LOCATION
-            const location = Object.values(generalData['results']).map((jobLocation) => jobLocation['locations'])
+            const location = Object.values(generalData).map((jobLocation) => jobLocation['locations'])
             //console.log (location)
             const defLocations = location.map((jl) => jl['0'])
             //console.log(defLocations)
@@ -21,7 +27,7 @@ const getDataInfo = (url) => {
             
             
             //CATEGORIES
-            const yAxis = Object.values(generalData['results']).map((jobName) => jobName['name'])
+            const yAxis = Object.values(generalData).map((jobName) => jobName['name'])
             console.log(yAxis)
 
 
@@ -45,4 +51,4 @@ const paintData = (remoteLength, noRemoteLength) => {
     })
 }
 
-getDataInfo(apiUrl)
+getDataInfo(`http://localhost:8000/results`)
