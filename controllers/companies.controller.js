@@ -5,8 +5,8 @@ const Company = require('../models/company.model');
 const Offer = require('../models/offer.model');
 const { sendCompanyActivationEmail } = require('../config/mailer.config');
 const { sendDeleteCompanyEmail } = require('../config/mailer.config');
-const { sendEmailUpdateEmail } = require('../config/mailer.config');
-const { sendPasswordUpdateEmail } = require('../config/mailer.config');
+const { sendCompanyEmailUpdateEmail } = require('../config/mailer.config');
+const { sendCompanyPasswordUpdateEmail } = require('../config/mailer.config');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports.companyProfile = (req, res, next) => {
@@ -75,6 +75,7 @@ module.exports.doSignup = (req, res, next) => {
         })
         console.log('req.body signup', req.body)
     }
+    
     Company.findOne({ email: req.body.email })
         .then((company) => {
             if (company) {
@@ -119,7 +120,6 @@ module.exports.activate = (req, res, next) => {
 }
 
 
-
 module.exports.logout = (req, res, next) => {
     req.logout();
     res.redirect('/');
@@ -145,11 +145,97 @@ module.exports.doEdit = (req, res, next) => {
         .catch((err) => next(err))
 }
 
+module.exports.updateEmail = (req, res, next) => {
+    Company.findById({_id: req.currentCompany.id})
+        .then((companyToUpdate) => {
+            //console.log('candidateToDelete', candidateToDelete)
+            req.flash('flashMessage', 'Solicitud de actualización de email realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
+            sendCompanyEmailUpdateEmail(companyToUpdate.email, companyToUpdate.token);
+            res.redirect('/company-profile');
+        })
+        .catch((err) => next(err));
+}
+
+module.exports.editEmail = (req, res, next) => res.render('companies/newEmailForm');
+
+module.exports.doEditEmail = (req, res, next) => {
+    function renderWithErrors(errors) {
+        res.status(400).render('companies/signup', {
+            errors: errors,
+            company: req.body
+        })
+    }
+    
+    if (req.body.newEmail != req.body.confirmEmail) {
+        renderWithErrors({
+            email: "Los emails no coindiden."
+        })
+    } else {
+        Company.findOneAndUpdate(
+            {email: req.body.email}, 
+            {email: req.body.newEmail, token: uuidv4()}
+        )
+        .then((updatedCompany) => {
+            if (updatedCompany) {
+                req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
+                res.redirect('/company-profile')
+            } else {
+                req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
+                location.reload();
+            }
+        })
+        .catch((err) => next(err));
+    }
+}
+
+module.exports.updatePassword = (req, res, next) => {
+    Company.findById({_id: req.currentCompany.id})
+        .then((companyToUpdate) => {
+            //console.log('candidateToDelete', candidateToDelete)
+            req.flash('flashMessage', 'Solicitud de actualización de contraseña realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
+            sendCompanyPasswordUpdateEmail(companyToUpdate.email, companyToUpdate.token);
+            res.redirect('/company-profile');
+        })
+        .catch((err) => next(err));
+}
+
+module.exports.editPassword = (req, res, next) => res.render('companies/newPasswordForm');
+
+module.exports.doEditPassword = (req, res, next) => {
+    function renderWithErrors(errors) {
+        res.status(400).render('companies/signup', {
+            errors: errors,
+            company: req.body
+        })
+    }
+    
+    if (req.body.newPassword != req.body.confirmPassword) {
+        renderWithErrors({
+            password: "Las contraseñas no coindiden."
+        })
+    } else {
+        Company.findOneAndUpdate(
+            {email: req.body.email}, 
+            {password: req.body.newPassword, token: uuidv4()}
+        )
+        .then((updatedCompany) => {
+            if (updatedCompany) {
+                req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+                res.redirect('/company-profile')
+            } else {
+                req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
+                location.reload();
+            }
+        })
+        .catch((err) => next(err));
+    }
+}
+
+
 module.exports.delete = (req, res, next) => {
-    console.log('req.body delete', req.body)
     Company.findById({_id: req.currentCompany.id})
         .then((companyToDelete) => {
-            console.log('companyToDelete', companyToDelete)
+            //console.log('companyToDelete', companyToDelete)
             req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
             sendDeleteCompanyEmail(companyToDelete.email, companyToDelete.token);
             res.redirect('/');

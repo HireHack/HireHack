@@ -22,36 +22,56 @@ router.post('/password-update/:id', miscController.passwordUpdateConfirmation);
 
 // CANDIDATES
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
+
 router.get('/candidate-signup', candidatesController.signup);
 router.post('/candidate-signup', candidatesController.doSignup);
 router.get('/activate-candidate/:token', candidatesController.activate);
+
 router.get('/candidate-login', candidatesController.login);
 router.post('/candidate-login', candidatesController.doLogin);
 router.get('/authenticate/google', passport.authenticate('google-auth-candidates', {
     scope: GOOGLE_SCOPES
-}))
-router.get('/authenticate/google/callback', candidatesController.doLoginGoogle)
+}));
+router.get('/authenticate/google/callback', candidatesController.doLoginGoogle);
 router.post('/candidate-logout', secure.checkRole('CANDIDATE'), candidatesController.logout);
+
 router.get('/candidate-edit/:id', secure.checkRole('CANDIDATE'), candidatesController.edit)
 router.post('/candidate-edit/:id', secure.checkRole('CANDIDATE'), upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'cv',maxCount: 1 }]), candidatesController.doEdit)
-router.get('/delete-candidate/:token', secure.checkRole('CANDIDATE'), candidatesController.delete);
+router.post('/candidate-update-email/:id', secure.checkRole('CANDIDATE'), candidatesController.updateEmail);
+router.post('/candidate-edit-email', secure.checkRole('CANDIDATE'), candidatesController.doEditEmail);
+router.get('/candidate-edit-email/:token', secure.checkRole('CANDIDATE'), candidatesController.editEmail);
+router.post('/candidate-update-password/:id', secure.checkRole('CANDIDATE'), candidatesController.updatePassword);
+router.post('/candidate-edit-password', secure.checkRole('CANDIDATE'), candidatesController.doEditPassword);
+router.get('/candidate-edit-password/:token', secure.checkRole('CANDIDATE'), candidatesController.editPassword);
+
+router.post('/delete-candidate/:id', secure.checkRole('CANDIDATE'), candidatesController.delete);
 router.get('/delete-candidate-account/:token', candidatesController.doDelete);
 
 // COMPANIES
 router.get('/company-profile', secure.checkRole('COMPANY'), companiesController.companyProfile);
+
 router.get('/company-signup', companiesController.signup);
 router.post('/company-signup', companiesController.doSignup);
 router.get('/activate-company/:token', companiesController.activate);
+
 router.get('/company-login', companiesController.login);
 router.post('/company-login', companiesController.doLogin);
 router.get('/auth/google', passport.authenticate('google-auth-companies', {
     scope: GOOGLE_SCOPES
-}))
-router.get('/auth/google/callback', companiesController.doLoginGoogle)
+}));
+router.get('/auth/google/callback', companiesController.doLoginGoogle);
 router.post('/company-logout', secure.checkRole('COMPANY'), companiesController.logout);
-router.get('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.edit)
-router.post('/company-edit/:id', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit)
-router.get('/delete-company/:token', secure.checkRole('COMPANY'), companiesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
+
+router.get('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.edit);
+router.post('/company-edit/:id', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit);
+router.post('/company-update-email/:id', secure.checkRole('COMPANY'), companiesController.updateEmail);
+router.post('/company-edit-email', secure.checkRole('COMPANY'), companiesController.doEditEmail);
+router.get('/company-edit-email/:token', secure.checkRole('COMPANY'), companiesController.editEmail);
+router.post('/company-update-password/:id', secure.checkRole('COMPANY'), companiesController.updatePassword);
+router.post('/company-edit-password', secure.checkRole('COMPANY'), companiesController.doEditPassword);
+router.get('/company-edit-password/:token', secure.checkRole('COMPANY'), companiesController.editPassword);
+
+router.post('/delete-company/:id', secure.checkRole('COMPANY'), companiesController.delete);
 router.get('/delete-company-account/:token', companiesController.doDelete);
 
 // OFFERS

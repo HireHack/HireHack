@@ -4,17 +4,31 @@ const flash = require('connect-flash');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
-const { sendCandidateActivationEmail } = require('../config/mailer.config');
-const { sendDeleteCandidateEmail } = require('../config/mailer.config');
-const { sendEmailUpdateEmail } = require('../config/mailer.config');
-const { sendPasswordUpdateEmail } = require('../config/mailer.config');
-const { v4: uuidv4 } = require('uuid');
+const {
+    sendCandidateActivationEmail
+} = require('../config/mailer.config');
+const {
+    sendDeleteCandidateEmail
+} = require('../config/mailer.config');
+const {
+    sendCandidateEmailUpdateEmail
+} = require('../config/mailer.config');
+const {
+    sendCandidatePasswordUpdateEmail
+} = require('../config/mailer.config');
+const {
+    v4: uuidv4
+} = require('uuid');
 
 module.exports.candidateProfile = (req, res, next) => {
-    Application.find({'candidate': req.currentCandidate.id})
+    Application.find({
+            'candidate': req.currentCandidate.id
+        })
         .populate('offer')
         .then((application) => {
-            res.render('candidates/candidateProfile', { application })
+            res.render('candidates/candidateProfile', {
+                application
+            })
         })
 }
 
@@ -91,7 +105,9 @@ module.exports.doSignup = (req, res, next) => {
         })
     }
     console.log('createdUser req.body: ', req.body)
-    Candidate.findOne({ email: req.body.email })
+    Candidate.findOne({
+            email: req.body.email
+        })
         .then((candidate) => {
             if (candidate) {
                 renderWithErrors({
@@ -117,12 +133,15 @@ module.exports.doSignup = (req, res, next) => {
 }
 
 module.exports.activate = (req, res, next) => {
-    Candidate.findOneAndUpdate (
-        { token: req.params.token, active: false },
-        { active: true, token: uuidv4() }
-    )
+    Candidate.findOneAndUpdate({
+            token: req.params.token,
+            active: false
+        }, {
+            active: true,
+            token: uuidv4()
+        })
         .then((candidate) => {
-            if(candidate) {
+            if (candidate) {
                 //candidate.generateToken();
                 req.flash('flashMessage', 'Tu cuenta ha sido activada - ¡Ya puedes iniciar sesión!');
                 res.redirect('/candidate-login');
@@ -139,9 +158,9 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/');
 }
 
-
 module.exports.edit = (req, res, next) => {
     const candidate = req.body
+
     if (candidate.skills) {
         candiate.skills = candidate.skills.split(',');
     }
@@ -149,6 +168,7 @@ module.exports.edit = (req, res, next) => {
     Candidate.findById(req.params.id)
         .then((candidateToEdit) => res.render('candidates/signup', candidateToEdit))
         .catch((err) => console.error(err))
+
 }
 
 module.exports.doEdit = (req, res, next) => {
@@ -169,10 +189,95 @@ module.exports.doEdit = (req, res, next) => {
     Candidate.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         })
-        .then(() => {
-            res.redirect('/candidate-profile')
-        })
+        .then(() => res.redirect('/candidate-profile'))
         .catch((err) => next(err))
+
+}
+
+module.exports.updateEmail = (req, res, next) => {
+    Candidate.findById({_id: req.currentCandidate.id})
+        .then((candidateToUpdate) => {
+            //console.log('candidateToDelete', candidateToDelete)
+            req.flash('flashMessage', 'Solicitud de actualización de email realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
+            sendCandidateEmailUpdateEmail(candidateToUpdate.email, candidateToUpdate.token);
+            res.redirect('/candidate-profile');
+        })
+        .catch((err) => next(err));
+}
+
+module.exports.editEmail = (req, res, next) => res.render('candidates/newEmailForm');
+
+module.exports.doEditEmail = (req, res, next) => {
+    function renderWithErrors(errors) {
+        res.status(400).render('candidates/signup', {
+            errors: errors,
+            candidate: req.body
+        })
+    }
+    
+    if (req.body.newEmail != req.body.confirmEmail) {
+        renderWithErrors({
+            email: "Los emails no coindiden."
+        })
+    } else {
+        Candidate.findOneAndUpdate(
+            {email: req.body.email}, 
+            {email: req.body.newEmail, token: uuidv4()}
+        )
+        .then((updatedCandidate) => {
+            if (updatedCandidate) {
+                req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
+                res.redirect('/candidate-profile')
+            } else {
+                req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
+                location.reload();
+            }
+        })
+        .catch((err) => next(err));
+    }
+}
+
+module.exports.updatePassword = (req, res, next) => {
+    Candidate.findById({_id: req.currentCandidate.id})
+        .then((candidateToUpdate) => {
+            //console.log('candidateToDelete', candidateToDelete)
+            req.flash('flashMessage', 'Solicitud de actualización de contraseña realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
+            sendCandidatePasswordUpdateEmail(candidateToUpdate.email, candidateToUpdate.token);
+            res.redirect('/candidate-profile');
+        })
+        .catch((err) => next(err));
+}
+
+module.exports.editPassword = (req, res, next) => res.render('candidates/newPasswordForm');
+
+module.exports.doEditPassword = (req, res, next) => {
+    function renderWithErrors(errors) {
+        res.status(400).render('candidates/signup', {
+            errors: errors,
+            candidate: req.body
+        })
+    }
+    
+    if (req.body.newPassword != req.body.confirmPassword) {
+        renderWithErrors({
+            password: "Las contraseñas no coindiden."
+        })
+    } else {
+        Candidate.findOneAndUpdate(
+            {email: req.body.email}, 
+            {password: req.body.newPassword, token: uuidv4()}
+        )
+        .then((updatedCandidate) => {
+            if (updatedCandidate) {
+                req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+                res.redirect('/company-profile')
+            } else {
+                req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
+                location.reload();
+            }
+        })
+        .catch((err) => next(err));
+    }
 }
 
 
@@ -188,7 +293,9 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.doDelete = (req, res, next) => {
-    Candidate.findOneAndRemove({token: req.params.token})
+    Candidate.findOneAndRemove({
+            token: req.params.token
+        })
         .then(() => {
             req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
             res.redirect('/');

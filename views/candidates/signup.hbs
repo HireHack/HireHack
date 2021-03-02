@@ -119,6 +119,16 @@
     <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil
         Candidato</button>
 </form>
+
+{{!-- {{#unless currentCandidate.social}} --}}
+<form class="update-form d-inline" action="/candidate-update-password/{{currentCandidate._id}}" method="post">
+    <button type="submit" class="btn btn-secondary" onclick="return clicked()">Actualizar contraseña</button>
+</form>
+
+<form class="update-form d-inline" action="/candidate-update-email/{{currentCandidate._id}}" method="post">
+    <button type="submit" class="btn btn-secondary" onclick="return clicked()">Actualizar email</button>
+</form>
+{{!-- {{/unless}} --}}
 {{/if}}
 
 

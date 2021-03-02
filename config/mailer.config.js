@@ -1,8 +1,10 @@
 const nodemailer = require('nodemailer');
 const { generateCandidateTemplate } = require('./mailtemplate.js');
 const { generateCompanyTemplate } = require('./mailtemplate.js');
-const { generatePasswordUpdateTemplate } = require('./mailtemplate.js');
-const { generateEmailUpdateTemplate } = require('./mailtemplate.js');
+const { generateCandidatePasswordUpdateTemplate } = require('./mailtemplate.js');
+const { generateCandidateEmailUpdateTemplate } = require('./mailtemplate.js');
+const { generateCompanyPasswordUpdateTemplate } = require('./mailtemplate.js');
+const { generateCompanyEmailUpdateTemplate } = require('./mailtemplate.js');
 const { generateDeleteCandidateTemplate } = require('./mailtemplate.js');
 const { generateDeleteCompanyTemplate } = require('./mailtemplate.js');
 
@@ -32,21 +34,57 @@ module.exports.sendCompanyActivationEmail = (email, token) => {
     });
 }
 
-module.exports.sendPasswordUpdateEmail = (email, token) => {
+// module.exports.sendCandidateSocialEmail = (email, token) => {
+//     transporter.sendMail({
+//         from: `HireHack <${process.env.NM_USER}>`,
+//         to: email,
+//         subject: '¡Gracias por unirte a HireHack!',
+//         html: generateSocialCandidateWelcomeTemplate()
+//     });
+// }
+
+// module.exports.sendCompanySocialEmail = (email, token) => {
+//     transporter.sendMail({
+//         from: `HireHack <${process.env.NM_USER}>`,
+//         to: email,
+//         subject: '¡Gracias por unirte a HireHack!',
+//         html: generateSocialCompanyWelcomeTemplate()
+//     });
+// }
+
+module.exports.sendCandidatePasswordUpdateEmail = (email, token) => {
     transporter.sendMail({
         from: `HireHack <${process.env.NM_USER}>`,
         to: email,
         subject: 'Confirma tu cambio de contraseña',
-        html: generatePasswordUpdateTemplate(token)
+        html: generateCandidatePasswordUpdateTemplate(token)
     });
 }
 
-module.exports.sendEmailUpdateEmail = (email, token) => {
+module.exports.sendCompanyPasswordUpdateEmail = (email, token) => {
     transporter.sendMail({
         from: `HireHack <${process.env.NM_USER}>`,
         to: email,
         subject: 'Confirma tu cambio de contraseña',
-        html: generateEmailUpdateTemplate(token)
+        html: generateCompanyPasswordUpdateTemplate(token)
+    });
+}
+
+module.exports.sendCandidateEmailUpdateEmail = (email, token) => {
+    transporter.sendMail({
+        from: `HireHack <${process.env.NM_USER}>`,
+        to: email,
+        subject: 'Confirma tu cambio de correo electrónico',
+        html: generateCandidateEmailUpdateTemplate(token)
+    });
+}
+
+module.exports.sendCompanyEmailUpdateEmail = (email, token) => {
+    transporter.sendMail({
+        from: `HireHack <${process.env.NM_USER}>`,
+        to: email,
+        subject: 'Confirma tu cambio de correo electrónico',
+        html: generateCompanyEmailUpdateTemplate(token)
     });
 }
 
