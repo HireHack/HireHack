@@ -4,11 +4,41 @@
 /* NAVBAR */
 
 .logo__header{
-    width: 50%;
+    width: 30%;
+}
+
+.logoHome{
+    width: 500px;
+}
+.iframeVideo{
+    width:100%;
+    float:left;
+    text-align:center;
+}
+
+iframe {
+    margin: 20px auto;
+}
+
+#chart_div{
+    margin: 20px auto;
 }
 
 img {
     width: 25%;
 }
 
+.home> h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.home>h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+canvas {
+    margin: 20px;
+}
 /* SECTION 1 */
