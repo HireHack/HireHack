@@ -10,3 +10,11 @@ module.exports.home = (req, res, next) => {
 module.exports.mainLogin = (req, res, next) => {
     res.render('main-login');
 }
+
+module.exports.passwordUpdateConfirmation = (req, res, next) => {
+    res.send('Password Update Confirmation')
+}
+
+module.exports.deleteAccountConfirmation = (req, res, next) => {
+    
+}

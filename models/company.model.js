@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const {
-    company
-} = require('faker');
+const { company } = require('faker');
+const { v4: uuidv4 } = require('uuid');
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -56,17 +55,10 @@ const companySchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    activationToken: {
+    token: {
         type: String,
-        default: () => {
-            const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            let token = '';
-            for (let i = 0; i < 25; i++) {
-                token += characters[Math.floor(Math.random() * characters.length)];
-            }
-            return token;
-        }
-    }
+        default: uuidv4(),
+    },
 }, {
     timestamps: true,
     toJSON: {

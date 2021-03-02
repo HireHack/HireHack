@@ -80,7 +80,7 @@
 {{/unless}}
 
 {{#if currentCompany}}
-<form class="delete-form d-inline" action="/delete-company/{{currentCompany._id}}" method="post">
+<form class="delete-form d-inline" action="/delete-company/{{currentCompany.token}}" method="get">
     <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil
         Empresa</button>
 </form>

@@ -17,6 +17,8 @@ const GOOGLE_SCOPES = [
 // MISC
 router.get('/', miscController.home);
 router.get('/main-login', miscController.mainLogin);
+router.post('/password-update/:id', miscController.passwordUpdateConfirmation);
+
 
 // CANDIDATES
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
@@ -32,7 +34,8 @@ router.get('/authenticate/google/callback', candidatesController.doLoginGoogle)
 router.post('/candidate-logout', secure.checkRole('CANDIDATE'), candidatesController.logout);
 router.get('/candidate-edit/:id', secure.checkRole('CANDIDATE'), candidatesController.edit)
 router.post('/candidate-edit/:id', secure.checkRole('CANDIDATE'), upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'cv',maxCount: 1 }]), candidatesController.doEdit)
-router.post('/delete-candidate/:id', secure.checkRole('CANDIDATE'), candidatesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
+router.get('/delete-candidate/:token', secure.checkRole('CANDIDATE'), candidatesController.delete);
+router.get('/delete-candidate-account/:token', candidatesController.doDelete);
 
 // COMPANIES
 router.get('/company-profile', secure.checkRole('COMPANY'), companiesController.companyProfile);
@@ -48,7 +51,8 @@ router.get('/auth/google/callback', companiesController.doLoginGoogle)
 router.post('/company-logout', secure.checkRole('COMPANY'), companiesController.logout);
 router.get('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.edit)
 router.post('/company-edit/:id', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit)
-router.post('/delete-company/:id', secure.checkRole('COMPANY'), companiesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
+router.get('/delete-company/:token', secure.checkRole('COMPANY'), companiesController.delete); // TODO --> Nodemailer confirmation email to permanently delete profile
+router.get('/delete-company-account/:token', companiesController.doDelete);
 
 // OFFERS
 router.get('/offers-list', offersController.offersList);

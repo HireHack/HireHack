@@ -4,6 +4,10 @@ const flash = require('connect-flash');
 const Company = require('../models/company.model');
 const Offer = require('../models/offer.model');
 const { sendCompanyActivationEmail } = require('../config/mailer.config');
+const { sendDeleteCompanyEmail } = require('../config/mailer.config');
+const { sendEmailUpdateEmail } = require('../config/mailer.config');
+const { sendPasswordUpdateEmail } = require('../config/mailer.config');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports.companyProfile = (req, res, next) => {
     Offer.find({'offers_publishedByCompany': req.currentCompany.id})
@@ -68,20 +72,17 @@ module.exports.doSignup = (req, res, next) => {
         })
         console.log('req.body signup', req.body)
     }
-    Company.findOne({
-            email: req.body.email
-        })
+    Company.findOne({ email: req.body.email })
         .then((company) => {
-            console.log('email', req.body.email)
             if (company) {
                 renderWithErrors({
                     email: "Ya existe un usuario con este email"
                 })
             } else {
                 Company.create(req.body)
-                    .then((cratedCompany) => {
+                    .then((createdCompany) => {
                         req.flash('flashMessage', '¡Perfil creado con éxito! - Por favor, ve a tu email para finalizar el registro')
-                        sendCompanyActivationEmail(cratedCompany.email, cratedCompany.activationToken);
+                        sendCompanyActivationEmail(createdCompany.email, createdCompany.token);
                         res.redirect('/company-login')
                     })
                     .catch((err) => {
@@ -98,16 +99,17 @@ module.exports.doSignup = (req, res, next) => {
 
 module.exports.activate = (req, res, next) => {
     Company.findOneAndUpdate (
-        { activationToken: req.params.token, active: false },
-        { active: true, activationToken: "active"}
+        { token: req.params.token, active: false },
+        { active: true, token: uuidv4() }
     )
         .then((company) => {
             if(company) {
+                //company.generateToken();
                 req.flash('flashMessage', 'Tu cuenta ha sido activada - ¡Ya puedes iniciar sesión!');
                 res.redirect('/company-login');
             } else {
                 req.flash('flashMessage', 'Error al activar tu cuenta, por favor, inténtalo de nuevo.');
-                res.render('companies/signup');
+                res.redirect('/company-signup');
             }
         })
         .catch((err) => next(err));
@@ -140,10 +142,23 @@ module.exports.doEdit = (req, res, next) => {
         .catch((err) => next(err))
 }
 
-
 module.exports.delete = (req, res, next) => {
-    console.log(req.params.id)
-    Company.findByIdAndDelete(req.params.id)
-        .then(() => res.redirect('/'))
+    console.log('req.body delete', req.body)
+    Company.findById({_id: req.currentCompany.id})
+        .then((companyToDelete) => {
+            console.log('companyToDelete', companyToDelete)
+            req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
+            sendDeleteCompanyEmail(companyToDelete.email, companyToDelete.token);
+            res.redirect('/');
+        })
+        .catch((err) => next(err));
+}
+
+module.exports.doDelete = (req, res, next) => {
+    Company.findOneAndRemove({token: req.params.token})
+        .then(() => {
+            req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
+            res.redirect('/');
+        })
         .catch((err) => next(err));
 }

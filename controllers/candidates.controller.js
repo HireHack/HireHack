@@ -5,6 +5,10 @@ const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
 const { sendCandidateActivationEmail } = require('../config/mailer.config');
+const { sendDeleteCandidateEmail } = require('../config/mailer.config');
+const { sendEmailUpdateEmail } = require('../config/mailer.config');
+const { sendPasswordUpdateEmail } = require('../config/mailer.config');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports.candidateProfile = (req, res, next) => {
     Application.find({'candidate': req.currentCandidate.id})
@@ -94,7 +98,7 @@ module.exports.doSignup = (req, res, next) => {
                 Candidate.create(req.body)
                     .then((createdCandidate) => {
                         req.flash('flashMessage', '¡Perfil creado con éxito! - Por favor, ve a tu email para finalizar el registro')
-                        sendCandidateActivationEmail(createdCandidate.email, createdCandidate.activationToken);
+                        sendCandidateActivationEmail(createdCandidate.email, createdCandidate.token);
                         res.redirect('/candidate-login')
                     })
                     .catch((err) => {
@@ -111,16 +115,17 @@ module.exports.doSignup = (req, res, next) => {
 
 module.exports.activate = (req, res, next) => {
     Candidate.findOneAndUpdate (
-        { activationToken: req.params.token, active: false },
-        { active: true, activationToken: "active"}
+        { token: req.params.token, active: false },
+        { active: true, token: uuidv4() }
     )
         .then((candidate) => {
             if(candidate) {
+                //candidate.generateToken();
                 req.flash('flashMessage', 'Tu cuenta ha sido activada - ¡Ya puedes iniciar sesión!');
                 res.redirect('/candidate-login');
             } else {
                 req.flash('flashMessage', 'Error al activar tu cuenta, por favor, inténtalo de nuevo.');
-                res.render('candidates/signup');
+                res.redirect('/candidate-signup');
             }
         })
         .catch((err) => next(err));
@@ -169,9 +174,21 @@ module.exports.doEdit = (req, res, next) => {
 
 
 module.exports.delete = (req, res, next) => {
-    Candidate.findByIdAndDelete({
-            _id: req.params.id
+    Candidate.findById({_id: req.currentCandidate.id})
+        .then((candidateToDelete) => {
+            //console.log('candidateToDelete', candidateToDelete)
+            req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
+            sendDeleteCandidateEmail(candidateToDelete.email, candidateToDelete.token);
+            res.redirect('/');
         })
-        .then(() => res.redirect('/'))
+        .catch((err) => next(err));
+}
+
+module.exports.doDelete = (req, res, next) => {
+    Candidate.findOneAndRemove({token: req.params.token})
+        .then(() => {
+            req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
+            res.redirect('/');
+        })
         .catch((err) => next(err));
 }

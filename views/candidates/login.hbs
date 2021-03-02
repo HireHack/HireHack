@@ -21,3 +21,9 @@
     </div>
 </div>
 <p>¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a></p>
+
+{{#if currentCandidate}}
+<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate.token}}" method="get">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Darme de baja</button>
+</form>
+{{/if}}
