@@ -18,12 +18,6 @@
         {{/each}}
     </p>
     <p>Oferta publicada por: <strong>{{offer.offers_publishedByCompany.name}}</strong></p>
-    {{!-- {{#if currentCompany}}
-    <a class="btn btn-success d-inline" href="/edit-offer/{{offer.id}}">Editar Oferta</a>
-    <form class="delete-form d-inline" action="/delete-offer/{{offer.id}}" method="post">
-        <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar oferta</button>
-    </form>
-    {{/if}} --}}
     {{#if currentCandidate}}
     <form class="delete-form d-inline" action="/apply/{{offer.id}}" method="post">
         <button type="submit" class="btn btn-danger">Inscribirme</button>
