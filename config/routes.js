@@ -17,6 +17,7 @@ const GOOGLE_SCOPES = [
 // MISC
 router.get('/', miscController.home);
 router.get('/main-login', miscController.mainLogin);
+router.get('/search', miscController.search)
 
 // CANDIDATES
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
@@ -56,6 +57,7 @@ router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doC
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
+router.get('/search-offers', offersController.search)
 
 // APPLICATION
 router.get('/application-detail/:id', applicationController.detail);

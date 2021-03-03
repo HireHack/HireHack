@@ -45,8 +45,67 @@
                 {{/if}}
             </div>
 
-            <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
+            <div class="form-group">
+                <label for="category">Categoría</label>
+                <select class="form-control" name="category" id="category">
+                    <option value="Adm.empresas">Adm.empresas</option>
+                    <option value="Atención al cliente">Atención al cliente</option>
+                    <option value="Compras, logistica y almacén">Compras, logistica y almacén</option>
+                    <option value="Educación y formación">Educación y formación</option>
+                    <option value="Finanzas y banca">Finanzas y banca</option>
+                    <option value="Informática y telecomunicaciones">Informática y telecomunicaciones</option>
+                    <option value="Ingenieros y técnicos">Ingenieros y técnicos</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Marketing y comunicación">Marketing y comunicación</option>
+                    <option value="RR.HH">RR.HH</option>
+                    <option value="Sanidad">Sanidad</option>
+                    <option value="Turismo">Turismo</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label for="contract">Tipo de contrato</label>
+                <select class="form-control" name="contract" id="contract">
+                    <option value="Indefinido">Indefinido</option>
+                    <option value="De duración determinada">De duración determinada</option>
+                    <option value="Autónomo">Autónomo</option>
+                    <option value="Otros Contratos">Otros contratos</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="studies">Estudios mínimos</label>
+                <select class="form-control" name="studies" id="studies">
+                    <option value="Sin estudios">Sin estudios</option>
+                    <option value="ESO">ESO</option>
+                    <option value="Grado medio">Grado medio</option>
+                    <option value="Grado superior">Grado superior</option>
+                    <option value="Grado">Grado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experiencia(años)</label>
+                <input class="form-control" name="experience" type="number">
+            </div>
+
+            <div class="form-group">
+                <label for="salary">Salario anual</label>
+                <select class="form-control" name="salary" id="salary">
+                    <option value="6K - 12k">6K - 12k</option>
+                    <option value="12K - 20K">12K - 20K</option>
+                    <option value="20K - 30K">20K - 30K</option>
+                    <option value="+ 30K">+ 30K</option>
+                </select>
+            </div>
+            <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
         </form>
     </div>
 </div>
+
+{{#if currentCompany}}
+<form class="delete-form d-inline" action="/delete-offer/{{_id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar oferta</button>
+</form>
+{{/if}}
