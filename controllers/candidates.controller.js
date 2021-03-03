@@ -159,7 +159,7 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const candidate = req.body
+    const candidate = req.body;
 
     if (candidate.skills) {
         candiate.skills = candidate.skills.split(',');
@@ -186,15 +186,14 @@ module.exports.doEdit = (req, res, next) => {
     //console.log('req.files[picture][0]', req.files.picture[0].path)
     //console.log('req.files[cv]', req.files.cv[0].path)
 
-    Candidate.findByIdAndUpdate(req.params.id, req.body, {
-            new: true
-        })
+    Candidate.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(() => res.redirect('/candidate-profile'))
         .catch((err) => next(err))
 
 }
 
 module.exports.updateEmail = (req, res, next) => {
+    console.log('curr candidate updateEmail', req.currentCandidate)
     Candidate.findById({
             _id: req.currentCandidate.id
         })
@@ -234,7 +233,7 @@ module.exports.doEditEmail = (req, res, next) => {
                     res.redirect('/candidate-profile')
                 } else {
                     req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
-                    location.reload();
+                    next();
                 }
             })
             .catch((err) => next(err));
@@ -257,6 +256,7 @@ module.exports.updatePassword = (req, res, next) => {
 module.exports.editPassword = (req, res, next) => res.render('candidates/newPasswordForm');
 
 module.exports.doEditPassword = (req, res, next) => {
+
     function renderWithErrors(errors) {
         res.status(400).render('candidates/signup', {
             errors: errors,
@@ -281,7 +281,7 @@ module.exports.doEditPassword = (req, res, next) => {
                     res.redirect('/company-profile')
                 } else {
                     req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
-                    location.reload();
+                    next();
                 }
             })
             .catch((err) => next(err));

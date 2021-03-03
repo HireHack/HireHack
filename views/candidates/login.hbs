@@ -4,12 +4,12 @@
         <form action="/candidate-login" method="POST">
             <div class="form-group">
                 <label for="email-input"> Email: </label>
-                <input class="form-control" type="email" value="{{candidate.email}}" name="email" id="email-input" required>
+                <input class="form-control" type="email" value="{{candidate.email}}" name="email" id="email-input"
+                    required>
             </div>
             <div class="form-group">
                 <label for="password-input"> Contraseña: </label>
-                <input class="form-control" type="password" name="password" id="password-input"
-                    required>
+                <input class="form-control" type="password" name="password" id="password-input" required>
             </div>
             {{#if errors}}
             <div class="error-message">{{errors}}</div>
@@ -20,5 +20,12 @@
         </form>
     </div>
 </div>
-<p>¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a></p>
-
+<p>¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a> | <a id="candidate-forgot-password" href="">¿Has
+        olvidado tu contraseña? </a></p>
+<form class="update-form d-inline d-none" action="/candidate-update-password/{{currentCompany._id}}" method="post">
+    <div class="form-group">
+        <label for="email">Introduce tu email de recuperación:</label>
+        <input class="form-control" type="text" name="email">
+        <button type="submit" class="btn btn-secondary mt-1" onclick="return clicked()">Enviar</button>
+    </div>
+</form>

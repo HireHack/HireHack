@@ -181,7 +181,7 @@ module.exports.doEditEmail = (req, res, next) => {
                 res.redirect('/company-profile')
             } else {
                 req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
-                location.reload();
+                next();
             }
         })
         .catch((err) => next(err));
@@ -221,10 +221,10 @@ module.exports.doEditPassword = (req, res, next) => {
         .then((updatedCompany) => {
             if (updatedCompany) {
                 req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
-                res.redirect('/company-profile')
+                res.redirect('/company-profile');
             } else {
                 req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
-                location.reload();
+                next();
             }
         })
         .catch((err) => next(err));

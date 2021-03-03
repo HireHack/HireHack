@@ -1,4 +1,4 @@
-<h1 class=>{{#if currentCompany}}Editar perfil{{else}}Registro como empresa{{/if}}</h1>
+<h1 class=>{{#if currentCompany}}Editar perfil de Empresa{{else}}Registro como empresa{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
         <form action="{{#if currentCompany}}/company-edit/{{_id}}{{else}}/company-signup{{/if}}" method="POST"
@@ -69,8 +69,8 @@
                 </div>
                 {{/if}}
 
-                <button class="btn btn-primary mt-3" type="submit">{{#if
-                    currentCompany}}Editar{{else}}Registro{{/if}}</button>
+                <button class="btn btn-success mt-3" type="submit">{{#if
+                    currentCompany}}Guardar{{else}}Registro{{/if}}</button>
         </form>
     </div>
 </div>
@@ -81,11 +81,11 @@
 
 {{#if currentCompany}}
 <form class="delete-form d-inline" action="/delete-company/{{currentCompany.token}}" method="get">
-    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil
+    <button type="submit" class="btn btn-outline-danger" onclick="return clicked()">Eliminar Perfil
         Empresa</button>
 </form>
 
-{{!-- {{#unless currentCandidate.social}} --}}
+{{#unlessSocialCompany currentCompany}}
 <form class="update-form d-inline" action="/company-update-password/{{currentCompany._id}}" method="post">
     <button type="submit" class="btn btn-secondary" onclick="return clicked()">Actualizar contraseña</button>
 </form>
@@ -93,5 +93,9 @@
 <form class="update-form d-inline" action="/company-update-email/{{currentCompany._id}}" method="post">
     <button type="submit" class="btn btn-secondary" onclick="return clicked()">Actualizar email</button>
 </form>
-{{!-- {{/unless}} --}}
+{{/unlessSocialCompany}}
+
 {{/if}}
+
+
+

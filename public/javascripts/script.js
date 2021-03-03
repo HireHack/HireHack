@@ -12,3 +12,9 @@ setTimeout(() => {
     new bootstrap.Toast(toast).hide()
   })  
 }, 5000);
+
+
+//DOM
+document.querySelectorAll('forgot-password').addEventListener('click', () => {
+  document.querySelectorAll('hidden').forEach(selector => selector.classList.toggle('d-none'))
+})
