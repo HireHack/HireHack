@@ -195,7 +195,9 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.updateEmail = (req, res, next) => {
-    Candidate.findById({_id: req.currentCandidate.id})
+    Candidate.findById({
+            _id: req.currentCandidate.id
+        })
         .then((candidateToUpdate) => {
             //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de actualización de email realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
@@ -214,31 +216,35 @@ module.exports.doEditEmail = (req, res, next) => {
             candidate: req.body
         })
     }
-    
+
     if (req.body.newEmail != req.body.confirmEmail) {
         renderWithErrors({
             email: "Los emails no coindiden."
         })
     } else {
-        Candidate.findOneAndUpdate(
-            {email: req.body.email}, 
-            {email: req.body.newEmail, token: uuidv4()}
-        )
-        .then((updatedCandidate) => {
-            if (updatedCandidate) {
-                req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
-                res.redirect('/candidate-profile')
-            } else {
-                req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
-                location.reload();
-            }
-        })
-        .catch((err) => next(err));
+        Candidate.findOneAndUpdate({
+                email: req.body.email
+            }, {
+                email: req.body.newEmail,
+                token: uuidv4()
+            })
+            .then((updatedCandidate) => {
+                if (updatedCandidate) {
+                    req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
+                    res.redirect('/candidate-profile')
+                } else {
+                    req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
+                    location.reload();
+                }
+            })
+            .catch((err) => next(err));
     }
 }
 
 module.exports.updatePassword = (req, res, next) => {
-    Candidate.findById({_id: req.currentCandidate.id})
+    Candidate.findById({
+            _id: req.currentCandidate.id
+        })
         .then((candidateToUpdate) => {
             //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de actualización de contraseña realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
@@ -257,32 +263,36 @@ module.exports.doEditPassword = (req, res, next) => {
             candidate: req.body
         })
     }
-    
+
     if (req.body.newPassword != req.body.confirmPassword) {
         renderWithErrors({
             password: "Las contraseñas no coindiden."
         })
     } else {
-        Candidate.findOneAndUpdate(
-            {email: req.body.email}, 
-            {password: req.body.newPassword, token: uuidv4()}
-        )
-        .then((updatedCandidate) => {
-            if (updatedCandidate) {
-                req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
-                res.redirect('/company-profile')
-            } else {
-                req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
-                location.reload();
-            }
-        })
-        .catch((err) => next(err));
+        Candidate.findOneAndUpdate({
+                email: req.body.email
+            }, {
+                password: req.body.newPassword,
+                token: uuidv4()
+            })
+            .then((updatedCandidate) => {
+                if (updatedCandidate) {
+                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+                    res.redirect('/company-profile')
+                } else {
+                    req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
+                    location.reload();
+                }
+            })
+            .catch((err) => next(err));
     }
 }
 
 
 module.exports.delete = (req, res, next) => {
-    Candidate.findById({_id: req.currentCandidate.id})
+    Candidate.findById({
+            _id: req.currentCandidate.id
+        })
         .then((candidateToDelete) => {
             //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
