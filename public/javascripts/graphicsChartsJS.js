@@ -12,7 +12,7 @@ const getDataInfo = (url) => {
         .then((response) => {
             //console.log(response.data.results)
             const generalData = response.data
-            console.log(generalData)
+            //console.log(generalData)
 
             //LOCATION
             const location = Object.values(generalData).map((jobLocation) => jobLocation['locations'])
@@ -20,15 +20,15 @@ const getDataInfo = (url) => {
             const defLocations = location.map((jl) => jl['0'])
             //console.log(defLocations)
             const xAxis = defLocations.map((jl) => jl['name'])
-            console.log(xAxis)
+            //console.log(xAxis)
 
             const remoteLength = xAxis.filter(place => place === 'Flexible / Remote').length
-            console.log (remoteLength)
+            //console.log (remoteLength)
             
             
             //CATEGORIES
             const yAxis = Object.values(generalData).map((jobName) => jobName['name'])
-            console.log(yAxis)
+            //console.log(yAxis)
 
 
             paintData1(remoteLength, xAxis.length - remoteLength)
@@ -143,5 +143,3 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
 
 
 getDataInfo(`http://localhost:8000/results`)
-
-

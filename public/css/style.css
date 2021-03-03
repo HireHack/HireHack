@@ -1,5 +1,18 @@
 /* MAIN */
 
+/* html {
+    background-image: url('/img/KIZOA-Movie-Maker-b23zmzsb.gif');
+    background-size: 280px;
+    background-position: 0% -70%; 
+    background-position-y: center; 
+    background-repeat: repeat-x;
+   
+}
+
+body{
+    margin: 0px 240px 0px 280px;
+    display: none; 
+}  */
 
 /* NAVBAR */
 
@@ -33,7 +46,7 @@ img {
     margin-bottom: 20px;
 }
 
-.home>h3 {
+.home> h2 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -41,4 +54,15 @@ img {
 canvas {
     margin: 20px;
 }
-/* SECTION 1 */
+/* HOME */
+
+.first_img {
+    position: absolute;
+    width: 80%;
+}
+
+.second_img {
+    position: relative;
+    width: 33%;
+    left: 50%;
+}
