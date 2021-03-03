@@ -22,7 +22,7 @@ const companySchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce un email"],
         unique: true,
         lowercase: true,
         trim: true,
@@ -30,7 +30,7 @@ const companySchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        //required: true,
+        //required: [true, "Por favor, introduce tu contraseña"],
         match: [PASSWORD_PATTERN, "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minuscula y 1 número"],
     },
     description: {

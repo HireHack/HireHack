@@ -16,6 +16,10 @@ const offerSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    active: {
+        type: Boolean,
+        default: true,
+    },
     skills: {
         type: [String],
         //enum: ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],

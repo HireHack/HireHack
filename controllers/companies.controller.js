@@ -6,9 +6,9 @@ const Offer = require('../models/offer.model');
 
 module.exports.companyProfile = (req, res, next) => {
     Offer.find({'offers_publishedByCompany': req.currentCompany.id})
-        .then ( offers => 
+        .then(offers => {
             res.render('companies/companyProfile', { offers })
-        )
+        })
     // console.log('req.user company', req.user) 
 } 
 

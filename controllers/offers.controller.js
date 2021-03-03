@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Offer = require('../models/offer.model');
-const flash = require ('connect-flash')
+const Application = require('../models/application.model');
+const flash = require ('connect-flash');
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
         .populate('offers_publishedByCompany')
         .then((offers) => {
-            //console.log('offers', offers);
-            res.render('offers/offersList', {offers})
+            res.render('offers/offersList', { offers })
         })
         .catch((err) => console.error(err))
 };
@@ -16,8 +16,10 @@ module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
         .populate('offers_publishedByCompany')
         .then((offer) => {
-            //console.log(offer.getAddress())
-            res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
+            if (offer.status == "Proceso abierto") {
+                //console.log(offer.getAddress())
+                res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/ })
+            }
         })
 };
 
@@ -43,6 +45,7 @@ module.exports.doCreate = (req, res, next) => {
 
     Offer.create(offer)
         .then((createdOffer) => {
+            createdOffer.status = "Proceso abierto"
             console.log('created offer: ', createdOffer)
             res.redirect('/company-profile');
             // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
@@ -88,8 +91,16 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-    Offer.findByIdAndDelete({_id: req.params.id /*offers_publishedByCompany: req.currentUser.id*/}) // To ensure only the creator can detele the offer
-        .then(() => res.redirect('/company-profile'))
+    Application.findOneAndDelete({ offer: req.params.id })
+        .then(() => {
+            console.log('req.body app delete', req.body)
+            Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
+                .then((offer) => {
+                    offer.active = false;
+                    offer.save();
+                    res.redirect('/company-profile')
+                })
+        })
         .catch((err) => next(err));
 }
 

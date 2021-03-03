@@ -5,6 +5,7 @@ const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
 
 module.exports.candidateProfile = (req, res, next) => {
+    console.log(req.currentCandidate)
     Application.find({'candidate': req.currentCandidate.id})
         .populate('offer')
         .then((application) => {

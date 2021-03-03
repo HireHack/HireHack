@@ -1,5 +1,9 @@
 <h1>Vista Candidatura</h1>
 
+<form class="delete-form d-inline" action="/delete-application/{{_id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar proceso</button>
+</form>
+
 <h2>Oferta</h2>
 {{#with offer}}
 {{!-- Offer detail --}}
