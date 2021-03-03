@@ -5,14 +5,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href="/">
-            <img class="logo__header" src="../img/logo.png" alt="HireHack logo">
+            <img class="logo__header" src="../img/logoNav.png" alt="HireHack logo">
         </a>
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
                     {{#if currentCompany}}
                             <li class="nav-item">
                                 <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}">{{#if
@@ -46,6 +43,9 @@
                         {{/if}}
                     {{/if}}
             </ul>
+
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/main-login">Acceso</a>
         </div>
     </div>
 </nav>

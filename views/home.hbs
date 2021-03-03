@@ -1,5 +1,9 @@
-<h1>Bienvenid@ a HireHack!!</h1>
-<a class="nav-link active" aria-current="page" href="/main-login">Acceso</a>
+<div class="container">
+
+<div class="row justify-content-center">
+    <img class="logoHome" src="/img/logo.png" alt="Logo">
+    {{!-- <img src="/img/banner.gif" alt=""> --}}
+</div>
 
 <form class="d-flex" action="/search" method="GET">
     <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
@@ -7,3 +11,165 @@
 </form>
 
 <a href="/offers-list">Ofertas publicadas</a>
+
+<div class="iframeVideo">
+    <div>
+        <iframe width="700" height="405" src="https://www.youtube.com/embed/A0rdpQizK9Y?start=2" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+    {{!-- <div class="col-4">
+        <p>Si no sabes por donde empezar, nuestro compañeros de educaweb(*) han resumido en el siguiente video, que deber preparar para buscar empleo.</p>
+    </div> --}}
+</div>
+
+<div class="row home">
+    <h2>EMPLEO</h2>
+    <h3>Tasa de paro en España</h3>
+    <p>Las tasas de paro en España se han incrementado con la aparición del virus COVID-19. Se espera que la tendencia, 
+        una vez que la población este vacunada, tienda a invertirse, por lo que es hora de comenzar a cambiarla. 
+        ¿Estas preparado para encontrar tu trabajo ideal? ¡<a href="/candidate-login">Accede</a> a tu perfil y comienza la búsqueda!</p>
+    <div id="chart_div" style="width: 900px; height: 558px;"></div>
+    <div id="table_div"></div>
+    <p>Datos obtenidos en el INE (Instituto Nacional de Estadística)</p>
+</div>
+
+<div class="row justify-content-beetween home">
+    <h3>Teletrabajo</h3>
+    <p>Desde hace algunos años la tendencia a teletrabajar esta aumentando. Entre sus principales causas estan la mejora de la 
+        conciliación laboral con la familia o la disminución del tránsito automovilistico en las ciudades para reducir los niveles de 
+        constaminación. Sin embargo, la irupción del virus COVID-19, ha disparado el teletrabajo durante el actual y pasado año.</p>
+    <div class="col-6">
+        <h4>Año 2021</h4>
+        <canvas id="circleGraphic" width="10" height="5"></canvas>
+        <p>Datos obtenidos en la API-V2 "Themuse" </p>
+    </div>
+    <div class="col-6">
+        <h4>Año 2019</h4>
+        <canvas id="circleGraphic2" width="10" height="5"></canvas>
+        <p>Datos obtenidos en la API-V2 "Themuse" </p>
+    </div>
+</div>
+
+<div class="row justify-content-beetween home">
+<h3>Profesiones más demandadas</h3>
+<div class="col-6">
+    <canvas id="lineGraphic" width="100" height="50"></canvas>
+</div>
+<div class="col-6">
+    <canvas id="bar-chart-horizontal" width="100" height="50"></canvas>
+</div>
+
+{{!-- <h3>Profesiones más demandadas en un futuro próximo (2 a 3 años)</h3>
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>SECTOR</th>
+            <th>PROFESIÓN</th>
+            <th>EN % DEL TOTAL</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr class="table-info">
+            <td>TECNOLOGÍA</td>
+            <td>'Big Data'</td>
+            <td>11,24</td>
+        </tr>
+        <tr class="table-info">
+            <td>TECNOLOGÍA</td>
+            <td>'Data Science'</td>
+            <td>9,55</td>
+        </tr>
+        <tr class="table-success">
+            <td>COMERCIAL</td>
+            <td>Comercial digital</td>
+            <td>5,06</td>
+        </tr>
+        <tr class="table-danger">
+            <td>INGIENERÍA</td>
+            <td>Ingeniero informático</td>
+            <td>4,49</td>
+        </tr>
+        <tr class="table-info">
+            <td>TECNOLOGÍA</td>
+            <td>Programador informático</td>
+            <td>4,49</td>
+        </tr>
+        <tr class="table-danger">
+            <td>INGIENERÍA</td>
+            <td>Ingeniero industrial</td>
+            <td>3,93</td>
+        </tr>
+        <tr class="table-active">
+            <td>OPERARIOS</td>
+            <td>Operarios cualificados</td>
+            <td>3,37</td>
+        </tr>
+        <tr class="table-info">
+            <td>TECNOLOGÍA</td>
+            <td>Responsable de ciberseguridad</td>
+            <td>3,37</td>
+        </tr>
+        <tr class="table-warning">
+            <td>RRHH</td>
+            <td>Responsable "HR analytics"</td>
+            <td>2,81</td>
+        </tr>
+        <tr class="table-ligth">
+            <td>DIRECCIÓN</td>
+            <td>CTO (Chief transformation officer)</td>
+            <td>2,25</td>
+        </tr>
+        <tr class="table-info">
+            <td>TECNOLOGÍA</td>
+            <td>Desarrollador de aplicaciones multimedia</td>
+            <td>2,25</td>
+        </tr>
+        <tr class="table-info">
+            <td>TECNOLOGÍA</td>
+            <td>Especialista 'e-commerce development'</td>
+            <td>2,25</td>
+        </tr>
+        <tr class="table-success">
+            <td>COMERCIAL</td>
+            <td>'Senior key account manager'</td>
+            <td>2,25</td>
+        </tr>
+        <tr class="table-danger">
+            <td>INGIENERÍA</td>
+            <td>Ingeniero de proyecto</td>
+            <td>2,25</td>
+        </tr>
+        <tr class="table-primary">
+            <td>SALUD</td>
+            <td>Médico</td>
+            <td>2,25</td>
+        </tr>
+
+    </tbody>
+</table> --}}
+<p>Datos obtenidos en la web "El País Economía" </p>
+</div>
+
+<h2>HABILIDADES</h2>
+<div>
+    <h3>Perfiles profesionales más necesitados por Comunidades autónomas</h3>
+    <div id="chart_hab" style="width: 900px; height: 558px;"></div>
+    <p>Datos obtenidos de Addeco </p>
+    <h3>Competencias que se exigen en las nuevas profesiones </h3>
+</div>
+
+<div class="row justify-content-center">
+    <h3>Competencias que se exigen en las nuevas profesiones </h3>
+    <img class="first_img" src="/img/habilidades.png" alt="People jumping">
+    <img class="second_img" src="/img/Habilidades2D.gif" alt="Abilities">
+    <br>
+</div>
+
+<div>
+    <h3>¿Qué habilidades se estan pidiendo para las profesiones más demandadas?</h3>
+    <div id="sankey_basic" style="width: 1500px; height: 900px;"></div>
+</div>
+
+</div>
