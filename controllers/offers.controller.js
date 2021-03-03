@@ -4,7 +4,7 @@ const Application = require('../models/application.model');
 const flash = require ('connect-flash');
 
 module.exports.offersList = (req, res, next) => {
-    Offer.find()
+    Offer.find({"active": true})
         .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', { offers })

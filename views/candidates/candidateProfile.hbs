@@ -33,7 +33,7 @@
     <p>Estado: {{#if offer.active}}<span style="color: green;">ABIERTO</span>{{else}}<span style="color: red;">CERRADO</span>{{/if}}</p>
     <p><b>Descripción:</b> <br> {{offer.description}}</p>
     <b>Requisitos:</b>
-    {{#each skills}}
+    {{#each offer.skills}}
     {{#if @last}}
     <span>{{this}}</span>
     {{else}}
