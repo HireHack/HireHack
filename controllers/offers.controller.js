@@ -16,10 +16,7 @@ module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
         .populate('offers_publishedByCompany')
         .then((offer) => {
-            if (offer.status == "Proceso abierto") {
-                //console.log(offer.getAddress())
-                res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/ })
-            }
+            res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/ })
         })
 };
 
@@ -91,13 +88,18 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-    Application.findOneAndDelete({ offer: req.params.id })
-        .then(() => {
-            console.log('req.body app delete', req.body)
+    Application.findOne({ offer: req.params.id })
+        .populate('offer')
+        .then((application) => {
+            application.offer.active = false
+            application.save()
             Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
                 .then((offer) => {
                     offer.active = false;
                     offer.save();
+                    //TO DO: mandar email candidato con proceso cerrado
+                    // EJEMPLO
+                    // sendCandidateActivationEmail(createdCandidate.email, createdCandidate.token);
                     res.redirect('/company-profile')
                 })
         })
