@@ -119,18 +119,17 @@ module.exports.activate = (req, res, next) => {
         .catch((err) => next(err));
 }
 
-
 module.exports.logout = (req, res, next) => {
     req.logout();
     res.redirect('/');
 }
 
 module.exports.edit = (req, res, next) => {
-     Company.findById(req.params.id)
+    //console.log('req.currentCompany', req.currentCompany)
+     Company.findById({_id: req.currentCompany.id})
          .then((companyToEdit) => res.render('companies/signup', companyToEdit))
-         .catch((err) => console.error(err))
+         .catch((err) => next(err))
 }
-
 
 module.exports.doEdit = (req, res, next) => {
 
@@ -230,7 +229,6 @@ module.exports.doEditPassword = (req, res, next) => {
         .catch((err) => next(err));
     }
 }
-
 
 module.exports.delete = (req, res, next) => {
     Company.findById({_id: req.currentCompany.id})

@@ -105,7 +105,7 @@
 
             <button class="btn btn-success mt-3" type="submit">{{#if currentCandidate}}Guardar{{else}}Registro{{/if}}</button>
             <br>
-            {{#if currentCandidate}}<a class="form-group" href="">Ajustes de privacidad</a>{{/if}} <!-- TODO: DOM shows delete profile, update password and update email-->
+            {{#if currentCandidate}}<a class="form-group" href="#">Ajustes de privacidad</a>{{/if}} <!-- TODO: DOM shows delete profile, update password and update email-->
         </form>
     </div>
 </div>
@@ -116,16 +116,16 @@
 
 
 {{#if currentCandidate}}
-<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
+<form class="delete-form d-inline" action="/delete-candidate" method="post">
     <button type="submit" class="btn btn-outline-danger" onclick="return clicked()">Darse de baja</button>
 </form>
 
 {{#unlessSocialCandidate currentCandidate}}
-<form class="update-form d-inline" action="/candidate-update-password/{{currentCandidate._id}}" method="post">
+<form class="update-form d-inline" action="/candidate-update-password" method="post">
     <button type="submit" class="btn btn-outline-secondary" onclick="return clicked()">Actualizar contraseña</button>
 </form>
 
-<form class="update-form d-inline" action="/candidate-update-email/{{currentCandidate._id}}" method="post">
+<form class="update-form d-inline" action="/candidate-update-email" method="post">
     <button type="submit" class="btn btn-outline-secondary" onclick="return clicked()">Actualizar email</button>
 </form>
 {{/unlessSocialCandidate}}

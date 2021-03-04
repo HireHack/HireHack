@@ -27,7 +27,7 @@ module.exports.sendCandidateActivationEmail = (email, token) => {
 
 module.exports.sendCompanyActivationEmail = (email, token) => {
     transporter.sendMail({
-        from: `HireHack <${process.env.NM_USER}>`,
+        from: `HireHack Empresas <${process.env.NM_USER}>`,
         to: email,
         subject: '¡Gracias por unirte a HireHack!',
         html: generateCompanyTemplate(token)
@@ -63,7 +63,7 @@ module.exports.sendCandidatePasswordUpdateEmail = (email, token) => {
 
 module.exports.sendCompanyPasswordUpdateEmail = (email, token) => {
     transporter.sendMail({
-        from: `HireHack <${process.env.NM_USER}>`,
+        from: `HireHack Empresas<${process.env.NM_USER}>`,
         to: email,
         subject: 'Confirma tu cambio de contraseña',
         html: generateCompanyPasswordUpdateTemplate(token)
@@ -81,7 +81,7 @@ module.exports.sendCandidateEmailUpdateEmail = (email, token) => {
 
 module.exports.sendCompanyEmailUpdateEmail = (email, token) => {
     transporter.sendMail({
-        from: `HireHack <${process.env.NM_USER}>`,
+        from: `HireHack Empresas <${process.env.NM_USER}>`,
         to: email,
         subject: 'Confirma tu cambio de correo electrónico',
         html: generateCompanyEmailUpdateTemplate(token)
@@ -99,7 +99,7 @@ module.exports.sendDeleteCandidateEmail = (email, token) => {
 
 module.exports.sendDeleteCompanyEmail = (email, token) => {
     transporter.sendMail({
-        from: `HireHack <${process.env.NM_USER}>`,
+        from: `HireHack Empresas <${process.env.NM_USER}>`,
         to: email,
         subject: 'Confirma tu baja en HireHack',
         html: generateDeleteCompanyTemplate(token)

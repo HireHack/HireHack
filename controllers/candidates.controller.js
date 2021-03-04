@@ -4,21 +4,11 @@ const flash = require('connect-flash');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
-const {
-    sendCandidateActivationEmail
-} = require('../config/mailer.config');
-const {
-    sendDeleteCandidateEmail
-} = require('../config/mailer.config');
-const {
-    sendCandidateEmailUpdateEmail
-} = require('../config/mailer.config');
-const {
-    sendCandidatePasswordUpdateEmail
-} = require('../config/mailer.config');
-const {
-    v4: uuidv4
-} = require('uuid');
+const { sendCandidateActivationEmail } = require('../config/mailer.config');
+const { sendDeleteCandidateEmail } = require('../config/mailer.config');
+const { sendCandidateEmailUpdateEmail } = require('../config/mailer.config');
+const { sendCandidatePasswordUpdateEmail } = require('../config/mailer.config');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports.candidateProfile = (req, res, next) => {
     Application.find({
@@ -165,9 +155,9 @@ module.exports.edit = (req, res, next) => {
         candiate.skills = candidate.skills.split(',');
     }
 
-    Candidate.findById(req.params.id)
+    Candidate.findById({_id: req.currentCandidate.id})
         .then((candidateToEdit) => res.render('candidates/signup', candidateToEdit))
-        .catch((err) => console.error(err))
+        .catch((err) => next(err))
 
 }
 
@@ -222,6 +212,7 @@ module.exports.doEditEmail = (req, res, next) => {
         })
     } else {
         Candidate.findOneAndUpdate({
+                _id: req.currentCandidate.id,
                 email: req.body.email
             }, {
                 email: req.body.newEmail,
@@ -236,14 +227,18 @@ module.exports.doEditEmail = (req, res, next) => {
                     next();
                 }
             })
-            .catch((err) => next(err));
+            .catch((err) => {
+                if (err instanceof mongoose.Error.ValidationError) {
+                    renderWithErrors(err.errors) // Not rendering errors
+                } else {
+                    next(err)
+                }
+            });
     }
 }
 
 module.exports.updatePassword = (req, res, next) => {
-    Candidate.findById({
-            _id: req.currentCandidate.id
-        })
+    Candidate.findById({_id: req.currentCandidate.id})
         .then((candidateToUpdate) => {
             //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de actualización de contraseña realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
@@ -253,10 +248,18 @@ module.exports.updatePassword = (req, res, next) => {
         .catch((err) => next(err));
 }
 
-module.exports.editPassword = (req, res, next) => res.render('candidates/newPasswordForm');
+module.exports.editPassword = (req, res, next) => {
+    Candidate.findOne({token: req.params.token})
+        .then((candidate) => {
+            res.render('candidates/newPasswordForm', { candidate })
+        })
+        .catch((err) => next(err));
+};
 
 module.exports.doEditPassword = (req, res, next) => {
-
+    //console.log('doEditPassword candidate', candidate)
+    console.log('req.currentCandidate doEditPassword', req.currentCandidate)
+    
     function renderWithErrors(errors) {
         res.status(400).render('candidates/signup', {
             errors: errors,
@@ -264,35 +267,66 @@ module.exports.doEditPassword = (req, res, next) => {
         })
     }
 
-    if (req.body.newPassword != req.body.confirmPassword) {
-        renderWithErrors({
-            password: "Las contraseñas no coindiden."
-        })
-    } else {
-        Candidate.findOneAndUpdate({
-                email: req.body.email
-            }, {
-                password: req.body.newPassword,
-                token: uuidv4()
-            })
-            .then((updatedCandidate) => {
-                if (updatedCandidate) {
-                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
-                    res.redirect('/company-profile')
+    // if (req.body.newPassword !== req.body.confirmPassword) {
+    //     renderWithErrors({
+    //         password: "Las contraseñas no coindiden."
+    //     })
+    // } else {
+        console.log('req.body', req.body)
+        Candidate.findById(req.currentCandidate.id)
+            .then(() => {
+                if (req.currentCandidate.password == req.body.newPassword) {
+                    // candidate.password = req.body.newPassword;
+                    // candidate.token = uuidv4();
+                    // candidate.save();
+                    res.renderWithErrors()
+                } else if (req.body.newPassword !== req.body.confirmPassword || req.body.newPassword == '' || req.body.confirmPassword == '') {
+                    renderWithErrors({
+                        password: "Las contraseñas no coindiden."
+                     })
                 } else {
-                    req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
-                    next();
+                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+                    res.redirect('/candidate-profile');
                 }
             })
-            .catch((err) => next(err));
-    }
+            // .then((updatedCandidate) => {
+            //     if (updatedCandidate) {
+            //         req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+            //         res.redirect('/candidate-profile')
+            //     } else {
+            //         req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
+            //         next();
+            //     }
+            // })
+            .catch((err) => {
+                if (err instanceof mongoose.Error.ValidationError) {
+                    renderWithErrors(err.errors) // Not rendering errors
+                } else {
+                    next(err)
+                }
+            });
+
+        // Candidate.findOneAndUpdate({
+        //         email: req.body.email
+        //     }, {
+        //         password: req.body.newPassword,
+        //         token: uuidv4()
+        //     })
+        //     .then((updatedCandidate) => {
+        //         if (updatedCandidate) {
+        //             req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+        //             res.redirect('/company-profile')
+        //         } else {
+        //             req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
+        //             next();
+        //         }
+        //     })
+        //     .catch((err) => next(err));
+    // }
 }
 
-
 module.exports.delete = (req, res, next) => {
-    Candidate.findById({
-            _id: req.currentCandidate.id
-        })
+    Candidate.findById({_id: req.currentCandidate.id})
         .then((candidateToDelete) => {
             //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
@@ -303,9 +337,7 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.doDelete = (req, res, next) => {
-    Candidate.findOneAndRemove({
-            token: req.params.token
-        })
+    Candidate.findOneAndRemove({token: req.params.token})
         .then(() => {
             req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
             res.redirect('/');

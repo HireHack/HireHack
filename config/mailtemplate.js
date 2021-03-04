@@ -1652,7 +1652,7 @@ module.exports.generateCandidatePasswordUpdateTemplate = (token) => {
           <a
              href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/candidate-edit-password/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
           >
-            CAMBIAR EMAIL
+            ACTUALIZAR CONTRASEÑA
         </a>
         </td>
       </tr>
@@ -2340,7 +2340,7 @@ module.exports.generateCompanyPasswordUpdateTemplate = (token) => {
           <a
              href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/company-edit-password/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
           >
-            CAMBIAR EMAIL
+          ACTUALIZAR CONTRASEÑA
         </a>
         </td>
       </tr>
@@ -3028,7 +3028,7 @@ module.exports.generateCandidateEmailUpdateTemplate = (token) => {
           <a
              href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/candidate-edit-email/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
           >
-            CAMBIAR EMAIL
+            ACTUALIZAR EMAIL
         </a>
         </td>
       </tr>
@@ -3715,7 +3715,7 @@ module.exports.generateCompanyEmailUpdateTemplate = (token) => {
           <a
              href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/company-edit-email/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
           >
-            CAMBIAR EMAIL
+            ACTUALIZAR EMAIL
         </a>
         </td>
       </tr>
@@ -4402,9 +4402,9 @@ module.exports.generateDeleteCandidateTemplate = (token) => {
              align="center" bgcolor="#10A5F4" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#10A5F4;" valign="middle"
           >
             <a
-               href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/delete-candidate-account/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+               href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/delete-candidate/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
             >
-              BORRAR MI CUENTA
+              CONFIRMAR BAJA DEFINITIVA
             </a>
           </td>
         </tr>
@@ -5093,7 +5093,7 @@ module.exports.generateDeleteCompanyTemplate = (token) => {
           <a
              href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/delete-company/${token}" style="display:inline-block;background:#10A5F4;color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
           >
-            BORRAR MI CUENTA
+            CONFIRMAR BAJA DEFINITIVA
           </a>
         </td>
       </tr>

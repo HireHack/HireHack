@@ -4,15 +4,15 @@
         <form action="/candidate-login" method="POST">
             <div class="form-group">
                 <label for="email-input"> Email: </label>
-                <input class="form-control" type="email" value="{{candidate.email}}" name="email" id="email-input"
+                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" value="{{candidate.email}}" name="email" id="email-input"
                     required>
             </div>
             <div class="form-group">
                 <label for="password-input"> Contraseña: </label>
-                <input class="form-control" type="password" name="password" id="password-input" required>
+                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="password" name="password" id="password-input" required>
             </div>
             {{#if errors}}
-            <div class="error-message">{{errors}}</div>
+            <div class="error-message invalid-feedback">{{errors}}</div>
             {{/if}}
 
             <button class="btn btn-primary mt-3" type="submit">Iniciar sesión</button>
