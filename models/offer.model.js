@@ -43,6 +43,18 @@ const offerSchema = new mongoose.Schema({
         type: String,
         //enum: ["6K - 12k", "12K - 20K", "20K - 30K", "+ 30K"]
     },
+    location: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+            default: 'Point'
+        },
+        Coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     offers_publishedByCompany: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Company",
@@ -56,6 +68,8 @@ const offerSchema = new mongoose.Schema({
     },
     }
 );
+
+offerSchema.index({ location: '2dsphere' });
 
 offerSchema.virtual('applications', {
     ref: 'Application',

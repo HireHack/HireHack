@@ -5,6 +5,7 @@
             <div>
                 <p>Empresa: {{currentCompany.name}}</p>
             </div>
+
             <div class="form-group">
                 <label for="offer-input" name="name"> Nombre de la oferta: </label>
                 <input class="form-control {{#if errors.name}}is-invalid{{/if}}" value="{{name}}" type="text" name="name"
@@ -13,6 +14,7 @@
                 <div class="invalid-feedback">{{errors.name}}</div>
                 {{/if}}
             </div>
+
             <div class="form-group">
                 <label for="address-input"> Lugar de la oferta: </label>
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text" name="address.streetName"
@@ -29,6 +31,7 @@
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
             </div>
+
             <div class="form-group">
                 <label for="offer-input"> Descripción: </label>
                 <textarea class="form-control" name="description" id="offer" cols="30" rows="10">{{description}}</textarea>
@@ -99,7 +102,33 @@
                     <option value="+ 30K">+ 30K</option>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="lat">Latitud:</label>
+                <input class="form-control {{#if errors.location}}is-invalid{{/if}}" type="string" name="lat" value="{{lat}}" id="lat" required> 
+                <label for="lng">Longitud:</label>
+                <input class="form-control {{#if errors.location}}is-invalid{{/if}}" type="string" name="lng" value="{{lat}}" id="lng" required>
+            </div>
+
+            <div id="map"></div>
+
             <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
         </form>
     </div>
 </div>
+
+
+<script>
+    {{#if lat}}
+        let marker = { lat: {{lat}}, lng: {{lng}} }
+    {{else}}
+        let marker = null
+    {{/if}}
+    const editable = true;
+</script>
+
+
+<script src="/javascripts/googleMaps.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly" async></script>
+
