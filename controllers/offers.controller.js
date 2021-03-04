@@ -34,18 +34,18 @@ module.exports.doCreate = (req, res, next) => {
     console.log('oferta', req.body)
     offer.offers_publishedByCompany = req.currentCompany.id
     //{offer, ...offer.offers_publishedByCompany}
-
+    
     if (offer.skills) {
         offer.skills = offer.skills.split(',');
     }
     const company = req.currentCompany.id
-
+    
     Offer.create(offer)
-        .then((createdOffer) => {
-            createdOffer.status = "Proceso abierto"
-            console.log('created offer: ', createdOffer)
-            res.redirect('/company-profile');
-            // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
+    .then((createdOffer) => {
+        createdOffer.status = "Proceso abierto"
+        console.log('created offer: ', createdOffer)
+        res.redirect('/company-profile');
+        // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
         })
         .catch((err) => {
             if (err instanceof mongoose.Error.ValidationError) {
@@ -88,12 +88,15 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
+    
     Application.findOne({ offer: req.params.id })
         .populate('offer')
         .then((application) => {
-            application.offer.active = false
-            application.save()
-            Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
+            if (application) {
+                application.offer.active = false 
+                application.save()
+            }    
+                Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
                 .then((offer) => {
                     offer.active = false;
                     offer.save();
@@ -131,32 +134,37 @@ module.exports.search = (req, res, next) => {
     // }
    
     if (req.query.category) {
-        Offer.find({category: req.query.category})
+        Offer.find({ category: req.query.category })
+            .populate('offers_publishedByCompany')
             .then((offers) => {
                 //console.log ('req.query.category', req.query.category)
                 //console.log('offers', offers)
                 res.render('offers/offersList', {offers})
             })
     } else if (req.query.contract) {
-        Offer.find({contract: req.query.contract})
+        Offer.find({ contract: req.query.contract })
+                .populate('offers_publishedByCompany')
                 .then((offers) => {
                     console.log('offers', offers)
                     res.render('offers/offersList', {offers})
                 })
     } else if (req.query.studies) {
-        Offer.find({studies: req.query.studies})
+        Offer.find({ studies: req.query.studies })
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.experience) {
-        Offer.find({experience: req.query.experience})
+        Offer.find({ experience: req.query.experience })
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.salary) {
-        Offer.find({salary: req.query.salary})
+        Offer.find({ salary: req.query.salary })
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             console.log('offers', offers)
             res.render('offers/offersList', {offers})
