@@ -220,57 +220,20 @@ module.exports.doEditEmail = (req, res, next) => {
         })
     }
 
-    // Candidate.findById(req.currentCandidate.id)
-    //     .then((candidate) => {
-    //         if (req.body.newEmail == req.currentCandidate.email) {
-    //             console.log('¡Error, por favor intentalo de nuevo!')
-    //             renderWithErrors({
-    //                 email: 'Este email ya ha sido utilizado'
-    //             })
-    //             req.flash('flashMessage', '¡Error, por favor intentalo de nuevo!')
-    //             res.redirect(`/candidate-edit-email/${candidate.token}`)
-    //         } else {
-    //             if (req.body.newEmail !== req.body.confirmEmail) {
-    //                 console.log('¡Los emails no coinciden!')
-    //                 renderWithErrors({
-    //                     email: "Los emails no coindiden."
-    //                 })
-    //                 req.flash('flashMessage', '¡Los emails no coinciden!')
-    //                 res.redirect(`/candidate-edit-email/${candidate.token}`)
-    //             } else {
-    //                 console.log('candidate', candidate)
-    //                 candidate.email = req.body.newEmail;
-    //                 candidate.token = uuidv4();
-    //                 candidate.checkPassword(req.currentCandidate.password)
-    //                 candidate.save();
-    //                 req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
-    //                 console.log('¡Ha ido bien!')
-    //                 res.redirect('/candidate-profile')
-    //             }
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         if (err instanceof mongoose.Error.ValidationError) {
-    //             renderWithErrors(err.errors)
-    //         } else {
-    //             next(err)
-    //         }
-    //     });
-
-    if (req.body.newEmail != req.body.confirmEmail) {
+    if (req.body.newEmail != req.body.confirmEmail || req.body.newEmail == '' || req.body.confirmEmail == '') {
         req.flash('flashMessage', '¡Los emails no coinciden!')
-        res.redirect(`/candidate-edit-email/${candidate.token}`)
+        res.redirect(`/candidate-edit-email/${req.currentCandidate.token}`)
         console.log('¡Los emails no coinciden!')
         renderWithErrors({
             email: "Los emails no coindiden."
         })
     } else if (req.body.newEmail == req.currentCandidate.email) {
+        req.flash('flashMessage', '¡Error, por favor intentalo de nuevo!')
+        res.redirect(`/candidate-edit-email/${req.currentCandidate.token}`)
         console.log('¡Error, por favor intentalo de nuevo!')
         renderWithErrors({
             email: 'Este email ya ha sido utilizado'
         })
-        req.flash('flashMessage', '¡Error, por favor intentalo de nuevo!')
-        res.redirect(`/candidate-edit-email/${candidate.token}`)
     } else {
         Candidate.findOneAndUpdate({
                 _id: req.currentCandidate.id,
