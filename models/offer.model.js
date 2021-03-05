@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const offerSchema = new mongoose.Schema({
     name: {
         type: String,
-        lowercase: true,
         required: true,
     },
     address: {
-        streetName: String,
-        number: String,
-        zipCode: String,
-        city: String,
-        country: String
+        type: String,
+        // streetName: String,
+        // number: String,
+        // zipCode: String,
+        // city: String,
+        // country: String
     },
     description: {
         type: String,

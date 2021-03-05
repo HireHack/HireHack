@@ -27,13 +27,14 @@ Promise.all([Offer.deleteMany(), Company.deleteMany()])
                         name: faker.name.jobTitle(),
                         offers_publishedByCompany: company._id,
                         description: faker.lorem.paragraph(),
-                        address: {
-                        streetName: faker.address.streetName(),
-                        number: Math.floor(Math.random() * 200),
-                        zipCode: faker.address.zipCode(),
-                        city: faker.address.city(),
-                        country: company.address.country
-                        },
+                        address: faker.address.streetAddress(),
+                        // {
+                        // streetName: faker.address.streetName(),
+                        // number: Math.floor(Math.random() * 200),
+                        // zipCode: faker.address.zipCode(),
+                        // city: faker.address.city(),
+                        // country: company.address.country
+                        // },
                         skills: getRandom(
                             ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
                             Math.floor(Math.random()* 6) + 1

@@ -116,8 +116,27 @@ module.exports.search = (req, res, next) => {
     //         console.log('switch default')
     //         break;
     // }
-   
-    if (req.query.category) {
+    if (req.query.address) {
+        Offer.find()
+            .then((offers) => {
+            console.log ('offers', offers)
+            const queryAddress = req.query.address.toLowerCase().slice(1)
+            console.log('req.query.search', queryAddress)
+            let filteredOffers = []
+            offers.forEach((offer) => {
+                console.log('offer forEach', offer)
+                const cityOffer = offer.address
+                if (cityOffer.includes(queryAddress)) {
+                    console.log('offerWithQueries', offer) 
+                    filteredOffers.push(offer);
+                    }  
+            })
+            console.log('filteredOffers', filteredOffers)
+                return filteredOffers       
+            }
+        )
+        .then((offers) => res.render('offers/offersList', { offers }))
+    } else if (req.query.category) {
         Offer.find({category: req.query.category})
             .then((offers) => {
                 //console.log ('req.query.category', req.query.category)
@@ -127,25 +146,25 @@ module.exports.search = (req, res, next) => {
     } else if (req.query.contract) {
         Offer.find({contract: req.query.contract})
                 .then((offers) => {
-                    console.log('offers', offers)
+                    //console.log('offers', offers)
                     res.render('offers/offersList', {offers})
                 })
     } else if (req.query.studies) {
         Offer.find({studies: req.query.studies})
         .then((offers) => {
-            console.log('offers', offers)
+            //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.experience) {
         Offer.find({experience: req.query.experience})
         .then((offers) => {
-            console.log('offers', offers)
+            //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.salary) {
         Offer.find({salary: req.query.salary})
         .then((offers) => {
-            console.log('offers', offers)
+            //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else {

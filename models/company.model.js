@@ -41,12 +41,12 @@ const companySchema = new mongoose.Schema({
     },
     website: {
         type: String,
-        validate: {
-            validator: (text) => {
-                return text.indexOf("https://" || "http://") === 0;
-            },
-            message: "Por favor, introduce una URL válida",
-        },
+        // validate: {
+        //     validator: (text) => {
+        //         return text.indexOf("https://" || "http://") === 0;
+        //     },
+        //     message: "Por favor, introduce una URL válida",
+        // },
     },
     role: {
         type: String,

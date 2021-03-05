@@ -62,5 +62,6 @@ router.get('/search-offers', offersController.search)
 // APPLICATION
 router.get('/application-detail/:id', applicationController.detail);
 router.post('/apply/:id', applicationController.apply);
+router.get('/search-applications', applicationController.search)
 
 module.exports = router;
