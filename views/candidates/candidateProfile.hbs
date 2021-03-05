@@ -49,3 +49,24 @@
 <form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
     <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Candidato</button>
 </form>
+
+<h2>Calendario de entrevistas</h2>
+<p><input type="date" id="dateInput"></p>
+<p><input type="time" id="timeInput"></p>
+<button id="addBtn">Añadir</button>
+<p><button id="sortBtn">Eliminar</button></p>
+<ul></ul>
+<table id="todoTable">
+    <tr>
+        <td></td>
+        <td>Date</td>
+        <td>Time</td>
+        <td>to-do</td>
+        <td>
+            <select name="categoryFilter" id="categoryFilter"></select>
+        </td>
+        <td></td>
+    </tr>
+</table>
+<div id="calendar"></div>
+

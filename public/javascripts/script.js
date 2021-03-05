@@ -11,24 +11,99 @@ setTimeout(() => {
   })  
 }, 3000);
 
-//FILTERS OFFERS
-// const host= "http://localhost:3000/offers-list"
+//CALENDAR
+// document.getElementById('')
+// function draw(data) {
+//   var calendarEl = document.getElementById('calendar');
 
-// const category = document.getElementById('category')
-// category.addEventListener('click', () => {
-  
-// })
+//   var calendar = new FullCalendar.Calendar(calendarEl, {
+//     initialView: 'dayGridMonth',
+//     initialDate: '2021-03-07',
+//     headerToolbar: {
+//       left: 'prev,next today',
+//       center: 'title',
+//       right: 'dayGridMonth,timeGridWeek,timeGridDay'
+//     },
+//     events: data
+//   });
 
-// axios.get(`${host}`, {
-//   params: {
-//   category: 'Adm. empresas'
-// }})
-//     .then((res) => {
-//     console.log(res)
-//     })
-//     .catch((e)=> console.error(e))
+//   calendar.render();
+// }
 
-// document.getElementById('category').addEventListener('change', function () {
-//   document.getElementById('formCategory').submit()
-// })
+// function renderRows() {
+//   todoList.forEach(todoObj => {
+//     rendowRow(todoObj)
+//   })
+//   draw(todoList.map(obj => {
+//     return {
+//       title: obj.todo,
+//       start: obj.date
+//     }
+//   }))
+// }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: '2021-03-07',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: [
+      {
+        title: 'All Day Event',
+        start: '2021-03-01'
+      },
+      {
+        title: 'Long Event',
+        start: '2021-03-07',
+        end: '2021-03-10'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2021-03-09T16:00:00'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2021-03-16T16:00:00'
+      },
+      {
+        title: 'Conference',
+        start: '2021-03-11',
+        end: '2021-03-13'
+      },
+      {
+        title: 'Meeting',
+        start: '2021-03-12T10:30:00',
+        end: '2021-03-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2021-03-12T12:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2021-03-12T14:30:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2021-03-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2021-03-28'
+      }
+    ]
+  });
+
+  calendar.render();
+});
+        
 
