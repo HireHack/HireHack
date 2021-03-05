@@ -18,8 +18,10 @@ module.exports.offerDetail = (req, res, next) => {
         .then((offer) => {
             res.render('offers/offerDetail', {
                 offer,
-                lat: 40.4167278,
-                lng: -3.7033387
+                
+                lat: offer.location.coordinates[1],
+                lng: offer.location.coordinates[0]
+                
             })
         })
 };
@@ -34,10 +36,12 @@ module.exports.doCreate = (req, res, next) => {
         })
     }
 
-    // req.body.location = {
-    //     type: 'Point',
-    //     coordinates: [Number(req.body.lng), Number(req.body.lat)]
-    // }
+    req.body.location = {
+        type: 'Point',
+        coordinates: [Number(req.body.lng), Number(req.body.lat)]
+    }
+
+    console.log(req.body.location)
 
     const offer = req.body;
     console.log('oferta', req.body)
@@ -75,8 +79,9 @@ module.exports.edit = (req, res, next) => {
                 // res.render('offers/offerCreation', offerToEdit);
                 res.render('offers/offerCreation', {
                     offerToEdit,
-                    // lat: offerToEdit.location.coordinates[1],
-                    // lng: offerToEdit.location.coordinates[0]
+                    lat: offerToEdit.location.coordinates[1],
+                    lng: offerToEdit.location.coordinates[0]
+
                 })
             } else {
                 res.render('denied-route');
@@ -91,15 +96,15 @@ module.exports.doEdit = (req, res, next) => {
     res.status(400).render("offers/offerCreation", {
       errors: errors,
       offer: req.body,
-    //   lat: req.body.lat,
-    //   lng: req.body.lng
+      lat: req.body.lat,
+      lng: req.body.lng
     });
   }
-    // req.body.location = {
-    //     type: 'Point',
-    //     coordinates: [req.body.lng, req.body.lat]
-    // }
-    //console.log("edit")
+    req.body.location = {
+        type: 'Point',
+        coordinates: [req.body.lng, req.body.lat]
+    }
+    console.log("edit")
     Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
         .then((offerToEdit) => {
             if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {

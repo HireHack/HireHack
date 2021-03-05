@@ -50,7 +50,7 @@ const offerSchema = new mongoose.Schema({
             required: true,
             default: 'Point'
         },
-        Coordinates: {
+        coordinates: {
             type: [Number],
             required: true
         }

@@ -103,10 +103,38 @@
                 </select>
             </div>
 
+            <div>
+                <label for="lat">Lat:</label>
+                <input type="string" name="lat" value="{{lat}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lat"
+                    required>
+                <label for="lng">Lng:</label>
+                <input type="string" name="lng" value="{{lng}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lng"
+                    required>
+                {{#if errors.price}}
+                <div class="invalid-feedback">
+                    {{errors.price}}
+                </div>
+                {{/if}}
+            </div>
+
+            <div id="map"></div>
+
             <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
         </form>
     </div>
 </div>
+
+<script>
+    {{#if lat}}
+        let marker = { lat: {{lat}}, lng: {{lng}} }
+    {{else}}
+        let marker = null
+    {{/if}}
+    const editable = true;
+</script>
+
+<script src="/javascripts/googleMaps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly"async></script>
 
 
 
