@@ -95,6 +95,7 @@ app.use((req, res, next) => {
 
   //GOOGLE MAPS
   res.locals.mapsKey = process.env.MAPS_KEY
+  
   next()
 })
 

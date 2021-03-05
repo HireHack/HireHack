@@ -1,7 +1,7 @@
 <h2>{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</h2>
 <div class="col mb-2">
     <div class="row">
-        <form action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
+        <form id="location-form" action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
             <div>
                 <p>Empresa: {{currentCompany.name}}</p>
             </div>
@@ -17,7 +17,8 @@
 
             <div class="form-group">
                 <label for="address-input"> Lugar de la oferta: </label>
-                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text" name="address.streetName"
+                <input type="text" id="location-input" class="form-control" placeholder="Escribe la dirección completa aquí">
+                {{!-- <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text" name="address.streetName"
                     id="address-input" placeholder="Calle">
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text" name="address.number"
                     id="address-input" placeholder="Número">
@@ -26,7 +27,7 @@
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.city}}" type="text" name="address.city"
                     id="address-input" placeholder="Ciudad">
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.country}}" type="text" name="address.country"
-                    id="address-input" placeholder="País">
+                    id="address-input" placeholder="País"> --}}
                 {{#if errors.address}}
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
@@ -103,20 +104,30 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="lat">Latitud:</label>
-                <input class="form-control {{#if errors.location}}is-invalid{{/if}}" type="string" name="lat" value="{{lat}}" id="lat" required> 
-                <label for="lng">Longitud:</label>
-                <input class="form-control {{#if errors.location}}is-invalid{{/if}}" type="string" name="lng" value="{{lat}}" id="lng" required>
+            <div>
+                <label for="lat">Lat:</label>
+                <input type="string" name="lat" value="{{lat}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lat">
+                <label for="lng">Lng:</label>
+                <input type="string" name="lng" value="{{lng}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lng">
+                {{#if errors.price}}
+                <div class="invalid-feedback">
+                    {{errors.price}}
+                </div>
+                {{/if}}
             </div>
 
             <div id="map"></div>
+
+            <div id="formatted-address"></div>
+            <div id="address-components"></div>
+            <div id="geometry"></div>
+
+            <div id="formatted-address"></div>
 
             <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
         </form>
     </div>
 </div>
-
 
 <script>
     {{#if lat}}
@@ -128,6 +139,7 @@
 </script>
 
 <script src="/javascripts/googleMaps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly"async></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly" async></script>
+
 

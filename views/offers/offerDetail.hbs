@@ -21,12 +21,17 @@
 
     <div id="map"></div>
 
+    <div id="formatted-address"></div>
+    <div id="address-components"></div>
+    <div id="geometry"></div>
+
     {{#if offer.active}}
     <form class="delete-form d-inline" action="/apply/{{offer.id}}" method="post">
         <button type="submit" class="btn btn-danger">Inscribirme</button>
     </form>
     {{/if}}
 </div>
+
 
 <script>
     let marker = { lat: {{lat}}, lng: {{lng}} }
@@ -37,3 +42,4 @@
 <script src="/javascripts/googleMaps.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly" async></script>
+
