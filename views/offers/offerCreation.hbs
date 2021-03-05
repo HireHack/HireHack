@@ -132,3 +132,33 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly" async></script>
 
+
+            <div class="form-group">
+                <label for="lat">Latitud:</label>
+                <input class="form-control {{#if errors.location}}is-invalid{{/if}}" type="string" name="lat" value="{{lat}}" id="lat" required> 
+                <label for="lng">Longitud:</label>
+                <input class="form-control {{#if errors.location}}is-invalid{{/if}}" type="string" name="lng" value="{{lat}}" id="lng" required>
+            </div>
+
+            <div id="map"></div>
+
+            <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    {{#if lat}}
+        let marker = { lat: {{lat}}, lng: {{lng}} }
+    {{else}}
+        let marker = null
+    {{/if}}
+    const editable = true;
+</script>
+
+
+<script src="/javascripts/googleMaps.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly" async></script>
+
