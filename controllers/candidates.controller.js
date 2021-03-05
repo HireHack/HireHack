@@ -26,6 +26,7 @@ module.exports.doLogin = (req, res, next) => {
         } else {
             req.login(candidate, loginErr => {
                 if (!loginErr && !candidate.age) {
+                    req.flash('flashMessage', 'Debes terminar de completar tu perfil')
                     res.redirect(`/candidate-edit/${candidate._id}`)
 
                 } else if (candidate.age){
@@ -50,6 +51,7 @@ module.exports.doLoginGoogle = (req, res, next) => {
         } else {
             req.login(candidate, (loginErr) => {
                 if (!loginErr && !candidate.age) {
+                    req.flash('flashMessage', 'Debes terminar de completar tu perfil')
                     res.redirect(`/candidate-edit/${candidate._id}`)
 
                 } else if (!loginErr && candidate.age){

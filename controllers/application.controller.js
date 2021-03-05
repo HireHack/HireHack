@@ -44,12 +44,12 @@ module.exports.apply = (req, res, next) => {
 
 module.exports.search = (req, res, next) => {
    
-    if (req.query.search) {
-        Candidate.find({ address : req.query.address })
-            .then((offers) => {
+    if (req.query.age) {
+        Candidate.find({age: req.query.age})
+            .then((candidate) => {
                 //console.log ('req.query.category', req.query.category)
                 //console.log('offers', offers)
-                res.render('offers/offersList', { offers })
+                res.render('application/application-detail', {candidate})
             })
     } else {
         console.log('else search')

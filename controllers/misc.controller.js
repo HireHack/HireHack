@@ -10,6 +10,7 @@ module.exports.home = (req, res, next) => {
 module.exports.search = (req, res, next) => {
     //console.log('req.body', req.body)
     Offer.find()
+    .populate('company')
     .then((offers) => {
         const queryContent = req.query.search.toLowerCase().slice(1)
         //console.log('req.query.search', queryContent)
