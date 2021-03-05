@@ -19,21 +19,9 @@
     </p>
     <p>Oferta publicada por: <strong>{{offer.offers_publishedByCompany.name}}</strong></p>
 
-    <div id="map"></div>
-
     {{#if offer.active}}
     <form class="delete-form d-inline" action="/apply/{{offer.id}}" method="post">
         <button type="submit" class="btn btn-danger">Inscribirme</button>
     </form>
     {{/if}}
 </div>
-
-<script>
-    let marker = { lat: {{lat}}, lng: {{lng}} }
-    let editable = false;
-</script>
-
-
-<script src="/javascripts/googleMaps.js"></script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApvy129zJ_n159Nhpc63yGtqlWi2zfWpg&callback=initMap&libraries=&v=weekly" async></script>
