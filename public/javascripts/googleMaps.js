@@ -4,6 +4,7 @@ function initMap() {
     zoom: 14,
     center: marker || defaultPosition
   });
+  
   let mapMarker = null
   if (marker) {
     mapMarker = new google.maps.Marker({

@@ -34,13 +34,13 @@ module.exports.doCreate = (req, res, next) => {
         })
     }
 
-    // req.body.location = {
-    //     type: 'Point',
-    //     coordinates: [Number(req.body.lng), Number(req.body.lat)]
-    // }
+    req.body.location = {
+        type: 'Point',
+        coordinates: [Number(req.body.lng), Number(req.body.lat)]
+    }
 
     const offer = req.body;
-    console.log('oferta', req.body)
+    //console.log('oferta', req.body)
     offer.offers_publishedByCompany = req.currentCompany.id
     //{offer, ...offer.offers_publishedByCompany}
     
@@ -71,18 +71,21 @@ module.exports.edit = (req, res, next) => {
     //Offer.find({'offers_publishedByCompany': req.currentCompany.id})
     Offer.findById(req.params.id)
         .then((offerToEdit) => {
+            console.log("I'm here")
+            console.log(offerToEdit)
             if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
                 // res.render('offers/offerCreation', offerToEdit);
+                console.log('if', offerToEdit)
                 res.render('offers/offerCreation', {
-                    offerToEdit,
-                    // lat: offerToEdit.location.coordinates[1],
-                    // lng: offerToEdit.location.coordinates[0]
-                })
+                    offerToEdit, lat: offerToEdit.location.coordinates[1], lng: offerToEdit.location.coordinates[0]
+                });
             } else {
                 res.render('denied-route');
             }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+            console.error(err)
+        });
 }
 
 
@@ -95,10 +98,10 @@ module.exports.doEdit = (req, res, next) => {
     //   lng: req.body.lng
     });
   }
-    // req.body.location = {
-    //     type: 'Point',
-    //     coordinates: [req.body.lng, req.body.lat]
-    // }
+    req.body.location = {
+        type: 'Point',
+        coordinates: [req.body.lng, req.body.lat]
+    }
     //console.log("edit")
     Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
         .then((offerToEdit) => {
