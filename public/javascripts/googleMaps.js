@@ -5,9 +5,8 @@ function initMap() {
     center: marker || defaultPosition
   });
 
-  const locationForm = document.getElementById('location-form');
-  
-  locationForm.addEventListener('submit', geocode);
+  const locationInput = document.getElementById('location-input');
+  locationInput.addEventListener('input', geocode);
 
 
   function geocode(e) {

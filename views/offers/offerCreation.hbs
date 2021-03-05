@@ -1,7 +1,7 @@
 <h2>{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</h2>
 <div class="col mb-2">
     <div class="row">
-        <form id="location-form" action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
+        <form action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
             <div>
                 <p>Empresa: {{currentCompany.name}}</p>
             </div>
@@ -104,7 +104,7 @@
                 </select>
             </div>
 
-            <div>
+            <div class="d-none">
                 <label for="lat">Lat:</label>
                 <input type="string" name="lat" value="{{lat}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lat">
                 <label for="lng">Lng:</label>
