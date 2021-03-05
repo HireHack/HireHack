@@ -25,8 +25,14 @@ module.exports.doLogin = (req, res, next) => {
             });
         } else {
             req.login(candidate, loginErr => {
-                if (loginErr) next(loginErr)
-                else res.redirect('/candidate-profile')
+                if (!loginErr && !candidate.age) {
+                    res.redirect(`/candidate-edit/${candidate._id}`)
+
+                } else if (candidate.age){
+                    res.redirect(`/candidate-profile`)
+                } else {
+                    next(loginErr)
+                }
             })
         }
     })(req, res, next);
@@ -43,9 +49,11 @@ module.exports.doLoginGoogle = (req, res, next) => {
             })
         } else {
             req.login(candidate, (loginErr) => {
-                if (!loginErr) {
-                    res.redirect('/candidate-profile')
+                if (!loginErr && !candidate.age) {
+                    res.redirect(`/candidate-edit/${candidate._id}`)
 
+                } else if (!loginErr && candidate.age){
+                    res.redirect(`/candidate-profile`)
                 } else {
                     next(loginErr)
                 }

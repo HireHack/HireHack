@@ -27,3 +27,12 @@
     <img src="{{candidate.picture}}" alt="Foto de perfil">
 </div>
 {{/each}}
+
+<h2>Filtrar candidatos</h2>
+<form class="form-group" action="/search-applications">
+    <label for="age">Edad</p>
+        <input class="form-control" name="age" type="text" id="age">
+    <label for="addres">Ciudad</p>
+        <input class="form-control" name="address" type="text" id="address">
+        <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+</form>

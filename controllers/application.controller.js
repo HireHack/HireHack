@@ -44,35 +44,11 @@ module.exports.apply = (req, res, next) => {
 
 module.exports.search = (req, res, next) => {
    
-    if (req.query.category) {
-        Offer.find({ category: req.query.category })
+    if (req.query.search) {
+        Candidate.find({ address : req.query.address })
             .then((offers) => {
                 //console.log ('req.query.category', req.query.category)
                 //console.log('offers', offers)
-                res.render('offers/offersList', { offers })
-            })
-    } else if (req.query.contract) {
-        Offer.find({ contract: req.query.contract })
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', { offers })
-            })
-    } else if (req.query.studies) {
-        Offer.find({ studies: req.query.studies })
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', { offers })
-            })
-    } else if (req.query.experience) {
-        Offer.find({ experience: req.query.experience })
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', { offers })
-            })
-    } else if (req.query.salary) {
-        Offer.find({ salary: req.query.salary })
-            .then((offers) => {
-                console.log('offers', offers)
                 res.render('offers/offersList', { offers })
             })
     } else {
