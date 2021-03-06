@@ -16,12 +16,11 @@ module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
         .populate('offers_publishedByCompany')
         .then((offer) => {
+            console.log('offerDetil', offer)
             res.render('offers/offerDetail', {
                 offer,
-                
                 lat: offer.location.coordinates[1],
                 lng: offer.location.coordinates[0]
-                
             })
         })
 };
@@ -73,13 +72,13 @@ module.exports.edit = (req, res, next) => {
     //Offer.find({'offers_publishedByCompany': req.currentCompany.id})
     Offer.findById(req.params.id)
         .then((offerToEdit) => {
-            console.log("I'm here")
+            //console.log("I'm here")
             console.log(offerToEdit)
             if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
                 // res.render('offers/offerCreation', offerToEdit);
                 console.log('if', offerToEdit)
                 res.render('offers/offerCreation', {
-                    offerToEdit, lat: offerToEdit.location.coordinates[1], lng: offerToEdit.location.coordinates[0]
+                    ...offerToEdit.toJSON(), lat: offerToEdit.location.coordinates[1], lng: offerToEdit.location.coordinates[0]
                 });
             } else {
                 res.render('denied-route');

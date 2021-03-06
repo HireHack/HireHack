@@ -17,7 +17,7 @@
 
             <div class="form-group">
                 <label for="address-input"> Lugar de la oferta: </label>
-                <input type="text" id="location-input" name="address" class="form-control" placeholder="Formato: Calle, número, C.P. Municipio">
+                <input type="text" id="location-input" value="{{address}}" name="address" class="form-control" placeholder="Formato: Calle, número, C.P. Municipio">
                 {{#if errors.address}}
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
