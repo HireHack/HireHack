@@ -333,12 +333,30 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.doDelete = (req, res, next) => {
-    Candidate.findOneAndRemove({
-            token: req.params.token
+    Candidate.findOne({ token: req.params.token })
+        .then((candidate) => {
+            console.log('candidate', candidate)
+            Application.deleteMany({ candidate: candidate.id })
+                .then(() => {
+                    console.log('application deleted')
+                    Candidate.findByIdAndDelete(candidate.id)
+                        .then(() => {
+                        req.flash('flashMessage', '¡Candidato eliminado con éxito!');
+                        res.redirect('/')
+                    })
+                })
+            .catch((e) => next(e))   
         })
-        .then(() => {
-            req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
-            res.redirect('/');
-        })
-        .catch((err) => next(err));
+        .catch((e)=> next(e))
 }
+
+// module.exports.doDelete = (req, res, next) => {
+//     Candidate.findOneAndRemove({
+//             token: req.params.token
+//         })
+//         .then(() => {
+//             req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
+//             res.redirect('/');
+//         })
+//         .catch((err) => next(err));
+// }

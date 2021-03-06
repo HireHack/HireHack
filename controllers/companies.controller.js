@@ -289,29 +289,12 @@ module.exports.doDelete = (req, res, next) => {
 
                     Company.findByIdAndDelete(company.id)
                     .then(() => {
-                        console.log('Empresa borrada')
+                        req.flash('flashMessage', '¡Empresa eliminada con éxito!');
                         res.redirect('/')
                     })
                 }) 
-                .catch((e) => next(e)) 
-        // return company   
+                .catch((e) => next(e))   
         })
-        // .then((company => {
-        //     console.log('company 2nd then', company)
-        //     Company.findByIdAndDelete(company.id)
-        //         .then(() => {
-        //             console.log('Empresa borrada')
-        //             res.redirect('/')
-        //         })
-        // }))
         .catch((e)=> next(e))
 }
 
-// module.exports.doDelete = (req, res, next) => {
-//     Company.findOneAndRemove({token: req.params.token})
-//         .then(() => {
-//             req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
-//             res.redirect('/');
-//         })
-//         .catch((err) => next(err));
-// }
