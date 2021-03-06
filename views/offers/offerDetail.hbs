@@ -2,9 +2,7 @@
 <div class="border rounded p-3">
     <h3>{{offer.name}}</h3>
     <hr>
-    {{#with offer.address}}
-    <h5>Lugar de la oferta: {{streetName}} {{number}}, {{zipCode}} - {{city}} ({{country}})</h5>
-    {{/with}}
+    <h5>Lugar de la oferta: {{offer.address}}</h5>
     <h5>Descripción:</h5>
     <p>{{offer.description}}</p>
     <p>

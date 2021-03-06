@@ -7,11 +7,6 @@ const offerSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        // streetName: String,
-        // number: String,
-        // zipCode: String,
-        // city: String,
-        // country: String
     },
     description: {
         type: String,

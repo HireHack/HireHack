@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 const Offer = require('../models/offer.model');
-const flash = require ('connect-flash')
+const flash = require('connect-flash')
 
 module.exports.offersList = (req, res, next) => {
     Offer.find()
         .populate('offers_publishedByCompany')
         .then((offers) => {
             //console.log('offers', offers);
-            res.render('offers/offersList', {offers})
+            res.render('offers/offersList', {
+                offers
+            })
         })
         .catch((err) => console.error(err))
 };
@@ -17,7 +19,9 @@ module.exports.offerDetail = (req, res, next) => {
         .populate('offers_publishedByCompany')
         .then((offer) => {
             //console.log(offer.getAddress())
-            res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/})
+            res.render('offers/offerDetail', {
+                offer /* addressDetail: offer.getAddress()*/
+            })
         })
 };
 
@@ -74,13 +78,15 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.doEdit = (req, res, next) => {
     console.log("edit")
-    Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    Offer.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+        })
         .then((offerToEdit) => {
             if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
                 res.redirect('/company-profile')
             } else {
                 res.render('denied-route');
-            }   
+            }
         })
         .catch((err) => {
             next(err)
@@ -88,86 +94,78 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-    Offer.findByIdAndDelete({_id: req.params.id /*offers_publishedByCompany: req.currentUser.id*/}) // To ensure only the creator can detele the offer
+    Offer.findByIdAndDelete({
+            _id: req.params.id /*offers_publishedByCompany: req.currentUser.id*/
+        }) // To ensure only the creator can detele the offer
         .then(() => res.redirect('/company-profile'))
         .catch((err) => next(err));
 }
 
 module.exports.search = (req, res, next) => {
-    //let query;
-    // switch(true) {
-    //     case req.query.category:
-    //         Offer.find({"category": req.query.category})
-    //         .then((offers) => {
-    //             //console.log ('req.query.category', req.query.category)
-    //             //console.log('offers', offers)
-    //             res.render('offers/offersList', {offers})
-    //         })
-    //         break;
-    //     case req.query.contractType:
-    //         Offer.find({"ContractType": req.query.contractType})
-    //             .then((offers) => {
-    //                 //console.log ('req.query.category', req.query.category)
-    //                 //console.log('offers', offers)
-    //                 res.render('offers/offersList', {offers})
-    //             })
-    //         break;
-    //     default:
-    //         console.log('switch default')
-    //         break;
-    // }
     if (req.query.address) {
+        console.log('req.query', req.query)
         Offer.find()
+            .populate('offers_publishedByCompany')
             .then((offers) => {
-            console.log ('offers', offers)
-            const queryAddress = req.query.address.toLowerCase().slice(1)
-            console.log('req.query.search', queryAddress)
-            let filteredOffers = []
-            offers.forEach((offer) => {
-                console.log('offer forEach', offer)
-                const cityOffer = offer.address
-                if (cityOffer.includes(queryAddress)) {
-                    console.log('offerWithQueries', offer) 
-                    filteredOffers.push(offer);
-                    }  
+                console.log('offers', offers)
+                const queryAddress = req.query.address.toLowerCase().slice(1)
+                console.log('req.query.search', queryAddress)
+                let filteredOffers = []
+                offers.forEach((offer) => {
+                    console.log('offer forEach', offer)
+                    const cityOffer = offer.address
+                    if (cityOffer.includes(queryAddress)) {
+                        console.log('offerWithQueries', offer)
+                        filteredOffers.push(offer);
+                    }
+                })
+                console.log('filteredOffers', filteredOffers)
+                return filteredOffers
             })
-            console.log('filteredOffers', filteredOffers)
-                return filteredOffers       
-            }
-        )
-        .then((offers) => res.render('offers/offersList', { offers }))
+            .then((offers) => res.render('offers/offersList', {
+                offers
+            }))
     } else if (req.query.category) {
-        Offer.find({category: req.query.category})
+        Offer.find({
+                category: req.query.category
+            })
+            .populate('offers_publishedByCompany')
             .then((offers) => {
                 //console.log ('req.query.category', req.query.category)
                 //console.log('offers', offers)
-                res.render('offers/offersList', {offers})
+                res.render('offers/offersList', {
+                    offers
+                })
             })
     } else if (req.query.contract) {
         Offer.find({contract: req.query.contract})
+            .populate('offers_publishedByCompany')
                 .then((offers) => {
                     //console.log('offers', offers)
                     res.render('offers/offersList', {offers})
                 })
     } else if (req.query.studies) {
         Offer.find({studies: req.query.studies})
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.experience) {
         Offer.find({experience: req.query.experience})
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.salary) {
         Offer.find({salary: req.query.salary})
+        .populate('offers_publishedByCompany')
         .then((offers) => {
             //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else {
         console.log('else search')
-    }  
+    }
 }

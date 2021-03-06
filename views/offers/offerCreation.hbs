@@ -16,8 +16,10 @@
             <div class="form-group">
                 <label for="address-input"> Lugar de la oferta: </label>
                 <input class="form-control mb-2" value="{{address}}" type="text" name="address"
-                    id="address-input">
-                {{!-- <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text" name="address.number"
+                    id="address-input" placeholder="">
+                {{!-- <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text" name="address.streetName"
+                    id="address-input" placeholder="Calle">
+                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text" name="address.number"
                     id="address-input" placeholder="Número">
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.zipCode}}" type="text" name="address.zipCode"
                     id="address-input" placeholder="Código Postal">

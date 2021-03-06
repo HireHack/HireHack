@@ -60,8 +60,8 @@ router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.d
 router.get('/search-offers', offersController.search)
 
 // APPLICATION
-router.get('/application-detail/:id', applicationController.detail);
-router.post('/apply/:id', applicationController.apply);
-router.get('/search-applications', applicationController.search)
+router.get('/application-detail/:id', secure.checkRole('COMPANY'),applicationController.detail);
+router.post('/apply/:id', secure.checkRole('CANDIDATE'), applicationController.apply);
+router.get('/application-search', applicationController.search)
 
 module.exports = router;
