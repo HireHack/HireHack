@@ -62,16 +62,16 @@ module.exports.search = (req, res, next) => {
         Candidate.find({
                 age: age
             })
-            .then((candidates) => {
-                console.log('candidates', candidates)
-                let filteredCandidates = []
-                candidates.forEach((candidate) => {
-                    filteredCandidates.push(candidate);
+            .then((foundCandidates) => {
+                console.log('candidates', foundCandidates)
+                let candidates = []
+                foundCandidates.forEach((candidate) => {
+                    candidates.push(candidate);
                 })
-                console.log('filteredCandidates', filteredCandidates)
-                return filteredCandidates
+                console.log('filteredCandidates', candidates)
+                res.render('application/application-detail', {candidates})
             })
-            .then((filteredCandidates) => res.render('application/application-detail', {filteredCandidates}))
+            .catch((e)=> next(e))
     } else {
         console.log('else')
     }
