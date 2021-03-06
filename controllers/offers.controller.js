@@ -52,7 +52,6 @@ module.exports.doCreate = (req, res, next) => {
     
     Offer.create(offer)
     .then((createdOffer) => {
-        createdOffer.status = "Proceso abierto"
         console.log('created offer: ', createdOffer)
         res.redirect('/company-profile');
         // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
@@ -172,28 +171,28 @@ module.exports.search = (req, res, next) => {
         Offer.find({ contract: req.query.contract })
                 .populate('offers_publishedByCompany')
                 .then((offers) => {
-                    console.log('offers', offers)
+                    //console.log('offers', offers)
                     res.render('offers/offersList', {offers})
                 })
     } else if (req.query.studies) {
         Offer.find({ studies: req.query.studies })
         .populate('offers_publishedByCompany')
         .then((offers) => {
-            console.log('offers', offers)
+            //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.experience) {
         Offer.find({ experience: req.query.experience })
         .populate('offers_publishedByCompany')
         .then((offers) => {
-            console.log('offers', offers)
+            //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else if (req.query.salary) {
         Offer.find({ salary: req.query.salary })
         .populate('offers_publishedByCompany')
         .then((offers) => {
-            console.log('offers', offers)
+            //console.log('offers', offers)
             res.render('offers/offersList', {offers})
         })
     } else {

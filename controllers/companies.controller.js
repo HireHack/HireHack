@@ -8,6 +8,7 @@ const { sendDeleteCompanyEmail } = require('../config/mailer.config');
 const { sendCompanyEmailUpdateEmail } = require('../config/mailer.config');
 const { sendCompanyPasswordUpdateEmail } = require('../config/mailer.config');
 const { v4: uuidv4 } = require('uuid');
+const Application = require('../models/application.model');
 
 module.exports.companyProfile = (req, res, next) => {
     Offer.find({'offers_publishedByCompany': req.currentCompany.id})
@@ -273,11 +274,44 @@ module.exports.delete = (req, res, next) => {
         .catch((err) => next(err));
 }
 
+
 module.exports.doDelete = (req, res, next) => {
-    Company.findOneAndRemove({token: req.params.token})
-        .then(() => {
-            req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
-            res.redirect('/');
+    Company.findOne({ token: req.params.token })
+        .then((company) => {
+            console.log('company 1st then', company)
+            Offer.find({ offers_publishedByCompany: company.id })
+                .then((offers) => {
+                    console.log('offers', offers)
+                    offers.forEach(offer => {
+                        offer.active = false
+                        offer.save()   
+                    })
+
+                    Company.findByIdAndDelete(company.id)
+                    .then(() => {
+                        console.log('Empresa borrada')
+                        res.redirect('/')
+                    })
+                }) 
+                .catch((e) => next(e)) 
+        // return company   
         })
-        .catch((err) => next(err));
+        // .then((company => {
+        //     console.log('company 2nd then', company)
+        //     Company.findByIdAndDelete(company.id)
+        //         .then(() => {
+        //             console.log('Empresa borrada')
+        //             res.redirect('/')
+        //         })
+        // }))
+        .catch((e)=> next(e))
 }
+
+// module.exports.doDelete = (req, res, next) => {
+//     Company.findOneAndRemove({token: req.params.token})
+//         .then(() => {
+//             req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
+//             res.redirect('/');
+//         })
+//         .catch((err) => next(err));
+// }
