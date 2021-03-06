@@ -4,21 +4,11 @@ const flash = require('connect-flash');
 const Candidate = require('../models/candidate.model');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
-const {
-    sendCandidateActivationEmail
-} = require('../config/mailer.config');
-const {
-    sendDeleteCandidateEmail
-} = require('../config/mailer.config');
-const {
-    sendCandidateEmailUpdateEmail
-} = require('../config/mailer.config');
-const {
-    sendCandidatePasswordUpdateEmail
-} = require('../config/mailer.config');
-const {
-    v4: uuidv4
-} = require('uuid');
+const { sendCandidateActivationEmail } = require('../config/mailer.config');
+const { sendDeleteCandidateEmail } = require('../config/mailer.config');
+const { sendCandidateEmailUpdateEmail } = require('../config/mailer.config');
+const { sendCandidatePasswordUpdateEmail } = require('../config/mailer.config');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports.candidateProfile = (req, res, next) => {
     Application.find({
@@ -183,24 +173,14 @@ module.exports.doEdit = (req, res, next) => {
         req.body.cv = req.files.cv[0].path + '.jpg'
     }
 
-    //console.log('req.body', req.body)
-    //console.log('req.files', req.files)
-    //console.log('req.files[picture][0]', req.files.picture[0].path)
-    //console.log('req.files[cv]', req.files.cv[0].path)
-
-    Candidate.findByIdAndUpdate(req.params.id, req.body, {
-            new: true
-        })
+    Candidate.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(() => res.redirect('/candidate-profile'))
         .catch((err) => next(err))
 
 }
 
 module.exports.updateEmail = (req, res, next) => {
-    console.log('curr candidate updateEmail', req.currentCandidate)
-    Candidate.findById({
-            _id: req.currentCandidate.id
-        })
+    Candidate.findById({ _id: req.currentCandidate.id })
         .then((candidateToUpdate) => {
             //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de actualización de email realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
@@ -260,7 +240,6 @@ module.exports.updatePassword = (req, res, next) => {
             _id: req.currentCandidate.id
         })
         .then((candidateToUpdate) => {
-            //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de actualización de contraseña realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
             sendCandidatePasswordUpdateEmail(candidateToUpdate.email, candidateToUpdate.token);
             res.redirect('/candidate-profile');

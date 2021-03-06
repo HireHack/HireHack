@@ -138,9 +138,7 @@ module.exports.doEdit = (req, res, next) => {
     }
 
     Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        .then(() => {
-        res.redirect('/company-profile')
-        })
+        .then(() => { res.redirect('/company-profile') })
         .catch((err) => next(err))
 }
 
@@ -159,7 +157,7 @@ module.exports.editEmail = (req, res, next) => res.render('companies/newEmailFor
 
 module.exports.doEditEmail = (req, res, next) => {
     function renderWithErrors(errors) {
-        res.status(400).render('companies/signup', {
+        res.status(400).render('companies/newEmailForm', {
             errors: errors,
             company: req.body
         })
@@ -167,23 +165,34 @@ module.exports.doEditEmail = (req, res, next) => {
     
     if (req.body.newEmail != req.body.confirmEmail) {
         renderWithErrors({
-            email: "Los emails no coindiden."
+            confirmEmail: "Los emails no coindiden."
+        })
+    } else if (req.body.newEmail == '' || req.body.confirmEmail == '') {
+        renderWithErrors({
+            email: "Los campos no deben estar vacíos."
+        })
+    } else if (req.body.newEmail == req.currentCompany.email) {
+        renderWithErrors({
+            email: 'Este email ya ha sido utilizado.'
         })
     } else {
-        Company.findOneAndUpdate(
-            {email: req.body.email}, 
-            {email: req.body.newEmail, token: uuidv4()}
-        )
-        .then((updatedCompany) => {
-            if (updatedCompany) {
-                req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
-                res.redirect('/company-profile')
-            } else {
-                req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
-                next();
-            }
-        })
-        .catch((err) => next(err));
+        Company.findOneAndUpdate({
+                _id: req.currentCompany.id,
+            }, {
+                email: req.body.newEmail,
+                token: uuidv4()
+            })
+            .then(() => {
+                req.flash('flashMessage', '¡Tu email ha sido actualizado con éxito!');
+                res.redirect('/company-profile');
+            })
+            .catch((err) => {
+                if (err instanceof mongoose.Error.ValidationError) {
+                    renderWithErrors()
+                } else {
+                    next(err)
+                }
+            });
     }
 }
 
