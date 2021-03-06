@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -72,7 +73,16 @@ const candidateSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'CANDIDATE'
-    }
+    },
+    active: {
+        type: Boolean,
+        default: false,
+    },
+    token: {
+        type: String,
+        default: uuidv4(),
+    },
+    //token temporal
 },
     {
     timestamps: true,

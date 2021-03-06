@@ -8,12 +8,12 @@
 {{/if}}
 
 
-<p>Conectado como {{currentCandidate.name}}</p>
+<p>Conectado como {{currentCandidate.name}} | {{currentCandidate.email}}</p>
 
 <form action="/candidate-logout" method="POST">
     <li>
         <button>Cerrar sesión</button>
-    </li
+    </li>
 </form>
 <p>
     {{currentCandidate.skills}}
@@ -43,9 +43,5 @@
     <br>
 </div>
 {{/each}}
-
-<a class="btn btn-success d-inline" href="/candidate-edit/{{currentCandidate._id}}">Editar mi perfil</a>
-
-<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
-    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil Candidato</button>
-</form>
+<br>
+<a class="btn btn-primary d-inline" href="/candidate-edit/{{currentCandidate._id}}">Editar mi perfil</a>

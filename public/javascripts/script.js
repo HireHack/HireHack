@@ -2,6 +2,10 @@
 function clicked(input) {
     return confirm(`¿Seguro que quieres eleiminar?`);
 }
+
+function update(input) {
+  return confirm(`¿Seguro que quieres actualizar?`);
+}
   
 //FLASH
 setTimeout(() => {
@@ -10,5 +14,3 @@ setTimeout(() => {
     new bootstrap.Toast(toast).hide()
   })  
 }, 3000);
-
-

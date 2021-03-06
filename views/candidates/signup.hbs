@@ -1,4 +1,4 @@
-<h1>{{#if currentCandidate}}Editar perfil{{else}}Registro como candidato{{/if}}</h1>
+<h1>{{#if currentCandidate}}Editar perfil de candidato{{else}}Registro como candidato{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
         <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST" {{#if currentCandidate}}enctype="multipart/form-data"{{/if}}>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="form-group">
-                <label for="candidateResume-input" name="resume"> Tu curriculum: </label>
+                <label for="candidateResume-input" name="resume">Tu curriculum:</label>
 
                 <textarea class="form-control" name="resume" id="resume" value="{{resume}}" cols="30" rows="10"></textarea>
 
@@ -101,8 +101,9 @@
 
             {{/if}}
 
-            <button class="btn btn-primary mt-3" type="submit">{{#if
-                currentCandidate}}Editar{{else}}Registro{{/if}}</button>
+            <button class="btn btn-success mt-3" type="submit">{{#if currentCandidate}}Guardar{{else}}Registro{{/if}}</button>
+            <br>
+            {{#if currentCandidate}}<a class="form-group" href="#">Ajustes de privacidad</a>{{/if}} <!-- TODO: DOM shows delete profile, update password and update email-->
         </form>
     </div>
 </div>
@@ -113,12 +114,20 @@
 
 
 {{#if currentCandidate}}
-<form class="delete-form d-inline" action="/delete-candidate/{{currentCandidate._id}}" method="post">
-    <button type="submit" class="btn btn-danger" onclick="return clicked()">Eliminar Perfil
-        Candidato</button>
+<form class="delete-form d-inline" action="/delete-candidate" method="post">
+    <button type="submit" class="btn btn-outline-danger" onclick="return clicked()">Darse de baja</button>
 </form>
+
+{{#unlessSocialCandidate currentCandidate}}
+<form class="update-form d-inline" action="/candidate-update-password" method="post">
+    <button type="submit" class="btn btn-outline-secondary" onclick="return clicked()">Actualizar contraseña</button>
+</form>
+
+<form class="update-form d-inline" action="/candidate-update-email" method="post">
+    <button type="submit" class="btn btn-outline-secondary" onclick="return clicked()">Actualizar email</button>
+</form>
+{{/unlessSocialCandidate}}
+
 {{/if}}
-
-
 
 

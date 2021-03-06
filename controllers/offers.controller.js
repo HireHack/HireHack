@@ -9,7 +9,7 @@ module.exports.offersList = (req, res, next) => {
         .then((offers) => {
             res.render('offers/offersList', { offers })
         })
-        .catch((err) => console.error(err))
+        .catch((err) => next(err))
 };
 
 module.exports.offerDetail = (req, res, next) => {
@@ -84,9 +84,7 @@ module.exports.edit = (req, res, next) => {
                 res.render('denied-route');
             }
         })
-        .catch((err) => {
-            console.error(err)
-        });
+        .catch((err) => next(err));
 }
 
 

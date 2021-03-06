@@ -1,7 +1,7 @@
 <img src="{{currentCompany.picture}}" alt="Foto de perfil">
 <h1>Perfil de Empresa</h1>
 
-<p>Has iniciado sesión como {{currentCompany.name}}</p>
+<p>Has iniciado sesión como {{currentCompany.name}} | {{currentCompany.email}}</p>
 
 
 {{!-- Skills --}}
@@ -16,7 +16,7 @@
     <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span style="color: red;">CERRADA</span>{{/if}}</p>
     <p><b>Descripción:</b> <br> {{description}}</p>
     <b>Requisitos:</b>
-    {{#each skills}}
+    {{#each offer.skills}}
     {{#if @last}}
     <span>{{this}}</span>
     {{else}}
@@ -29,5 +29,5 @@
 </div>
 {{/each}}
 <br>
-<a class="btn btn-success d-inline" href="/company-edit/{{currentCompany._id}}">Editar mi perfil</a>
+<a class="btn btn-primary d-inline" href="/company-edit">Editar mi perfil</a>
 
