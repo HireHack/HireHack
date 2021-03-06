@@ -21,7 +21,7 @@ const companySchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce un email"],
         unique: true,
         lowercase: true,
         trim: true,
@@ -29,7 +29,7 @@ const companySchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce tu contraseña"],
         match: [PASSWORD_PATTERN, "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minuscula y 1 número"],
     },
     description: {
@@ -37,15 +37,16 @@ const companySchema = new mongoose.Schema({
     },
     picture: {
         type: String,
+        default: 'https://i.pcmag.com/imagery/articles/03WHIruaSljeZnevrNKJX7j-12..1582137780.jpg'
     },
     website: {
         type: String,
-        validate: {
-            validator: (text) => {
-                return text.indexOf("https://" || "http://") === 0;
-            },
-            message: "Por favor, introduce una URL válida",
-        },
+        // validate: {
+        //     validator: (text) => {
+        //         return text.indexOf("https://" || "http://") === 0;
+        //     },
+        //     message: "Por favor, introduce una URL válida",
+        // },
     },
     social: {
         google: String,

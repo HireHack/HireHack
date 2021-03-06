@@ -10,15 +10,18 @@ const candidateSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Por favor, introduce tu nombre"],
+        trim: true
     },
     surname: {
         type: String,
         required: [true, "Por favor, introduce tu apellido"],
+        trim: true
     },
     age: {
         type: Number,
         min: 18,
         max: 120,
+        trim: true,
     },
     address: {
         streetName: String,
@@ -29,7 +32,7 @@ const candidateSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce tu email"],
         unique: true,
         lowercase: true,
         trim: true,
@@ -37,7 +40,7 @@ const candidateSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce tu contraseña"],
         match: [PASSWORD_PATTERN, "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minuscula y 1 número"],
     },
     resume: {

@@ -2,7 +2,7 @@ module.exports.isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         next()
     } else {
-        next();
+        res.redirect('/')
     }
 }
 
@@ -20,6 +20,8 @@ module.exports.checkRole = (role) => (req, res, next) => {
             res.redirect('/company-login');
         } else if (req.url.includes('candidate')) {
             res.redirect('/candidate-login');
+        } else if (req.url.includes('apply')) {
+            res.redirect('/candidate-login')
         }
     } else if (req.user.role === 'COMPANY') {
         if (req.isAuthenticated && req.user.role === role) {

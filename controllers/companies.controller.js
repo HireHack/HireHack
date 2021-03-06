@@ -11,9 +11,9 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports.companyProfile = (req, res, next) => {
     Offer.find({'offers_publishedByCompany': req.currentCompany.id})
-        .then ( offers => 
+        .then(offers => {
             res.render('companies/companyProfile', { offers })
-        )
+        })
     // console.log('req.user company', req.user) 
 } 
 

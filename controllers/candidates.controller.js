@@ -11,9 +11,7 @@ const { sendCandidatePasswordUpdateEmail } = require('../config/mailer.config');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports.candidateProfile = (req, res, next) => {
-    Application.find({
-            'candidate': req.currentCandidate.id
-        })
+    Application.find({'candidate': req.currentCandidate.id})
         .populate('offer')
         .then((application) => {
             res.render('candidates/candidateProfile', {

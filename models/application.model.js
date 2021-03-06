@@ -13,10 +13,6 @@ const applicationSchema = new mongoose.Schema({
         ref: 'Candidate',
         required: true
   },
-  status: {
-    type: [String],
-    enum: ["Descartado", "En proceso", "Finalista", "Entrevista personal"]
-    }
 },
     {
     timestamps: true,

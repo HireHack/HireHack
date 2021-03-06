@@ -1,4 +1,10 @@
 <h1>Vista Candidatura</h1>
+
+<form class="delete-form d-inline" action="/delete-offer/{{offer._id}}" method="post">
+    <button type="submit" class="btn btn-danger" onclick="return clicked()">Cerrar proceso</button>
+</form>
+
+<h2>Oferta</h2>
 {{#with offer}}
 {{!-- Offer detail --}}
 <div class="border rounded p-3 mb-2">
@@ -17,6 +23,7 @@
 </div>
 {{/with}}
 
+<h2>Candidatos</h2>
 {{!-- Applicants --}}
 {{#each application}}
 <div class="border rounded p-3 mb-2">

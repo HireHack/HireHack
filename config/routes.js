@@ -17,8 +17,7 @@ const GOOGLE_SCOPES = [
 // MISC
 router.get('/', miscController.home);
 router.get('/main-login', miscController.mainLogin);
-router.post('/password-update/:id', miscController.passwordUpdateConfirmation);
-
+router.get('/search', miscController.search)
 
 // CANDIDATES
 router.get('/candidate-profile', secure.checkRole('CANDIDATE'), candidatesController.candidateProfile);
@@ -73,7 +72,7 @@ router.get('/company-edit-password/:token', secure.checkRole('COMPANY'), compani
 
 router.post('/delete-company', secure.checkRole('COMPANY'), companiesController.delete);
 router.get('/delete-company/:token', companiesController.doDelete);
-//router.get('/delete/company/:token', companiesController.doDelete);
+// TODO --> REST ROUTES: router.get('/delete/company/:token', companiesController.doDelete);
 
 // OFFERS
 router.get('/offers-list', offersController.offersList);
@@ -83,9 +82,10 @@ router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doC
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
+router.get('/search-offers', offersController.search)
 
 // APPLICATION
-router.get('/application-detail/:id', applicationController.detail);
-router.post('/apply/:id', applicationController.apply);
+router.get('/application-detail/:id', secure.checkRole('COMPANY'), applicationController.detail);
+router.post('/apply/:id', secure.checkRole('CANDIDATE'), applicationController.apply);
 
 module.exports = router;

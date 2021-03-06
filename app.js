@@ -83,10 +83,13 @@ app.use((req, res, next) => {
   }
 })
 
-//FLASH
 app.use((req, res, next) => {
+  //FLASH
   res.locals.flashMessage = req.flash('flashMessage')
 
+  //GOOGLE MAPS
+  res.locals.mapsKey = process.env.MAPS_KEY
+  
   next()
 })
 

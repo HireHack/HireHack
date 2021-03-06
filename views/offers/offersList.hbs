@@ -1,18 +1,102 @@
 <h1 class="text-center">Listado de Ofertas</h1>
-{{#each offers}}
-<div class="border rounded p-3 mb-2">
-    <h3>{{name}}</h3>
-    <p><b>Descripción:</b> <br> {{description}}</p>
-    <b>Requisitos:</b>
-    {{#each skills}}
-    {{#if @last}}
-    <span>{{this}}</span>
-    {{else}}
-    <span>{{this}} |</span>
-    {{/if}}
-    {{/each}}
-    <br>
-    <p>Oferta publicada por: <strong>{{offers_publishedByCompany.name}}</strong></p>
-    <a href="/offer-detail/{{_id}}">Ver detalle de la oferta</a>
+
+<h2>Filtrar ofertas</h2>
+
+<div class='container'>
+    <div class='row justify-content-between'>
+        {{!-- FILTROS --}}
+        <div class='col-3'>
+            <form class="form-group" action="/search-offers">
+                <label for="city">Ciudad</p>
+                <input class="form-control" name="addressCity" type="text" id="city">
+                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+                    {{!-- TODO: GoogleMaps --}}
+            </form>
+
+            <form class="form-group" action="/search-offers" method="GET" id="formCategory">
+                <label for="category">Categoría</label>
+                <select class="form-control" name="category" id="category">
+                    <option disable selected>Seleccionar categoría</option>
+                    <option value="Adm.empresas">Adm.empresas</option>
+                    <option value="Atencion al cliente">Atencion al cliente</option>
+                    <option value="Compras, logistica y almacén">Compras, logistica y almacén</option>
+                    <option value="Educación y formación">Educación y formación</option>
+                    <option value="Finanzas y banca">Finanzas y banca</option>
+                    <option value="Informática y telecomunicaciones">Informática y telecomunicaciones</option>
+                    <option value="Ingenieros y técnicos">Ingenieros y técnicos</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Marketing y comunicación">Marketing y comunicación</option>
+                    <option value="RR.HH">RR.HH</option>
+                    <option value="Sanidad">Sanidad</option>
+                    <option value="Turismo">Turismo</option>
+                    <option value="Otros">Otros</option>
+                </select>
+                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+
+            <form action="/search-offers" method="GET" id="contract"></form>
+            <label for="contract">Seleccionar tipo de contrato</label>
+            <select class="form-control" name="contract" id="contract">
+                <option disable selected>Tipo de contrato</option>
+                <option value="Indefinido">Indefinido</option>
+                <option value="De duración determinada">De duración determinada</option>
+                <option value="Autónomo">Autónomo</option>
+                <option value="Otros Contratos">Otros contratos</option>
+            </select>
+            <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+
+            <form class="form-group" action="/search-offers" method="GET">
+                <label for="studies">Estudios mínimos</label>
+                <select class="form-control" name="studies" id="studies">
+                    <option disable selected>Nivel de estudios</option>
+                    <option value="Sin estudios">Sin estudios</option>
+                    <option value="ESO">ESO</option>
+                    <option value="Grado medio">Grado medio</option>
+                    <option value="Grado superior">Grado superior</option>
+                    <option value="Grado">Grado</option>
+                </select>
+                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+
+            <form class="form-group" action="/search-offers" method="GET">
+                <label for="experience">Experiencia(años)</label>
+                <input name="experience" type="number" id="experience">
+                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+
+            <form class="form-group" action="/search-offers" method="GET">
+                <label for="salary">Salario anual</label>
+                <select name="salary" id="salary">
+                    <option value="6K - 12k">6K - 12k</option>
+                    <option value="12K - 20K">12K - 20K</option>
+                    <option value="20K - 30K">20K - 30K</option>
+                    <option value="+ 30K">+ 30K</option>
+                </select>
+                <button class="btn btn-secondary text-white  mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+        </div>
+
+        {{!-- OFERTAS --}}
+        <div class='col-9'>
+            {{#each offers}}
+            <div class="border rounded p-3 mb-2">
+                <h3>{{name}}</h3>
+                <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span style="color: red;">CERRADA</span>{{/if}}</p>
+                <p><b>Descripción:</b> <br> {{description}}</p>
+                <b>Requisitos:</b>
+                {{#each skills}}
+                {{#if @last}}
+                <span>{{this}}</span>
+                {{else}}
+                <span>{{this}} |</span>
+                {{/if}}
+                {{/each}}
+                <br>
+                <p>Oferta publicada por: <strong>{{offers_publishedByCompany.name}}</strong></p>
+                <a href="/offer-detail/{{_id}}">Ver detalle de la oferta</a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
 </div>
-{{/each}}

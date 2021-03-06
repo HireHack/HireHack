@@ -1,11 +1,15 @@
 <div>
     <h1>Acceso denegado</h1>
-    <p>Para ver esta página debes tener una cuenta válida.</p>
+    <p>No tienes permisos para ver esta página. Por favor, accede con una cuenta diferente.</p>
+    {{#if currentCompany}}
     <button class="btn btn-primary">
         <a class="nav-link text-white" href="/company-login">Acceso como empresa</a>
     </button>
+    {{/if}}
+    {{#if currentCandidate}}
     <button class="btn btn-warning mx-3">
         <a class="nav-link text-dark" href="/candidate-login">Acceso como candidato</a>
     </button>
+    {{/if}}
     </ul>
 </div>
