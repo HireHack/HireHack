@@ -11,24 +11,4 @@ setTimeout(() => {
   })  
 }, 3000);
 
-//FILTERS OFFERS
-// const host= "http://localhost:3000/offers-list"
-
-// const category = document.getElementById('category')
-// category.addEventListener('click', () => {
-  
-// })
-
-// axios.get(`${host}`, {
-//   params: {
-//   category: 'Adm. empresas'
-// }})
-//     .then((res) => {
-//     console.log(res)
-//     })
-//     .catch((e)=> console.error(e))
-
-// document.getElementById('category').addEventListener('change', function () {
-//   document.getElementById('formCategory').submit()
-// })
 

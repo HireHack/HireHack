@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "faker": "^5.4.0",
+    "geocoder": "^0.2.3",
     "hbs": "^4.1.1",
     "http-errors": "^1.8.0",
     "mongo": "^0.1.0",

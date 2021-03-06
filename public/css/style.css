@@ -66,3 +66,7 @@ canvas {
     width: 33%;
     left: 50%;
 }
+
+#map {
+    height: 400px;
+}

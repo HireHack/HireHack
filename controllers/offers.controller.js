@@ -16,7 +16,12 @@ module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
         .populate('offers_publishedByCompany')
         .then((offer) => {
-            res.render('offers/offerDetail', { offer /* addressDetail: offer.getAddress()*/ })
+            console.log('offerDetil', offer)
+            res.render('offers/offerDetail', {
+                offer,
+                lat: offer.location.coordinates[1],
+                lng: offer.location.coordinates[0]
+            })
         })
 };
 
@@ -30,8 +35,13 @@ module.exports.doCreate = (req, res, next) => {
         })
     }
 
+    req.body.location = {
+        type: 'Point',
+        coordinates: [Number(req.body.lng), Number(req.body.lat)]
+    }
+
     const offer = req.body;
-    console.log('oferta', req.body)
+    //console.log('oferta', req.body)
     offer.offers_publishedByCompany = req.currentCompany.id
     //{offer, ...offer.offers_publishedByCompany}
     
@@ -62,18 +72,37 @@ module.exports.edit = (req, res, next) => {
     //Offer.find({'offers_publishedByCompany': req.currentCompany.id})
     Offer.findById(req.params.id)
         .then((offerToEdit) => {
+            //console.log("I'm here")
+            console.log(offerToEdit)
             if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
-                res.render('offers/offerCreation', offerToEdit);
+                // res.render('offers/offerCreation', offerToEdit);
+                console.log('if', offerToEdit)
+                res.render('offers/offerCreation', {
+                    ...offerToEdit.toJSON(), lat: offerToEdit.location.coordinates[1], lng: offerToEdit.location.coordinates[0]
+                });
             } else {
                 res.render('denied-route');
             }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+            console.error(err)
+        });
 }
 
 
 module.exports.doEdit = (req, res, next) => {
-    console.log("edit")
+    function renderWithErrors(errors) {
+    res.status(400).render("offers/offerCreation", {
+      errors: errors,
+      offer: req.body,
+      lat: req.body.lat,
+      lng: req.body.lng
+    });
+  }
+    req.body.location = {
+        type: 'Point',
+        coordinates: [req.body.lng, req.body.lat]
+    }
     Offer.findByIdAndUpdate(req.params.id, req.body, {new: true})
         .then((offerToEdit) => {
             if (offerToEdit.offers_publishedByCompany == req.currentCompany.id) {
