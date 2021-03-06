@@ -190,7 +190,6 @@ module.exports.doEditEmail = (req, res, next) => {
 module.exports.updatePassword = (req, res, next) => {
     Company.findById({_id: req.currentCompany.id})
         .then((companyToUpdate) => {
-            //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de actualización de contraseña realizada correctamente - Por favor, ve a tu email para confirmar el cambio');
             sendCompanyPasswordUpdateEmail(companyToUpdate.email, companyToUpdate.token);
             res.redirect('/company-profile');
@@ -201,39 +200,63 @@ module.exports.updatePassword = (req, res, next) => {
 module.exports.editPassword = (req, res, next) => res.render('companies/newPasswordForm');
 
 module.exports.doEditPassword = (req, res, next) => {
+
     function renderWithErrors(errors) {
-        res.status(400).render('companies/signup', {
+        res.status(400).render('companies/newPasswordForm', {
             errors: errors,
             company: req.body
         })
     }
     
-    if (req.body.newPassword != req.body.confirmPassword) {
-        renderWithErrors({
-            password: "Las contraseñas no coindiden."
+    Company.findById(req.currentCompany.id)
+        .then((company) => {
+            return company.checkPassword(req.body.newPassword)
+                .then(match => {
+                    if (!match) {
+                        if (req.body.newPassword !== req.body.confirmPassword) {
+                            renderWithErrors({
+                                confirmPassword: "Las contraseñas no coinciden."
+                            })
+                        } else if (req.body.newPassword == '' || req.body.confirmPassword == '') {
+                            renderWithErrors({
+                                password: "Los campos no deben estar vacíos."
+                            })
+                        } else {
+                            company.password = req.body.newPassword;
+                            company.token = uuidv4();
+                            return company.save()
+                                .then(() => {
+                                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizada correctamente!');
+                                    res.redirect('/company-profile')
+                                })
+                        }
+                    } else {
+                        console.log('¡Error, por favor intentalo de nuevo!')
+                        renderWithErrors({
+                            password: "Esa contraseña ya ha sido utilizada"
+                        })
+                    }
+                })
+                .catch((err) => {
+                    if (err instanceof mongoose.Error.ValidationError) {
+                        renderWithErrors(err.errors)
+                    } else {
+                        next(err)
+                    }
+                })
         })
-    } else {
-        Company.findOneAndUpdate(
-            {email: req.body.email}, 
-            {password: req.body.newPassword, token: uuidv4()}
-        )
-        .then((updatedCompany) => {
-            if (updatedCompany) {
-                req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
-                res.redirect('/company-profile');
+        .catch((err) => {
+            if (err instanceof mongoose.Error.ValidationError) {
+                renderWithErrors(err.errors) // Not rendering errors
             } else {
-                req.flash('flashMessage', 'Error al actualizar tu contraseña, por favor, inténtalo de nuevo.');
-                next();
+                next(err)
             }
-        })
-        .catch((err) => next(err));
-    }
+        });
 }
 
 module.exports.delete = (req, res, next) => {
     Company.findById({_id: req.currentCompany.id})
         .then((companyToDelete) => {
-            //console.log('companyToDelete', companyToDelete)
             req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
             sendDeleteCompanyEmail(companyToDelete.email, companyToDelete.token);
             res.redirect('/');

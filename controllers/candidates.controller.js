@@ -223,7 +223,7 @@ module.exports.doEditEmail = (req, res, next) => {
     if (req.body.newEmail != req.body.confirmEmail) {
         console.log('¡Los emails no coinciden!')
         renderWithErrors({
-            email: "Los emails no coindiden."
+            confirmEmail: "Los emails no coindiden."
         })
     } else if (req.body.newEmail == '' || req.body.confirmEmail == '') {
         renderWithErrors({
@@ -241,19 +241,13 @@ module.exports.doEditEmail = (req, res, next) => {
                 email: req.body.newEmail,
                 token: uuidv4()
             })
-            .then((updatedCandidate) => {
-                console.log('updatedCandidate', updatedCandidate)
-                console.log('todo ha ido bien')
-                // if (updatedCandidate) {
-                // }
-                // else {
-                //     req.flash('flashMessage', 'Error al actualizar tu email, por favor, inténtalo de nuevo.');
-                //     next();
-                // }
+            .then(() => {
+                req.flash('flashMessage', '¡Tu email ha sido actualizado con éxito!');
+                res.redirect('/candidate-profile');
             })
             .catch((err) => {
                 if (err instanceof mongoose.Error.ValidationError) {
-                    renderWithErrors() // Not rendering errors
+                    renderWithErrors()
                 } else {
                     next(err)
                 }
@@ -306,19 +300,22 @@ module.exports.doEditPassword = (req, res, next) => {
                     if (!match) {
                         console.log('candidate pw !match')
                         // TODO --> Separar validación confirmar contraseña
-                        if (req.body.newPassword !== req.body.confirmPassword || req.body.newPassword == '' || req.body.confirmPassword == '') {
+                        if (req.body.newPassword !== req.body.confirmPassword) {
                             console.log('¡Las contraseñas no coinciden!')
                             renderWithErrors({
-                                password: "Las contraseñas no coinciden."
+                                confirmPassword: "Las contraseñas no coinciden."
                             })
-                            res.send('error')
+                        } else if (req.body.newPassword == '' || req.body.confirmPassword == '') {
+                            renderWithErrors({
+                                password: "Los campos no deben estar vacíos."
+                            })
                         } else {
                             console.log('candidate pw !match else')
                             candidate.password = req.body.newPassword;
                             candidate.token = uuidv4();
                             return candidate.save()
                                 .then(() => {
-                                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+                                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizada correctamente!');
                                     res.redirect('/candidate-profile')
                                 })
                         }
@@ -351,7 +348,6 @@ module.exports.delete = (req, res, next) => {
             _id: req.currentCandidate.id
         })
         .then((candidateToDelete) => {
-            //console.log('candidateToDelete', candidateToDelete)
             req.flash('flashMessage', 'Solicitud de baja realizada correctamente - Por favor, ve a tu email para finalizar el proceso');
             sendDeleteCandidateEmail(candidateToDelete.email, candidateToDelete.token);
             res.redirect('/');

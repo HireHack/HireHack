@@ -4,22 +4,16 @@
         <form action="/company-edit-email" method="POST">
             <div class="form-group">
                 <label for="email-input"> Email Antiguo: </label>
-                <input class="form-control {{#if errors.email}}is-invalid{{/if}}" type="email"
-                    value="{{company.email}}" name="email" id="email-input">
-                {{#if errors.email}}
-                <div class="invalid-feedback">{{errors.email}}</div>
-                {{/if}}
+                <p>{{currentCompany.email}}</p>
                 <label for="new-email-input"> Nuevo Email: </label>
-                <input class="form-control {{#if errors.email}}is-invalid{{/if}}" type="email"
-                    value="{{company.email}}" name="newEmail" id="new-email-input">
+                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="newEmail" id="new-email-input">
                 {{#if errors.email}}
                 <div class="invalid-feedback">{{errors.email}}</div>
                 {{/if}}
                 <label for="confirm-email-input"> Confirmar Nuevo Email: </label>
-                <input class="form-control {{#if errors.email}}is-invalid{{/if}}" type="email"
-                    value="{{company.email}}" name="confirmEmail" id="confirm-email-input">
-                {{#if errors.email}}
-                <div class="invalid-feedback">{{errors.email}}</div>
+                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="confirmEmail" id="confirm-email-input">
+                {{#if errors.confirmEmail}}
+                <div class="invalid-feedback">{{errors.confirmEmail}}</div>
                 {{/if}}
                 <button class="btn btn-primary mt-3" type="submit">Actualizar</button>
             </div>
