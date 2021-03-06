@@ -79,6 +79,7 @@ const candidateSchema = new mongoose.Schema({
         type: String,
         default: uuidv4(),
     },
+    //token temporal
 },
     {
     timestamps: true,

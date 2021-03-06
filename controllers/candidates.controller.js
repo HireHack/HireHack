@@ -214,25 +214,25 @@ module.exports.editEmail = (req, res, next) => res.render('candidates/newEmailFo
 
 module.exports.doEditEmail = (req, res, next) => {
     function renderWithErrors(errors) {
-        res.status(400).render('candidates/signup', {
+        res.status(400).render('candidates/newEmailForm', {
             errors: errors,
             candidate: req.body
         })
     }
 
-    if (req.body.newEmail != req.body.confirmEmail || req.body.newEmail == '' || req.body.confirmEmail == '') {
-        req.flash('flashMessage', '¡Los emails no coinciden!')
-        res.redirect(`/candidate-edit-email/${req.currentCandidate.token}`)
+    if (req.body.newEmail != req.body.confirmEmail) {
         console.log('¡Los emails no coinciden!')
         renderWithErrors({
             email: "Los emails no coindiden."
         })
+    } else if (req.body.newEmail == '' || req.body.confirmEmail == '') {
+        renderWithErrors({
+            email: "Los campos no deben estar vacíos."
+        })
     } else if (req.body.newEmail == req.currentCandidate.email) {
-        req.flash('flashMessage', '¡Error, por favor intentalo de nuevo!')
-        res.redirect(`/candidate-edit-email/${req.currentCandidate.token}`)
         console.log('¡Error, por favor intentalo de nuevo!')
         renderWithErrors({
-            email: 'Este email ya ha sido utilizado'
+            email: 'Este email ya ha sido utilizado.'
         })
     } else {
         Candidate.findOneAndUpdate({
@@ -244,8 +244,6 @@ module.exports.doEditEmail = (req, res, next) => {
             .then((updatedCandidate) => {
                 console.log('updatedCandidate', updatedCandidate)
                 console.log('todo ha ido bien')
-                req.flash('flashMessage', '¡Tu email ha sido actualizado correctamente!');
-                res.redirect('/candidate-profile')
                 // if (updatedCandidate) {
                 // }
                 // else {
@@ -255,7 +253,7 @@ module.exports.doEditEmail = (req, res, next) => {
             })
             .catch((err) => {
                 if (err instanceof mongoose.Error.ValidationError) {
-                    renderWithErrors(err.errors) // Not rendering errors
+                    renderWithErrors() // Not rendering errors
                 } else {
                     next(err)
                 }
@@ -293,60 +291,59 @@ module.exports.doEditPassword = (req, res, next) => {
     //console.log('req.currentCandidate doEditPassword', req.currentCandidate)
 
     function renderWithErrors(errors) {
-        res.status(400).render('candidates/signup', {
+        res.status(400).render('candidates/newPasswordForm', {
             errors: errors,
             candidate: req.body
         })
-
-        Candidate.findById(req.currentCandidate.id)
-            .then((candidate) => {
-                // console.log('candidate', candidate)
-                return candidate.checkPassword(req.body.newPassword)
-                    .then(match => {
-                        //console.log('candidate match')
-                        if (!match) {
-                            //console.log('candidate pw !match')
-                            if (req.body.newPassword !== req.body.confirmPassword || req.body.newPassword == '' || req.body.confirmPassword == '') {
-                                // console.log('¡Las contraseñas no coinciden!')
-                                renderWithErrors({
-                                    password: "Las contraseñas no coindiden."
-                                })
-                                req.flash('flashMessage', '¡Las contraseñas no coinciden!')
-                                res.redirect(`/candidate-edit-password/${candidate.token}`)
-                                // res.send('error')
-                            } else {
-                                // console.log('candidate pw !match else')
-                                candidate.password = req.body.newPassword;
-                                candidate.token = uuidv4();
-                                candidate.save();
-                                req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
-                                res.redirect('/candidate-profile')
-                            }
-                        } else {
-                            // console.log('¡Error, por favor intentalo de nuevo!')
-                            renderWithErrors({
-                                password: "Esa contraseña ya ha sido utilizada"
-                            })
-                            req.flash('flashMessage', '¡Error, por favor intentalo de nuevo!');
-                            res.redirect(`/candidate-edit-password/${candidate.token}`)
-                        }
-                    })
-                    .catch((err) => {
-                        if (err instanceof mongoose.Error.ValidationError) {
-                            renderWithErrors(err.errors)
-                        } else {
-                            next(err)
-                        }
-                    })
-            })
-            .catch((err) => {
-                if (err instanceof mongoose.Error.ValidationError) {
-                    renderWithErrors(err.errors) // Not rendering errors
-                } else {
-                    next(err)
-                }
-            });
     }
+
+    Candidate.findById(req.currentCandidate.id)
+        .then((candidate) => {
+            console.log('candidate', candidate)
+            return candidate.checkPassword(req.body.newPassword)
+                .then(match => {
+                    console.log('candidate match')
+                    if (!match) {
+                        console.log('candidate pw !match')
+                        // TODO --> Separar validación confirmar contraseña
+                        if (req.body.newPassword !== req.body.confirmPassword || req.body.newPassword == '' || req.body.confirmPassword == '') {
+                            console.log('¡Las contraseñas no coinciden!')
+                            renderWithErrors({
+                                password: "Las contraseñas no coinciden."
+                            })
+                            res.send('error')
+                        } else {
+                            console.log('candidate pw !match else')
+                            candidate.password = req.body.newPassword;
+                            candidate.token = uuidv4();
+                            return candidate.save()
+                                .then(() => {
+                                    req.flash('flashMessage', '¡Tu contraseña ha sido actualizado correctamente!');
+                                    res.redirect('/candidate-profile')
+                                })
+                        }
+                    } else {
+                        console.log('¡Error, por favor intentalo de nuevo!')
+                        renderWithErrors({
+                            password: "Esa contraseña ya ha sido utilizada"
+                        })
+                    }
+                })
+                .catch((err) => {
+                    if (err instanceof mongoose.Error.ValidationError) {
+                        renderWithErrors(err.errors)
+                    } else {
+                        next(err)
+                    }
+                })
+        })
+        .catch((err) => {
+            if (err instanceof mongoose.Error.ValidationError) {
+                renderWithErrors(err.errors) // Not rendering errors
+            } else {
+                next(err)
+            }
+        });
 }
 
 module.exports.delete = (req, res, next) => {
