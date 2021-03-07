@@ -8,6 +8,7 @@ const applicationController = require('../controllers/application.controller');
 const secure = require("../middlewares/secure.middleware");
 const multer = require('multer');
 const upload = require ('./storage.config');
+const express = require('express');
 
 const GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/userinfo.profile",
@@ -82,7 +83,9 @@ router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doC
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
-router.get('/search-offers', offersController.search)
+router.get('/search-offers', offersController.search);
+router.post('/offers/:id/paid', secure.checkRole('COMPANY'), offersController.paid);
+router.post('/offers/webhook', express.raw({ type: 'application/json'}), offersController.webhook);
 
 // APPLICATION
 router.get('/application-detail/:id', secure.checkRole('COMPANY'), applicationController.detail);
