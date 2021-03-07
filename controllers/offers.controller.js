@@ -6,9 +6,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const createError = require('http-errors');
 
 module.exports.offersList = (req, res, next) => {
-    Offer.find({
-            "active": true
-        })
+    Offer.find({$and:[{"active": true}, {"paid": true}]})
         .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', {
@@ -216,33 +214,8 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
-    //let query;
-    // switch(true) {
-    //     case req.query.category:
-    //         Offer.find({"category": req.query.category})
-    //         .then((offers) => {
-    //             //console.log ('req.query.category', req.query.category)
-    //             //console.log('offers', offers)
-    //             res.render('offers/offersList', {offers})
-    //         })
-    //         break;
-    //     case req.query.contractType:
-    //         Offer.find({"ContractType": req.query.contractType})
-    //             .then((offers) => {
-    //                 //console.log ('req.query.category', req.query.category)
-    //                 //console.log('offers', offers)
-    //                 res.render('offers/offersList', {offers})
-    //             })
-    //         break;
-    //     default:
-    //         console.log('switch default')
-    //         break;
-    // }
-
     if (req.query.category) {
-        Offer.find({
-                category: req.query.category
-            })
+        Offer.find({$and:[{"active": true}, {"paid": true}, {category: req.query.category}]})
             .populate('offers_publishedByCompany')
             .then((offers) => {
                 //console.log ('req.query.category', req.query.category)
@@ -252,9 +225,7 @@ module.exports.search = (req, res, next) => {
                 })
             })
     } else if (req.query.contract) {
-        Offer.find({
-                contract: req.query.contract
-            })
+        Offer.find({$and:[{"active": true}, {"paid": true}, {contract: req.query.contract}]})
             .populate('offers_publishedByCompany')
             .then((offers) => {
                 console.log('offers', offers)
@@ -263,9 +234,7 @@ module.exports.search = (req, res, next) => {
                 })
             })
     } else if (req.query.studies) {
-        Offer.find({
-                studies: req.query.studies
-            })
+        Offer.find({$and:[{"active": true}, {"paid": true}, {studies: req.query.studies}]})
             .populate('offers_publishedByCompany')
             .then((offers) => {
                 console.log('offers', offers)
@@ -274,9 +243,7 @@ module.exports.search = (req, res, next) => {
                 })
             })
     } else if (req.query.experience) {
-        Offer.find({
-                experience: req.query.experience
-            })
+        Offer.find({$and:[{"active": true}, {"paid": true}, {experience: req.query.experience}]})
             .populate('offers_publishedByCompany')
             .then((offers) => {
                 console.log('offers', offers)
@@ -285,9 +252,7 @@ module.exports.search = (req, res, next) => {
                 })
             })
     } else if (req.query.salary) {
-        Offer.find({
-                salary: req.query.salary
-            })
+        Offer.find({$and:[{"active": true}, {"paid": true}, {salary: req.query.salary}]})
             .populate('offers_publishedByCompany')
             .then((offers) => {
                 console.log('offers', offers)
@@ -296,6 +261,6 @@ module.exports.search = (req, res, next) => {
                 })
             })
     } else {
-        console.log('else search')
+        next()
     }
 }
