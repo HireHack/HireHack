@@ -75,7 +75,6 @@ module.exports.edit = (req, res, next) => {
         .catch((err) => console.error(err));
 }
 
-
 module.exports.doEdit = (req, res, next) => {
     console.log("edit")
     Offer.findByIdAndUpdate(req.params.id, req.body, {
