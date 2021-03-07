@@ -9,7 +9,7 @@ module.exports.home = (req, res, next) => {
 
 module.exports.search = (req, res, next) => {
     //console.log('req.body', req.body)
-    Offer.find()
+    Offer.find({$and:[{"active": true}, {"paid": true}]})
     .then((offers) => {
         const queryContent = req.query.search.toLowerCase().slice(1)
         //console.log('req.query.search', queryContent)
@@ -32,12 +32,4 @@ module.exports.search = (req, res, next) => {
 
 module.exports.mainLogin = (req, res, next) => {
     res.render('main-login');
-}
-
-module.exports.passwordUpdateConfirmation = (req, res, next) => {
-    res.send('Password Update Confirmation')
-}
-
-module.exports.deleteAccountConfirmation = (req, res, next) => {
-    
 }

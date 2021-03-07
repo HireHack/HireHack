@@ -15,7 +15,14 @@ require('./config/hbs.config');
 
 // Express config
 const app = express();
-app.use(express.json());
+//app.use(express.json());
+app.use((req, res, next) => {
+  if (req.originalUrl === '/offers/webhook') {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
 app.use(express.urlencoded({
   extended: false
 }));

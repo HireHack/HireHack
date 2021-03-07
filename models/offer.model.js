@@ -56,6 +56,10 @@ const offerSchema = new mongoose.Schema({
         ref: "Company",
         required: true
     },
+    paid: {
+        type: Boolean,
+        default: false,
+    },
 },
     {
     timestamps: true,
