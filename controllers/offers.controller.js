@@ -5,12 +5,12 @@ const flash = require('connect-flash');
 
 module.exports.offersList = (req, res, next) => {
     const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
+    const limit = parseInt(req.query.limit) || 7;
     const startIndex = (page - 1) * limit;
     
     Offer.find({ "active": true })
         .sort('-createdAt')
-        .limit(limit || 5)
+        .limit(limit)
         .skip(startIndex)
         .populate('offers_publishedByCompany')
         .then((offers) => {
@@ -26,7 +26,7 @@ module.exports.offersFiltered = (req, res, next) => {
     const limit = parseInt(req.query.limit) || 7;
     const startIndex = (page - 1) * limit;
 
-    Offer.find({ "active": true })
+    Offer.find()
         .sort('-createdAt')
         .limit(limit)
         .skip(startIndex)

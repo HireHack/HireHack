@@ -1,5 +1,7 @@
 //const { load } = require("dotenv/types");
 
+//const { offersFiltered } = require("../../controllers/offers.controller");
+
 //DELETE
 function clicked(input) {
   return confirm(`¿Seguro que quieres eleiminar?`);
@@ -21,11 +23,13 @@ setTimeout(() => {
 // PAGINATION
 let loadMore = 1;
 window.onscroll = function (ev) {
-  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  console.log('scrolling')
+  if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
     loadMore++;
     console.log(loadMore);
-    axios.get(`http://localhost:3000/offers-filtered?page=${loadMore}&limit=7`)
-      .then((response) => response.data.forEach(item => console.log(item.name)))
+    axios.get(`/offers-filtered?page=${loadMore}&limit=7`)
+      .then((response) => console.log(response.data))
+      .catch(e => console.log(e));
   }
 };
 
