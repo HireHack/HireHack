@@ -85,12 +85,12 @@ module.exports.paid = (req, res, next) => {
                         line_items: [{
                             amount: 150 * 100,
                             currency: 'EUR',
-                            name: offer.name,
+                            name: `Publicación de la oferta: ${offer.name}`,
                             quantity: 1
                         }],
                         customer_email: req.currentCompany.email,
                         success_url: `${process.env.HOST || 'http://localhost:3000'}/company-profile`,
-                        cancel_url: `${process.env.HOST || 'http://localhost:3000'}/offer-detail/${offer.id}`,
+                        cancel_url: `${process.env.HOST ||'http://localhost:3000'}/offer-detail/${offer.id}`,
                         metadata: {
                             offer: offer.id
                         }
@@ -126,14 +126,14 @@ module.exports.webhook = (req, res, next) => {
             .then(() => {
                 req.flash('flashMessage', 'El pago se realizó correctamente - !La oferta ha sido publicada!');
                 console.log(`Offer with id ${session.metadata.offer} has been published`)
-                res.status(200)
+                res.status(200).end()
             })
             .catch((err) => {
                 console.log('Payment failed')
                 next(err)
             })
     } else {
-        res.status(200)
+        res.status(200).end()
     }
 }
 
