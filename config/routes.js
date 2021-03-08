@@ -88,9 +88,9 @@ router.post('/offers/:id/paid', secure.checkRole('COMPANY'), offersController.pa
 router.post('/offers/webhook', express.raw({ type: 'application/json'}), offersController.webhook);
 
 // APPLICATION
-router.get('/application-detail/:id', secure.checkRole('COMPANY'),applicationController.detail);
+router.get('/application-detail/:id', secure.checkRole('COMPANY'), applicationController.detail);
 router.post('/apply/:id', secure.checkRole('CANDIDATE'), applicationController.apply);
-router.get('/application-search', applicationController.search)
+router.get('/application-search', secure.checkRole('COMPANY'), applicationController.search)
 
 
 module.exports = router;
