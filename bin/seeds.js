@@ -28,17 +28,14 @@ Promise.all([Offer.deleteMany(), Company.deleteMany()])
                         offers_publishedByCompany: company._id,
                         description: faker.lorem.paragraph(),
                         address: faker.address.streetAddress(),
-                        // {
-                        // streetName: faker.address.streetName(),
-                        // number: Math.floor(Math.random() * 200),
-                        // zipCode: faker.address.zipCode(),
-                        // city: faker.address.city(),
-                        // country: company.address.country
-                        // },
                         skills: getRandom(
                             ["creatividad", "trabajo en equipo", "organización", "motivación", "comunicación", "compromiso", "trabajo bajo presión"],
                             Math.floor(Math.random()* 6) + 1
                         ),
+                        location: {
+                            type: "Point",
+                            coordinates: [faker.address.longitude(), faker.address.latitude()]
+                        },
                         category: getOneRandom(["Adm.empresas", "Atención al cliente", "Compras, logística y almacen", "Educación y formación", "Finanzas y banca", "Informática y telecomunicaciones", "Ingenieros y tecnicos", "Legal", "Marketing y comunicación", "RR.HH", "Sanidad", "Turismo", "Otros"]),
                         contract: getOneRandom(["Indefinido", "De duración determinada", "Autónomo", "Otros contractos"]),
                         studies: getOneRandom(["Sin estudios", "Educación secundaria Obligatoria", "Grado medio", "Grado superior", "Grado"]),

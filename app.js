@@ -1,20 +1,28 @@
 require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
-const hbs = require('hbs');
 const routes = require('./config/routes');
 const createError = require('http-errors');
 const passport = require('passport');
 const flash = require ('connect-flash')
 const session = require('./config/session.config');
 const Candidate = require('./models/candidate.model');
-const Company = require('./models/company.model')
+const Company = require('./models/company.model');
+
 require('./config/db.config');
 require('./config/passport.config');
+require('./config/hbs.config');
 
 // Express config
 const app = express();
-app.use(express.json());
+//app.use(express.json());
+app.use((req, res, next) => {
+  if (req.originalUrl === '/offers/webhook') {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
 app.use(express.urlencoded({
   extended: false
 }));
@@ -26,13 +34,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
-hbs.registerPartials(__dirname + '/views/partials');
-// hbs.registerHelper('unlessCond', (currentCandidate, currentCompany, options) => {
-//     if(currentCandidate || currentCompany) {
-//       return options.fn();
-//     }
-//     return options.inverse();
-//   });
 
 // SESSION CONFIG
 // app.use((req, res, next) => {
@@ -89,10 +90,13 @@ app.use((req, res, next) => {
   }
 })
 
-//FLASH
 app.use((req, res, next) => {
+  //FLASH
   res.locals.flashMessage = req.flash('flashMessage')
 
+  //GOOGLE MAPS
+  res.locals.mapsKey = process.env.MAPS_KEY
+  
   next()
 })
 

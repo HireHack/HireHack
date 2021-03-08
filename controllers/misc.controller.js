@@ -9,7 +9,7 @@ module.exports.home = (req, res, next) => {
 
 module.exports.search = (req, res, next) => {
     //console.log('req.body', req.body)
-    Offer.find()
+    Offer.find({$and:[{"active": true}, {"paid": true}]})
         .populate('offers_publishedByCompany')
         .then((offers) => {
             const queryContent = req.query.search.toLowerCase().slice(1)

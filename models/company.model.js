@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const {
-    company
-} = require('faker');
+const { company } = require('faker');
+const { v4: uuidv4 } = require('uuid');
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -22,7 +21,7 @@ const companySchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Por favor, introduce un email"],
         unique: true,
         lowercase: true,
         trim: true,
@@ -30,7 +29,7 @@ const companySchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        //required: true,
+        //required: [true, "Por favor, introduce tu contraseña"],
         match: [PASSWORD_PATTERN, "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minuscula y 1 número"],
     },
     description: {
@@ -38,6 +37,7 @@ const companySchema = new mongoose.Schema({
     },
     picture: {
         type: String,
+        default: 'https://i.pcmag.com/imagery/articles/03WHIruaSljeZnevrNKJX7j-12..1582137780.jpg'
     },
     website: {
         type: String,
@@ -48,10 +48,22 @@ const companySchema = new mongoose.Schema({
         //     message: "Por favor, introduce una URL válida",
         // },
     },
+    social: {
+        google: String,
+        linkedin: String
+    },
     role: {
         type: String,
         default: 'COMPANY'
-    }
+    },
+    active: {
+        type: Boolean,
+        default: false,
+    },
+    token: {
+        type: String,
+        default: uuidv4(),
+    },
 }, {
     timestamps: true,
     toJSON: {
