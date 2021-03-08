@@ -56,23 +56,58 @@ module.exports.apply = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
-    const age = Number(req.query.age);
-    if (age) {
-        console.log(age)
-        Candidate.find({
-                age: age
-            })
-            .then((foundCandidates) => {
-                console.log('candidates', foundCandidates)
-                let candidates = []
-                foundCandidates.forEach((candidate) => {
-                    candidates.push(candidate);
+    if (req.query.age) {
+        Candidate.find({ age: req.query.age })
+            .then((candidates) => {
+                //console.log('foundCandidates', candidates)
+                //console.log('req.query.age', req.query.age)
+                candidates.forEach(candidate => {
+                    Application.find({ candidate: candidate.id })
+                        .populate('offer')
+                        .then((applications) => {
+                            applications.forEach((application) => {
+                                //console.log('application.offer', application.offer)
+                                res.render('application/application-detail', {candidates, offer: application.offer})
+                            })
+                        })
+                        .catch((e)=> next(e)) 
                 })
-                console.log('filteredCandidates', candidates)
-                res.render('application/application-detail', {candidates})
             })
             .catch((e)=> next(e))
-    } else {
+    } else if (req.query.address) {
+        //console.log('req.query', req.query)
+        Candidate.find()
+            .then((candidatesFound) => {
+                //console.log('candidatesFound', candidatesFound)
+                const queryAddress = req.query.address.toLowerCase().slice(1)
+                //console.log('req.query.search', queryAddress)
+                let filteredCandidates = []
+                candidatesFound.forEach((c) => {
+                    //console.log('candidates forEach', c)
+                    const cityCandidate = c.address
+                    if (cityCandidate.includes(queryAddress)) {
+                        filteredCandidates.push(c);
+                    }
+                })
+                console.log('filteredCandidates', filteredCandidates)
+                return filteredCandidates
+            })
+            .then((candidates) => {
+                candidates.forEach(candidate => {
+                Application.find({ candidate: candidate.id })
+                        .populate('offer')
+                        .then((applications) => {
+                            applications.forEach((application) => {
+                                console.log('application.offer', application.offer)
+                                res.render('application/application-detail', {candidates, offer: application.offer})
+                            })
+                        })
+                        .catch((e) => next(e))
+                })
+            })
+            .catch((e) => next(e))
+    }else {
         console.log('else')
+        next()
     }
 }

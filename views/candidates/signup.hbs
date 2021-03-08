@@ -68,16 +68,16 @@
             
             <div class="form-group">
                 <label for="address-input"> Dirección: </label>
-                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.streetName}}" type="text"
-                    name="address.streetName" id="address-input" placeholder="Calle"required>
-                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text"
+                <input class="form-control mb-2" value="{{address}}" type="text"
+                    name="address" id="address-input" placeholder=""required>
+                {{!-- <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text"
                     name="address.number" id="address-input" placeholder="Número"required>
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.zipCode}}" type="text"
                     name="address.zipCode" id="address-input" placeholder="Código Postal"required>
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.city}}" type="text"
                     name="address.city" id="address-input" placeholder="Ciudad" required>
                 <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.country}}" type="text"
-                    name="address.country" id="address-input" placeholder="País"required>
+                    name="address.country" id="address-input" placeholder="País"required> --}}
                 {{#if errors.address}}
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}

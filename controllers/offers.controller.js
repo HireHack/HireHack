@@ -104,7 +104,7 @@ module.exports.delete = (req, res, next) => {
 module.exports.search = (req, res, next) => {
     if (req.query.address) {
         console.log('req.query', req.query)
-        Offer.find()
+        Offer.find( {$and:[{"active": true}, {"paid": true}]} )
             .populate('offers_publishedByCompany')
             .then((offers) => {
                 console.log('offers', offers)
