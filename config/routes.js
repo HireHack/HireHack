@@ -78,7 +78,8 @@ router.get('/delete-company/:token', companiesController.doDelete);
 // TODO --> REST ROUTES: router.get('/delete/company/:token', companiesController.doDelete);
 
 // OFFERS
-router.get('/offers-list', paginate.results(Offer), offersController.offersList);
+router.get('/offers-list', offersController.offersList);
+router.get('/offers-filtered', paginate.results(Offer), offersController.offersFiltered);
 router.get('/offer-detail/:id', offersController.offerDetail);
 router.get('/offer-creation', secure.checkRole('COMPANY'), offersController.create);
 router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doCreate);
