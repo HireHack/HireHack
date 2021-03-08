@@ -8,11 +8,11 @@
     background-repeat: repeat-x;
    
 }
+*/
 
-body{
-    margin: 0px 240px 0px 280px;
-    display: none; 
-}  */
+body, html{
+    min-height: 60rem;
+}  
 
 /* NAVBAR */
 .navbar {
@@ -20,22 +20,48 @@ body{
 }
 
 .logo-header{
-    width: 20%;
+    width: 10%;
 }
 
 .btn {
-    font-size: 1.2rem;
-    color: #ffffff;
-    border-color: #ffffff;
+    font-size: 1.3rem;
+    padding: 10px 20px;
     border-radius: 10px;
     margin: 10px;
 }
 
 .btn-offers {
-
+    color: #ffffff;
+    border-color: #ffffff;
+    display:inline;
 }
 
-.
+.btn-access {
+    color: #276678;
+    border-color: #276678;
+    background-color: #fff;
+    display:inline;
+}
+
+.btn-logout {
+    color: #276678;
+    border-color: #276678;
+    background-color: #fff;
+    display:inline;
+    align-self: center;
+}
+
+.profile-status{
+    font-size: 1.3rem;
+    color: #fff;
+    align-self: center;
+}
+
+.profile-status, .btn-logout {
+    margin-right: 0;
+}
+
+
 
 /* HOME */
 

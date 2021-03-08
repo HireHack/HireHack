@@ -11,47 +11,50 @@
         </a>
 
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div id="navbarTogglerDemo03">
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {{#if currentCompany}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}">{{#if
-                        currentCompany}}Mi perfil{{else}}Empresas{{/if}}</a>
+                    <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}"></a>
+                </li>
+                <li class="profile-status">
+                    <p>{{currentCompany.name}} | Empresa</p>
                 </li>
                 {{#if currentCompany}}
                 <form action="/company-logout" method="POST">
                     <li>
-                        <button>Cerrar sesión</button>
+                        <button class="nav-link active btn btn-logout">Cerrar sesión</button>
                     </li>
                 </form>
                 {{/if}}
-                <li>
-                    <p>{{currentCompany.name}} | Empresa</p>
-                </li>
                 {{else}}
                 {{#if currentCandidate}}
                 <li class="nav-item">
                     <a class="nav-link" href="/{{#if currentCandidate}}candidate-profile{{else}}candidate-login{{/if}}"
-                        tabindex="-1" aria-disabled="true">{{#if currentCandidate}}Mi
-                        perfil{{else}}Candidatos{{/if}}</a>
+                        tabindex="-1" aria-disabled="true"></a>
+                </li>
+                <li class="profile-status">
+                    <p>{{currentCandidate.name}} | Candidato</p>
                 </li>
                 {{#if currentCandidate}}
                 <form action="/candidate-logout" method="POST">
                     <li>
-                        <button>Cerrar sesión</button>
+                        <button class="nav-link active btn btn-logout">Cerrar sesión</button>
                     </li>
                 </form>
                 {{/if}}
-                <li>
-                    <p>{{currentCandidate.name}} | Candidato</p>
-                </li>
                 {{/if}}
                 {{/if}}
             </ul>
 
+
+            {{#unless currentCompany}}
+            {{#unless currentCandidate}}
             <a class="nav-link active btn btn-offers" aria-current="page" href="/offers-list">Ofertas</a>
             <a class="nav-link active btn btn-access" aria-current="page" id="show-login">Acceso</a>
+            {{/unless}}
+            {{/unless}}
         </div>
     </div>
 </nav>
