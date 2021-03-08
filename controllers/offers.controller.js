@@ -158,7 +158,6 @@ module.exports.edit = (req, res, next) => {
         .catch((err) => next(err));
 }
 
-
 module.exports.doEdit = (req, res, next) => {
     function renderWithErrors(errors) {
         res.status(400).render("offers/offerCreation", {
@@ -188,7 +187,6 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-
     Application.findOne({
             offer: req.params.id
         })
@@ -204,9 +202,6 @@ module.exports.delete = (req, res, next) => {
                 .then((offer) => {
                     offer.active = false;
                     offer.save();
-                    //TO DO: mandar email candidato con proceso cerrado
-                    // EJEMPLO
-                    // sendCandidateActivationEmail(createdCandidate.email, createdCandidate.token);
                     res.redirect('/company-profile')
                 })
         })
@@ -214,7 +209,30 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
-    if (req.query.category) {
+    if (req.query.address) {
+        console.log('req.query', req.query)
+        Offer.find( {$and:[{"active": true}, {"paid": true}]} )
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                console.log('offers', offers)
+                const queryAddress = req.query.address.toLowerCase().slice(1)
+                console.log('req.query.search', queryAddress)
+                let filteredOffers = []
+                offers.forEach((offer) => {
+                    console.log('offer forEach', offer)
+                    const cityOffer = offer.address
+                    if (cityOffer.includes(queryAddress)) {
+                        console.log('offerWithQueries', offer)
+                        filteredOffers.push(offer);
+                    }
+                })
+                console.log('filteredOffers', filteredOffers)
+                return filteredOffers
+            })
+            .then((offers) => res.render('offers/offersList', {
+                offers
+            }))
+    } else if (req.query.category) {
         Offer.find({$and:[{"active": true}, {"paid": true}, {category: req.query.category}]})
             .populate('offers_publishedByCompany')
             .then((offers) => {
