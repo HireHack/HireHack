@@ -1,14 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <a href="/">
-            <img class="logo__header" src="../img/logoNav.png" alt="HireHack logo">
+            <img class="logo-header" src="/img/HireHack.png" alt="HireHack logo">
         </a>
+
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {{#if currentCompany}}
                 <li class="nav-item">
@@ -46,8 +50,8 @@
                 {{/if}}
             </ul>
 
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-            <a class="nav-link active" aria-current="page" id="show-login">Acceso</a>
+            <a class="nav-link active btn btn-offers" aria-current="page" href="/offers-list">Ofertas</a>
+            <a class="nav-link active btn btn-access" aria-current="page" id="show-login">Acceso</a>
         </div>
     </div>
 </nav>
