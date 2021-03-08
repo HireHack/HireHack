@@ -43,9 +43,17 @@
                         {{/if}}
                     {{/if}}
             </ul>
-
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-            <a class="nav-link active" aria-current="page" href="/main-login">Acceso</a>
+            <a class="nav-link active" href="/offers-list">Ofertas publicadas</a>
+            <a class="nav-link active" aria-current="page" id="show-login">Acceso</a>
         </div>
     </div>
 </nav>
+
+<div id="main-login" class="d-none d-flex text-center col-12 bg-light text-white py-5">
+    <div class="col-6">
+        <button class="btn btn-secondary text-white"><a class="nav-link text-white" href="/company-login">Empresas</a></button>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-secondary text-white"><a class="nav-link text-white" href="/candidate-login">Candidatos</a></button>
+    </div>
+</div> 
