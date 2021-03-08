@@ -4,7 +4,14 @@ const Application = require('../models/application.model');
 const flash = require ('connect-flash');
 
 module.exports.offersList = (req, res, next) => {
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+    const startIndex = (page - 1) * limit;
+
     Offer.find({"active": true})
+        .sort('-createdAt')
+        .limit(limit || 7)
+        .skip(startIndex)
         .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', { offers })
