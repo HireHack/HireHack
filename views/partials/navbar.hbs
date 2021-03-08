@@ -10,42 +10,53 @@
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {{#if currentCompany}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}">{{#if
-                                    currentCompany}}Mi perfil{{else}}Empresas{{/if}}</a>
-                            </li>
-                            {{#if currentCompany}}
-                                <form action="/company-logout" method="POST">
-                                    <li>
-                                        <button>Cerrar sesión</button>
-                                    </li>
-                                </form>
-                            {{/if}}
-                            <li>
-                                <p>{{currentCompany.name}} | Empresa</p>
-                            </li>
-                        {{else}}
-                        {{#if currentCandidate}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/{{#if currentCandidate}}candidate-profile{{else}}candidate-login{{/if}}" tabindex="-1" aria-disabled="true">{{#if currentCandidate}}Mi perfil{{else}}Candidatos{{/if}}</a>
-                            </li>
-                            {{#if currentCandidate}}
-                                <form action="/candidate-logout" method="POST">
-                                    <li>
-                                        <button>Cerrar sesión</button>
-                                    </li>
-                                </form>
-                            {{/if}}
-                            <li>
-                                <p>{{currentCandidate.name}} | Candidato</p>
-                            </li>
-                        {{/if}}
-                    {{/if}}
+                {{#if currentCompany}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}">{{#if
+                        currentCompany}}Mi perfil{{else}}Empresas{{/if}}</a>
+                </li>
+                {{#if currentCompany}}
+                <form action="/company-logout" method="POST">
+                    <li>
+                        <button>Cerrar sesión</button>
+                    </li>
+                </form>
+                {{/if}}
+                <li>
+                    <p>{{currentCompany.name}} | Empresa</p>
+                </li>
+                {{else}}
+                {{#if currentCandidate}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{#if currentCandidate}}candidate-profile{{else}}candidate-login{{/if}}"
+                        tabindex="-1" aria-disabled="true">{{#if currentCandidate}}Mi
+                        perfil{{else}}Candidatos{{/if}}</a>
+                </li>
+                {{#if currentCandidate}}
+                <form action="/candidate-logout" method="POST">
+                    <li>
+                        <button>Cerrar sesión</button>
+                    </li>
+                </form>
+                {{/if}}
+                <li>
+                    <p>{{currentCandidate.name}} | Candidato</p>
+                </li>
+                {{/if}}
+                {{/if}}
             </ul>
 
             <a class="nav-link active" aria-current="page" href="/">Home</a>
-            <a class="nav-link active" aria-current="page" href="/main-login">Acceso</a>
+            <a class="nav-link active" aria-current="page" id="show-login">Acceso</a>
         </div>
     </div>
 </nav>
+
+<div id="main-login" class="d-none d-flex text-center col-12 bg-light text-white py-5">
+    <div class="col-6">
+        <button class="btn btn-secondary text-white"><a class="nav-link text-white" href="/company-login">Empresas</a></button>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-secondary text-white"><a class="nav-link text-white" href="/candidate-login">Candidatos</a></button>
+    </div>
+</div>
