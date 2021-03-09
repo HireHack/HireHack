@@ -44,11 +44,13 @@
 <h2>Filtrar candidatos</h2>
 <form class="form-group" action="/application-search">
     <label for="age">Edad</label>
+    <input name="offerId" type="hidden" value="{{offer._id}}">
     <input class="form-control" name="age" type="text" id="age">
     <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
 </form>
 <form class="form-group" action="/application-search">
     <label for="addres">Ciudad</label>
+    <input name="offerId" type="hidden" value="{{offer._id}}">
     <input class="form-control" name="address" type="text" id="address">
     <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
 </form>

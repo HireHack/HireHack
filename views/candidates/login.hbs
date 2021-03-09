@@ -1,4 +1,4 @@
-<h1>Iniciar sesión como candidato</h1>
+<h1>Iniciar sesión</h1>
 <div class="col mb-2">
     <div class="row">
         <form action="/candidate-login" method="POST">
@@ -15,12 +15,15 @@
             <div class="error-message invalid-feedback">{{errors}}</div>
             {{/if}}
 
-            <button class="btn btn-primary mt-3" type="submit">Iniciar sesión</button>
-            <a href="/authenticate/google" class="btn btn-primary mt-3">Iniciar sesión con Google</a>
+            <button class="btn btn-access" type="submit">Iniciar sesión</button>
+            <a href="/authenticate/google" class="btn btn-outline-dark" role="button" style="text-transform:none">
+            <img class="google-sign-in" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            Iniciar sesión con Google</a>
         </form>
     </div>
 </div>
-<p>¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a> | <a id="candidate-forgot-password" href="">¿Has
+<p class="not-register">¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a> | <a id="candidate-forgot-password" href="">¿Has
         olvidado tu contraseña? </a></p>
 <form class="update-form d-inline d-none" action="/candidate-update-password/{{currentCompany._id}}" method="post">
     <div class="form-group">
