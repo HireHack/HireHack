@@ -1,7 +1,6 @@
 <h1 class="text-center">Listado de Ofertas</h1>
 
 <h2>Filtrar ofertas</h2>
-
 <div class='container'>
     <div class='row justify-content-between'>
         {{!-- FILTROS --}}
@@ -78,6 +77,7 @@
 
         {{!-- OFERTAS --}}
         <div class='col-9'>
+            <span><a href="#" id="page">{{number}}</a></span>
             {{#each offers}}
             <div class="border rounded p-3 mb-2">
                 <h3>{{name}}</h3>
@@ -98,4 +98,7 @@
             {{/each}}
         </div>
     </div>
+
+    <a href="#" id="load-more">Load more</a>
+
 </div>

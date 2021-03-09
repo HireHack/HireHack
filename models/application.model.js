@@ -13,6 +13,10 @@ const applicationSchema = new mongoose.Schema({
         ref: 'Candidate',
         required: true
   },
+  // name: {
+  //   type: String,
+  //   default: "Prueba"
+  //   }
 },
     {
     timestamps: true,

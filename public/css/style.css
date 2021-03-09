@@ -8,17 +8,132 @@
     background-repeat: repeat-x;
    
 }
+*/
 
-body{
-    margin: 0px 240px 0px 280px;
-    display: none; 
-}  */
+body, html{
+    min-height: 60rem;
+} 
+
+a:hover {
+    text-decoration: none;
+    color: #276678;
+}
+
+.toast-config {
+    min-height: 10rem;
+    background-color: #276678;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+.toast-msg {
+    color:#fff;
+    background-color: #276678;
+    padding: 10px;
+}
+
 
 /* NAVBAR */
-
-.logo__header{
-    width: 30%;
+.navbar {
+    background-color: #276678;
+    transition: all .3s;
+    /* position: fixed; */
+    width: 100%;
+    z-index: 9999;
+    top:0;
 }
+
+.border-top {
+    border-top: 1px solid #276678;
+}
+
+.thin {
+    background-color: #fff;
+}
+
+/* .thin-profileDown {
+    color: #276678;
+}
+
+.thin-profileUp {
+    color: #fff;
+} */
+
+.logo-header{
+    width: 10%;
+}
+
+.btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.btn-offers {
+    color: #ffffff;
+    border-color: #ffffff;
+    display:inline;
+    background-color: #276678;
+}
+
+.btn-access {
+    color: #276678;
+    border-color: #276678;
+    background-color: #fff;
+    display:inline;
+}
+
+
+.btn-logout {
+    color: #276678;
+    font-weight: 400;
+    border-color: #276678;
+    background-color: #fff;
+    display:inline;
+    align-self: center;
+}
+
+.profile-status{
+    font-size: 1.1rem;
+    color: #d3e0ea;
+    align-self: center;
+}
+
+.profile-status, .btn-logout {
+    margin-right: 0;
+}
+
+/* DENIED_ROUTE */
+
+.denied {
+    text-decoration: none;
+    color:#276678;
+}
+
+/* ERROR */
+.error-message {
+    text-align: center;
+}
+
+.error-img {
+    width: 75%;
+    margin: 30px 0px;
+}
+
+/* SIGIN */
+
+.google-sign-in{
+    width: 20px;
+}
+
+.not-register > a {
+    text-decoration: none;
+    color: #276678;
+}
+
+/* HOME */
 
 .logoHome{
     width: 500px;
@@ -69,4 +184,72 @@ canvas {
 
 #map {
     height: 400px;
+}
+
+
+/* --- OUR CONTENTS SECTION --- */
+
+.our-contents {
+    background-color: #f6f5f5;
+    padding: 30px 0px 10px 20px;
+}
+
+.our-contents ul {
+    list-style: none; 
+    text-decoration: none; 
+    padding: 0;
+}
+
+.our-contents li {
+    text-transform: capitalize;
+    color: #5b5e6d;
+    margin: 10px 0;
+    font-size: .9rem;
+    font-weight: 300;
+}
+
+.our-contents a {
+    text-decoration: none;
+    color: #5b5e6d;
+}
+
+.our-contents img {
+    width: 50px;
+    margin-bottom: 40px;
+}
+
+/* --- FOOTER --- */
+
+footer {
+    background-color: #276678;
+    text-transform: capitalize;
+    color: #fff;
+    font-size: .8em;
+    padding: 10px;
+    text-align: center;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+footer li {
+    margin: 10px;
+    text-transform: capitalize;
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.SP {
+    width: 20px;
+}
+
+.fa {
+    width: 25px;
+    padding: 10px;
 }

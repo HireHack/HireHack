@@ -29,9 +29,9 @@ module.exports.search = (req, res, next) => {
         .then((offers) => res.render('offers/offersList', {
             offers
         }))
-
 }
 
 module.exports.mainLogin = (req, res, next) => {
     res.render('main-login');
 }
+
