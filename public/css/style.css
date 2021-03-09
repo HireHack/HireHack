@@ -1,15 +1,5 @@
 /* MAIN */
 
-/* html {
-    background-image: url('/img/KIZOA-Movie-Maker-b23zmzsb.gif');
-    background-size: 280px;
-    background-position: 0% -70%; 
-    background-position-y: center; 
-    background-repeat: repeat-x;
-   
-}
-*/
-
 body, html{
     min-height: 60rem;
 } 
@@ -19,6 +9,8 @@ a:hover {
     color: #276678;
 }
 
+
+/* TOAST */
 .toast-config {
     min-height: 10rem;
     background-color: #276678;
@@ -33,6 +25,16 @@ a:hover {
     padding: 10px;
 }
 
+/* MODAL */
+.modal-img {
+    width: 300px;
+    margin: 20px 0px 40px 0px;
+}
+
+.modal-body{
+    background-color: #d3e0ea;
+}
+
 
 /* NAVBAR */
 .navbar {
@@ -44,21 +46,9 @@ a:hover {
     top:0;
 }
 
-.border-top {
-    border-top: 1px solid #276678;
-}
-
 .thin {
     background-color: #fff;
 }
-
-/* .thin-profileDown {
-    color: #276678;
-}
-
-.thin-profileUp {
-    color: #fff;
-} */
 
 .logo-header{
     width: 10%;
@@ -69,12 +59,12 @@ a:hover {
     padding: 10px 20px;
     border-radius: 10px;
     margin: 10px;
+    display:inline;
 }
 
 .btn-offers {
     color: #ffffff;
     border-color: #ffffff;
-    display:inline;
     background-color: #276678;
 }
 
@@ -82,7 +72,6 @@ a:hover {
     color: #276678;
     border-color: #276678;
     background-color: #fff;
-    display:inline;
 }
 
 
@@ -91,7 +80,6 @@ a:hover {
     font-weight: 400;
     border-color: #276678;
     background-color: #fff;
-    display:inline;
     align-self: center;
 }
 
@@ -133,11 +121,16 @@ a:hover {
     color: #276678;
 }
 
+.sign-in > h1 {
+    margin-top: 50px;
+}
+
+.sendBtn{
+    margin-bottom: 80px;
+}
+
 /* HOME */
 
-.logoHome{
-    width: 500px;
-}
 .iframeVideo{
     width:100%;
     float:left;
@@ -155,16 +148,6 @@ iframe {
 img {
     width: 25%;
 }
-
-/* .home> h3 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.home> h2 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-} */
 
 canvas {
     margin: 20px;
@@ -186,11 +169,12 @@ canvas {
 }
 
 header {
-    background-image: url("../img/home.png");
-    background-position: end;
+    background-image: url("../img/home.png"); 
+    background-position: en;
     background-size: cover;
     background-repeat: no-repeat;
     height: 40rem;
+    z-index: 1;
 }
 
 /* Removes bootstrap's default blue search shadow */
@@ -283,3 +267,5 @@ footer a {
     width: 25px;
     padding: 10px;
 }
+
+/* MEDIA-QUERIES */

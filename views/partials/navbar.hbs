@@ -1,4 +1,3 @@
-<header class="navigation">
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
 
@@ -51,19 +50,35 @@
             {{#unless currentCompany}}
             {{#unless currentCandidate}}
             <a class="nav-link active btn btn-offers" aria-current="page" href="/offers-list">Ofertas</a>
-            <a class="nav-link active btn btn-access" aria-current="page" id="show-login">Acceso</a>
+            <button type="button" class="btn btn-access" data-toggle="modal" data-target="#accessModal"> Acceso </button> 
             {{/unless}}
             {{/unless}}
         </div>
     </div>
 </nav>
 
-<div id="main-login" class="d-none d-flex text-center col-12 bg-light text-white py-5">
-    <div class="col-6">
-        <button class="btn btn-secondary text-white"><a class="nav-link text-white" href="/company-login">Empresas</a></button>
-    </div>
-    <div class="col-6">
-        <button class="btn btn-secondary text-white"><a class="nav-link text-white" href="/candidate-login">Candidatos</a></button>
+<div class="modal fade" id="accessModal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 ms-auto">
+                            <img class="modal-img" src="https://img.freepik.com/vector-gratis/ilustracion-concepto-empresa_114360-2581.jpg?size=338&ext=jpg" alt="Empresa">
+                            <a class="btn btn-access" href="/company-login" data-toggle="tooltip" title="GeeksforGeeks" data-placement="right">
+                                Empresa</a>   
+                        </div>
+                        <div class="col-md-6 ms-auto">
+                            <img class="modal-img" src="https://image.freepik.com/vector-gratis/elegir-candidato-trabajo_1325-385.jpg" alt="Empresa">
+                            <a class="btn btn-access text-center" href="/candidate-login" data-toggle="tooltip" title="GeeksforGeeks" data-placement="right">
+                                Candidato</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</header>
+</div>
+
+
