@@ -14,3 +14,9 @@ setTimeout(() => {
     new bootstrap.Toast(toast).hide()
   })  
 }, 3000);
+
+
+// OFFERS LIST
+document.getElementById('show-filters').addEventListener('click', () => {
+  document.getElementById('filters').classList.toggle('d-none')
+})

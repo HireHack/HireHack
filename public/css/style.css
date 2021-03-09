@@ -14,6 +14,11 @@ body{
     display: none; 
 }  */
 
+body,
+html {
+    background-color: rgba(246, 245, 245, 1);
+}
+
 /* NAVBAR */
 
 .logo__header{
@@ -54,6 +59,7 @@ img {
 canvas {
     margin: 20px;
 }
+
 /* HOME */
 
 .first_img {
@@ -69,4 +75,10 @@ canvas {
 
 #map {
     height: 400px;
+}
+
+/* OFFER LIST */
+.offer,
+.filters {
+    background-color: rgba(211, 224, 234, 1);
 }
