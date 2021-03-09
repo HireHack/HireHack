@@ -1,5 +1,5 @@
 <section class="our-contents">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 
             <div class="col-12 col-md-2 col-lg-4">
@@ -54,13 +54,13 @@
 
 <footer class="background-grey">
     <section>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-between">
 
                 <div class="col-8 col-md-5 col-lg-3">
-                    <ul>
+                    <ul class="align-self-center">
                         <li><a href="#">Estado</a></li>
-                        <li><a href="#">Priv. & Térm.</a></li>
+                        <li><a data-toggle="modal" data-target="#termModal" href="#">Términos y condiciones</a></li>
                         <li><a href="#">Contáctanos</a></li>
                     </ul>
                 </div>
@@ -78,3 +78,23 @@
         </div>
     </section>
 </footer>
+
+{{!-- MODAL TERM.&COND. --}}
+{{!-- <!-- Scrollable modal -->
+<div class="modal fade" id="termModal">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+        </div>
+    </div>
+</div> --}}

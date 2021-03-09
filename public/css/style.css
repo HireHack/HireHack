@@ -4,12 +4,6 @@ body, html{
     min-height: 60rem;
 } 
 
-a:hover {
-    text-decoration: none;
-    color: #276678;
-}
-
-
 /* TOAST */
 .toast-config {
     min-height: 10rem;
@@ -110,10 +104,14 @@ a:hover {
     margin: 30px 0px;
 }
 
-/* SIGIN */
+/* SIGIN & LOGIN */
 
 .google-sign-in{
-    width: 20px;
+    width: 22px;
+}
+
+.btn-google{
+    padding: 12px 10px;
 }
 
 .not-register > a {
@@ -121,12 +119,28 @@ a:hover {
     color: #276678;
 }
 
-.sign-in > h1 {
-    margin-top: 50px;
+.login > h1 {
+    margin: 50px 0 30px 0;
+}
+
+.login > button {
+    margin-bottom: 20px;
+}
+
+.input-login {
+    margin-bottom: 20px;
+}
+
+.label-login {
+    margin-top: 20px;
 }
 
 .sendBtn{
     margin-bottom: 80px;
+}
+
+.old-email{
+    font-weight: bolder
 }
 
 /* HOME */
@@ -206,6 +220,7 @@ input[type="text"]:active {
 .our-contents {
     background-color: #f6f5f5;
     padding: 30px 0px 10px 20px;
+    margin-top: 50px;
 }
 
 .our-contents ul {
