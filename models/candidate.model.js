@@ -24,11 +24,12 @@ const candidateSchema = new mongoose.Schema({
         trim: true,
     },
     address: {
-        streetName: String,
-        number: Number,
-        zipCode: Number,
-        city: String,
-        country: String
+        type: String, 
+        // streetName: String,
+        // number: Number,
+        // zipCode: Number,
+        // city: String,
+        // country: String
     },
     email: {
         type: String,

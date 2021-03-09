@@ -26,8 +26,13 @@
     <br>
     <a href="/edit-offer/{{_id}}">Editar Oferta</a>
     <a href="/application-detail/{{_id}}">Ver candidatos</a> 
+    {{#unless paid}}
+    <p class="mt-3">Para publicar esta oferta debes realizar el pago</p>
+    <a href="/offer-detail/{{_id}}">Realizar pago</a>
+    {{/unless}}
 </div>
 {{/each}}
+
 <br>
 <a class="btn btn-primary d-inline" href="/company-edit">Editar mi perfil</a>
 

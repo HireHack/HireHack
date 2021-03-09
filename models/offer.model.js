@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const offerSchema = new mongoose.Schema({
     name: {
         type: String,
-        lowercase: true,
         required: true,
     },
     address: {
-        type: String
+        type: String,
     },
     description: {
         type: String,
@@ -55,6 +54,10 @@ const offerSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Company",
         required: true
+    },
+    paid: {
+        type: Boolean,
+        default: false,
     },
 },
     {

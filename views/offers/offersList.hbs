@@ -6,10 +6,9 @@
         {{!-- FILTROS --}}
         <div class='col-3'>
             <form class="form-group" action="/search-offers">
-                <label for="city">Ciudad</p>
-                <input class="form-control" name="addressCity" type="text" id="city">
+                <label for="address">Ciudad</p>
+                <input class="form-control" name="address" type="text" id="address">
                 <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
-                    {{!-- TODO: GoogleMaps --}}
             </form>
 
             <form class="form-group" action="/search-offers" method="GET" id="formCategory">
@@ -33,7 +32,7 @@
                 <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
             </form>
 
-            <form action="/search-offers" method="GET" id="contract"></form>
+            <form class="form-group" action="/search-offers" method="GET" id="contract"></form>
             <label for="contract">Seleccionar tipo de contrato</label>
             <select class="form-control" name="contract" id="contract">
                 <option disable selected>Tipo de contrato</option>
