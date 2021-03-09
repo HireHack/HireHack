@@ -27,12 +27,11 @@ module.exports.offersFiltered = (req, res, next) => {
     const startIndex = (page - 1) * limit;
 
     Offer.find()
+        .populate('offers_publishedByCompany')
         .sort('-createdAt')
         .limit(limit)
         .skip(startIndex)
-        .then((offers) => {
-            res.send(offers);
-        })
+        .then((offers) => res.send(offers))
         .catch((err) => next(err));
 }
 
@@ -72,6 +71,7 @@ module.exports.doCreate = (req, res, next) => {
     if (offer.skills) {
         offer.skills = offer.skills.split(',');
     }
+
     const company = req.currentCompany.id
 
     Offer.create(offer)
