@@ -12,19 +12,60 @@
 
 body, html{
     min-height: 60rem;
-}  
+} 
+
+a:hover {
+    text-decoration: none;
+    color: #276678;
+}
+
+.toast-config {
+    min-height: 10rem;
+    background-color: #276678;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+.toast-msg {
+    color:#fff;
+    background-color: #276678;
+    padding: 10px;
+}
+
 
 /* NAVBAR */
 .navbar {
     background-color: #276678;
+    transition: all .3s;
+    /* position: fixed; */
+    width: 100%;
+    z-index: 9999;
+    top:0;
 }
+
+.border-top {
+    border-top: 1px solid #276678;
+}
+
+.thin {
+    background-color: #fff;
+}
+
+/* .thin-profileDown {
+    color: #276678;
+}
+
+.thin-profileUp {
+    color: #fff;
+} */
 
 .logo-header{
     width: 10%;
 }
 
 .btn {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     padding: 10px 20px;
     border-radius: 10px;
     margin: 10px;
@@ -34,6 +75,7 @@ body, html{
     color: #ffffff;
     border-color: #ffffff;
     display:inline;
+    background-color: #276678;
 }
 
 .btn-access {
@@ -43,8 +85,10 @@ body, html{
     display:inline;
 }
 
+
 .btn-logout {
     color: #276678;
+    font-weight: 400;
     border-color: #276678;
     background-color: #fff;
     display:inline;
@@ -52,8 +96,8 @@ body, html{
 }
 
 .profile-status{
-    font-size: 1.3rem;
-    color: #fff;
+    font-size: 1.1rem;
+    color: #d3e0ea;
     align-self: center;
 }
 
@@ -61,7 +105,33 @@ body, html{
     margin-right: 0;
 }
 
+/* DENIED_ROUTE */
 
+.denied {
+    text-decoration: none;
+    color:#276678;
+}
+
+/* ERROR */
+.error-message {
+    text-align: center;
+}
+
+.error-img {
+    width: 75%;
+    margin: 30px 0px;
+}
+
+/* SIGIN */
+
+.google-sign-in{
+    width: 20px;
+}
+
+.not-register > a {
+    text-decoration: none;
+    color: #276678;
+}
 
 /* HOME */
 

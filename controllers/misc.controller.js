@@ -18,13 +18,15 @@ module.exports.search = (req, res, next) => {
             if (nameOffer.includes(queryContent)) {
                 //console.log('offerWithQueries',offer) 
                 filteredOffers.push(offer);
-                }  
+            }  
         })
         //console.log('filteredOffers', filteredOffers)
-            return filteredOffers       
-        }
+        return filteredOffers       
+    }
     )
-    .then((offers) => res.render('offers/offersList', {offers}))
+        .then((offers) => {
+            res.render('offers/offersList', { offers })
+        })
     
 }
 
