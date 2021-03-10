@@ -1,11 +1,10 @@
-<div class="container login">
+<div class="container-xl container-lg container-md container-fluid login">
     <h1>Introduce tu nuevo correo electrónico</h1>
     <div class="col mb-2">
         <div class="row">
             <form action="/candidate-edit-email" method="POST">
                 <div class="form-group">
-                    <label class="input-login" for="email-input"> Email Antiguo: </label>
-                    <p class="old-email">{{currentCandidate.email}}</p>
+                    <p>Email Antiguo: <b>{{currentCandidate.email}}</b></p>
                     <label class="label-login" for="new-email-input"> Nuevo Email: </label>
                     <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="newEmail" id="new-email-input">
                     {{#if errors.email}}

@@ -19,7 +19,7 @@
                     <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}"></a>
                 </li>
                 <li class="profile-status">
-                    <p>{{currentCompany.name}} | Empresa</p>
+                    <a href="/company-profile">{{currentCompany.name}} | Empresa</a>
                 </li>
                 {{#if currentCompany}}
                 <form action="/company-logout" method="POST">
@@ -35,7 +35,7 @@
                         tabindex="-1" aria-disabled="true"></a>
                 </li>
                 <li class="profile-status">
-                    <p>{{currentCandidate.name}} | Candidato</p>
+                    <a href="/candidate-profile">{{currentCandidate.name}} | Candidato</a>
                 </li>
                 {{#if currentCandidate}}
                 <form action="/candidate-logout" method="POST">

@@ -1,4 +1,4 @@
-<div class="container login">
+<div class="container-xl container-lg container-md container-fluid login">
 <h1>{{#if currentCandidate}}Editar perfil{{else}}Registro{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
@@ -94,13 +94,12 @@
 
             {{/if}}
             
-            <button class="btn btn-access mt-3" type="submit">{{#if currentCandidate}}Guardar{{else}}Registro{{/if}}</button>
-            </br>
-            </br>
-            {{#if currentCandidate}}<a id="privacity" class="form-group btn btn-access btn-google" href="#">Ajustes de privacidad</a>{{/if}} <!-- TODO: DOM shows delete profile, update password and update email-->
+            <button class="btn btn-access mt-3" type="submit">{{#if currentCandidate}}Guardar{{else}}Registro{{/if}}</button>  
         </form>
     </div>
 </div>
+
+{{#if currentCandidate}}<a id="privacity" href="#">Ajustes de privacidad</a>{{/if}} 
 
 {{#unless currentCandidate}}
 <p class="not-register">¿Ya tienes una cuenta? <a href="/candidate-login">Iniciar sesión</a></p>
@@ -108,17 +107,17 @@
 
 
 {{#if currentCandidate}}
-<form id="dropOut" class="delete-form d-inline" action="/delete-candidate" method="post">
+<form id="dropOut" class="delete-form d-none" action="/delete-candidate" method="post">
     <button type="submit" class="btn btn-outline-danger" onclick="return clicked()">Darse de baja</button>
 </form>
 
 {{#unlessSocialCandidate currentCandidate}}
-<form id="restorePass" class="update-form d-inline" action="/candidate-update-password" method="post">
-    <button type="submit" class="btn btn-offers" onclick="return clicked()">Actualizar contraseña</button>
+<form id="restorePass" class="update-form d-none" action="/candidate-update-password" method="post">
+    <button type="submit" class="btn btn-offers" onclick="return update()">Actualizar contraseña</button>
 </form>
 
-<form id="restoreEm" class="update-form d-inline" action="/candidate-update-email" method="post">
-    <button type="submit" class="btn btn-offers" onclick="return clicked()">Actualizar email</button>
+<form id="restoreEm" class="update-form d-none" action="/candidate-update-email" method="post">
+    <button type="submit" class="btn btn-offers" onclick="return update()">Actualizar email</button>
 </form>
 {{/unlessSocialCandidate}}
 

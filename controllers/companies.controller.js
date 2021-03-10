@@ -126,11 +126,11 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    //console.log('req.currentCompany', req.currentCompany)
-     Company.findById({_id: req.currentCompany.id})
+     Company.findById(req.params.id)
          .then((companyToEdit) => res.render('companies/signup', companyToEdit))
-         .catch((err) => next(err))
+         .catch((err) => console.error(err))
 }
+
 
 module.exports.doEdit = (req, res, next) => {
 
@@ -139,7 +139,9 @@ module.exports.doEdit = (req, res, next) => {
     }
 
     Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        .then(() => { res.redirect('/company-profile') })
+        .then(() => {
+        res.redirect('/company-profile')
+        })
         .catch((err) => next(err))
 }
 

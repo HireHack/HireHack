@@ -62,10 +62,22 @@ body, html{
     background-color: #276678;
 }
 
+.btn-offers:hover {
+    color: #276678;
+    border-color: #276678;
+    background-color: #fff;
+}
+
 .btn-access {
     color: #276678;
     border-color: #276678;
     background-color: #fff;
+}
+
+.btn-access:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: #276678;
 }
 
 
@@ -77,10 +89,20 @@ body, html{
     align-self: center;
 }
 
+.btn-logout:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: #276678;
+}
+
 .profile-status{
     font-size: 1.1rem;
-    color: #d3e0ea;
     align-self: center;
+}
+
+.profile-status > a {
+    text-decoration: none;
+    color: #d3e0ea;
 }
 
 .profile-status, .btn-logout {
@@ -104,7 +126,7 @@ body, html{
     margin: 30px 0px;
 }
 
-/* SIGIN & LOGIN */
+/* SIGIN & LOGIN & NEWPASS & NEWEM*/
 
 .google-sign-in{
     width: 22px;
@@ -141,6 +163,12 @@ body, html{
 
 .old-email{
     font-weight: bolder
+}
+
+#privacity {
+    text-decoration: none;
+    color: #276678;
+    margin-left: 1rem;
 }
 
 /* HOME */
