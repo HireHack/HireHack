@@ -58,42 +58,37 @@
         </div>
 
         {{!-- Filters --}}
-        <div id="filters" class="d-none">
-            <h2><u>Filtrar candidatos</u></h2>
+        <div id="filters" class="">
             <form class="form-group" action="/application-search">
                 <label for="age">Edad</label>
                 <input name="offerId" type="hidden" value="{{offer._id}}">
                 <input class="form-control" name="age" type="text" id="age">
-                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+                <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
             </form>
 
             <form class="form-group" action="/application-search">
                 <label for="addres">Ciudad</label>
                 <input name="offerId" type="hidden" value="{{offer._id}}">
                 <input class="form-control" name="address" type="text" id="address">
-                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+                <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
             </form>
         </div>
 
         {{!-- Applicants --}}
-        {{#each application}}
-        <div class="border rounded p-3 mb-2 row">
-            <div class="col-4">
-                <h3>{{candidate.name}}</h3>
-                <img src="{{candidate.picture}}" alt="Foto de perfil">
-            </div>
-        </div>
-        {{/each}}
-
         <div class="container">
-            <div id="fake-candidate" class="p-3 mb-2 row">
-                {{!-- Fake candidate --}}
+            {{!-- Real candidates --}}
+            <div id="fake-candidate" class="p-3 mb-2 row d-flex align-items-baseline"> {{!-- Fake candidates --}}
+            {{#each application}}
+                <div class="d-flex flex-column align-items-center col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
+                    <img class="profile-img img-fluid" src="{{candidate.picture}}" alt="Foto de perfil">
+                    <h5 class="p-2 text-center"><b>{{candidate.name}} <br> {{candidate.surname}}</b> </h5>
+                </div>
+            {{/each}}
             </div>
         </div>
 
 
         {{!-- Results filters --}}
-
         {{#each candidates}}
         <div>
             <img class="profile-img" src="{{picture}}" alt="Foto de perfil">
