@@ -185,10 +185,11 @@ body, html{
 
 .profile-company {
     text-align: center;
+    position: relative;
 }
 
 .company-img {
-    width: 100%;
+    width: 80%;
     height: 45rem;
 }
 
@@ -199,6 +200,11 @@ body, html{
 
 .profile-company > a {
     margin-bottom: 1rem;
+    position: absolute;
+    right: 2rem;
+    top: 84%;
+    left: 80%;
+    transform: translate(-50%, -50%);
 }
 
 .profile-company > a:hover {
@@ -213,6 +219,25 @@ body, html{
 
 .btn-candidates:hover {
     color: #fff;
+}
+
+.profile-candidate{
+    text-align: center;
+    margin-top: 8rem;
+    position: relative;
+    border: 2px solid #1687a7;
+    border-radius: 10px;
+}
+
+.profile-candidate > img {
+    position: absolute;
+    top: -30%;
+    right: 85%;
+    border-radius: 100%;
+}
+
+.offers-cadidate {
+
 }
 
 /* HOME */
