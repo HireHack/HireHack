@@ -19,6 +19,10 @@ html {
     background-color: rgba(246, 245, 245, 1);
 }
 
+.profile-img {
+    border-radius: 50%;
+}
+
 /* NAVBAR */
 
 .logo__header{

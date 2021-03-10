@@ -1,56 +1,107 @@
-<h1>Vista Candidatura</h1>
-
-<form class="delete-form d-inline" action="/delete-offer/{{offer._id}}" method="post">
-    <button type="submit" class="btn btn-danger" onclick="return clicked()">Cerrar proceso</button>
-</form>
-
-<h2>Oferta</h2>
-{{#with offer}}
-{{!-- Offer detail --}}
-<div class="border rounded p-3 mb-2">
-    <h3>{{name}}</h3>
-    <p><b>Descripción:</b> <br> {{description}}</p>
-    <b>Requisitos:</b>
-    {{#each skills}}
-    {{#if @last}}
-    <span>{{this}}</span>
-    {{else}}
-    <span>{{this}} |</span>
-    {{/if}}
-    {{/each}}
-    <br>
-    <a href="/edit-offer/{{_id}}">Editar Oferta</a>
+<div id="offer-list-navbar" class="">
+    <div
+        class="align-items-center d-block d-sm-flex justify-content-between container-xl container-lg container-md container-fluid m-2">
+        <h1>{{offer.name}}</h1>
+        <form class="delete-form" action="/delete-offer/{{offer._id}}" method="post">
+            <button type="submit" class="btn btn-danger" onclick="return clicked()">Cerrar proceso</button>
+        </form>
+    </div>
 </div>
-{{/with}}
 
-<h2>Candidatos</h2>
-{{!-- Applicants --}}
-{{#each application}}
-<div class="border rounded p-3 mb-2">
-    <h3>{{candidate.name}}</h3>
-    <img src="{{candidate.picture}}" alt="Foto de perfil">
+<div class="container-xl container-lg container-md container-fluid">
+    {{!-- OFFER --}}
+    {{!-- <div class="container-xl container-lg container-md container-fluid"> --}}
+        <div class="border rounded p-3">
+            <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
+                <h3 class="mt-2">Información de la oferta</h3>
+                <div id="show-offer-detail" class="text-secondary mt-2"><b><u>Mostrar</u></b></div>
+            </div>
+            <div id="offer-detail" class="d-none">
+                <h3>{{offer.name}}</h3>
+                <hr>
+                <h5>Lugar de la oferta: {{offer.address}}</h5>
+                <h5>Descripción</h5>
+                <p class="text-justify">{{offer.description}}</p>
+                <p>
+                    <b>Requisitos:</b>
+                    {{#each skills}}
+                    {{#if @last}}
+                    <span>{{this}}</span>
+                    {{else}}
+                    <span>{{this}} |</span>
+                    {{/if}}
+                    {{/each}}
+                </p>
+                <p>Oferta publicada por: <strong>{{offers_publishedByCompany.name}}</strong></p>
+
+                <div id="map"></div>
+
+                <a class="btn btn-outline-primary" href="/edit-offer/{{_id}}">Editar Oferta</a>
+
+                {{#if offer.active}}
+                {{#unless offer.paid}}
+                <p class="mt-3">Para publicar esta oferta debes realizar el pago</p>
+                <button id="checkout-btn" class="btn btn-primary">Realizar pago</button>
+                {{/unless}}
+                {{/if}}
+            </div>
+        </div>
+
+        {{!--
+    </div> --}}
+
+    {{!-- CANDIDATES --}}
+    <div class="border rounded p-3 mt-3">
+        <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
+            <h3 class="mt-2"><u>Candidatos</u></h3>
+            <div id="show-filters" class="text-secondary mt-2"><b><u>Filtros</u></b></div>
+        </div>
+
+        {{!-- Filters --}}
+        <div id="filters" class="d-none">
+            <h2><u>Filtrar candidatos</u></h2>
+            <form class="form-group" action="/application-search">
+                <label for="age">Edad</label>
+                <input name="offerId" type="hidden" value="{{offer._id}}">
+                <input class="form-control" name="age" type="text" id="age">
+                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+
+            <form class="form-group" action="/application-search">
+                <label for="addres">Ciudad</label>
+                <input name="offerId" type="hidden" value="{{offer._id}}">
+                <input class="form-control" name="address" type="text" id="address">
+                <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
+            </form>
+        </div>
+
+        {{!-- Applicants --}}
+        {{#each application}}
+        <div class="border rounded p-3 mb-2 row">
+            <div class="col-4">
+                <h3>{{candidate.name}}</h3>
+                <img src="{{candidate.picture}}" alt="Foto de perfil">
+            </div>
+        </div>
+        {{/each}}
+
+        <div class="container">
+            <div id="fake-candidate" class="p-3 mb-2 row">
+                {{!-- Fake candidate --}}
+            </div>
+        </div>
+
+
+        {{!-- Results filters --}}
+
+        {{#each candidates}}
+        <div>
+            <img class="profile-img" src="{{picture}}" alt="Foto de perfil">
+            <h3>{{name}}</h3>
+        </div>
+        {{/each}}
+    </div>
+
 </div>
-{{/each}}
 
-
-{{!-- Results filters --}}
-{{#each candidates}}
-<div>
-    <h3>{{name}}</h3>
-    <img src="{{picture}}" alt="Foto de perfil">
-</div>
-{{/each}}
-
-<h2>Filtrar candidatos</h2>
-<form class="form-group" action="/application-search">
-    <label for="age">Edad</label>
-    <input name="offerId" type="hidden" value="{{offer._id}}">
-    <input class="form-control" name="age" type="text" id="age">
-    <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
-</form>
-<form class="form-group" action="/application-search">
-    <label for="addres">Ciudad</label>
-    <input name="offerId" type="hidden" value="{{offer._id}}">
-    <input class="form-control" name="address" type="text" id="address">
-    <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
-</form>
+<script src="/javascripts/application-detail.js"></script>

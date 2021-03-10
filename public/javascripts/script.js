@@ -28,7 +28,6 @@ window.onscroll = (ev) => {
 }
 
 let showFilters = document.getElementById('show-filters');
-
 showFilters.addEventListener('click', () => {
   document.getElementById('offer-list').classList.toggle('d-none');
   document.getElementById('filters').classList.toggle('d-none');
@@ -44,6 +43,14 @@ showFilters.addEventListener('click', () => {
   }
 })
 
-document.querySelectorAll('show-detail').addEventListener('click', () => {
+let showDetail = document.getElementById('show-detail');
+
+document.getElementById('show-detail').addEventListener('click', () => {
   document.getElementById('detail').classList.toggle('d-none');
+
+  if (showDetail.innerHTML === 'Mostrar detalle') {
+    showDetail.innertHTML ='Ocultar'
+  } else {
+    showDetail.innertHTML = 'Mostrar detalle'
+  }
 })
