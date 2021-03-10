@@ -171,6 +171,50 @@ body, html{
     margin-left: 1rem;
 }
 
+/* PROFILES */
+
+.show-more {
+    text-decoration: none;
+    color: #276678;
+}
+
+#show-more-profile {
+    text-decoration: none;
+    color: #276678;
+}
+
+.profile-company {
+    text-align: center;
+}
+
+.company-img {
+    width: 100%;
+    height: 45rem;
+}
+
+.profile-company > h1, h2 {
+    margin: 2rem 0;
+    text-transform: uppercase;
+}
+
+.profile-company > a {
+    margin-bottom: 1rem;
+}
+
+.profile-company > a:hover {
+    color: #276678;
+}
+
+.btn-candidates {
+    background-color: #d3e0ea;
+    color: #1687a7;
+    border-color: #d3e0ea;
+}
+
+.btn-candidates:hover {
+    color: #fff;
+}
+
 /* HOME */
 
 .iframeVideo{

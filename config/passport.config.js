@@ -6,6 +6,7 @@ const Candidate = require('../models/candidate.model');
 
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const { json } = require('express');
 //const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 passport.serializeUser((entity, next) => {
@@ -115,7 +116,7 @@ passport.use('google-auth-companies', new GoogleStrategy({
         }).then(company => {
             if (!company) {
                 const newCompanyInstance = new Company({
-                    name: email,
+                    name: profile.name.givenName,
                     email: email,
                     social: {
                         google: googleID
@@ -160,7 +161,8 @@ passport.use('google-auth-candidates', new GoogleStrategy({
         }).then(candidate => {
             if (!candidate) {
                 const newCandidateInstance = new Candidate({
-                    name: email,
+                    name: profile.name.givenName,
+                    picture: profile.photos[0].value,
                     surname: email,
                     email: email,
                     social: {

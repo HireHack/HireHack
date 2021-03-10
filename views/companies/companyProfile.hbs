@@ -1,38 +1,76 @@
-<img src="{{currentCompany.picture}}" alt="Foto de perfil">
-<h1>Perfil de Empresa</h1>
-
-<p>Has iniciado sesión como {{currentCompany.name}} | {{currentCompany.email}}</p>
-
-
-{{!-- Skills --}}
-
-<a href="/offer-creation">Crear Oferta</a>
-<br>
-<h2>Ofertas Publicadas</h2>
-{{#each offers}}
-{{!-- Mostrar oferta --}}
-<div class="border rounded p-3 mb-2">
-    <h3>{{name}}</h3>
-    <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span style="color: red;">CERRADA</span>{{/if}}</p>
-    <p><b>Descripción:</b> <br> {{description}}</p>
-    <b>Requisitos:</b>
-    {{#each offer.skills}}
-    {{#if @last}}
-    <span>{{this}}</span>
-    {{else}}
-    <span>{{this}} |</span>
-    {{/if}}
-    {{/each}}
-    <br>
-    <a href="/edit-offer/{{_id}}">Editar Oferta</a>
-    <a href="/application-detail/{{_id}}">Ver candidatos</a> 
-    {{#unless paid}}
-    <p class="mt-3">Para publicar esta oferta debes realizar el pago</p>
-    <a href="/offer-detail/{{_id}}">Realizar pago</a>
-    {{/unless}}
+<div class="profile-company">
+    <img class="company-img" src="{{currentCompany.picture}}" alt="Foto de perfil">
+    <h1>{{currentCompany.name}}</h1>
+    <a type="button" class="show-more" data-toggle="modal" data-target="#showMoreModal">Ver perfil de empresa</a>
 </div>
-{{/each}}
 
-<br>
-<a class="btn btn-primary d-inline" href="/company-edit/{{currentCompany.id}}">Editar mi perfil</a>
+<div class="container-xl container-lg container-md container-fluid login">
+<div>
+    <h2>Ofertas Publicadas</h2>
+    {{!-- Crear Oferta --}}
+    <a type="button" class="btn btn-offers" href="/offer-creation">Crear Oferta</a>
+    
+    {{!-- Mostrar oferta --}}
+    {{#each offers}}
+    <div class="border rounded p-3 mb-2">
+        <h3>{{name}}</h3>
+        <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
+                style="color: red;">CERRADA</span>{{/if}}</p>
 
+        <a type="button" id="show-more-profile" class="text-secondary d-block show-more"><b>Ver más</b></a>
+
+        <div id="description-offer" class="d-none">
+            <p><b>Descripción: </b> <br> {{description}}</p>
+            <p><b>Lugar de la oferta: </b> {{address}}</p>
+            <p><b>Requisitos:</b>
+            {{#each skills}}
+            {{#if @last}}
+            <span>{{this}}</span>
+            {{else}}
+            <span>{{this}} |</span>
+            {{/if}}
+            {{/each}}
+            </p>
+            <p><b>Categoría: </b> {{category}}</p>
+            <p><b>Tipo de contrato: </b> {{contract}}</p>
+            <p><b>Estudios mínimos: </b> {{studies}}</p>
+            <p><b>Experiencia: </b> {{experience}}</p>
+            <p><b>Salario: </b> {{salary}}</p>
+        </div>
+
+        <a type="button" class="btn btn-access" href="/edit-offer/{{_id}}">Editar Oferta</a>
+        <a type="button" class="btn btn-candidates" href="/application-detail/{{_id}}">Ver candidatos</a>
+        {{#unless paid}}
+        <p class="mt-3">Para publicar esta oferta debes realizar el pago</p>
+        <a href="/offer-detail/{{_id}}">Realizar pago</a>
+        {{/unless}}
+    </div>
+    {{/each}}
+</div>
+
+
+{{!-- MODAL EDIT COMPANY--}}
+<div class="modal fade" id="showMoreModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid justify-content-center">
+                    <div class="row">
+                        <div class="ms-auto profile-company">
+                            <h2>{{currentCompany.name}}</h2>
+                            <p><b>Email: </b>{{currentCompany.email}}</p>
+                            <p><b>Descripción: </b>
+                            <p id="description" class="d-none">{{currentCompany.description}}</p>
+                            </p>
+                            <a type="button" id="show-more" class="text-secondary d-block show-more"><b>Ver más</b></a>
+                            <p><b>Página web: </b> {{currentCompany.website}}</p>
+                            <p><b>Dirección: </b> {{currentCompany.address.streetName}} {{currentCompany.address.number}} {{currentCompany.address.zipCode}} {{currentCompany.address.city}} {{currentCompany.address.country}}</p>
+                        </div>
+                        <a class="btn btn-access d-inline" href="/company-edit/{{currentCompany.id}}">Editar mi perfil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
