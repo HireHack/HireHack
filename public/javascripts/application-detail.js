@@ -1,10 +1,10 @@
 let showOfferDetail = document.getElementById('show-offer-detail');
+
 document.getElementById('show-offer-detail').addEventListener('click', () => {
     document.getElementById('offer-detail').classList.toggle('d-none');
 
     if (showOfferDetail.innerHTML === 'Mostrar') {
         showOfferDetail.innerHTML = 'Ocultar'
-        document.getElementsById()
       } else {
         showOfferDetail.innerHTML = 'Mostrar'
       }
@@ -23,6 +23,8 @@ showAppfiltersBtn.addEventListener('click', () => {
   }
 })
 
+const findBTN = document.querySelectorAll('.btn');
+console.log(findBTN);
 // document.querySelectorAll('find-btn').addEventListener('click', () => {
 //    console.log('clicked');
 // })
