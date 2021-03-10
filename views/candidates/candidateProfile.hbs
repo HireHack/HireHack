@@ -1,45 +1,83 @@
-<div class="container-xl container-lg container-md container-fluid login profile-candidate">
-    <img src="{{currentCandidate.picture}}" alt="Foto de perfil">
+<div class="profile-candidate">
+    <img class="img-fluid" src="{{currentCandidate.picture}}" alt="Foto de perfil">
 
-    <h1>{{currentCandidate.name}} {{currentCandidate.surname}}</h1>
-    <p>Email: {{currentCandidate.email}}</p>
-
-    {{#if currentCandidate.cv}}
-
-    <a href="{{currentCandidate.cv}}">Tu CV</a>
-
-    {{/if}}
-
-<a class="btn btn-primary d-inline" href="/candidate-edit/{{currentCandidate._id}}">Editar mi perfil</a>
-    <p>
-        {{currentCandidate.skills}}
-        {{!-- {{#each currentCandidate.skills}}
-        {{#if @last}}
-        <span>{{this}}</span>
-        {{else}}
-        <span>{{this}} |</span>
-        {{/if}}
-        {{/each}} --}}
-    </p>
+    <a type="button" class="btn btn-candidates" data-toggle="modal" data-target="#showMoreModal">Mi perfil</a>
 
 </div>
 
-<div class="container-xl container-lg container-md container-fluid login profile-candidate">
-    <h2>Mis ofertas</h2>
-    {{#each application}}
-    <div class="border rounded p-3 mb-2">
-        <h3>{{offer.name}}</h3>
-        <p>Estado: {{#if offer.active}}<span style="color: green;">ABIERTO</span>{{else}}<span style="color: red;">CERRADO</span>{{/if}}</p>
-        <p><b>Descripción:</b> <br> {{offer.description}}</p>
-        <b>Requisitos:</b>
-        {{#each offer.skills}}
-        {{#if @last}}
-        <span>{{this}}</span>
-        {{else}}
-        <span>{{this}} |</span>
-        {{/if}}
+<h1 class="candidate-name">{{currentCandidate.name}} {{currentCandidate.surname}}</h1>
+
+<div class="container-xl container-lg container-md container-fluid">
+    <div>
+        <h2>Mis ofertas</h2>
+
+        {{#each application}}
+        <div class="border rounded p-3 mb-2 offers-candidate">
+            <h3>{{offer.name}}</h3>
+            <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
+                    style="color: red;">CERRADA</span>{{/if}}</p>
+            
+            <a type="button" id="show-more-profile" class="text-secondary d-block show-more"><b>Ver más</b></a>
+            
+            <div id="description-offer" class="d-none">
+                <p><b>Descripción: </b> <br> {{offer.description}}</p>
+                <p><b>Lugar de la oferta: </b> {{offer.address}}</p>
+                <p><b>Requisitos:</b>
+                    {{#each offer.skills}}
+                    {{#if @last}}
+                    <span>{{this}}</span>
+                    {{else}}
+                    <span>{{this}} |</span>
+                    {{/if}}
+                    {{/each}}
+                </p>
+                <p><b>Categoría: </b> {{offer.category}}</p>
+                <p><b>Tipo de contrato: </b> {{offer.contract}}</p>
+                <p><b>Estudios mínimos: </b> {{offer.studies}}</p>
+                <p><b>Experiencia: </b> {{offer.experience}}</p>
+                <p><b>Salario: </b> {{offer.salary}}</p>
+            </div>
+        </div>
         {{/each}}
-        <br>
     </div>
-    {{/each}}
+</div>
+
+{{!-- MODAL EDIT CANDIDATE--}}
+<div class="modal fade" id="showMoreModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid justify-content-center">
+                    <div class="row">
+                        <div class="ms-auto modal-company">
+                            <h2>{{currentCandidate.name}} {{currentCandidate.surname}}</h2>
+                            <p><b>Email: </b>{{currentCandidate.email}}</p>
+                            <p><b>Número de teléfono: </b>{{currentCandidate.phone}}</p>
+                            <p><b>Competencias: </b>
+                                {{#each currentCandidate.skills}}
+                                {{#if @last}}
+                                <span>{{this}}</span>
+                                {{else}}
+                                <span>{{this}} |</span>
+                                {{/if}}
+                                {{/each}}
+                            </p>
+                            <p><b>Edad: </b> {{currentCandidate.age}} años</p>
+                            <p><b>Mi curriculum: </b></p>
+                            <p id="description" class="d-none"> {{currentCandidate.resume}}</p>
+                            <a type="button" id="show-more" class="text-secondary d-block show-more"><b>Ver más</b></a>
+                            <p><b>Dirección: </b>{{currentCandidate.address}}</p>
+                            <p><b>Mi linkedIn: </b>{{currentCandidate.linkedin}}</p>
+                            {{#if currentCandidate.cv}}
+                            <a href="{{currentCandidate.cv}}">Tu CV</a>
+                            {{/if}}
+                        </div>
+                        <a class="btn btn-access d-inline" href="/candidate-edit/{{currentCandidate.id}}">Editar mi
+                            perfil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

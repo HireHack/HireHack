@@ -162,8 +162,8 @@ passport.use('google-auth-candidates', new GoogleStrategy({
             if (!candidate) {
                 const newCandidateInstance = new Candidate({
                     name: profile.name.givenName,
+                    surname: profile.name.familyName,
                     picture: profile.photos[0].value,
-                    surname: email,
                     email: email,
                     social: {
                         google: googleID

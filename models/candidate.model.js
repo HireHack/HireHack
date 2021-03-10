@@ -39,6 +39,9 @@ const candidateSchema = new mongoose.Schema({
         trim: true,
         match: [EMAIL_PATTERN, "Es necesario añadir un correo electrónico"],
     },
+    phone: {
+        type: Number,
+    },
     password: {
         type: String,
         required: [true, "Por favor, introduce tu contraseña"],
@@ -62,7 +65,7 @@ const candidateSchema = new mongoose.Schema({
     cv: {
         type: String,
     },
-    linkedinProfile: {
+    linkedin: {
         type: String,
         validate: {
             validator: (text) => {

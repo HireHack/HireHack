@@ -26,7 +26,7 @@ body, html{
 }
 
 .modal-body{
-    background-color: #d3e0ea;
+    background-color: #7FCEE5;
 }
 
 
@@ -183,6 +183,20 @@ body, html{
     color: #276678;
 }
 
+.modal-company {
+    text-align: center;
+    border-radius: 20%;
+}
+
+.modal-company > h2 {
+    margin: 2rem 0;
+    text-transform: uppercase;
+}
+
+.modal-company > a {
+    margin-bottom: 1rem;
+}
+
 .profile-company {
     text-align: center;
     position: relative;
@@ -211,6 +225,10 @@ body, html{
     color: #276678;
 }
 
+.btn-pay {
+    background-color: #7FCEE5;
+}
+
 .btn-candidates {
     background-color: #d3e0ea;
     color: #1687a7;
@@ -222,22 +240,43 @@ body, html{
 }
 
 .profile-candidate{
-    text-align: center;
-    margin-top: 8rem;
     position: relative;
-    border: 2px solid #1687a7;
-    border-radius: 10px;
+    height: 23rem;
+    background-image: url("http://cdn28.us1.fansshare.com/photograph/wallpapershd/samsung-galaxy-hd-wallpaper-default-vivid-colorful-wallpaper-1406219970.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: end;
 }
 
 .profile-candidate > img {
+    width: 20rem;
+    height: 20rem;
     position: absolute;
-    top: -30%;
-    right: 85%;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 100%;
 }
 
-.offers-cadidate {
+.profile-candidate > a {
+    align-self: center;
+    position: absolute;
+    top: 80%;
+    right: 0%;
+}
 
+.profile-candidate > a:hover{
+    color: #276678;
+}
+
+.offers-candidate {
+    text-align: justify;
+    margin-top: 1rem;
+}
+
+.candidate-name {
+    text-align: center;
+    margin: 13rem 0 3rem 0;
 }
 
 /* HOME */

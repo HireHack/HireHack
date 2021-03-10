@@ -1,5 +1,5 @@
 <div class="profile-company">
-    <img class="company-img" src="{{currentCompany.picture}}" alt="Foto de perfil">
+    <img class="company-img img-fluid" src="{{currentCompany.picture}}" alt="Foto de perfil">
     <a type="button" class="btn btn-candidates" data-toggle="modal" data-target="#showMoreModal">Ver perfil de empresa</a>
     <h1>{{currentCompany.name}}</h1>
 </div>
@@ -41,8 +41,9 @@
         <a type="button" class="btn btn-access" href="/edit-offer/{{_id}}">Editar Oferta</a>
         <a type="button" class="btn btn-candidates" href="/application-detail/{{_id}}">Ver candidatos</a>
         {{#unless paid}}
-        <p class="mt-3">Para publicar esta oferta debes realizar el pago</p>
-        <a href="/offer-detail/{{_id}}">Realizar pago</a>
+        <p class="mt-3">Para publicar esta oferta <u>debes realizar el pago</u>:
+        <a type="button" class="btn btn-pay" href="/offer-detail/{{_id}}">Pagar oferta</a>
+        </p>
         {{/unless}}
     </div>
     {{/each}}
@@ -56,13 +57,13 @@
             <div class="modal-body">
                 <div class="container-fluid justify-content-center">
                     <div class="row">
-                        <div class="ms-auto profile-company">
+                        <div class="ms-auto modal-company">
                             <h2>{{currentCompany.name}}</h2>
                             <p><b>Email: </b>{{currentCompany.email}}</p>
                             <p><b>Descripción: </b>
                             <p id="description" class="d-none">{{currentCompany.description}}</p>
-                            </p>
                             <a type="button" id="show-more" class="text-secondary d-block show-more"><b>Ver más</b></a>
+                            </br>
                             <p><b>Página web: </b> {{currentCompany.website}}</p>
                             <p><b>Dirección: </b> {{currentCompany.address.streetName}} {{currentCompany.address.number}} {{currentCompany.address.zipCode}} {{currentCompany.address.city}} {{currentCompany.address.country}}</p>
                         </div>
