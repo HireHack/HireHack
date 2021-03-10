@@ -1,19 +1,4 @@
 /* MAIN */
-
-/* html {
-    background-image: url('/img/KIZOA-Movie-Maker-b23zmzsb.gif');
-    background-size: 280px;
-    background-position: 0% -70%; 
-    background-position-y: center; 
-    background-repeat: repeat-x;
-   
-}
-
-body{
-    margin: 0px 240px 0px 280px;
-    display: none; 
-}  */
-
 body,
 html {
     background-color: rgba(246, 245, 245, 1);
@@ -21,6 +6,7 @@ html {
 
 .profile-img {
     border-radius: 50%;
+    border: 0.4rem solid white;
     object-fit: cover;
     width: 7rem;
     height: 7rem;

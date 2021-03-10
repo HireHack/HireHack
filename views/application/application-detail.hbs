@@ -13,10 +13,10 @@
     {{!-- <div class="container-xl container-lg container-md container-fluid"> --}}
         <div class="border rounded p-3">
             <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
-                <h3 class="mt-2">Información de la oferta</h3>
+                <h3 id="info-oferta" class="mt-2">Información de la oferta</h3>
                 <div class="text-secondary mt-2"><b><u><span id="show-offer-detail">Mostrar</span></u></b></div>
             </div>
-            <div id="offer-detail" class="d-none">
+            <div id="offer-detail" class="d-none mt-3">
                 <h3>{{offer.name}}</h3>
                 <hr>
                 <h5>Lugar de la oferta: {{offer.address}}</h5>
@@ -24,7 +24,7 @@
                 <p class="text-justify">{{offer.description}}</p>
                 <p>
                     <b>Requisitos:</b>
-                    {{#each skills}}
+                    {{#each offer.skills}}
                     {{#if @last}}
                     <span>{{this}}</span>
                     {{else}}
@@ -32,11 +32,8 @@
                     {{/if}}
                     {{/each}}
                 </p>
-                <p>Oferta publicada por: <strong>{{offers_publishedByCompany.name}}</strong></p>
 
-                <div id="map"></div>
-
-                <a class="btn btn-outline-primary" href="/edit-offer/{{_id}}">Editar Oferta</a>
+                <a class="btn btn-outline-primary" href="/edit-offer/{{offer._id}}">Editar Oferta</a>
 
                 {{#if offer.active}}
                 {{#unless offer.paid}}
@@ -54,26 +51,26 @@
     <div class="border rounded p-3 mt-3">
         <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
             <h3 class="mt-2"><u>Candidatos</u></h3>
-            <div class="text-secondary mt-2"><b><u><span id="show-filters">Filtros</span></u></b></div>
+            <div class="text-secondary mt-2"><b><u><span id="show-app-filters">Filtros</span></u></b></div>
         </div>
 
         {{!-- Filters --}}
-        <div id="filters" class="d-none d-flex justify-content-around mb-2">
+        <div id="app-filters" class="d-none d-flex justify-content-around mb-2">
             <div class="col-5">
                 <form class="form-group" action="/application-search">
-                <label for="age">Edad</label>
-                <input name="offerId" type="hidden" value="{{offer._id}}">
-                <input class="form-control" name="age" type="text" id="age">
-                <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
+                    <label for="age">Edad</label>
+                    <input name="offerId" type="hidden" value="{{offer._id}}">
+                    <input class="form-control" name="age" type="text" id="age">
+                    <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
                 </form>
             </div>
-            
+
             <div class="col-5">
                 <form class="form-group" action="/application-search">
-                <label for="addres">Ciudad</label>
-                <input name="offerId" type="hidden" value="{{offer._id}}">
-                <input class="form-control" name="address" type="text" id="address">
-                <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
+                    <label for="addres">Ciudad</label>
+                    <input name="offerId" type="hidden" value="{{offer._id}}">
+                    <input class="form-control" name="address" type="text" id="address">
+                    <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
                 </form>
             </div>
             <hr>
@@ -82,13 +79,13 @@
         {{!-- Applicants --}}
         <div class="container">
             {{!-- Real candidates --}}
-            <div id="fake-candidate" class="p-3 mb-2 row d-flex align-items-baseline"> {{!-- Fake candidates --}}
-            {{#each application}}
+            <div id="fake-candidate" class="p-3 mb-2 row d-flex align-items-baseline" data-toggle="modal" data-target="#candidateModal"> {{!-- Fake candidates --}}
+                {{#each application}}
                 <div class="d-flex flex-column align-items-center col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
                     <img class="profile-img img-fluid" src="{{candidate.picture}}" alt="Foto de perfil">
                     <h5 class="p-2 text-center"><b>{{candidate.name}} <br> {{candidate.surname}}</b> </h5>
                 </div>
-            {{/each}}
+                {{/each}}
             </div>
         </div>
 
@@ -96,12 +93,48 @@
         {{!-- Results filters --}}
         {{#each candidates}}
         <div>
-            <img class="profile-img" src="{{picture}}" alt="Foto de perfil">
-            <h3>{{name}}</h3>
+            <img class="profile-img" src="{{candidate.picture}}" alt="Foto de perfil">
+            <h3>{{candidate.name}}</h3>
         </div>
         {{/each}}
     </div>
 
+</div>
+
+{{!-- MODAL CANDIDATE--}}
+<div class="modal fade" id="candidateModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid justify-content-center">
+                    <div class="row">
+                        <div class="ms-auto modal-company">
+                            {{#with application}}
+                            <img class="profile-img img-fluid" src="{{candidate.picture}}" alt="Foto de perfil">
+                            <h2>{{candidate.name}}</h2>
+                            <p><b>Email: </b>{{currentCandidate.email}}</p>
+                            <p>Número de teléfono: {{currentCandidate.phone}}</p>
+                            <p>
+                                {{#each currentCandidate.skills}}
+                                {{#if @last}}
+                                <span>{{this}}</span>
+                                {{else}}
+                                <span>{{this}} |</span>
+                                {{/if}}
+                                {{/each}}
+                            </p>
+                            <p>Edad: {{currentCandidate.age}}</p>
+                            <p>Mi curriculum: {{currentCandidate.resume}}</p>
+                            <p>Dirección: {{currentCandidate.address}}</p>
+                            <p>Mi linkedIn: {{currentCandidate.linkedin}}</p>
+                            {{/with}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script src="/javascripts/application-detail.js"></script>

@@ -4,11 +4,24 @@ document.getElementById('show-offer-detail').addEventListener('click', () => {
 
     if (showOfferDetail.innerHTML === 'Mostrar') {
         showOfferDetail.innerHTML = 'Ocultar'
+        document.getElementsById()
       } else {
         showOfferDetail.innerHTML = 'Mostrar'
       }
     
 });
+
+let showAppfiltersBtn = document.getElementById('show-app-filters');
+showAppfiltersBtn.addEventListener('click', () => {
+  //document.getElementById('offer-list').classList.toggle('d-none');
+  document.getElementById('app-filters').classList.toggle('d-none');
+
+  if (showAppfiltersBtn.innerHTML === 'Filtros') {
+    showAppfiltersBtn.innerHTML = 'Ocultar'
+  } else {
+    showAppfiltersBtn.innerHTML = 'Filtros'
+  }
+})
 
 // document.querySelectorAll('find-btn').addEventListener('click', () => {
 //    console.log('clicked');
@@ -42,16 +55,3 @@ function addFakeCandidate(n) {
 }
 
 addFakeCandidate(Math.ceil(Math.random() * 30) + 5);
-
-
-let showAppfiltersBtn = document.getElementById('show-filters');
-showAppfiltersBtn.addEventListener('click', () => {
-  //document.getElementById('offer-list').classList.toggle('d-none');
-  document.getElementById('filters').classList.toggle('d-none');
-
-  if (showAppfiltersBtn.innerHTML === 'Filtros') {
-    showAppfiltersBtn.innerHTML = 'Ocultar filtros'
-  } else {
-    showAppfiltersBtn.innerHTML = 'Filtros'
-  }
-})
