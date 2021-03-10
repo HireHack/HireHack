@@ -14,7 +14,7 @@
         <div class="border rounded p-3">
             <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
                 <h3 class="mt-2">Información de la oferta</h3>
-                <div id="show-offer-detail" class="text-secondary mt-2"><b><u>Mostrar</u></b></div>
+                <div class="text-secondary mt-2"><b><u><span id="show-offer-detail">Mostrar</span></u></b></div>
             </div>
             <div id="offer-detail" class="d-none">
                 <h3>{{offer.name}}</h3>
@@ -54,24 +54,29 @@
     <div class="border rounded p-3 mt-3">
         <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
             <h3 class="mt-2"><u>Candidatos</u></h3>
-            <div id="show-filters" class="text-secondary mt-2"><b><u>Filtros</u></b></div>
+            <div class="text-secondary mt-2"><b><u><span id="show-filters">Filtros</span></u></b></div>
         </div>
 
         {{!-- Filters --}}
-        <div id="filters" class="">
-            <form class="form-group" action="/application-search">
+        <div id="filters" class="d-none d-flex justify-content-around mb-2">
+            <div class="col-5">
+                <form class="form-group" action="/application-search">
                 <label for="age">Edad</label>
                 <input name="offerId" type="hidden" value="{{offer._id}}">
                 <input class="form-control" name="age" type="text" id="age">
                 <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
-            </form>
-
-            <form class="form-group" action="/application-search">
+                </form>
+            </div>
+            
+            <div class="col-5">
+                <form class="form-group" action="/application-search">
                 <label for="addres">Ciudad</label>
                 <input name="offerId" type="hidden" value="{{offer._id}}">
                 <input class="form-control" name="address" type="text" id="address">
                 <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
-            </form>
+                </form>
+            </div>
+            <hr>
         </div>
 
         {{!-- Applicants --}}
