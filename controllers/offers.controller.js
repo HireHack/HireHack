@@ -25,6 +25,7 @@ module.exports.offersFiltered = (req, res, next) => {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit) || 7;
     const startIndex = (page - 1) * limit;
+    const query = req.query.search;
 
     Offer.find()
         .populate('offers_publishedByCompany')
@@ -168,86 +169,14 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
-    //let query;
-    // switch(true) {
-    //     case req.query.category:
-    //         Offer.find({"category": req.query.category})
-    //         .then((offers) => {
-    //             //console.log ('req.query.category', req.query.category)
-    //             //console.log('offers', offers)
-    //             res.render('offers/offersList', {offers})
-    //         })
-    //         break;
-    //     case req.query.contractType:
-    //         Offer.find({"ContractType": req.query.contractType})
-    //             .then((offers) => {
-    //                 //console.log ('req.query.category', req.query.category)
-    //                 //console.log('offers', offers)
-    //                 res.render('offers/offersList', {offers})
-    //             })
-    //         break;
-    //     default:
-    //         console.log('switch default')
-    //         break;
-    // }
+    const query = Object.fromEntries(Object.entries(req.query).filter(([_, v]) => !!v)
+    .map(([k, v]) => [k, { '$regex' : v, '$options' : 'i' }]));
 
-    if (req.query.category) {
-        Offer.find({
-                category: req.query.category
-            })
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                //console.log ('req.query.category', req.query.category)
-                //console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.contract) {
-        Offer.find({
-                contract: req.query.contract
-            })
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                //console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.studies) {
-        Offer.find({
-                studies: req.query.studies
-            })
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                //console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.experience) {
-        Offer.find({
-                experience: req.query.experience
-            })
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                //console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.salary) {
-        Offer.find({
-                salary: req.query.salary
-            })
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                //console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else {
-        console.log('else search')
-    }
+    Offer.find(query)
+    .populate('offers_publishedByCompany')
+    .then((offers) => {
+        res.render('offers/offersList', {
+            offers, query: req.query
+        })
+    })
 }

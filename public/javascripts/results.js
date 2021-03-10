@@ -10,7 +10,10 @@ console.log('scrolling')
     loadMore++;
     console.log(loadMore);
 
-    axios.get(`/offers-filtered?page=${loadMore}&limit=7`)
+    const urlParams = new URLSearchParams(window.location.search);
+    const search = urlParams.get('search');
+
+    axios.get(`/offers-filtered?page=${loadMore}&limit=7&search=${search}`)
       .then((response) => {
         console.log(response.data)
         let filteredOffers = [];
@@ -21,14 +24,10 @@ console.log('scrolling')
           filteredOffers.push(`
           <div class="border rounded p-3 mb-2">
           <h3>${offer.name}</h3>
-          <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span style="color: red;">CERRADA</span>{{/if}}</p>
+          <p>Estado: ${offer.active ? '<span style="color: green;">ABIERTA</span>' : '<span style="color: red;">CERRADA</span>'}</p>
           <p><b>Descripción:</b> <br> ${offer.description}</p>
-          <b>Requisitos:</b>`
-          +
-          offer.skills.for
-          `<span>${offer.skills}</span>` // How to iterate the array?
-          +
-          `
+          <b>Requisitos:</b>
+          <span>${offer.skills.join(', ')}</span>
           <br>
           <p>Oferta publicada por: <strong>${offer.offers_publishedByCompany.name}</strong></p>
           <a href="/offer-detail/${offer._id}">Ver detalle de la oferta</a>

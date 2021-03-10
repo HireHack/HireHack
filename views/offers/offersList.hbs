@@ -7,7 +7,7 @@
         <div class='col-3'>
             <form class="form-group" action="/search-offers">
                 <label for="city">Ciudad</p>
-                <input class="form-control" name="addressCity" type="text" id="city">
+                <input class="form-control" name="address" type="text" id="city" value="{{query.address}}">
                 <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
                     {{!-- TODO: GoogleMaps --}}
             </form>
@@ -15,7 +15,7 @@
             <form class="form-group" action="/search-offers" method="GET" id="formCategory">
                 <label for="category">Categoría</label>
                 <select class="form-control" name="category" id="category">
-                    <option disable selected>Seleccionar categoría</option>
+                    <option disable>Seleccionar categoría</option>
                     <option value="Adm.empresas">Adm.empresas</option>
                     <option value="Atencion al cliente">Atencion al cliente</option>
                     <option value="Compras, logistica y almacén">Compras, logistica y almacén</option>
@@ -36,7 +36,7 @@
             <form action="/search-offers" method="GET" id="contract"></form>
             <label for="contract">Seleccionar tipo de contrato</label>
             <select class="form-control" name="contract" id="contract">
-                <option disable selected>Tipo de contrato</option>
+                <option disable label=" "></option>
                 <option value="Indefinido">Indefinido</option>
                 <option value="De duración determinada">De duración determinada</option>
                 <option value="Autónomo">Autónomo</option>
@@ -48,7 +48,7 @@
             <form class="form-group" action="/search-offers" method="GET">
                 <label for="studies">Estudios mínimos</label>
                 <select class="form-control" name="studies" id="studies">
-                    <option disable selected>Nivel de estudios</option>
+                    <option disable>Nivel de estudios</option>
                     <option value="Sin estudios">Sin estudios</option>
                     <option value="ESO">ESO</option>
                     <option value="Grado medio">Grado medio</option>
