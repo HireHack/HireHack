@@ -22,13 +22,13 @@ body, html{
 /* MODAL */
 .modal-img {
     width: 300px;
-    margin: 20px 0px 40px 0px;
+    margin: 2rem auto;
 }
 
 .modal-body{
-    background-color: #7FCEE5;
+    background-color: #d3e0ea;
+    text-align: center;
 }
-
 
 /* NAVBAR */
 .navbar {
@@ -242,7 +242,7 @@ body, html{
 .profile-candidate{
     position: relative;
     height: 23rem;
-    background-image: url("http://cdn28.us1.fansshare.com/photograph/wallpapershd/samsung-galaxy-hd-wallpaper-default-vivid-colorful-wallpaper-1406219970.jpg");
+    background-image: url("https://images.unsplash.com/photo-1553949333-0510da388b82?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
     background-repeat: no-repeat;
     background-size: cover;
     text-align: end;
