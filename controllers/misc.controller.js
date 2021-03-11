@@ -1,4 +1,6 @@
-const flash = require ('connect-flash');
+const Company = require('../models/company.model');
+const Candidate = require('../models/candidate.model');
+const flash = require('connect-flash');
 const Offer = require('../models/offer.model');
 
 module.exports.home = (req, res, next) => {
@@ -15,6 +17,3 @@ module.exports.mainLogin = (req, res, next) => {
     res.render('main-login');
 }
 
-module.exports.passwordUpdateConfirmation = (req, res, next) => {
-    res.send('Password Update Confirmation')
-}

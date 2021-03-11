@@ -2,16 +2,12 @@ const mongoose = require('mongoose');
 const Offer = require('../models/offer.model');
 const Application = require('../models/application.model');
 const flash = require('connect-flash');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const createError = require('http-errors');
 
 module.exports.offersList = (req, res, next) => {
-    // const page = parseInt(req.query.page);
-    // const limit = parseInt(req.query.limit) || 7;
-    // const startIndex = (page - 1) * limit;
-    
-    Offer.find({ "active": true })
+    Offer.find({$and:[{"active": true}, {"paid": true}]})
         .sort('-createdAt')
-        // .limit(limit)
-        // .skip(startIndex)
         .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', {
@@ -78,8 +74,7 @@ module.exports.doCreate = (req, res, next) => {
     Offer.create(offer)
         .then((createdOffer) => {
             console.log('created offer: ', createdOffer)
-            res.redirect('/company-profile');
-            // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
+            res.redirect(`/offer-detail/${createdOffer.id}`);
         })
         .catch((err) => {
             if (err instanceof mongoose.Error.ValidationError) {
@@ -90,6 +85,72 @@ module.exports.doCreate = (req, res, next) => {
                 next(err)
             }
         })
+}
+
+module.exports.paid = (req, res, next) => {
+    Offer.findById(req.params.id)
+        .then(offer => {
+            if (!offer) {
+                next(createError(404));
+            } else if (offer.paid) {
+                next(createError(403));
+            } else {
+                return stripe.checkout.sessions.create({
+                        payment_method_types: ['card'],
+                        mode: 'payment',
+                        line_items: [{
+                            amount: 150 * 100,
+                            currency: 'EUR',
+                            name: `Publicación de la oferta: ${offer.name}`,
+                            quantity: 1
+                        }],
+                        customer_email: req.currentCompany.email,
+                        success_url: `${process.env.HOST || 'http://localhost:3000'}/company-profile`,
+                        cancel_url: `${process.env.HOST ||'http://localhost:3000'}/offer-detail/${offer.id}`,
+                        metadata: {
+                            offer: offer.id
+                        }
+                    })
+                    .then(session => {
+                        res.json({
+                            sessionId: session.id,
+                        });
+                    })
+            }
+        })
+        .catch(next)
+
+}
+
+module.exports.webhook = (req, res, next) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_SIGNING_SECRET);
+    } catch (err) {
+        console.error(err)
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        // Fulfill the purchase...
+        Offer.findByIdAndUpdate(session.metadata.offer, {
+                paid: true
+            }, {
+                new: true
+            })
+            .then(() => {
+                req.flash('flashMessage', 'El pago se realizó correctamente - !La oferta ha sido publicada!');
+                console.log(`Offer with id ${session.metadata.offer} has been published`)
+                res.status(200).end()
+            })
+            .catch((err) => {
+                console.log('Payment failed')
+                next(err)
+            })
+    } else {
+        res.status(200).end()
+    }
 }
 
 module.exports.edit = (req, res, next) => {
@@ -112,7 +173,6 @@ module.exports.edit = (req, res, next) => {
         })
         .catch((err) => next(err));
 }
-
 
 module.exports.doEdit = (req, res, next) => {
     function renderWithErrors(errors) {
@@ -143,7 +203,6 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.delete = (req, res, next) => {
-
     Application.findOne({
             offer: req.params.id
         })
@@ -159,9 +218,6 @@ module.exports.delete = (req, res, next) => {
                 .then((offer) => {
                     offer.active = false;
                     offer.save();
-                    //TO DO: mandar email candidato con proceso cerrado
-                    // EJEMPLO
-                    // sendCandidateActivationEmail(createdCandidate.email, createdCandidate.token);
                     res.redirect('/company-profile')
                 })
         })
@@ -169,6 +225,7 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
+// Optimized search
     const query = Object.fromEntries(Object.entries(req.query).filter(([_, v]) => !!v)
     .map(([k, v]) => [k, { '$regex' : v, '$options' : 'i' }]));
 
@@ -180,4 +237,79 @@ module.exports.search = (req, res, next) => {
                 offers, query: req.query
             })
         })
+        .catch((err) => next(err));
+
+ // Test active + paid
+    if (req.query.address) {
+        console.log('req.query', req.query)
+        Offer.find( {$and:[{"active": true}, {"paid": true}]} )
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                console.log('offers', offers)
+                const queryAddress = req.query.address.toLowerCase().slice(1)
+                console.log('req.query.search', queryAddress)
+                let filteredOffers = []
+                offers.forEach((offer) => {
+                    console.log('offer forEach', offer)
+                    const cityOffer = offer.address
+                    if (cityOffer.includes(queryAddress)) {
+                        console.log('offerWithQueries', offer)
+                        filteredOffers.push(offer);
+                    }
+                })
+                console.log('filteredOffers', filteredOffers)
+                return filteredOffers
+            })
+            .then((offers) => res.render('offers/offersList', {
+                offers
+            }))
+    } else if (req.query.category) {
+        Offer.find({$and:[{"active": true}, {"paid": true}, {category: req.query.category}]})
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                //console.log ('req.query.category', req.query.category)
+                //console.log('offers', offers)
+                res.render('offers/offersList', {
+                    offers
+                })
+            })
+    } else if (req.query.contract) {
+        Offer.find({$and:[{"active": true}, {"paid": true}, {contract: req.query.contract}]})
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                console.log('offers', offers)
+                res.render('offers/offersList', {
+                    offers
+                })
+            })
+    } else if (req.query.studies) {
+        Offer.find({$and:[{"active": true}, {"paid": true}, {studies: req.query.studies}]})
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                console.log('offers', offers)
+                res.render('offers/offersList', {
+                    offers
+                })
+            })
+    } else if (req.query.experience) {
+        Offer.find({$and:[{"active": true}, {"paid": true}, {experience: req.query.experience}]})
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                console.log('offers', offers)
+                res.render('offers/offersList', {
+                    offers
+                })
+            })
+    } else if (req.query.salary) {
+        Offer.find({$and:[{"active": true}, {"paid": true}, {salary: req.query.salary}]})
+            .populate('offers_publishedByCompany')
+            .then((offers) => {
+                console.log('offers', offers)
+                res.render('offers/offersList', {
+                    offers
+                })
+            })
+    } else {
+        next()
+    }
 }

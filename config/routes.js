@@ -11,6 +11,7 @@ const multer = require('multer');
 const upload = require ('./storage.config');
 const Offer = require('../models/offer.model');
 const Candidate = require('../models/candidate.model');
+const express = require('express');
 
 const GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/userinfo.profile",
@@ -86,9 +87,13 @@ router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
 router.get('/search-offers', /*paginate.results(Offer),*/ offersController.search);
+router.post('/offers/:id/paid', secure.checkRole('COMPANY'), offersController.paid);
+router.post('/offers/webhook', express.raw({ type: 'application/json'}), offersController.webhook);
 
 // APPLICATION
 router.get('/application-detail/:id', secure.checkRole('COMPANY'), applicationController.detail);
 router.post('/apply/:id', secure.checkRole('CANDIDATE'), applicationController.apply);
+router.get('/application-search', secure.checkRole('COMPANY'), applicationController.search)
+
 
 module.exports = router;
