@@ -7,18 +7,13 @@ body, html{
 } 
 
 /* TOAST */
-.toast-config {
-    min-height: 10rem;
-    background-color: #276678;
+.toast {
+    background-color: #276678; 
     font-size: 1rem;
     padding: 10px 20px;
     border-radius: 15px;
-}
-
-.toast-msg {
+    width: 60rem;
     color:#fff;
-    background-color: #276678;
-    padding: 10px;
 }
 
 /* MODAL */
@@ -399,9 +394,9 @@ body, html{
     padding-left: 5rem;
 }
 
-img {
+/* img {
     width: 25%;
-}
+} */
 
 #lineGraphic {
     width: 280;
