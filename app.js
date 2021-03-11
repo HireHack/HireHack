@@ -23,7 +23,7 @@ app.use((req, res, next) => {
     express.json()(req, res, next);
   }
 });
-app.use(() => {
+app.use((req, res, next) => {
   if (req.originalUrl === '/offers/webhook') {
     next();
   } else {
