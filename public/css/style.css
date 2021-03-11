@@ -144,6 +144,10 @@ body, html{
     margin-bottom: 3rem;
 }
 
+.height-p{
+    line-height: 2rem;
+}
+
 .login > h1 {
     margin: 50px 0 30px 0;
 }
@@ -363,6 +367,10 @@ iframe {
     margin: 20px auto;
 }
 
+#sankey_basic{
+    padding-left: 5rem;
+}
+
 img {
     width: 25%;
 }
@@ -373,8 +381,12 @@ img {
     margin: 20px;
 }
 
+.info-graphics{
+    padding-top: 1rem;
+}
+
 .first_img {
-   width: 50rem;
+   width: 100%;
 }
 
 .second_img {

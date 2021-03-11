@@ -1,5 +1,5 @@
 //MAPA TASA PARO
-google.load('visualization', '1', { 'packages': ['geochart'] });
+google.load('visualization', { 'packages': ['geochart'] });
      google.setOnLoadCallback(drawMarkersMap1);
 
     function drawMarkersMap1() {
@@ -28,10 +28,20 @@ google.load('visualization', '1', { 'packages': ['geochart'] });
 
       var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
       chart.draw(data, options);
+
+      function resizeHandler () {
+            chart.draw(data, options);
+        }
+        if (window.addEventListener) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent('onresize', resizeHandler);
+        }
 };
 
 //MAPA HABILIDADES
-google.load('visualization', '2', { 'packages': ['geochart'] });
+google.load('visualization', { 'packages': ['geochart'] });
      google.setOnLoadCallback(drawMarkersMap);
 
     function drawMarkersMap() {
@@ -73,6 +83,16 @@ google.load('visualization', '2', { 'packages': ['geochart'] });
 
       var chart = new google.visualization.GeoChart(document.getElementById('chart_hab'));
       chart.draw(data, options);
+
+      function resizeHandler () {
+            chart.draw(data, options);
+        }
+        if (window.addEventListener) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent('onresize', resizeHandler);
+        }
 };
 
 //SANKEY HABILIDADES
@@ -106,13 +126,25 @@ google.charts.load('current', {'packages':['sankey']});
 
         // Sets chart options.
         var options = {
-          width: 900,
-          height: 600,
+          width: 650,
+          height: 500,
         };
 
         // Instantiates and draws our chart, passing in some options.
         var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
         chart.draw(data, options);
+
+        function resizeHandler () {
+            chart.draw(data, options);
+        }
+        if (window.addEventListener) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent('onresize', resizeHandler);
+        }
       }
+
+
 
 

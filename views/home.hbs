@@ -24,7 +24,7 @@
 
                 <div class="row justify-content-beetween home">
                     <h3>Tasa de paro en España</h3>
-                    <p>Las tasas de paro en España se han incrementado con la aparición del virus COVID-19. Se espera que la
+                    <p class="not-register height-p">Las tasas de paro en España se han incrementado con la aparición del virus COVID-19. Se espera que la
                         tendencia,
                         una vez que la población este vacunada, tienda a invertirse, por lo que es hora de comenzar a
                         cambiarla.
@@ -38,7 +38,7 @@
 
                 <div class="row justify-content-beetween home">
                     <h3 class="my-3">Teletrabajo</h3>
-                    <p>Desde hace algunos años la tendencia a teletrabajar esta aumentando. Entre sus principales causas
+                    <p class="height-p">Desde hace algunos años la tendencia a teletrabajar esta aumentando. Entre sus principales causas
                         estan
                         la mejora de la
                         conciliación laboral con la familia o la disminución del tránsito automovilistico en las ciudades
@@ -49,19 +49,18 @@
                     <div class="col-6">
                         <h4>Año 2021</h4>
                         <canvas id="circleGraphic" width="10" height="5"></canvas>
-                        <p>Datos obtenidos en la API-V2 "Themuse" </p>
+                        <p class="info-graphics">Datos obtenidos en la API-V2 "Themuse" </p>
                     </div>
                     <div class="col-6">
                         <h4>Año 2019</h4>
                         <canvas id="circleGraphic2" width="10" height="5"></canvas>
-                        <p>Datos obtenidos en la API-V2 "Themuse" </p>
+                        <p class="info-graphics">Datos obtenidos en la API-V2 "Themuse" </p>
                     </div>
                 </div>
 
-                <div class="home">
+                <div class="ow justify-content-center home">
                     <h3 class="my-3">Profesiones más demandadas</h3>
-                    <div>
-                    {{!-- <div class="col-6"> --}}
+                    <div class="col-11">
                         <canvas id="lineGraphic"></canvas>
                     </div>
                     {{!-- <div class="col-6">
@@ -76,24 +75,24 @@
             {{!-- <h2>HABILIDADES</h2> --}}
             <div class="container">
                 <div class="row justify-content-beetween home">
-                    <h3>Perfiles profesionales más necesitados por Comunidades autónomas</h3>
+                    <h3 class="mb-2">Perfiles profesionales más necesitados por Comunidades autónomas</h3>
                     <div id="chart_hab" style="width: 800px; height: 458px;"></div>
                     <p>Datos obtenidos de Addeco </p>
                 </div>
 
                 <div class="row justify-content-beetween home">
-                    <h3>Competencias que se exigen en las nuevas profesiones </h3>
-                    <div class="col-7">
+                    <h3 class="mb-2">Competencias que se exigen en las nuevas profesiones </h3>
+                    <div class="col-12 col-lg-7">
                         <img class="first_img" src="/img/habilidades.png" alt="People jumping">
                     </div>
-                    <div class="col-5">
+                    <div class="col-12 col-lg-5">
                         <img class="second_img" src="/img/Habilidades2.png" alt="Abilities">
                     </div>
                 </div>
 
-                <div class="row justify-content-beetween home">
-                    <h3>¿Qué habilidades se estan pidiendo para las profesiones más demandadas?</h3>
-                    <div id="sankey_basic" style="width: 100px; height: 650px;"></div>
+                <div class="row justify-content-start home">
+                    <h3 class="mb-2">¿Qué habilidades se estan pidiendo para las profesiones más demandadas?</h3>
+                    <div id="sankey_basic" style="width: 100px; height: 550px;"></div>
                 </div>
             </div>
         </div>
