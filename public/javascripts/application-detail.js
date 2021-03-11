@@ -3,10 +3,11 @@ let showOfferDetail = document.getElementById('show-offer-detail');
 document.getElementById('show-offer-detail').addEventListener('click', () => {
     document.getElementById('offer-detail').classList.toggle('d-none');
 
-    if (showOfferDetail.innerHTML === 'Mostrar') {
-        showOfferDetail.innerHTML = 'Ocultar'
+
+    if (showOfferDetail.innerHTML === 'Ver más') {
+        showOfferDetail.innerHTML = 'Ver menos'
       } else {
-        showOfferDetail.innerHTML = 'Mostrar'
+        showOfferDetail.innerHTML = 'Ver más'
       }
     
 });
@@ -15,6 +16,7 @@ let showAppfiltersBtn = document.getElementById('show-app-filters');
 showAppfiltersBtn.addEventListener('click', () => {
   //document.getElementById('offer-list').classList.toggle('d-none');
   document.getElementById('app-filters').classList.toggle('d-none');
+
 
   if (showAppfiltersBtn.innerHTML === 'Filtros') {
     showAppfiltersBtn.innerHTML = 'Ocultar'

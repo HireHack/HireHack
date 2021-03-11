@@ -26,6 +26,22 @@ showFilters.addEventListener('click', () => {
 })
 
 let showDescriptions = document.querySelectorAll('.show-description');
+showDescriptions.forEach(showDescriptionBtn => showDescriptionBtn.addEventListener('click', (event) => {
+    
+    console.log(document.getElementById('offer-list-info'))
+
+    // const description = event.target.parentElement.querySelector('offer-list-info')
+    // showDescriptions.classList.toggle('d-none');
+
+    document.getElementById('description').classList.toggle('d-none');
+
+    if (showDescriptionBtn.innerHTML === 'Ver más') {
+        showDescriptionBtn.innerHTML = 'Ver menos'
+    } else {
+        showDescriptionBtn.innerHTML = 'Ver más'
+    }
+    
+}))
 
 // document.getElementById('show-description').addEventListener('click', () => {
 //     document.getElementById('description').classList.toggle('d-none');
@@ -37,15 +53,3 @@ let showDescriptions = document.querySelectorAll('.show-description');
 //     }
 // })
 
-
-showDescriptions.forEach(showDescriptionBtn => showDescriptionBtn.addEventListener('click', (event) => {
-    console.log('entra')
-    const description = event.target.parentElement.querySelector('#description')
-    description.classList.toggle('d-none');
-
-    if (description.className != 'd-none') {
-        showMoreBtn.innerHTML = 'Ver menos'
-    } else {
-        showMoreBtn.innerHTML = 'Ver más'
-    }
-}))

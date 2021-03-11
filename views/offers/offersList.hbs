@@ -81,12 +81,12 @@
         {{!-- OFERTAS --}}
         <div id="offer-list" class="col-lg-9 col-12">
             {{#each offers}}
-            <div class="border rounded p-3 mb-2 offer">
+            <div class="border rounded p-3 mb-2 offer-list-info">
                 <h3>{{name}}</h3>
                 <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
                         style="color: red;">CERRADA</span>{{/if}}</p>
 
-                <div id="show-description" class="text-secondary d-block d-sm-none d-xs-none show-description"><b><u>Mostrar detalle</u></b></div>
+                <div class="text-secondary d-block d-sm-none d-xs-none"><b><u><span id="show-description" class="show-description">Ver más</span></u></b></div>
 
                 <div id="description" class="d-none d-md-block d-sm-block d-xs-block description">
                     <div>
