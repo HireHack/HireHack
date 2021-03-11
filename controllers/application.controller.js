@@ -15,12 +15,12 @@ module.exports.detail = (req, res, next) => {
                     .then((application) => {
                             res.render('application/application-detail', { offer, application })
                     })
-                    .catch((e) => next())
+                    .catch((err) => next(err))
             } else {
                 res.render('denied-route')
             }
         })
-        .catch((e) => next(e))
+        .catch((err) => next(err))
 };
 
 module.exports.apply = (req, res, next) => {

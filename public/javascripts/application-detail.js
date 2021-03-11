@@ -1,5 +1,15 @@
-let showOfferDetail = document.getElementById('show-offer-detail');
+//OFFERS LIST
+window.onscroll = (ev) => {
+    if (window.scrollY > 65 && document.body.scrollTop <= 0) {
+      document.getElementById('offer-list-navbar').classList.add('fixed-top');
+      document.getElementById('offer-list-navbar').classList.add('bg-white');
+    } else if (window.scrollY < 30) {
+      document.getElementById('offer-list-navbar').classList.remove('fixed-top');
+      document.getElementById('offer-list-navbar').classList.remove('bg-white');
+    }
+  }
 
+let showOfferDetail = document.getElementById('show-offer-detail');
 document.getElementById('show-offer-detail').addEventListener('click', () => {
     document.getElementById('offer-detail').classList.toggle('d-none');
 
@@ -14,9 +24,7 @@ document.getElementById('show-offer-detail').addEventListener('click', () => {
 
 let showAppfiltersBtn = document.getElementById('show-app-filters');
 showAppfiltersBtn.addEventListener('click', () => {
-  //document.getElementById('offer-list').classList.toggle('d-none');
   document.getElementById('app-filters').classList.toggle('d-none');
-
 
   if (showAppfiltersBtn.innerHTML === 'Filtros') {
     showAppfiltersBtn.innerHTML = 'Ocultar'
@@ -24,12 +32,6 @@ showAppfiltersBtn.addEventListener('click', () => {
     showAppfiltersBtn.innerHTML = 'Filtros'
   }
 })
-
-const findBTN = document.querySelectorAll('.btn');
-console.log(findBTN);
-// document.querySelectorAll('find-btn').addEventListener('click', () => {
-//    console.log('clicked');
-// })
 
 function addFakeCandidate(n) {
     for (i=0; i<n; i++) {
@@ -59,3 +61,21 @@ function addFakeCandidate(n) {
 }
 
 addFakeCandidate(Math.ceil(Math.random() * 30) + 5);
+
+
+const exampleModal = document.getElementById('exampleModal')
+exampleModal.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  const button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  const recipient = button.getAttribute(`${id}`)
+  // If necessary, you could initiate an AJAX request here
+  // and then do the updating in a callback.
+  //
+  // Update the modal's content.
+  const modalTitle = exampleModal.querySelector('.modal-title')
+  const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+  modalTitle.textContent = 'New message to ' + recipient
+  modalBodyInput.value = recipient
+})

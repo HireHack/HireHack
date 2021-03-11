@@ -1,13 +1,13 @@
-// OFFERS LIST
-// window.onscroll = (ev) => {
-//     if (window.scrollY > 65 && document.body.scrollTop <= 0) {
-//       document.getElementById('offer-list-navbar').classList.add('fixed-top');
-//       document.getElementById('offer-list-navbar').classList.add('bg-white');
-//     } else if (window.scrollY < 30) {
-//       document.getElementById('offer-list-navbar').classList.remove('fixed-top');
-//       document.getElementById('offer-list-navbar').classList.remove('bg-white');
-//     }
-//   }
+//OFFERS LIST
+window.onscroll = (ev) => {
+    if (window.scrollY > 65 && document.body.scrollTop <= 0) {
+      document.getElementById('offer-list-navbar').classList.add('fixed-top');
+      document.getElementById('offer-list-navbar').classList.add('bg-white');
+    } else if (window.scrollY < 30) {
+      document.getElementById('offer-list-navbar').classList.remove('fixed-top');
+      document.getElementById('offer-list-navbar').classList.remove('bg-white');
+    }
+  }
 
 let showFilters = document.getElementById('show-filters');
 showFilters.addEventListener('click', () => {
@@ -28,28 +28,13 @@ showFilters.addEventListener('click', () => {
 let showDescriptions = document.querySelectorAll('.show-description');
 showDescriptions.forEach(showDescriptionBtn => showDescriptionBtn.addEventListener('click', (event) => {
     
-    console.log(document.getElementById('offer-list-info'))
-
-    // const description = event.target.parentElement.querySelector('offer-list-info')
-    // showDescriptions.classList.toggle('d-none');
-
-    document.getElementById('description').classList.toggle('d-none');
+    const description = event.target.parentElement.parentElement.parentElement.parentElement.querySelector('#description');
+    description.classList.toggle('d-none');
 
     if (showDescriptionBtn.innerHTML === 'Ver más') {
-        showDescriptionBtn.innerHTML = 'Ver menos'
+        showDescriptionBtn.innerHTML = 'Ver menos';
     } else {
-        showDescriptionBtn.innerHTML = 'Ver más'
+        showDescriptionBtn.innerHTML = 'Ver más';
     }
-    
+
 }))
-
-// document.getElementById('show-description').addEventListener('click', () => {
-//     document.getElementById('description').classList.toggle('d-none');
-
-//     if (showDescription.innerHTML === 'Mostrar detalle') {
-//         showDescription.innertHTML = 'Ver menos'
-//     } else {
-//         showDescription.innertHTML = 'Ver más'
-//     }
-// })
-

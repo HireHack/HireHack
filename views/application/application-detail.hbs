@@ -1,10 +1,12 @@
-<div id="offer-list-navbar" class="">
-    <div
-        class="align-items-center d-block d-sm-flex justify-content-between container-xl container-lg container-md container-fluid m-2">
-        <h1>{{offer.name}}</h1>
-        <form class="delete-form" action="/delete-offer/{{offer._id}}" method="post">
-            <button type="submit" class="btn btn-danger" onclick="return clicked()">Cerrar proceso</button>
-        </form>
+<div id="offer-list-navbar">
+    <div class="container-xl container-lg container-md container-fluid my-2 px-0">
+        <div
+            class="align-items-center d-block d-sm-flex justify-content-between container-xl container-lg container-md container-fluid">
+            <h1>{{offer.name}}</h1>
+            <form class="delete-form" action="/delete-offer/{{offer._id}}" method="post">
+                <button type="submit" class="btn btn-danger" onclick="return clicked()">Cerrar proceso</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -44,81 +46,86 @@
             </div>
         </div>
 
-        {{!--
-    </div> --}}
-
-    {{!-- CANDIDATES --}}
-    <div class="border rounded p-3 mt-3">
-        <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
-            <h3 class="mt-2"><u>Candidatos</u></h3>
-            <div class="text-secondary mt-2"><b><u><span id="show-app-filters">Filtros</span></u></b></div>
-        </div>
-
-        {{!-- Filters --}}
-        <div id="app-filters" class="d-none">
-            <div class="d-flex justify-content-around my-2">
-                <div class="col-5">
-                    <form class="form-group" action="/application-search">
-                        <label for="age">Edad</label>
-                        <input name="offerId" type="hidden" value="{{offer._id}}">
-                        <input class="form-control" name="age" type="text" id="age">
-                        <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
-                    </form>
-                </div>
-
-                <div class="col-5">
-                    <form class="form-group" action="/application-search">
-                        <label for="addres">Ciudad</label>
-                        <input name="offerId" type="hidden" value="{{offer._id}}">
-                        <input class="form-control" name="address" type="text" id="address">
-                        <button class="btn btn-secondary text-white mt-2 mb-3 find-btn" type='submit'>Buscar</button>
-                    </form>
-                </div>
+        {{!-- CANDIDATES --}}
+        <div class="border rounded p-3 mt-3">
+            <div id="offer-list-navbar" class="align-items-center d-flex justify-content-between">
+                <h3 class="mt-2"><u>Candidatos</u></h3>
+                <div class="text-secondary mt-2"><b><u><span id="show-app-filters">Filtros</span></u></b></div>
             </div>
-            <hr>
-        </div>
 
-        {{!-- Applicants --}}
-        <div class="container">
-            {{!-- Real candidates --}}
-            <div id="fake-candidate" class="p-3 mb-2 row d-flex align-items-baseline" data-toggle="modal"
-                data-target="#candidateModal"> {{!-- Fake candidates --}}
-                {{#each application}}
-                <div class="d-flex flex-column align-items-center col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
-                    <img class="profile-img img-fluid" src="{{candidate.picture}}" alt="Foto de perfil">
-                    <h5 class="p-2 text-center"><b>{{candidate.name}} <br> {{candidate.surname}}</b> </h5>
+            {{!-- Filters --}}
+            <div id="app-filters" class="d-none">
+                <div class="d-flex justify-content-around my-2">
+                    <div class="col-5">
+                        <form class="form-group" action="/application-search">
+                            <label for="age">Edad</label>
+                            <input name="offerId" type="hidden" value="{{offer._id}}">
+                            <input class="form-control" name="age" type="text" id="age">
+                            <button class="btn btn-secondary text-white mt-2 mb-3 find-btn"
+                                type='submit'>Buscar</button>
+                        </form>
+                    </div>
+
+                    <div class="col-5">
+                        <form class="form-group" action="/application-search">
+                            <label for="addres">Ciudad</label>
+                            <input name="offerId" type="hidden" value="{{offer._id}}">
+                            <input class="form-control" name="address" type="text" id="address">
+                            <button class="btn btn-secondary text-white mt-2 mb-3 find-btn"
+                                type='submit'>Buscar</button>
+                        </form>
+                    </div>
                 </div>
-                {{/each}}
+                <hr>
             </div>
-        </div>
+
+            {{!-- Applicants --}}
+            <div class="container">
+                {{!-- Real candidates --}}
+                {{#with application}}
+                <div id="fake-candidate" class="p-3 mb-2 row d-flex align-items-baseline" data-toggle="modal"
+                    data-target="#candidateModal" data-bs-whatever="@{{id}}"> {{!-- Fake candidates --}}
+                    {{#each this}}
+                    <div
+                        class="d-flex flex-column align-items-center col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
+                        <img class="profile-img img-fluid" src="{{candidate.picture}}" alt="Foto de perfil">
+                        <h5 class="p-2 text-center"><b>{{candidate.name}} <br> {{candidate.surname}}</b> </h5>
+                    </div>
+                    {{/each}}
+                </div>
+                {{/with}}
+            </div>
 
 
-        {{!-- Results filters --}}
-        {{#each candidates}}
-        <div>
-            <img class="profile-img" src="{{candidate.picture}}" alt="Foto de perfil">
-            <h3>{{candidate.name}}</h3>
+            {{!-- Results filters --}}
+            {{#each candidates}}
+            <div>
+                <img class="profile-img" src="{{candidate.picture}}" alt="Foto de perfil">
+                <h3>{{candidate.name}}</h3>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
+
     </div>
-
 </div>
 
+{{#each application}}
+{{#with candidate}}
 {{!-- MODAL CANDIDATE--}}
 <div class="modal fade" id="candidateModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="container-fluid justify-content-center">
                     <div class="row">
                         <div class="ms-auto modal-company">
-                            {{#with application}}
-                            <img class="profile-img img-fluid" src="{{candidate.picture}}" alt="Foto de perfil">
-                            <h2>{{candidate.name}}</h2>
-                            <p><b>Email: </b>{{currentCandidate.email}}</p>
-                            <p>Número de teléfono: {{currentCandidate.phone}}</p>
+
+                            <img class="profile-img img-fluid" src="{{picture}}" alt="Foto de perfil">
+                            <h2>{{name}}</h2>
+                            <p><b>Email: </b>{{email}}</p>
+                            <p>Número de teléfono: {{phone}}</p>
                             <p>
-                                {{#each currentCandidate.skills}}
+                                {{#each skills}}
                                 {{#if @last}}
                                 <span>{{this}}</span>
                                 {{else}}
@@ -126,11 +133,10 @@
                                 {{/if}}
                                 {{/each}}
                             </p>
-                            <p>Edad: {{currentCandidate.age}}</p>
-                            <p>Mi curriculum: {{currentCandidate.resume}}</p>
-                            <p>Dirección: {{currentCandidate.address}}</p>
-                            <p>Mi linkedIn: {{currentCandidate.linkedin}}</p>
-                            {{/with}}
+                            <p>Edad: {{age}}</p>
+                            <p>Mi curriculum: {{resume}}</p>
+                            <p>Dirección: {{address}}</p>
+                            <p>Mi linkedIn: {{linkedin}}</p>
                         </div>
                     </div>
                 </div>
@@ -138,6 +144,7 @@
         </div>
     </div>
 </div>
-</div>
+{{/with}}
+{{/each}}
 
 <script src="/javascripts/application-detail.js"></script>
