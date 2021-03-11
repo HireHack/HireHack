@@ -1,10 +1,16 @@
 /* MAIN */
-
 body, html{
     min-height: 60rem;
     margin: 0;
     padding: 0;
 } 
+
+.profile-img {
+    border-radius: 50%;
+    border: 0.4rem solid white;
+    object-fit: cover;
+    width: 7rem;
+    height: 7rem;
 
 /* TOAST */
 .toast {
@@ -421,8 +427,15 @@ body, html{
     height: 400px;
 }
 
+/* OFFER LIST */
+.offer,
+.filters {
+    background-color: rgba(211, 224, 234, 1);
+}
 
-/*-------------------------*/
+.theme-bg-color {
+    background-color: rgba(211, 224, 234, 1)
+}
 
 header {
     background-image: url("../img/HOME.jpg"); 

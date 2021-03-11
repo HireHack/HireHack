@@ -1,10 +1,14 @@
-<h1 class="text-center mb-4">{{#if offer.paid}}Detalle de la oferta{{else}}Vista previa de la oferta{{/if}}</h1>
+<div id="offer-list-navbar" class="align-items-center d-flex justify-content-center justify-content-around">
+    <h1 class="space-around d-inline mt-2">{{#if offer.paid}}Detalle de la oferta{{else}}Vista previa de la oferta{{/if}}</h1>
+</div>
+
+<div id="offer-detail" class="container-xl container-lg container-md container-fluid">
 <div class="border rounded p-3">
     <h3>{{offer.name}}</h3>
     <hr>
     <h5>Lugar de la oferta: {{offer.address}}</h5>
     <h5>Descripción:</h5>
-    <p>{{offer.description}}</p>
+    <p class="text-justify">{{offer.description}}</p>
     <p>
         <b>Requisitos:</b>
         {{#each offer.skills}}
@@ -31,6 +35,7 @@
     {{/unless}}
     {{/unless}}
     {{/if}}
+</div>
 </div>
 
 <script>
