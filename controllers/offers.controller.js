@@ -7,6 +7,7 @@ const createError = require('http-errors');
 
 module.exports.offersList = (req, res, next) => {
     Offer.find({$and:[{"active": true}, {"paid": true}]})
+        .sort('-createdAt')
         .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', {
@@ -15,6 +16,21 @@ module.exports.offersList = (req, res, next) => {
         })
         .catch((err) => next(err))
 };
+
+// module.exports.offersFiltered = (req, res, next) => {
+//     const page = parseInt(req.query.page);
+//     const limit = parseInt(req.query.limit) || 7;
+//     const startIndex = (page - 1) * limit;
+//     const query = req.query.search;
+
+//     Offer.find()
+//         .populate('offers_publishedByCompany')
+//         .sort('-createdAt')
+//         .limit(limit)
+//         .skip(startIndex)
+//         .then((offers) => res.send(offers))
+//         .catch((err) => next(err));
+// }
 
 module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
@@ -52,13 +68,13 @@ module.exports.doCreate = (req, res, next) => {
     if (offer.skills) {
         offer.skills = offer.skills.split(',');
     }
+
     const company = req.currentCompany.id
 
     Offer.create(offer)
         .then((createdOffer) => {
             console.log('created offer: ', createdOffer)
             res.redirect(`/offer-detail/${createdOffer.id}`);
-            // TODO: Push new offer to the top of the list and add an animation (blink + color) for 3-4 seconds
         })
         .catch((err) => {
             if (err instanceof mongoose.Error.ValidationError) {
@@ -209,6 +225,21 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
+// Optimized search
+    const query = Object.fromEntries(Object.entries(req.query).filter(([_, v]) => !!v)
+    .map(([k, v]) => [k, { '$regex' : v, '$options' : 'i' }]));
+
+    Offer.find(query)
+        .sort('-createdAt')
+        .populate('offers_publishedByCompany')
+        .then((offers) => {
+            res.render('offers/offersList', {
+                offers, query: req.query
+            })
+        })
+        .catch((err) => next(err));
+
+ // Test active + paid
     if (req.query.address) {
         console.log('req.query', req.query)
         Offer.find( {$and:[{"active": true}, {"paid": true}]} )
