@@ -333,17 +333,45 @@ body, html{
     padding: 2rem 0;
 }
 
-.laptop {
+/* .laptop {
     position: relative;
-    width: 1000px;
+    width: 60rem;
     margin: 0 auto;
+} */
+
+/* iframe {
+    position: absolute;
+    top: 356%; 
+    transform: translate(-50%, -50%);
+} */
+
+/* .video-in {
+    position: absolute;
+    /* top: 356%; */
+    /* transform: translate(-50%, -50%);
+} */ 
+
+.video-laptop {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 67.5%;
+    height: 0;
+    z-index: 1;
 }
 
-iframe {
+#laptop {
+    box-sizing: border-box;
+    background: url(http://176.32.230.43/testdigitalmarketingmentor.co.uk/wp-content/uploads/2016/07/laptop-1000x728-trans.png) center center no-repeat;
+    background-size: contain;
+    padding: 11.7% 17.5% 15.4%;
     position: absolute;
-    top: 356%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
+
 
 .graphics {
     background-color: #f6f5f5;
@@ -351,7 +379,7 @@ iframe {
 
 .home {
     margin: 0 auto;
-    border: 2px solid #276678;
+    border: 2px solid #d3e0ea;
     margin: 3rem;
     border-radius: 3rem;
     padding: 2rem;
