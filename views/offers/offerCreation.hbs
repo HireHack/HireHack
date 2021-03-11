@@ -1,131 +1,138 @@
-<h2>{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</h2>
-<div class="col mb-2">
-    <div class="row">
-        <form action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
-            <div>
-                <p>Empresa: {{currentCompany.name}}</p>
-            </div>
+<div id="offer-list-navbar" class="align-items-center d-flex justify-content-center justify-content-around">
+    <h2 class="space-around d-inline mt-2">{{#if _id}}Editar oferta{{else}}Crear Oferta{{/if}}</h2>
+</div>
 
-            <div class="form-group">
-                <label for="offer-input" name="name"> Nombre de la oferta: </label>
-                <input class="form-control {{#if errors.name}}is-invalid{{/if}}" value="{{name}}" type="text" name="name"
-                    id="offer-input">
-                {{#if errors.name}}
-                <div class="invalid-feedback">{{errors.name}}</div>
-                {{/if}}
-            </div>
-
-            <div class="form-group">
-                <label for="address-input"> Lugar de la oferta: </label>
-                <input type="text" id="location-input" value="{{address}}" name="address" class="form-control" placeholder="Formato: Calle, número, C.P. Municipio">
-                {{#if errors.address}}
-                <div class="invalid-feedback">{{errors.address}}</div>
-                {{/if}}
-            </div>
-
-            <div class="form-group">
-                <label for="offer-input"> Descripción: </label>
-                <textarea class="form-control" name="description" id="offer" cols="30" rows="10">{{description}}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="skills-input"> Requisitios: </label>
-                <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
-                    id="skills-input" value="{{skills}}"
-                    placeholder="Ej.: creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
-                <div class="form-text text-secondary">Debes añadir mínimo dos requisitos separados por comas.</div>
-                {{#if errors.skills}}
-                <div class="invalid-feedback">{{errors.skills}}</div>
-                {{/if}}
-            </div>
-
-            <div class="form-group">
-                <label for="category">Categoría</label>
-                <select class="form-control" name="category" id="category">
-                    <option value="Adm.empresas">Adm.empresas</option>
-                    <option value="Atención al cliente">Atención al cliente</option>
-                    <option value="Compras, logistica y almacén">Compras, logistica y almacén</option>
-                    <option value="Educación y formación">Educación y formación</option>
-                    <option value="Finanzas y banca">Finanzas y banca</option>
-                    <option value="Informática y telecomunicaciones">Informática y telecomunicaciones</option>
-                    <option value="Ingenieros y técnicos">Ingenieros y técnicos</option>
-                    <option value="Legal">Legal</option>
-                    <option value="Marketing y comunicación">Marketing y comunicación</option>
-                    <option value="RR.HH">RR.HH</option>
-                    <option value="Sanidad">Sanidad</option>
-                    <option value="Turismo">Turismo</option>
-                    <option value="Otros">Otros</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="contract">Tipo de contrato</label>
-                <select class="form-control" name="contract" id="contract">
-                    <option value="Indefinido">Indefinido</option>
-                    <option value="De duración determinada">De duración determinada</option>
-                    <option value="Autónomo">Autónomo</option>
-                    <option value="Otros Contratos">Otros contratos</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="studies">Estudios mínimos</label>
-                <select class="form-control" name="studies" id="studies">
-                    <option value="Sin estudios">Sin estudios</option>
-                    <option value="ESO">ESO</option>
-                    <option value="Grado medio">Grado medio</option>
-                    <option value="Grado superior">Grado superior</option>
-                    <option value="Grado">Grado</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="experience">Experiencia(años)</label>
-                <input class="form-control" name="experience" type="number">
-            </div>
-
-            <div class="form-group">
-                <label for="salary">Salario anual</label>
-                <select class="form-control" name="salary" id="salary">
-                    <option value="6K - 12k">6K - 12k</option>
-                    <option value="12K - 20K">12K - 20K</option>
-                    <option value="20K - 30K">20K - 30K</option>
-                    <option value="+ 30K">+ 30K</option>
-                </select>
-            </div>
-
-            <div class="d-none">
-                <label for="lat">Lat:</label>
-                <input type="string" name="lat" value="{{lat}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lat">
-                <label for="lng">Lng:</label>
-                <input type="string" name="lng" value="{{lng}}" class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lng">
-                {{#if errors.price}}
-                <div class="invalid-feedback">
-                    {{errors.price}}
+<div class="container-xl container-lg container-md container-fluid">
+    <div class="col mb-2">
+        <div class="row py-4">
+            <form action="{{#if _id}}/edit-offer/{{_id}}{{else}}/offer-creation{{/if}}" method="POST">
+                <div>
+                    <p>Empresa: {{currentCompany.name}}</p>
                 </div>
-                {{/if}}
-            </div>
 
-            <div id="map"></div>
+                <div class="form-group py-1">
+                    <label for="offer-input" name="name"> Nombre de la oferta: </label>
+                    <input class="form-control {{#if errors.name}}is-invalid{{/if}}" value="{{name}}" type="text"
+                        name="name" id="offer-input">
+                    {{#if errors.name}}
+                    <div class="invalid-feedback">{{errors.name}}</div>
+                    {{/if}}
+                </div>
 
-            <div id="formatted-address"></div>
+                <div class="form-group py-1">
+                    <label for="address-input"> Lugar de la oferta: </label>
+                    <input type="text" id="location-input" value="{{address}}" name="address" class="form-control"
+                        placeholder="Formato: Calle, número, C.P. Municipio">
+                    {{#if errors.address}}
+                    <div class="invalid-feedback">{{errors.address}}</div>
+                    {{/if}}
+                </div>
 
-            <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Edita la oferta{{else}}Crea una oferta{{/if}}</button>
-        </form>
+                <div class="form-group py-1">
+                    <label for="offer-input"> Descripción: </label>
+                    <textarea class="form-control" name="description" id="offer" cols="30"
+                        rows="10">{{description}}</textarea>
+                </div>
+
+                <div class="form-group py-1">
+                    <label for="skills-input"> Requisitios: </label>
+                    <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
+                        id="skills-input" value="{{skills}}"
+                        placeholder="Ej.: creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
+                    <div class="form-text text-secondary">Debes añadir mínimo dos requisitos separados por comas.</div>
+                    {{#if errors.skills}}
+                    <div class="invalid-feedback">{{errors.skills}}</div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group py-1">
+                    <label for="category">Categoría</label>
+                    <select class="form-control" name="category" id="category">
+                        <option value="Adm.empresas">Adm.empresas</option>
+                        <option value="Atención al cliente">Atención al cliente</option>
+                        <option value="Compras, logistica y almacén">Compras, logistica y almacén</option>
+                        <option value="Educación y formación">Educación y formación</option>
+                        <option value="Finanzas y banca">Finanzas y banca</option>
+                        <option value="Informática y telecomunicaciones">Informática y telecomunicaciones</option>
+                        <option value="Ingenieros y técnicos">Ingenieros y técnicos</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Marketing y comunicación">Marketing y comunicación</option>
+                        <option value="RR.HH">RR.HH</option>
+                        <option value="Sanidad">Sanidad</option>
+                        <option value="Turismo">Turismo</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="form-group py-1">
+                    <label for="contract">Tipo de contrato</label>
+                    <select class="form-control" name="contract" id="contract">
+                        <option value="Indefinido">Indefinido</option>
+                        <option value="De duración determinada">De duración determinada</option>
+                        <option value="Autónomo">Autónomo</option>
+                        <option value="Otros Contratos">Otros contratos</option>
+                    </select>
+                </div>
+
+                <div class="form-group py-2">
+                    <label for="studies">Estudios mínimos</label>
+                    <select class="form-control" name="studies" id="studies">
+                        <option value="Sin estudios">Sin estudios</option>
+                        <option value="ESO">ESO</option>
+                        <option value="Grado medio">Grado medio</option>
+                        <option value="Grado superior">Grado superior</option>
+                        <option value="Grado">Grado</option>
+                    </select>
+                </div>
+
+                <div class="form-group py-1">
+                    <label for="experience">Experiencia(años)</label>
+                    <input class="form-control" name="experience" type="number">
+                </div>
+
+                <div class="form-group py-1">
+                    <label for="salary">Salario anual</label>
+                    <select class="form-control" name="salary" id="salary">
+                        <option value="6K - 12k">6K - 12k</option>
+                        <option value="12K - 20K">12K - 20K</option>
+                        <option value="20K - 30K">20K - 30K</option>
+                        <option value="+ 30K">+ 30K</option>
+                    </select>
+                </div>
+
+                <div class="d-none py-1">
+                    <label for="lat">Lat:</label>
+                    <input type="string" name="lat" value="{{lat}}"
+                        class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lat">
+                    <label for="lng">Lng:</label>
+                    <input type="string" name="lng" value="{{lng}}"
+                        class="form-control {{#if errors.price}}is-invalid{{/if}}" id="lng">
+                    {{#if errors.price}}
+                    <div class="invalid-feedback">
+                        {{errors.price}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="py-2 mt-3" id="map"></div>
+
+                {{!-- <div id="formatted-address"></div> --}}
+
+                <button class="btn btn-primary mt-3" type="submit">{{#if _id}}Guardar cambios{{else}}Crear{{/if}}</button>
+            </form>
+        </div>
     </div>
 </div>
 
 <script>
     {{#if lat}}
-        let marker = { lat: {{lat}}, lng: {{lng}} }
-    {{else}}
-        let marker = null
+    let marker = { lat: {{lat}}, lng: {{lng}} }
+    {{else }}
+    let marker = null
     {{/if}}
     const editable = true;
 </script>
 
 <script src="/javascripts/googleMaps.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly"async></script>
-
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initMap&libraries=&v=weekly"
+    async></script>

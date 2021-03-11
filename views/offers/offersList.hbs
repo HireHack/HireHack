@@ -1,12 +1,15 @@
-<h1 class="text-center">Listado de Ofertas</h1>
+<div id="offer-list-navbar" class="align-items-center d-flex justify-content-center justify-content-around">
+    <h1 class="space-around mt-2">Listado de Ofertas</h1>
+    <a id="show-filters" class="btn btn-outline-primary d-lg-none d-xl-none mt-2 mb-3">FILTROS</a>
+</div>
 
-<h2>Filtrar ofertas</h2>
-<div class="container">
+<div class="container-xl container-lg container-md container-fluid">
     <div class="row justify-content-between">
         {{!-- FILTROS --}}
-        <div class='col-3'>
+        <div id="filters" class="col-lg-3 col-12 d-none d-lg-block d-xl-block border rounded p-3 mb-2 h-25">
+            <h2><u>Filtrar ofertas</u></h2>
             <form class="form-group" action="/search-offers">
-                
+                <label for="address mb-0">Ciudad</p> 
                 {{!-- <label for="city">Ciudad</p>
                 <input class="form-control" name="address" type="text" id="city" value="{{query.address}}">
                 <label for="address">Ciudad</p> --}}
@@ -80,23 +83,37 @@
         </div>
 
         {{!-- OFERTAS --}}
-        <div id="filtered-offer" class='col-9'>
+        <div id="offer-list" class="col-lg-9 col-12">
             {{#each offers}}
-            <div class="border rounded p-3 mb-2">
+            <div class="border rounded p-3 mb-2 offer-list-info">
                 <h3>{{name}}</h3>
-                <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span style="color: red;">CERRADA</span>{{/if}}</p>
-                <p><b>Descripción:</b> <br> {{description}}</p>
-                <b>Requisitos:</b>
-                {{#each skills}}
-                {{#if @last}}
-                <span>{{this}}</span>
-                {{else}}
-                <span>{{this}}, </span>
-                {{/if}}
-                {{/each}}
-                <br>
-                <p>Oferta publicada por: <strong>{{offers_publishedByCompany.name}}</strong></p>
-                <a href="/offer-detail/{{_id}}">Ver detalle de la oferta</a>
+                <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
+                        style="color: red;">CERRADA</span>{{/if}}</p>
+
+                <div class="text-secondary d-block d-sm-none d-xs-none"><b><u><span id="show-description" class="show-description">Ver más</span></u></b></div>
+
+                <div id="description" class="d-none d-md-block d-sm-block d-xs-block description">
+                    <div>
+                        <b>Descripción</b>
+                        <p>{{description}}</p>
+                    </div>
+
+                    <div>
+                        <b>Requisitos</b>
+                        <div>
+                            {{#each skills}}
+                            {{#if @last}}
+                            <span>{{this}}</span>
+                            {{else}}
+                            <span>{{this}} |</span>
+                            {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-2">Oferta publicada por: <strong>{{offers_publishedByCompany.name}}</strong></p>
+                <a href="/offer-detail/{{_id}}">Ir a página de la oferta</a>
             </div>
             {{/each}}
         </div>
@@ -105,4 +122,5 @@
     </div>
 </div>
 
-<script src="/javascripts/results.js"></script>
+<script src="/javascripts/offer-list.js"></script>
+
