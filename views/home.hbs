@@ -14,79 +14,87 @@
 
 <div class="graphics">
     <section id="data">
-        <div class="mb-3 header">
-            <a id="show-employment" class="border rounded p-3 my-2">Empleo</a>
-            <a id="show-skills" class="border rounded p-3 my-2">Habilidades</a>
+        <div class="mb-3 header btn-graphics">
+            <a id="show-employment" class="p-3 my-2 btn btn-access">Empleo</a>
+            <a id="show-skills" class="p-3 my-2 btn btn-offers">Habilidades</a>
         </div>
         <div id="employment" class="p-3 justify-content-center flex-column">
-            <div class="home">
-                <h2>EMPLEO</h2>
-                <h3>Tasa de paro en España</h3>
-                <p>Las tasas de paro en España se han incrementado con la aparición del virus COVID-19. Se espera que la
-                    tendencia,
-                    una vez que la población este vacunada, tienda a invertirse, por lo que es hora de comenzar a
-                    cambiarla.
-                    ¿Estas preparado para encontrar tu trabajo ideal? ¡<a href="/candidate-login">Accede</a> a tu perfil
-                    y
-                    comienza la búsqueda!</p>
-                <div id="chart_div" style="width: 900px; height: 558px;"></div>
-                <div id="table_div"></div>
-                <p>Datos obtenidos en el INE (Instituto Nacional de Estadística)</p>
-            </div>
+            <div class="container">
+                {{!-- <h2>EMPLEO</h2> --}}
 
-            <div class="row justify-content-beetween home">
-                <h3>Teletrabajo</h3>
-                <p>Desde hace algunos años la tendencia a teletrabajar esta aumentando. Entre sus principales causas
-                    estan
-                    la mejora de la
-                    conciliación laboral con la familia o la disminución del tránsito automovilistico en las ciudades
-                    para
-                    reducir los niveles de
-                    constaminación. Sin embargo, la irupción del virus COVID-19, ha disparado el teletrabajo durante el
-                    actual y pasado año.</p>
-                <div class="col-6">
-                    <h4>Año 2021</h4>
-                    <canvas id="circleGraphic" width="10" height="5"></canvas>
-                    <p>Datos obtenidos en la API-V2 "Themuse" </p>
+                <div class="row justify-content-beetween home">
+                    <h3>Tasa de paro en España</h3>
+                    <p>Las tasas de paro en España se han incrementado con la aparición del virus COVID-19. Se espera que la
+                        tendencia,
+                        una vez que la población este vacunada, tienda a invertirse, por lo que es hora de comenzar a
+                        cambiarla.
+                        ¿Estas preparado para encontrar tu trabajo ideal? ¡<a href="/candidate-login">Accede</a> a tu perfil
+                        y
+                        comienza la búsqueda!</p>
+                    <div id="chart_div" style="width: 800px; height: 458px;"></div>
+                    <p>Datos obtenidos en el INE (Instituto Nacional de Estadística)</p>
                 </div>
-                <div class="col-6">
-                    <h4>Año 2019</h4>
-                    <canvas id="circleGraphic2" width="10" height="5"></canvas>
-                    <p>Datos obtenidos en la API-V2 "Themuse" </p>
-                </div>
-            </div>
+            
 
-            <div class="row justify-content-beetween home">
-                <h3>Profesiones más demandadas</h3>
-                <div class="col-6">
-                    <canvas id="lineGraphic" width="100" height="50"></canvas>
+                <div class="row justify-content-beetween home">
+                    <h3 class="my-3">Teletrabajo</h3>
+                    <p>Desde hace algunos años la tendencia a teletrabajar esta aumentando. Entre sus principales causas
+                        estan
+                        la mejora de la
+                        conciliación laboral con la familia o la disminución del tránsito automovilistico en las ciudades
+                        para
+                        reducir los niveles de
+                        constaminación. Sin embargo, la irupción del virus COVID-19, ha disparado el teletrabajo durante el
+                        actual y pasado año.</p>
+                    <div class="col-6">
+                        <h4>Año 2021</h4>
+                        <canvas id="circleGraphic" width="10" height="5"></canvas>
+                        <p>Datos obtenidos en la API-V2 "Themuse" </p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Año 2019</h4>
+                        <canvas id="circleGraphic2" width="10" height="5"></canvas>
+                        <p>Datos obtenidos en la API-V2 "Themuse" </p>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <canvas id="bar-chart-horizontal" width="100" height="50"></canvas>
+
+                <div class="home">
+                    <h3 class="my-3">Profesiones más demandadas</h3>
+                    <div>
+                    {{!-- <div class="col-6"> --}}
+                        <canvas id="lineGraphic"></canvas>
+                    </div>
+                    {{!-- <div class="col-6">
+                        <canvas id="bar-chart-horizontal" width="100" height="50"></canvas>
+                    </div>
+                    <p>Datos obtenidos en la web "El País Economía" </p> --}}
                 </div>
-                <p>Datos obtenidos en la web "El País Economía" </p>
             </div>
         </div>
 
         <div id="skills" class="p-3 d-none">
-            <h2>HABILIDADES</h2>
-            <div>
-                <h3>Perfiles profesionales más necesitados por Comunidades autónomas</h3>
-                <div id="chart_hab" style="width: 900px; height: 558px;"></div>
-                <p>Datos obtenidos de Addeco </p>
-                <h3>Competencias que se exigen en las nuevas profesiones </h3>
-            </div>
+            {{!-- <h2>HABILIDADES</h2> --}}
+            <div class="container">
+                <div class="row justify-content-beetween home">
+                    <h3>Perfiles profesionales más necesitados por Comunidades autónomas</h3>
+                    <div id="chart_hab" style="width: 800px; height: 458px;"></div>
+                    <p>Datos obtenidos de Addeco </p>
+                </div>
 
-            <div class="">
-                <h3>Competencias que se exigen en las nuevas profesiones </h3>
-                <img class="first_img" src="/img/habilidades.png" alt="People jumping">
-                <img class="second_img" src="/img/Habilidades2D.gif" alt="Abilities">
-                <br>
-            </div>
+                <div class="row justify-content-beetween home">
+                    <h3>Competencias que se exigen en las nuevas profesiones </h3>
+                    <div class="col-7">
+                        <img class="first_img" src="/img/habilidades.png" alt="People jumping">
+                    </div>
+                    <div class="col-5">
+                        <img class="second_img" src="/img/Habilidades2.png" alt="Abilities">
+                    </div>
+                </div>
 
-            <div>
-                <h3>¿Qué habilidades se estan pidiendo para las profesiones más demandadas?</h3>
-                <div id="sankey_basic" style="width: 1500px; height: 900px;"></div>
+                <div class="row justify-content-beetween home">
+                    <h3>¿Qué habilidades se estan pidiendo para las profesiones más demandadas?</h3>
+                    <div id="sankey_basic" style="width: 100px; height: 650px;"></div>
+                </div>
             </div>
         </div>
 
@@ -96,10 +104,12 @@
 <div class="video">
     <section>
             <div>
+                <h3 class="mb-5">¿Qué necesito saber para encontrar mi trabajo ideal?</h3>
                 <p>Si no sabes por donde empezar, nuestro compañeros de educaweb(*) han resumido en el siguiente
                     video, que
                     debes preparar para buscar empleo.</p>
             </div>
+                <img class="laptop" src="/img/laptop.png" alt="ordenador">
             <div>
                 <iframe width="650" height="355" src="https://www.youtube.com/embed/A0rdpQizK9Y?start=2" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -112,7 +122,7 @@
 
     <div class="container">
 
-        <h2 class="border-left-title">La isometría <br>es tendencia <br>en el diseño actual</h2>
+        <h2 class="border-left-title">La tecnología <br>utilizada para la<br>búsqueda de empleo</h2>
 
         <div class="slider">
             <div class="slider-track">
@@ -135,21 +145,21 @@
     <div class="container">
 
         <div>
-            <h2>Estas en buenas manos</h2>
+            <h2>Nuestras empresas nos avalan</h2>
             
-            <p>Millones de persona ya confian en HireHack para desarrollar su futuro profesional.</p>
+            <p>Miles de empresas y candidatos ya confian en HireHack para desarrollar su futuro profesional.</p>
             
-            <a class="btn btn-access" href="#">Descubre por qué</a>
+            <a class="btn btn-access" href="/">Descubre por qué</a>
 
         </div>
 
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-4"><img src="img/airbnb-logo.png" alt=""></div>
-            <div class="col-12 col-md-6 col-lg-4"><img src="img/capital-one-logo.png" alt=""></div>
-            <div class="col-12 col-md-6 col-lg-4"><img src="img/harvard-logo.png" alt=""></div>
-            <div class="col-12 col-md-6 col-lg-4"><img src="img/los-angeles-times-logo.png" alt=""></div>
-            <div class="col-12 col-md-6 col-lg-4"><img src="img/oracle-logo.png" alt=""></div>
-            <div class="col-12 col-md-6 col-lg-4"><img src="img/ticketmaster-logo.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/google.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/indeed.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/airbnb.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/movistar.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/jobtoday.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/vodafone.png" alt=""></div>
         </div>
 
     </div>

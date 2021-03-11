@@ -3,7 +3,7 @@
 body, html{
     min-height: 60rem;
     margin: 0;
-    padding: 0
+    padding: 0;
 } 
 
 /* TOAST */
@@ -141,6 +141,7 @@ body, html{
 .not-register > a {
     text-decoration: none;
     color: #276678;
+    margin-bottom: 3rem;
 }
 
 .login > h1 {
@@ -286,12 +287,14 @@ body, html{
 .border-left-title {
     border-left: 1px solid var(--border-color);
     padding: 20px;
+    color: #276678;
 }
 
 .join {
     padding: 150px 0;
     overflow: hidden;
-    background-color: #f6f5f5
+    background-color: #f6f5f5;
+    height: 60rem;
 }
 
 .join .slider {
@@ -318,10 +321,6 @@ body, html{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
 }
 
-.graphics {
-    background-color: #f6f5f5;
-}
-
 .video {
     width: 100%;
     background-color: #276678;
@@ -330,11 +329,37 @@ body, html{
     padding: 2rem 0;
 }
 
-iframe {
-    margin: 20px auto;
+.laptop {
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
 }
 
-#chart_div{
+iframe {
+    position: absolute;
+    top: 356%;
+    transform: translate(-50%, -50%);
+}
+
+.graphics {
+    background-color: #f6f5f5;
+}
+
+.home {
+    margin: 0 auto;
+    border: 2px solid #276678;
+    margin: 3rem;
+    border-radius: 3rem;
+    padding: 2rem;
+    background-color: #fff;
+}
+
+.btn-graphics{
+    text-align: center;
+    padding-top: 3rem;
+}
+
+#chart_div, #chart_hab{
     margin: 20px auto;
 }
 
@@ -342,24 +367,27 @@ img {
     width: 25%;
 }
 
-canvas {
+#lineGraphic {
+    width: 280;
+    height: 200;
     margin: 20px;
 }
 
 .first_img {
-    /* position: absolute; */
-    width: 80%;
+   width: 50rem;
 }
 
 .second_img {
-    /* position: relative; */
-    width: 33%;
-    left: 50%;
+    width: 20rem;
+    padding: 2rem;
 }
 
 #map {
     height: 400px;
 }
+
+
+/*-------------------------*/
 
 header {
     background-image: url("../img/HOME.jpg"); 
@@ -397,6 +425,7 @@ input[type="text"]:active {
 /* SPONSOR SECTION */
 .sponsors {
     text-align: center;
+    align-items: center;
     padding: 20px 0 40px 0;
     background-color: #276678;
     color: #fff;
@@ -420,7 +449,6 @@ input[type="text"]:active {
 .our-contents {
     background-color: #f6f5f5;
     padding: 30px 0px 10px 20px;
-    margin-top: 50px;
 }
 
 .our-contents ul {
@@ -459,7 +487,7 @@ footer {
     /* Siempre abajo */
     display:flex;
     flex-direction: column;
-    min-height: 100%;
+    height: 100%;
 }
 
 footer ul {
