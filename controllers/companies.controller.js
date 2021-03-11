@@ -8,6 +8,7 @@ const { sendDeleteCompanyEmail } = require('../config/mailer.config');
 const { sendCompanyEmailUpdateEmail } = require('../config/mailer.config');
 const { sendCompanyPasswordUpdateEmail } = require('../config/mailer.config');
 const { v4: uuidv4 } = require('uuid');
+const Application = require('../models/application.model');
 
 module.exports.companyProfile = (req, res, next) => {
     Offer.find({'offers_publishedByCompany': req.currentCompany.id})
@@ -125,11 +126,11 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    //console.log('req.currentCompany', req.currentCompany)
-     Company.findById({_id: req.currentCompany.id})
+     Company.findById(req.params.id)
          .then((companyToEdit) => res.render('companies/signup', companyToEdit))
-         .catch((err) => next(err))
+         .catch((err) => console.error(err))
 }
+
 
 module.exports.doEdit = (req, res, next) => {
 
@@ -138,7 +139,9 @@ module.exports.doEdit = (req, res, next) => {
     }
 
     Company.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        .then(() => { res.redirect('/company-profile') })
+        .then(() => {
+        res.redirect('/company-profile')
+        })
         .catch((err) => next(err))
 }
 
@@ -273,11 +276,27 @@ module.exports.delete = (req, res, next) => {
         .catch((err) => next(err));
 }
 
+
 module.exports.doDelete = (req, res, next) => {
-    Company.findOneAndRemove({token: req.params.token})
-        .then(() => {
-            req.flash('flashMessage', 'Tu cuenta ha sido borrada correctamente');
-            res.redirect('/');
+    Company.findOne({ token: req.params.token })
+        .then((company) => {
+            console.log('company 1st then', company)
+            Offer.find({ offers_publishedByCompany: company.id })
+                .then((offers) => {
+                    console.log('offers', offers)
+                    offers.forEach(offer => {
+                        offer.active = false
+                        offer.save()   
+                    })
+
+                    Company.findByIdAndDelete(company.id)
+                    .then(() => {
+                        req.flash('flashMessage', '¡Empresa eliminada con éxito!');
+                        res.redirect('/')
+                    })
+                }) 
+                .catch((e) => next(e))   
         })
-        .catch((err) => next(err));
+        .catch((e)=> next(e))
 }
+

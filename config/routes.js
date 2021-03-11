@@ -5,9 +5,12 @@ const candidatesController = require('../controllers/candidates.controller');
 const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
 const applicationController = require('../controllers/application.controller');
-const secure = require("../middlewares/secure.middleware");
+const secure = require('../middlewares/secure.middleware');
+// const paginate = require('../middlewares/paginate.middleware');
 const multer = require('multer');
 const upload = require ('./storage.config');
+const Offer = require('../models/offer.model');
+const Candidate = require('../models/candidate.model');
 const express = require('express');
 
 const GOOGLE_SCOPES = [
@@ -62,8 +65,8 @@ router.get('/auth/google', passport.authenticate('google-auth-companies', {
 router.get('/auth/google/callback', companiesController.doLoginGoogle);
 router.post('/company-logout', secure.checkRole('COMPANY'), companiesController.logout);
 
-router.get('/company-edit', secure.checkRole('COMPANY'), companiesController.edit);
-router.post('/company-edit', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit); // REVISAR
+router.get('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.edit);
+router.post('/company-edit/:id', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit); // REVISAR
 router.post('/company-update-email', secure.checkRole('COMPANY'), companiesController.updateEmail);
 router.post('/company-edit-email', secure.checkRole('COMPANY'), companiesController.doEditEmail);
 router.get('/company-edit-email/:token', secure.checkRole('COMPANY'), companiesController.editEmail);
@@ -73,17 +76,17 @@ router.get('/company-edit-password/:token', secure.checkRole('COMPANY'), compani
 
 router.post('/delete-company', secure.checkRole('COMPANY'), companiesController.delete);
 router.get('/delete-company/:token', companiesController.doDelete);
-// TODO --> REST ROUTES: router.get('/delete/company/:token', companiesController.doDelete);
 
 // OFFERS
 router.get('/offers-list', offersController.offersList);
+// router.get('/offers-filtered', paginate.results(Offer), offersController.offersFiltered);
 router.get('/offer-detail/:id', offersController.offerDetail);
 router.get('/offer-creation', secure.checkRole('COMPANY'), offersController.create);
 router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doCreate);
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
-router.get('/search-offers', offersController.search);
+router.get('/search-offers', /*paginate.results(Offer),*/ offersController.search);
 router.post('/offers/:id/paid', secure.checkRole('COMPANY'), offersController.paid);
 router.post('/offers/webhook', express.raw({ type: 'application/json'}), offersController.webhook);
 

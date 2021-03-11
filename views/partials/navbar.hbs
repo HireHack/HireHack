@@ -1,51 +1,85 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a href="/">
-            <img class="logo__header" src="../img/logoNav.png" alt="HireHack logo">
-        </a>
-        {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {{#if currentCompany}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}">{{#if
-                                    currentCompany}}Mi perfil{{else}}Empresas{{/if}}</a>
-                            </li>
-                            {{#if currentCompany}}
-                                <form action="/company-logout" method="POST">
-                                    <li>
-                                        <button>Cerrar sesión</button>
-                                    </li>
-                                </form>
-                            {{/if}}
-                            <li>
-                                <p>{{currentCompany.name}} | Empresa</p>
-                            </li>
-                        {{else}}
-                        {{#if currentCandidate}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/{{#if currentCandidate}}candidate-profile{{else}}candidate-login{{/if}}" tabindex="-1" aria-disabled="true">{{#if currentCandidate}}Mi perfil{{else}}Candidatos{{/if}}</a>
-                            </li>
-                            {{#if currentCandidate}}
-                                <form action="/candidate-logout" method="POST">
-                                    <li>
-                                        <button>Cerrar sesión</button>
-                                    </li>
-                                </form>
-                            {{/if}}
-                            <li>
-                                <p>{{currentCandidate.name}} | Candidato</p>
-                            </li>
-                        {{/if}}
-                    {{/if}}
-            </ul>
 
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-            <a class="nav-link active" aria-current="page" href="/main-login">Acceso</a>
+        <a href="/">
+            <img class="logo-header" src="/img/HireHack.png" alt="HireHack logo">
+        </a>
+
+        {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
+        <div id="navbarTogglerDemo03">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{#if currentCompany}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}"></a>
+                </li>
+                <li class="profile-status">
+                    <a href="/company-profile">{{currentCompany.name}} | Empresa</a>
+                </li>
+                {{#if currentCompany}}
+                <form action="/company-logout" method="POST">
+                    <li>
+                        <button class="nav-link active btn btn-logout">Cerrar sesión</button>
+                    </li>
+                </form>
+                {{/if}}
+                {{else}}
+                {{#if currentCandidate}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{#if currentCandidate}}candidate-profile{{else}}candidate-login{{/if}}"
+                        tabindex="-1" aria-disabled="true"></a>
+                </li>
+                <li class="profile-status">
+                    <a href="/candidate-profile">{{currentCandidate.name}} | Candidato</a>
+                </li>
+                {{#if currentCandidate}}
+                <form action="/candidate-logout" method="POST">
+                    <li>
+                        <button class="nav-link active btn btn-logout">Cerrar sesión</button>
+                    </li>
+                </form>
+                {{/if}}
+                {{/if}}
+                {{/if}}
+            </ul>
+            {{#unless currentCompany}}
+            {{#unless currentCandidate}}
+            <a class="nav-link active btn btn-offers" aria-current="page" href="/offers-list">Ofertas</a>
+            <button type="button" class="btn btn-access" data-toggle="modal" data-target="#accessModal"> Acceso </button> 
+            {{/unless}}
+            {{/unless}}
         </div>
     </div>
 </nav>
+
+<div class="modal fade" id="accessModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 ms-auto">
+                            <img class="modal-img d-block" src="https://images.unsplash.com/photo-1462206092226-f46025ffe607?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80" alt="Empresa">
+                            <a class="btn btn-access" href="/company-login" data-toggle="tooltip" title="GeeksforGeeks" data-placement="right">
+                                Empresa</a>   
+                        </div>
+                        <div class="col-md-6 ms-auto">
+                            <img class="modal-img d-block" src="https://images.unsplash.com/photo-1459499362902-55a20553e082?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80" alt="Candidato">
+                            <a class="btn btn-access text-center" href="/candidate-login" data-toggle="tooltip" title="GeeksforGeeks" data-placement="right">
+                                Candidato</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+

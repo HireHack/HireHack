@@ -1,63 +1,59 @@
-class APIHandler {
-    constructor(baseUrl) {
-        this.BASE_URL = baseUrl
-    }
-}
+// class APIHandler {
+//     constructor(baseUrl) {
+//         this.BASE_URL = baseUrl
+//     }
+// }
 
-const jobsAPI = new APIHandler ('http://localhost:8000')
+// const jobsAPI = new APIHandler (`${HOST_CHARTS}`)
 
-const getDataInfo = (url) => {
-    axios
-        .get(url)
-        .then((response) => {
-            //console.log(response.data.results)
-            const generalData = response.data
-            //console.log(generalData)
+// const getDataInfo = (url) => {
+//     axios
+//         .get(url)
+//         .then((response) => {
+//             //console.log(response.data.results)
+//             const generalData = response.data
+//             //console.log(generalData)
 
-            //LOCATION
-            const location = Object.values(generalData).map((jobLocation) => jobLocation['locations'])
-            //console.log (location)
-            const defLocations = location.map((jl) => jl['0'])
-            //console.log(defLocations)
-            const xAxis = defLocations.map((jl) => jl['name'])
-            //console.log(xAxis)
+//             //LOCATION
+//             const location = Object.values(generalData).map((jobLocation) => jobLocation['locations'])
+//             //console.log (location)
+//             const defLocations = location.map((jl) => jl['0'])
+//             //console.log(defLocations)
+//             const xAxis = defLocations.map((jl) => jl['name'])
+//             //console.log(xAxis)
 
-            const remoteLength = xAxis.filter(place => place === 'Flexible / Remote').length
-            //console.log (remoteLength)
+//             const remoteLength = xAxis.filter(place => place === 'Flexible / Remote').length
+//             //console.log (remoteLength)
             
             
-            //CATEGORIES
-            const yAxis = Object.values(generalData).map((jobName) => jobName['name'])
-            //console.log(yAxis)
+//             //CATEGORIES
+//             const yAxis = Object.values(generalData).map((jobName) => jobName['name'])
+//             //console.log(yAxis)
 
 
-            paintData1(remoteLength, xAxis.length - remoteLength)
-            paintData2(remoteLength, xAxis.length - remoteLength)
+//             paintData1(remoteLength, xAxis.length - remoteLength)
+//             paintData2(remoteLength, xAxis.length - remoteLength)
             
 
-        })
-        .catch((e)=> console.log(e))
-}
+//         })
+//         .catch((e)=> console.log(e))
+// }
 
 //Teletrabajo actualmente
-const paintData1 = (remoteLength, noRemoteLength) => {
-    const ctx = document.getElementById('circleGraphic').getContext('2d');
-    const myChart = new Chart(ctx, {
+new Chart(document.getElementById('circleGraphic').getContext('2d'), {
         type: 'doughnut',
         data: {
             labels: ['Teletrabajo', 'Presencial'], 
             datasets: [{
-                data: [remoteLength, noRemoteLength],
+                data: [1000, 600],
                 backgroundColor: ['#20ECAB', '#20ABEC'],
             }]
         }, 
     })
-}
+
 
 //Teletrabajo años anteriores
-const paintData2 = () => {
-    const ctx = document.getElementById('circleGraphic2').getContext('2d');
-    const myChart = new Chart(ctx, {
+new Chart(document.getElementById('circleGraphic2').getContext('2d'), {
         type: 'doughnut',
         data: {
             labels: ['Teletrabajo', 'Presencial'], 
@@ -67,7 +63,7 @@ const paintData2 = () => {
             }]
         }, 
     })
-}
+
 
 //Profesiones mas demandadas
 new Chart(document.getElementById("lineGraphic"), {
@@ -142,4 +138,4 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
 });
 
 
-getDataInfo(`http://localhost:8000/results`)
+//getDataInfo(`http://localhost:8000/results`)
