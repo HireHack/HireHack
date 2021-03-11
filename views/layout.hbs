@@ -25,12 +25,14 @@
 </head>
 
 <body>
-    
+
     {{> navbar}}
 
-    {{{body}}}
+    <div style="position: relative;">
+        {{> toast}}
+    </div>
 
-    {{> toast}}
+    {{{body}}}
 
     {{> footer}}
 
