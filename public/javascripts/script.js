@@ -12,9 +12,8 @@ setTimeout(() => {
   document.querySelectorAll('.toast').forEach(toast => {
     console.log(toast)
     new bootstrap.Toast(toast).hide()
-  })  
+  })
 }, 3000);
-
 
 // //PAGINATION
 // document.getElementById('page').addEventListener('click', ()  => {
