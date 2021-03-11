@@ -23,9 +23,13 @@ app.use((req, res, next) => {
     express.json()(req, res, next);
   }
 });
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(() => {
+  if (req.originalUrl === '/offers/webhook') {
+    next();
+  } else {
+    express.urlencoded({extended: false})(req, res, next);
+  }
+});
 app.use(express.static('public'));
 app.use(logger('dev'));
 app.use(session);
