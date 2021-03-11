@@ -65,8 +65,8 @@ router.get('/auth/google', passport.authenticate('google-auth-companies', {
 router.get('/auth/google/callback', companiesController.doLoginGoogle);
 router.post('/company-logout', secure.checkRole('COMPANY'), companiesController.logout);
 
-router.get('/company-edit', secure.checkRole('COMPANY'), companiesController.edit);
-router.post('/company-edit', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit); // REVISAR
+router.get('/company-edit/:id', secure.checkRole('COMPANY'), companiesController.edit);
+router.post('/company-edit/:id', secure.checkRole('COMPANY'), upload.single('picture'), companiesController.doEdit); // REVISAR
 router.post('/company-update-email', secure.checkRole('COMPANY'), companiesController.updateEmail);
 router.post('/company-edit-email', secure.checkRole('COMPANY'), companiesController.doEditEmail);
 router.get('/company-edit-email/:token', secure.checkRole('COMPANY'), companiesController.editEmail);

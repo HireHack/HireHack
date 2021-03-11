@@ -1,34 +1,40 @@
-<h1>Iniciar sesión</h1>
-<div class="col mb-2">
-    <div class="row">
-        <form action="/candidate-login" method="POST">
-            <div class="form-group">
-                <label for="email-input"> Email: </label>
-                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" value="{{candidate.email}}" name="email" id="email-input"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="password-input"> Contraseña: </label>
-                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="password" name="password" id="password-input" required>
-            </div>
-            {{#if errors}}
-            <div class="error-message invalid-feedback">{{errors}}</div>
-            {{/if}}
+<div class="container-xl container-lg container-md container-fluid login">
+    <h1>Iniciar sesión</h1>
+    <div class="col mb-2">
+        <div class="row">
+            <form action="/candidate-login" method="POST">
+                <div class="form-group">
+                    <label for="email-input"> Email: </label>
+                    <input class="input-login form-control {{#if errors}}is-invalid{{/if}}" type="email" value="{{candidate.email}}" name="email" id="email-input"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="password-input"> Contraseña: </label>
+                    <input class="input-login form-control {{#if errors}}is-invalid{{/if}}" type="password" name="password" id="password-input" required>
+                </div>
+                {{#if errors}}
+                <div class="error-message invalid-feedback">{{errors}}</div>
+                {{/if}}
 
-            <button class="btn btn-access" type="submit">Iniciar sesión</button>
-            <a href="/authenticate/google" class="btn btn-outline-dark" role="button" style="text-transform:none">
-            <img class="google-sign-in" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-            Iniciar sesión con Google</a>
-        </form>
+                <button class="btn btn-access mt-3" type="submit">Iniciar sesión</button>
+                <a href="/authenticate/google" class="btn btn-google btn-outline-dark mt-3" role="button" style="text-transform:none">
+                <img class="google-sign-in" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                Iniciar sesión con Google</a>
+            </form>
+        </div>
     </div>
+    <p class="not-register">¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a> | <a class="not-register" type="button" id="candidate-forgot-password">¿Has
+            olvidado tu contraseña? </a></p>
+    <form id="restoreEmail" class="update-form d-none" action="/candidate-update-password/{{currentCompany._id}}" method="post">
+        <div class="form-group">
+            <label for="email">Introduce tu email de recuperación:</label>
+            <input class="form-control" type="text" name="email">
+            <button type="submit" class="btn btn-offers mt-1 sendBtn" onclick="return clicked()">Enviar</button>
+        </div>
+    </form>
 </div>
-<p class="not-register">¿Todavía no estás registrado? <a href="/candidate-signup">Registrarme</a> | <a id="candidate-forgot-password" href="">¿Has
-        olvidado tu contraseña? </a></p>
-<form class="update-form d-inline d-none" action="/candidate-update-password/{{currentCompany._id}}" method="post">
-    <div class="form-group">
-        <label for="email">Introduce tu email de recuperación:</label>
-        <input class="form-control" type="text" name="email">
-        <button type="submit" class="btn btn-secondary mt-1" onclick="return clicked()">Enviar</button>
-    </div>
-</form>
+
+
+
+

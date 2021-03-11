@@ -33,6 +33,8 @@ const offerSchema = new mongoose.Schema({
     },
     experience: {
         type: Number,
+        min: 1,
+        max: 60,
     },
     salary: {
         type: String,

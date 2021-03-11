@@ -1,13 +1,13 @@
 //DELETE
 function clicked(input) {
-  return confirm(`¿Seguro que quieres eleiminar?`);
+    return confirm(`¿Seguro que quieres eliminar?`);
 }
 
 function update(input) {
   return confirm(`¿Seguro que quieres actualizar?`);
 }
-
-//FLASH
+  
+// FLASH
 setTimeout(() => {
   document.querySelectorAll('.toast').forEach(toast => {
     console.log(toast)
@@ -31,20 +31,3 @@ setTimeout(() => {
 //   axios.get(`http://localhost:3000/offers-list?page=${loadMore}`)
 //   .then((response) => console.log(response))
 // })
-
-
-//NAVBAR PARALLAX
-let depth
-
-document.onscroll = () => {
-
-  depth = window.scrollY
-
-  //console.log(depth)
-  
-  if (depth > 100) {
-    document.querySelector('.navbar').classList.add('thin')  
-  } else {
-    document.querySelector('.navbar').classList.remove('thin')
-  }
-}

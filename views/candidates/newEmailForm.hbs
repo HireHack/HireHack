@@ -1,22 +1,23 @@
-<h1>Introduce tu nuevo correo electrónico</h1>
-<div class="col mb-2">
-    <div class="row">
-        <form action="/candidate-edit-email" method="POST">
-            <div class="form-group">
-                <label for="email-input"> Email Antiguo: </label>
-                <p>{{currentCandidate.email}}</p>
-                <label for="new-email-input"> Nuevo Email: </label>
-                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="newEmail" id="new-email-input">
-                {{#if errors.email}}
-                <div class="invalid-feedback">{{errors.email}}</div>
-                {{/if}}
-                <label for="confirm-email-input"> Confirmar Nuevo Email: </label>
-                <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="confirmEmail" id="confirm-email-input">
-                {{#if errors.confirmEmail}}
-                <div class="invalid-feedback">{{errors.confirmEmail}}</div>
-                {{/if}}
-                <button class="btn btn-primary mt-3" type="submit">Actualizar</button>
-            </div>
-        </form>
+<div class="container-xl container-lg container-md container-fluid login">
+    <h1>Introduce tu nuevo correo electrónico</h1>
+    <div class="col mb-2">
+        <div class="row">
+            <form action="/candidate-edit-email" method="POST">
+                <div class="form-group">
+                    <p>Email Antiguo: <b>{{currentCandidate.email}}</b></p>
+                    <label class="label-login" for="new-email-input"> Nuevo Email: </label>
+                    <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="newEmail" id="new-email-input">
+                    {{#if errors.email}}
+                    <div class="invalid-feedback">{{errors.email}}</div>
+                    {{/if}}
+                    <label class="label-login" for="confirm-email-input"> Confirmar Nuevo Email: </label>
+                    <input class="form-control {{#if errors}}is-invalid{{/if}}" type="email" name="confirmEmail" id="confirm-email-input">
+                    {{#if errors.confirmEmail}}
+                    <div class="invalid-feedback">{{errors.confirmEmail}}</div>
+                    {{/if}}
+                    <button class="btn btn-access mt-3" type="submit">Actualizar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

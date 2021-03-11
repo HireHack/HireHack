@@ -1,11 +1,12 @@
-<h1>{{#if currentCandidate}}Editar perfil de candidato{{else}}Registro como candidato{{/if}}</h1>
+<div class="container-xl container-lg container-md container-fluid login">
+<h1>{{#if currentCandidate}}Editar perfil{{else}}Registro{{/if}}</h1>
 <div class="col mb-2">
     <div class="row">
         <form action="{{#if currentCandidate}}/candidate-edit/{{_id}}{{else}}/candidate-signup{{/if}}" method="POST" {{#if currentCandidate}}enctype="multipart/form-data"{{/if}}>
             {{#if currentCandidate}}    
             <div class="form-group">
                 <label for="candidatePicture-input" name="picture"> Foto de perfil: </label>
-                <input class="form-control" value="{{picture}}" type="file" name="picture" id="candidatePicture-input">
+                <input class="input-login form-control" value="{{picture}}" type="file" name="picture" id="candidatePicture-input">
                 {{#if errors.picture}}
                 <div class="invalid-feedback">
                     {{errors.picture}}
@@ -15,17 +16,17 @@
             {{/if}}
             <div class="form-group">
                 <label for="candidateName-input" name="name"> Nombre: </label>
-                <input class="form-control" value="{{name}}" type="text" name="name" id="candidateName-input">
+                <input class="input-login form-control" value="{{name}}" type="text" name="name" id="candidateName-input">
             </div>
             <div class="form-group">
                 <label for="candidateSurname-input" name="surname"> Apellidos: </label>
-                <input class="form-control" value="{{surname}}" type="text" name="surname" id="candidateSurname-input">
+                <input class="input-login form-control" value="{{surname}}" type="text" name="surname" id="candidateSurname-input">
             </div>
 
             {{#unless currentCandidate}}
             <div class="form-group">
                 <label for="email-input" name="email"> Email: </label>
-                <input class="form-control {{#if errors.email}}is-invalid{{/if}}" type="email"
+                <input class="input-login form-control {{#if errors.email}}is-invalid{{/if}}" type="email"
                     value="{{candidate.email}}" name="email" id="email-input">
                 {{#if errors.email}}
                 <div class="invalid-feedback">{{errors.email}}</div>
@@ -33,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label for="candidatePassword-input" name="password"> Contraseña: </label>
-                <input class="form-control {{#if errors.password}}is-invalid{{/if}}" type="password" name="password"
+                <input class="input-login form-control {{#if errors.password}}is-invalid{{/if}}" type="password" name="password"
                     id="candidatePassword-input">
                 {{#if errors.password}}
                 <div class="invalid-feedback">{{errors.password}}</div>
@@ -44,19 +45,24 @@
             {{#if currentCandidate}}
             <div class="form-group">
                 <label for="candidateAge-input" name="age"> Edad: </label>
-                <input class="form-control" value="{{age}}" type="number" name="age" id="candidateAge-input" required>
+                <input class="input-login form-control" value="{{age}}" type="number" name="age" id="candidateAge-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="candidatePhoneNumber-input" name="phone"> Número de teléfono: </label>
+                <input class="input-login form-control" value="{{phone}}" type="number" name="phone" id="candidatePhoneNumber-input" required>
             </div>
 
             <div class="form-group">
                 <label for="candidateResume-input" name="resume">Tu curriculum:</label>
 
-                <textarea class="form-control" name="resume" id="resume" value="{{resume}}" cols="30" rows="10"></textarea>
+                <textarea class="input-login form-control" name="resume" id="resume" cols="30" rows="10">{{resume}}</textarea>
 
             </div>
 
             <div class="form-group">
                 <label for="skills-input"> Competencias: </label>
-                <input class="form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
+                <input class="input-login form-control {{#if errors.skills}}is-invalid{{/if}}" type="text" name="skills"
                     id="skills-input" value="{{skills}}"
 
                     placeholder="Ej.: creatividad, trabajo en equipo, orientación a resultados, organización, motivación, comunicación, compromiso, trabajo bajo presión...">
@@ -68,16 +74,8 @@
             
             <div class="form-group">
                 <label for="address-input"> Dirección: </label>
-                <input class="form-control mb-2" value="{{address}}" type="text"
+                <input class="input-login form-control mb-2" value="{{address}}" type="text"
                     name="address" id="address-input" placeholder=""required>
-                {{!-- <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.number}}" type="text"
-                    name="address.number" id="address-input" placeholder="Número"required>
-                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.zipCode}}" type="text"
-                    name="address.zipCode" id="address-input" placeholder="Código Postal"required>
-                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.city}}" type="text"
-                    name="address.city" id="address-input" placeholder="Ciudad" required>
-                <input class="form-control mb-2 {{#if errors.address}}is-invalid{{/if}}" value="{{address.country}}" type="text"
-                    name="address.country" id="address-input" placeholder="País"required> --}}
                 {{#if errors.address}}
                 <div class="invalid-feedback">{{errors.address}}</div>
                 {{/if}}
@@ -85,13 +83,13 @@
 
             <div class="form-group">
                 <label for="candidateLinkedin-input" name="linkedin"> Linkedin: </label>
-                <input class="form-control" value="{{linkedin}}" type="text" name="linkedin"
+                <input class="input-login form-control" value="{{linkedin}}" type="text" name="linkedin"
                     id="candidateLinkedin-input">
             </div>
 
             <div class="form-group">
                 <label for="candidateCV-input" name="cv"> Adjuntar CV: </label>
-                <input class="form-control" value="{{cv}}" type="file" name="cv" id="candidateCv-input">
+                <input class="input-login form-control" value="{{cv}}" type="file" name="cv" id="candidateCv-input">
                 {{#if errors.cv}}
                 <div class="invalid-feedback">
                     {{errors.cv}}
@@ -100,34 +98,36 @@
             </div>
 
             {{/if}}
-
-            <button class="btn btn-success mt-3" type="submit">{{#if currentCandidate}}Guardar{{else}}Registro{{/if}}</button>
-            <br>
-            {{#if currentCandidate}}<a class="form-group" href="#">Ajustes de privacidad</a>{{/if}} <!-- TODO: DOM shows delete profile, update password and update email-->
+            
+            <button class="btn btn-access mt-3" type="submit">{{#if currentCandidate}}Guardar{{else}}Registro{{/if}}</button>  
         </form>
     </div>
 </div>
 
+{{#if currentCandidate}}<a type="button" id="privacity"><u>Ajustes de privacidad</u></a>{{/if}} 
+
 {{#unless currentCandidate}}
-<p>¿Ya tienes una cuenta? <a href="/candidate-login">Iniciar sesión</a></p>
+<p class="not-register">¿Ya tienes una cuenta? <a href="/candidate-login">Iniciar sesión</a></p>
 {{/unless}}
 
 
 {{#if currentCandidate}}
-<form class="delete-form d-inline" action="/delete-candidate" method="post">
+<form id="dropOut" class="delete-form d-none" action="/delete-candidate" method="post">
     <button type="submit" class="btn btn-outline-danger" onclick="return clicked()">Darse de baja</button>
 </form>
 
 {{#unlessSocialCandidate currentCandidate}}
-<form class="update-form d-inline" action="/candidate-update-password" method="post">
-    <button type="submit" class="btn btn-outline-secondary" onclick="return clicked()">Actualizar contraseña</button>
+<form id="restorePass" class="update-form d-none" action="/candidate-update-password" method="post">
+    <button type="submit" class="btn btn-offers" onclick="return update()">Actualizar contraseña</button>
 </form>
 
-<form class="update-form d-inline" action="/candidate-update-email" method="post">
-    <button type="submit" class="btn btn-outline-secondary" onclick="return clicked()">Actualizar email</button>
+<form id="restoreEm" class="update-form d-none" action="/candidate-update-email" method="post">
+    <button type="submit" class="btn btn-offers" onclick="return update()">Actualizar email</button>
 </form>
 {{/unlessSocialCandidate}}
 
 {{/if}}
+
+</div>
 
 
