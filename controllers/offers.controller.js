@@ -4,14 +4,14 @@ const Application = require('../models/application.model');
 const flash = require('connect-flash');
 
 module.exports.offersList = (req, res, next) => {
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit) || 7;
-    const startIndex = (page - 1) * limit;
+    // const page = parseInt(req.query.page);
+    // const limit = parseInt(req.query.limit) || 7;
+    // const startIndex = (page - 1) * limit;
     
     Offer.find({ "active": true })
         .sort('-createdAt')
-        .limit(limit)
-        .skip(startIndex)
+        // .limit(limit)
+        // .skip(startIndex)
         .populate('offers_publishedByCompany')
         .then((offers) => {
             res.render('offers/offersList', {
@@ -21,20 +21,20 @@ module.exports.offersList = (req, res, next) => {
         .catch((err) => next(err))
 };
 
-module.exports.offersFiltered = (req, res, next) => {
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit) || 7;
-    const startIndex = (page - 1) * limit;
-    const query = req.query.search;
+// module.exports.offersFiltered = (req, res, next) => {
+//     const page = parseInt(req.query.page);
+//     const limit = parseInt(req.query.limit) || 7;
+//     const startIndex = (page - 1) * limit;
+//     const query = req.query.search;
 
-    Offer.find()
-        .populate('offers_publishedByCompany')
-        .sort('-createdAt')
-        .limit(limit)
-        .skip(startIndex)
-        .then((offers) => res.send(offers))
-        .catch((err) => next(err));
-}
+//     Offer.find()
+//         .populate('offers_publishedByCompany')
+//         .sort('-createdAt')
+//         .limit(limit)
+//         .skip(startIndex)
+//         .then((offers) => res.send(offers))
+//         .catch((err) => next(err));
+// }
 
 module.exports.offerDetail = (req, res, next) => {
     Offer.findById(req.params.id)
@@ -173,10 +173,11 @@ module.exports.search = (req, res, next) => {
     .map(([k, v]) => [k, { '$regex' : v, '$options' : 'i' }]));
 
     Offer.find(query)
-    .populate('offers_publishedByCompany')
-    .then((offers) => {
-        res.render('offers/offersList', {
-            offers, query: req.query
+        .sort('-createdAt')
+        .populate('offers_publishedByCompany')
+        .then((offers) => {
+            res.render('offers/offersList', {
+                offers, query: req.query
+            })
         })
-    })
 }

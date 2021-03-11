@@ -6,7 +6,7 @@ const companiesController = require('../controllers/companies.controller');
 const offersController = require('../controllers/offers.controller');
 const applicationController = require('../controllers/application.controller');
 const secure = require('../middlewares/secure.middleware');
-const paginate = require('../middlewares/paginate.middleware');
+// const paginate = require('../middlewares/paginate.middleware');
 const multer = require('multer');
 const upload = require ('./storage.config');
 const Offer = require('../models/offer.model');
@@ -75,18 +75,17 @@ router.get('/company-edit-password/:token', secure.checkRole('COMPANY'), compani
 
 router.post('/delete-company', secure.checkRole('COMPANY'), companiesController.delete);
 router.get('/delete-company/:token', companiesController.doDelete);
-// TODO --> REST ROUTES: router.get('/delete/company/:token', companiesController.doDelete);
 
 // OFFERS
 router.get('/offers-list', offersController.offersList);
-router.get('/offers-filtered', paginate.results(Offer), offersController.offersFiltered);
+// router.get('/offers-filtered', paginate.results(Offer), offersController.offersFiltered);
 router.get('/offer-detail/:id', offersController.offerDetail);
 router.get('/offer-creation', secure.checkRole('COMPANY'), offersController.create);
 router.post('/offer-creation', secure.checkRole('COMPANY'), offersController.doCreate);
 router.get('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.edit);
 router.post('/edit-offer/:id', secure.checkRole('COMPANY'), offersController.doEdit);
 router.post('/delete-offer/:id', secure.checkRole('COMPANY'), offersController.delete);
-router.get('/search-offers', paginate.results(Offer), offersController.search);
+router.get('/search-offers', /*paginate.results(Offer),*/ offersController.search);
 
 // APPLICATION
 router.get('/application-detail/:id', secure.checkRole('COMPANY'), applicationController.detail);
