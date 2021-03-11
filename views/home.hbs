@@ -1,10 +1,10 @@
-<header class="d-flex align-items-center justify-content-start text-white p-5 mb-3">
+<header class="d-flex align-items-center justify-content-start text-white p-5">
     <div class="header-data col-12 p-5">
         <h1 class="h1"><strong>HireHack</strong></h1>
         <h2 class="">Your future starts <u>here</u>.</h2>
         <form class="d-flex flex-column col-4" action="/search" method="GET">
             <input class="form-control mt-2 col-4" name="search" type="search" placeholder="Puesto, empresa o palabra clave" aria-label="Search">
-            <button class="btn btn-outline-light align-self-start mt-2 col-2" type="submit">Buscar</button>
+            <button class="btn btn-outline-light align-self-start mt-2" type="submit">Buscar</button>
         </form>
     </div>
     <div>
@@ -12,13 +12,13 @@
     </div>
 </header>
 
-<div class="container main__content container mt-3">
-    <section id="data" class="my-5">
+<div class="graphics">
+    <section id="data">
         <div class="mb-3 header">
             <a id="show-employment" class="border rounded p-3 my-2">Empleo</a>
             <a id="show-skills" class="border rounded p-3 my-2">Habilidades</a>
         </div>
-        <div id="employment" class="border rounded p-3 d-flex justify-content-center flex-column">
+        <div id="employment" class="p-3 justify-content-center flex-column">
             <div class="home">
                 <h2>EMPLEO</h2>
                 <h3>Tasa de paro en España</h3>
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <div id="skills" class="border rounded p-3 d-none">
+        <div id="skills" class="p-3 d-none">
             <h2>HABILIDADES</h2>
             <div>
                 <h3>Perfiles profesionales más necesitados por Comunidades autónomas</h3>
@@ -88,22 +88,70 @@
                 <h3>¿Qué habilidades se estan pidiendo para las profesiones más demandadas?</h3>
                 <div id="sankey_basic" style="width: 1500px; height: 900px;"></div>
             </div>
+        </div>
 
-            <div class="iframeVideo">
-                <div>
-                    <iframe width="700" height="405" src="https://www.youtube.com/embed/A0rdpQizK9Y?start=2"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-                {{!-- <div class="col-4">
-                    <p>Si no sabes por donde empezar, nuestro compañeros de educaweb(*) han resumido en el siguiente
-                        video, que
-                        deber preparar para buscar empleo.</p>
-                </div> --}}
+    </section>
+</div>
+
+<div class="video">
+    <section>
+            <div>
+                <p>Si no sabes por donde empezar, nuestro compañeros de educaweb(*) han resumido en el siguiente
+                    video, que
+                    debes preparar para buscar empleo.</p>
             </div>
+            <div>
+                <iframe width="650" height="355" src="https://www.youtube.com/embed/A0rdpQizK9Y?start=2" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+    </section>
+</div>
+
+<aside class="join border-top">
+
+    <div class="container">
+
+        <h2 class="border-left-title">La isometría <br>es tendencia <br>en el diseño actual</h2>
+
+        <div class="slider">
+            <div class="slider-track">
+                <ul class="parallax" data-speed=".8" data-axis="horizontal">
+                    <li><img src="img/slide1.jpg" alt="Imagen de trabajo"></li>
+                    <li><img src="img/slide2.jpg" alt="Imagen de trabajo"></li>
+                    <li><img src="img/slide3.jpg" alt="Imagen de trabajo"></li>
+                    <li><img src="img/slide4.jpg" alt="Imagen de trabajo"></li>
+                    <li><img src="img/slide5.jpg" alt="Imagen de trabajo"></li>
+                    <li><img src="img/slide6.jpg" alt="Imagen de trabajo"></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</aside>
+
+<section class="sponsors background-grey">
+    <div class="container">
+
+        <div>
+            <h2>Estas en buenas manos</h2>
+            
+            <p>Millones de persona ya confian en HireHack para desarrollar su futuro profesional.</p>
+            
+            <a class="btn btn-access" href="#">Descubre por qué</a>
 
         </div>
-    </section>
 
-</div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/airbnb-logo.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/capital-one-logo.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/harvard-logo.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/los-angeles-times-logo.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/oracle-logo.png" alt=""></div>
+            <div class="col-12 col-md-6 col-lg-4"><img src="img/ticketmaster-logo.png" alt=""></div>
+        </div>
+
+    </div>
+</section>
+

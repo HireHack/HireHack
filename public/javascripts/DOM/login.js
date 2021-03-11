@@ -1,3 +1,3 @@
 document.getElementById('candidate-forgot-password').addEventListener('click', () => {
-    document.getElementById('restoreEmail').classList.remove('d-none')
+    document.getElementById('restoreEmail').classList.toggle('d-none')
 })

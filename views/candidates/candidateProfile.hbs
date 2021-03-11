@@ -5,21 +5,20 @@
 
 </div>
 
-<h1 class="candidate-name">{{currentCandidate.name}} {{currentCandidate.surname}}</h1>
+<h1 class="candidate-name text-uppercase">{{currentCandidate.name}} {{currentCandidate.surname}}</h1>
 
 <div class="container-xl container-lg container-md container-fluid">
-    <div>
         <h2>Mis ofertas</h2>
 
         {{#each application}}
         <div class="border rounded p-3 mb-2 offers-candidate">
             <h3>{{offer.name}}</h3>
-            <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
+            <p>Estado: {{#if offer.active}}<span style="color: green;">ABIERTA</span>{{else}}<span
                     style="color: red;">CERRADA</span>{{/if}}</p>
             
-            <a type="button" id="show-more-profile" class="text-secondary d-block show-more"><b>Ver más</b></a>
+            <a type="button" class="text-secondary d-block show-more show-me">Ver más</a>
             
-            <div id="description-offer" class="d-none">
+            <div id="description1" class="d-none">
                 <p><b>Descripción: </b> <br> {{offer.description}}</p>
                 <p><b>Lugar de la oferta: </b> {{offer.address}}</p>
                 <p><b>Requisitos:</b>
@@ -39,7 +38,6 @@
             </div>
         </div>
         {{/each}}
-    </div>
 </div>
 
 {{!-- MODAL EDIT CANDIDATE--}}
@@ -64,8 +62,8 @@
                             </p>
                             <p><b>Edad: </b> {{currentCandidate.age}} años</p>
                             <p><b>Mi curriculum: </b></p>
-                            <p id="description" class="d-none"> {{currentCandidate.resume}}</p>
-                            <a type="button" id="show-more" class="text-secondary d-block show-more"><b>Ver más</b></a>
+                            <p id="description-profile" class="d-none"> {{currentCandidate.resume}}</p>
+                            <a type="button" id="show-more-profile" class="text-secondary d-block show-more"><b>Ver más</b></a>
                             <p><b>Dirección: </b>{{currentCandidate.address}}</p>
                             <p><b>Mi linkedIn: </b>{{currentCandidate.linkedin}}</p>
                             {{#if currentCandidate.cv}}
