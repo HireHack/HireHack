@@ -1,5 +1,5 @@
 //MAPA TASA PARO
-google.load('visualization', '1', { 'packages': ['geochart'] });
+google.load('visualization', { 'packages': ['geochart'] });
      google.setOnLoadCallback(drawMarkersMap1);
 
     function drawMarkersMap1() {
@@ -20,18 +20,28 @@ google.load('visualization', '1', { 'packages': ['geochart'] });
           values: [10, 12, 14, 15, 16, 17, 21, 23, 25],
           colors: ['#6A20EC', '#2045EC', '#20BBEC', '#20ECD0', '#20EC95', '#5BEC20', '#DDEC20', '#ECB120', '#e31b23'],
         },
-        legend: {textStyle: {color: 'blue', fontSize: 16}}
-        // backgroundColor: '#81d4fa',
+        legend: {textStyle: {color: 'blue', fontSize: 16}},
+        backgroundColor: '#fff',
         // datalessRegionColor: '#BBB9B2',
         // defaultColor: '#f5f5f5',
     };
 
       var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
       chart.draw(data, options);
+
+      function resizeHandler () {
+            chart.draw(data, options);
+        }
+        if (window.addEventListener) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent('onresize', resizeHandler);
+        }
 };
 
 //MAPA HABILIDADES
-google.load('visualization', '2', { 'packages': ['geochart'] });
+google.load('visualization', { 'packages': ['geochart'] });
      google.setOnLoadCallback(drawMarkersMap);
 
     function drawMarkersMap() {
@@ -66,13 +76,23 @@ google.load('visualization', '2', { 'packages': ['geochart'] });
           values: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
           colors: ['#1FC1D7', '#2F68EB', '#fff', '#369C2A', '#E1D133', '#E15533', '#D21E13', '#E1F517', '#AA1EDA', '#DA1E2C', '#DA1E6B', '#DAC91E', '#050101', '#670D37', '#8CE69B', '#D5C509', '#842CC4'],
         },
-        // backgroundColor: '#81d4fa',
+        backgroundColor: '#fff',
         // datalessRegionColor: '#BBB9B2',
         // defaultColor: '#f5f5f5',
     };
 
       var chart = new google.visualization.GeoChart(document.getElementById('chart_hab'));
       chart.draw(data, options);
+
+      function resizeHandler () {
+            chart.draw(data, options);
+        }
+        if (window.addEventListener) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent('onresize', resizeHandler);
+        }
 };
 
 //SANKEY HABILIDADES
@@ -106,12 +126,25 @@ google.charts.load('current', {'packages':['sankey']});
 
         // Sets chart options.
         var options = {
-          width: 600,
+          width: 650,
+          height: 500,
         };
 
         // Instantiates and draws our chart, passing in some options.
         var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
         chart.draw(data, options);
+
+        function resizeHandler () {
+            chart.draw(data, options);
+        }
+        if (window.addEventListener) {
+            window.addEventListener('resize', resizeHandler, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent('onresize', resizeHandler);
+        }
       }
+
+
 
 
