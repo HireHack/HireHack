@@ -28,3 +28,4 @@ document.onscroll = () => {
     
     slides.style.transform = `translate(${horizontalSum}px, 0px)`
 }
+

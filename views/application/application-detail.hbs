@@ -1,14 +1,10 @@
-<div id="offer-list-navbar">
-    <div class="container-xl container-lg container-md container-fluid my-2 px-0">
-        <div
-            class="align-items-center d-block d-sm-flex justify-content-between container-xl container-lg container-md container-fluid">
-            <h1>{{offer.name}}</h1>
-            <form class="delete-form" action="/delete-offer/{{offer._id}}" method="post">
+<div id="application-list-navbar" class="navbar-inverse sticky-top2 align-items-center d-flex justify-content-center justify-content-around">
+    <h1>{{offer.name}}</h1>
+    <form class="delete-form" action="/delete-offer/{{offer._id}}" method="post">
                 <button type="submit" class="btn btn-danger" onclick="return clicked()">Cerrar proceso</button>
             </form>
-        </div>
-    </div>
 </div>
+
 
 <div class="container-xl container-lg container-md container-fluid">
     {{!-- OFFER --}}

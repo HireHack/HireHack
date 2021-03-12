@@ -99,7 +99,7 @@ passport.use('local-auth-candidates', new LocalStrategy({
 passport.use('google-auth-companies', new GoogleStrategy({
     clientID: process.env.GCO_CLIENT_ID,
     clientSecret: process.env.GCO_CLIENT_SECRET,
-    callbackURL: process.env.GCO_REDIRECT_URI_COMPANIES,
+    callbackURL: process.env.GCO_REDIRECT_URI_COMPANIES_LOCAL,
 }, (accessToken, refreshToken, profile, next) => {
     const googleID = profile.id
     const email = profile.emails[0] ? profile.emails[0].value : undefined

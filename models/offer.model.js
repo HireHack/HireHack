@@ -32,9 +32,9 @@ const offerSchema = new mongoose.Schema({
         //enum: ["Sin estudios", "Educación secundaria Obligatoria", "Grado medio", "Grado superior", "Grado"]
     },
     experience: {
-        type: Number,
-        min: 1,
-        max: 60,
+        type: String,
+        // min: 1,
+        // max: 60,
     },
     salary: {
         type: String,

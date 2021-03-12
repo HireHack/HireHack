@@ -1,4 +1,4 @@
-<div id="offer-list-navbar" class="align-items-center d-flex justify-content-center justify-content-around">
+<div id="offer-list-navbar" class="navbar-inverse sticky-top2 align-items-center d-flex justify-content-center justify-content-around">
     <h1 class="space-around mt-2">Listado de Ofertas</h1>
     <a id="show-filters" class="btn btn-outline-primary d-lg-none d-xl-none mt-2 mb-3">FILTROS</a>
 </div>
@@ -7,14 +7,13 @@
     <div class="row justify-content-between">
         {{!-- FILTROS --}}
         <div id="filters" class="col-lg-3 col-12 d-none d-lg-block d-xl-block border rounded p-3 mb-2 h-25">
-            <h2><u>Filtrar ofertas</u></h2>
+            <h2><u>FILTROS</u></h2>
             <form class="form-group" action="/search-offers">
-                <label for="address mb-0">Ciudad</p> 
+                <label for="address" class="mb-0">Ciudad</p> 
                 {{!-- <label for="city">Ciudad</p>
                 <input class="form-control" name="address" type="text" id="city" value="{{query.address}}">
                 <label for="address">Ciudad</p> --}}
-                
-                <input class="form-control" name="address" type="text" id="address">
+                <input class="form-control mt-0" name="address" type="text" id="address">
                 <button class="btn btn-secondary text-white mt-2 mb-3" type='submit'>Buscar</button>
             </form>
 
@@ -87,8 +86,6 @@
             {{#each offers}}
             <div class="border rounded p-3 mb-2 offer-list-info">
                 <h3>{{name}}</h3>
-                <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
-                        style="color: red;">CERRADA</span>{{/if}}</p>
 
                 <div class="text-secondary d-block d-sm-none d-xs-none"><b><u><span id="show-description" class="show-description">Ver más</span></u></b></div>
 
@@ -122,5 +119,4 @@
     </div>
 </div>
 
-<script src="/javascripts/offer-list.js"></script>
 

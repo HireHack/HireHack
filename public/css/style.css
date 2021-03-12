@@ -16,6 +16,7 @@ body, html{
     object-fit: cover;
     width: 7rem;
     height: 7rem;
+    z-index: 1;
 }
 
 /* TOAST */
@@ -45,8 +46,20 @@ body, html{
     transition: all .3s;
     /* position: fixed; */
     width: 100%;
-    z-index: 9999;
+    z-index: 1;
     top:0;
+}
+
+#fake-candidate {
+    z-index: -1;
+}
+
+.sticky-top2 {
+    background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4rem;
+    z-index: 1030;
 }
 
 .thin {
@@ -54,15 +67,16 @@ body, html{
 }
 
 .logo-header{
-    width: 10%;
+    border-radius: 2px;
+    width: 25%;
 }
 
 .btn {
     font-size: 1.2rem;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin: 10px;
-    display:inline;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    border-width: 0.15rem;
+    margin: 0.1rem;
 }
 
 .btn-offers {
@@ -81,6 +95,7 @@ body, html{
     color: #276678;
     border-color: #276678;
     background-color: #fff;
+    padding: 0.25rem 0.5rem;
 }
 
 .btn-access:hover {
@@ -96,6 +111,7 @@ body, html{
     border-color: #276678;
     background-color: #fff;
     align-self: center;
+    padding: 0.25rem 0.5rem;
 }
 
 .btn-logout:hover {
@@ -217,7 +233,6 @@ body, html{
 }
 
 .company-img {
-    width: 80%;
     height: 45rem;
 }
 
@@ -368,9 +383,9 @@ body, html{
 
 #laptop {
     box-sizing: border-box;
-    background: url(http://176.32.230.43/testdigitalmarketingmentor.co.uk/wp-content/uploads/2016/07/laptop-1000x728-trans.png) center center no-repeat;
+    background: url('../img/laptop.png') center center no-repeat;
     background-size: contain;
-    padding: 11.7% 17.5% 15.4%;
+    padding: 11.1% 17.5% 14.9%;
     position: absolute;
     top: 0;
     left: 0;
@@ -448,7 +463,7 @@ header {
     background-position: en;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 40rem;
+    height: 35rem;
     z-index: 1;
 }
 
@@ -483,7 +498,6 @@ input[type="text"]:active {
     padding: 20px 0 40px 0;
     background-color: #276678;
     color: #fff;
-
 }
 
 .sponsors p {
