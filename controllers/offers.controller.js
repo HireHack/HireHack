@@ -227,9 +227,9 @@ module.exports.delete = (req, res, next) => {
 module.exports.search = (req, res, next) => {
 // Optimized search
     const query = Object.fromEntries(Object.entries(req.query).filter(([_, v]) => !!v)
-    .map(([k, v]) => [k, { '$regex' : v, '$options' : 'i' }]));
+    .map(([k, v]) => [k, { '$regex' : v, '$options' : 'i'}]));
 
-    Offer.find(query)
+    Offer.find({$and:[query, {"active": true}, {"paid": true}]})
         .sort('-createdAt')
         .populate('offers_publishedByCompany')
         .then((offers) => {
@@ -240,76 +240,76 @@ module.exports.search = (req, res, next) => {
         .catch((err) => next(err));
 
  // Test active + paid
-    if (req.query.address) {
-        console.log('req.query', req.query)
-        Offer.find( {$and:[{"active": true}, {"paid": true}]} )
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                console.log('offers', offers)
-                const queryAddress = req.query.address.toLowerCase().slice(1)
-                console.log('req.query.search', queryAddress)
-                let filteredOffers = []
-                offers.forEach((offer) => {
-                    console.log('offer forEach', offer)
-                    const cityOffer = offer.address
-                    if (cityOffer.includes(queryAddress)) {
-                        console.log('offerWithQueries', offer)
-                        filteredOffers.push(offer);
-                    }
-                })
-                console.log('filteredOffers', filteredOffers)
-                return filteredOffers
-            })
-            .then((offers) => res.render('offers/offersList', {
-                offers
-            }))
-    } else if (req.query.category) {
-        Offer.find({$and:[{"active": true}, {"paid": true}, {category: req.query.category}]})
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                //console.log ('req.query.category', req.query.category)
-                //console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.contract) {
-        Offer.find({$and:[{"active": true}, {"paid": true}, {contract: req.query.contract}]})
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.studies) {
-        Offer.find({$and:[{"active": true}, {"paid": true}, {studies: req.query.studies}]})
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.experience) {
-        Offer.find({$and:[{"active": true}, {"paid": true}, {experience: req.query.experience}]})
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else if (req.query.salary) {
-        Offer.find({$and:[{"active": true}, {"paid": true}, {salary: req.query.salary}]})
-            .populate('offers_publishedByCompany')
-            .then((offers) => {
-                console.log('offers', offers)
-                res.render('offers/offersList', {
-                    offers
-                })
-            })
-    } else {
-        next()
-    }
+//     if (req.query.address) {
+//         console.log('req.query', req.query)
+//         Offer.find( {$and:[{"active": true}, {"paid": true}]} )
+//             .populate('offers_publishedByCompany')
+//             .then((offers) => {
+//                 console.log('offers', offers)
+//                 const queryAddress = req.query.address.toLowerCase().slice(1)
+//                 console.log('req.query.search', queryAddress)
+//                 let filteredOffers = []
+//                 offers.forEach((offer) => {
+//                     console.log('offer forEach', offer)
+//                     const cityOffer = offer.address
+//                     if (cityOffer.includes(queryAddress)) {
+//                         console.log('offerWithQueries', offer)
+//                         filteredOffers.push(offer);
+//                     }
+//                 })
+//                 console.log('filteredOffers', filteredOffers)
+//                 return filteredOffers
+//             })
+//             .then((offers) => res.render('offers/offersList', {
+//                 offers
+//             }))
+//     } else if (req.query.category) {
+//         Offer.find({$and:[{"active": true}, {"paid": true}, {category: req.query.category}]})
+//             .populate('offers_publishedByCompany')
+//             .then((offers) => {
+//                 //console.log ('req.query.category', req.query.category)
+//                 //console.log('offers', offers)
+//                 res.render('offers/offersList', {
+//                     offers
+//                 })
+//             })
+//     } else if (req.query.contract) {
+//         Offer.find({$and:[{"active": true}, {"paid": true}, {contract: req.query.contract}]})
+//             .populate('offers_publishedByCompany')
+//             .then((offers) => {
+//                 console.log('offers', offers)
+//                 res.render('offers/offersList', {
+//                     offers
+//                 })
+//             })
+//     } else if (req.query.studies) {
+//         Offer.find({$and:[{"active": true}, {"paid": true}, {studies: req.query.studies}]})
+//             .populate('offers_publishedByCompany')
+//             .then((offers) => {
+//                 console.log('offers', offers)
+//                 res.render('offers/offersList', {
+//                     offers
+//                 })
+//             })
+//     } else if (req.query.experience) {
+//         Offer.find({$and:[{"active": true}, {"paid": true}, {experience: req.query.experience}]})
+//             .populate('offers_publishedByCompany')
+//             .then((offers) => {
+//                 console.log('offers', offers)
+//                 res.render('offers/offersList', {
+//                     offers
+//                 })
+//             })
+//     } else if (req.query.salary) {
+//         Offer.find({$and:[{"active": true}, {"paid": true}, {salary: req.query.salary}]})
+//             .populate('offers_publishedByCompany')
+//             .then((offers) => {
+//                 console.log('offers', offers)
+//                 res.render('offers/offersList', {
+//                     offers
+//                 })
+//             })
+//     } else {
+//         next()
+//     }
 }

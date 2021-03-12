@@ -60,7 +60,7 @@ body, html{
 .btn {
     font-size: 1.2rem;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     margin: 10px;
     display:inline;
 }
@@ -368,9 +368,9 @@ body, html{
 
 #laptop {
     box-sizing: border-box;
-    background: url(http://176.32.230.43/testdigitalmarketingmentor.co.uk/wp-content/uploads/2016/07/laptop-1000x728-trans.png) center center no-repeat;
+    background: url('../img/laptop.png') center center no-repeat;
     background-size: contain;
-    padding: 11.7% 17.5% 15.4%;
+    padding: 11.1% 17.5% 14.9%;
     position: absolute;
     top: 0;
     left: 0;

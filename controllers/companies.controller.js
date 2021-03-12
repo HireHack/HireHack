@@ -241,6 +241,7 @@ module.exports.doEditPassword = (req, res, next) => {
                                     req.flash('flashMessage', '¡Tu contraseña ha sido actualizada correctamente!');
                                     res.redirect('/company-profile')
                                 })
+                                .catch((err) => next(err))
                         }
                     } else {
                         console.log('¡Error, por favor intentalo de nuevo!')

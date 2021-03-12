@@ -8,7 +8,8 @@ module.exports.home = (req, res, next) => {
 }
 
 module.exports.search = (req, res, next) => {
-    Offer.find({ 'name' : { '$regex' : req.query.search, '$options' : 'i' } })
+
+    Offer.find({ 'name' : { '$regex' : req.query.search, '$options' : 'i' }, 'active' : true, 'paid' : true })
         .then((offers) => res.render('offers/offersList', {offers}))
         .catch((err) => next(err));
 }
