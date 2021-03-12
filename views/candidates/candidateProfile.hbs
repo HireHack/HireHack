@@ -19,7 +19,7 @@
             <a type="button" class="text-secondary d-block show-more show-me">Ver más</a>
             
             <div id="description1" class="d-none">
-                <p><b>Descripción: </b> <br> {{offer.description}}</p>
+                <p class="text"><b>Descripción: </b> <br> {{offer.description}}</p>
                 <p><b>Lugar de la oferta: </b> {{offer.address}}</p>
                 <p><b>Requisitos:</b>
                     {{#each offer.skills}}
@@ -62,7 +62,7 @@
                             </p>
                             <p><b>Edad: </b> {{currentCandidate.age}} años</p>
                             <p><b>Mi curriculum: </b></p>
-                            <p id="description-profile" class="d-none"> {{currentCandidate.resume}}</p>
+                            <p id="description-profile" class="d-none text"> {{currentCandidate.resume}}</p>
                             <a type="button" id="show-more-profile" class="text-secondary d-block show-more"><b>Ver más</b></a>
                             <p><b>Dirección: </b>{{currentCandidate.address}}</p>
                             <p><b>Mi linkedIn: </b>{{currentCandidate.linkedin}}</p>

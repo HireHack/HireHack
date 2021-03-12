@@ -1,10 +1,13 @@
 <div class="profile-company">
-    <img class="company-img img-fluid" src="{{currentCompany.picture}}" alt="Foto de perfil">
+    <img class="company-img" src="{{currentCompany.picture}}" alt="Foto de perfil">
     <a type="button" class="btn btn-candidates" data-toggle="modal" data-target="#showMoreModal">Ver perfil de empresa</a>
     <h1 class="text-uppercase my-5">{{currentCompany.name}}</h1>
 </div>
 
-<div class="container-xl container-lg container-md container-fluid border rounded login py-3">
+<a type="button" class="btn btn-candidates show-more-company" data-toggle="modal" data-target="#showMoreModal">Ver perfil de empresa</a>
+
+<div class="container-xl container-lg container-md container-fluid login my-5">
+<div>
     <h2>Ofertas Publicadas</h2>
     {{!-- Crear Oferta --}}
     <a type="button" class="btn btn-offers" href="/offer-creation">Crear Oferta</a>
@@ -19,7 +22,7 @@
         <a type="button" class="text-secondary d-block show-more">Ver más</a>
 
         <div id="description" class="d-none description">
-            <p><b>Descripción: </b> <br> {{description}}</p>
+            <p class="text"><b>Descripción: </b><br>{{description}}</p>
             <p><b>Lugar de la oferta: </b> {{address}}</p>
             <p><b>Requisitos:</b>
             {{#each skills}}
@@ -60,7 +63,7 @@
                             <h2>{{currentCompany.name}}</h2>
                             <p><b>Email: </b>{{currentCompany.email}}</p>
                             <p><b>Descripción: </b>
-                            <p id="description-profile" class="d-none">{{currentCompany.description}}</p>
+                            <p id="description-profile" class="d-none text">{{currentCompany.description}}</p>
                             <a type="button" id="show-more-profile" class="text-secondary d-block show-more"><b>Ver más</b></a>
                             </br>
                             <p><b>Página web: </b> {{currentCompany.website}}</p>
