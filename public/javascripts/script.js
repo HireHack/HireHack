@@ -1,6 +1,6 @@
 //DELETE
 function clicked(input) {
-    return confirm(`¿Seguro que quieres eliminar?`);
+    return confirm(`¿Estás seguro?`);
 }
 
 function update(input) {
@@ -31,3 +31,13 @@ setTimeout(() => {
 //   axios.get(`http://localhost:3000/offers-list?page=${loadMore}`)
 //   .then((response) => console.log(response))
 // })
+
+window.onscroll = (ev) => {
+  if (window.scrollY > 2 && document.body.scrollTop <= 0) {
+    document.getElementById('navbar').classList.add('fixed-top');
+    document.getElementById('navbar').classList.add('bg-white');
+  } else if (window.scrollY < 2) {
+    document.getElementById('navbar').classList.remove('fixed-top');
+    document.getElementById('navbar').classList.remove('bg-white');
+  }
+}

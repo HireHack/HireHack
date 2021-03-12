@@ -1,10 +1,10 @@
 //OFFERS LIST
 window.onscroll = (ev) => {
     if (window.scrollY > 65 && document.body.scrollTop <= 0) {
-      document.getElementById('offer-list-navbar').classList.add('fixed-top');
+    //   document.getElementById('offer-list-navbar').classList.add('fixed-top');
       document.getElementById('offer-list-navbar').classList.add('bg-white');
     } else if (window.scrollY < 30) {
-      document.getElementById('offer-list-navbar').classList.remove('fixed-top');
+    //   document.getElementById('offer-list-navbar').classList.remove('fixed-top');
       document.getElementById('offer-list-navbar').classList.remove('bg-white');
     }
   }
