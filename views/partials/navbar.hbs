@@ -1,19 +1,18 @@
 
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-
+<nav id="navbar" class="navbar container-fluid d-flex align-items-baseline">
+    {{!-- <div class="container-fluid"> --}}
+{{!-- 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> --}}
 
-        <a href="/">
-            <img class="logo-header" src="/img/HireHack.png" alt="HireHack logo">
+        <a href="/" class=" col-sm-4 col-sm-3 col-xs-2">
+            <img class="logo-header w-50 rounded" src="/img/HireHack.png" alt="HireHack logo">
         </a>
 
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
         <div id="navbarTogglerDemo03">
-
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {{#if currentCompany}}
                 <li class="nav-item">
@@ -50,12 +49,14 @@
             </ul>
             {{#unless currentCompany}}
             {{#unless currentCandidate}}
-            <a class="nav-link active btn btn-offers" aria-current="page" href="/offers-list">Ofertas</a>
-            <button type="button" class="btn btn-access" data-toggle="modal" data-target="#accessModal"> Acceso </button> 
+            <div class="d-flex flex-row col-sm-8 col-sm-8">
+                <a class="nav-link active btn btn-offers mr-3" aria-current="page" href="/offers-list">Ofertas</a>
+                <button type="button" class="btn btn-access" data-toggle="modal" data-target="#accessModal"> Acceso </button> 
+            </div>
             {{/unless}}
             {{/unless}}
         </div>
-    </div>
+    {{!-- </div> --}}
 </nav>
 
 <div class="modal fade" id="accessModal">

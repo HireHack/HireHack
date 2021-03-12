@@ -54,15 +54,15 @@ body, html{
 }
 
 .logo-header{
-    width: 10%;
+    border-radius: 0.1rem;
 }
 
 .btn {
     font-size: 1.2rem;
-    padding: 10px 20px;
+    padding: 0.25rem 0.75rem;
     border-radius: 12px;
-    margin: 10px;
-    display:inline;
+    border-width: 0.15rem;
+    margin: 0.1rem;
 }
 
 .btn-offers {
@@ -81,6 +81,7 @@ body, html{
     color: #276678;
     border-color: #276678;
     background-color: #fff;
+    padding: 0.25rem 0.5rem;
 }
 
 .btn-access:hover {
@@ -96,6 +97,7 @@ body, html{
     border-color: #276678;
     background-color: #fff;
     align-self: center;
+    padding: 0.25rem 0.5rem;
 }
 
 .btn-logout:hover {
@@ -448,7 +450,7 @@ header {
     background-position: en;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 40rem;
+    height: 35rem;
     z-index: 1;
 }
 

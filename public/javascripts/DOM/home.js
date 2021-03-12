@@ -1,3 +1,14 @@
+window.onscroll = (ev) => {
+    if (window.scrollY > 2 && document.body.scrollTop <= 0) {
+      document.getElementById('navbar').classList.add('fixed-top');
+      document.getElementById('navbar').classList.add('bg-white');
+    } else if (window.scrollY < 2) {
+      document.getElementById('navbar').classList.remove('fixed-top');
+      document.getElementById('navbar').classList.remove('bg-white');
+    }
+  }
+
+
 document.getElementById('show-skills').addEventListener('click', () => {
     document.getElementById('skills').classList.remove('d-none');
     //document.getElementById('skills').classList.add('d-flex');
