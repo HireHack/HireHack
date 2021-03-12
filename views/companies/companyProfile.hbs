@@ -4,15 +4,14 @@
     <h1 class="text-uppercase my-5">{{currentCompany.name}}</h1>
 </div>
 
-<div class="container-xl container-lg container-md container-fluid login my-5">
-<div>
+<div class="container-xl container-lg container-md container-fluid border rounded login py-3">
     <h2>Ofertas Publicadas</h2>
     {{!-- Crear Oferta --}}
     <a type="button" class="btn btn-offers" href="/offer-creation">Crear Oferta</a>
     
     {{!-- Mostrar oferta --}}
     {{#each offers}}
-    <div class="border rounded p-3 mb-2">
+    <div class="border rounded p-3 my-2">
         <h3>{{name}}</h3>
         <p>Estado: {{#if active}}<span style="color: green;">ABIERTA</span>{{else}}<span
                 style="color: red;">CERRADA</span>{{/if}}</p>

@@ -1,21 +1,21 @@
 
-<nav id="navbar" class="navbar container-fluid d-flex align-items-baseline">
-    {{!-- <div class="container-fluid"> --}}
+<nav id="navbar" class="navbar container-fluid d-flex justify-content-around align-items-baseline">
+    <div class="container-fluid">
 {{!-- 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button> --}}
-
-        <a href="/" class=" col-sm-4 col-sm-3 col-xs-2">
-            <img class="logo-header w-50 rounded" src="/img/HireHack.png" alt="HireHack logo">
+        
+        <a href="/" class="d-sm-inline w-25">
+            <img class="logo-header rounded img-fluid" src="/img/HireHack.png" alt="HireHack logo">
         </a>
 
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
-        <div id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div id="navbarTogglerDemo03" class="col-4 justify-content-end">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-row col-sm-8 col-sm-8 px-1">
                 {{#if currentCompany}}
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}"></a>
                 </li>
                 <li class="profile-status">
@@ -50,8 +50,8 @@
             {{#unless currentCompany}}
             {{#unless currentCandidate}}
             <div class="d-flex flex-row col-sm-8 col-sm-8">
-                <a class="nav-link active btn btn-offers mr-3" aria-current="page" href="/offers-list">Ofertas</a>
-                <button type="button" class="btn btn-access" data-toggle="modal" data-target="#accessModal"> Acceso </button> 
+                <a class="nav-link active btn btn-lg btn-offers mr-3" aria-current="page" href="/offers-list">Ofertas</a>
+                <button type="button" class="btn btn-lg btn-access" data-toggle="modal" data-target="#accessModal"> Acceso </button> 
             </div>
             {{/unless}}
             {{/unless}}
@@ -82,5 +82,3 @@
     </div>
 </div>
 </div>
-
-
