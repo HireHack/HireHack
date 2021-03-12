@@ -99,7 +99,7 @@ passport.use('local-auth-candidates', new LocalStrategy({
 passport.use('google-auth-companies', new GoogleStrategy({
     clientID: process.env.GCO_CLIENT_ID,
     clientSecret: process.env.GCO_CLIENT_SECRET,
-    callbackURL: process.env.GCO_REDIRECT_URI_COMPANIES_LOCAL,
+    callbackURL: process.env.GCO_REDIRECT_URI_COMPANIES,
 }, (accessToken, refreshToken, profile, next) => {
     const googleID = profile.id
     const email = profile.emails[0] ? profile.emails[0].value : undefined
@@ -144,7 +144,7 @@ passport.use('google-auth-companies', new GoogleStrategy({
 passport.use('google-auth-candidates', new GoogleStrategy({
     clientID: process.env.GCA_CLIENT_ID,
     clientSecret: process.env.GCA_CLIENT_SECRET,
-    callbackURL: process.env.GCO_REDIRECT_URI_CANDIDATES_LOCAL,
+    callbackURL: process.env.GCO_REDIRECT_URI_CANDIDATES,
 }, (accessToken, refreshToken, profile, next) => {
     const googleID = profile.id
     const email = profile.emails[0] ? profile.emails[0].value : undefined
