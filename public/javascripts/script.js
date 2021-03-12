@@ -1,6 +1,6 @@
 //DELETE
 function clicked(input) {
-    return confirm(`¿Seguro que quieres eliminar?`);
+    return confirm(`¿Estás seguro?`);
 }
 
 function update(input) {
