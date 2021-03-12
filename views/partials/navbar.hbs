@@ -12,10 +12,10 @@
         </a>
 
         {{!-- <a class="navbar-brand" href="#">HireHack</a> --}}
-        <div id="navbarTogglerDemo03" class="col-4 justify-content-end">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-row col-sm-8 col-sm-8 px-1">
+        <div id="navbarTogglerDemo03" class="">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-row px-2">
                 {{#if currentCompany}}
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="/{{#if currentCompany}}company-profile{{else}}company-login{{/if}}"></a>
                 </li>
                 <li class="profile-status">
@@ -24,7 +24,7 @@
                 {{#if currentCompany}}
                 <form action="/company-logout" method="POST">
                     <li>
-                        <button class="nav-link active btn btn-logout">Cerrar sesión</button>
+                        <button class="nav-link active btn btn-logout ml-3">Cerrar sesión</button>
                     </li>
                 </form>
                 {{/if}}
