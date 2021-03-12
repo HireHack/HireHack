@@ -226,7 +226,7 @@ body, html{
 
 .company-img {
     width: 100%;
-    height: 45rem;
+    height: auto;
 }
 
 .profile-company > a {
@@ -577,15 +577,59 @@ footer a {
     padding: 10px;
 }
 
+.show-more-company{
+    display: none
+}
+
 /* MEDIA-QUERIES */
+
+@media all and (max-width: 700px) {
+    .profile-company>a {
+        display: none;
+    }
+    .show-more-company{
+        display: inline;
+        transform: translate(92%, 20%);
+    }
+}
 
 @media all and (max-width: 634px) {
 
     .login-btn{
         display: block;
     }
+
     .btn-google {
-        margin-left: 10px;
+        margin-left: 10px 0 0 10px;
+    } 
+    .show-more-company {
+        display: inline;
+        margin: 0 auto;
+        transform: translate(35%, 20%);
     }
-    
+}
+
+@media all and (max-width: 1200px) {
+    .profile-company>a {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        position: absolute;
+        right: 2rem;
+        top: 70%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media all and (max-width: 769px) {
+    .profile-company>a {
+        font-size: .8rem;
+        margin-bottom: .5rem 1.2rem;
+        padding: 0 1rem;
+        position: absolute;
+        right: 2rem;
+        top: 65%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+    }
 }
