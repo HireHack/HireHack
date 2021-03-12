@@ -50,7 +50,7 @@ body, html{
     transition: all .3s;
     /* position: fixed; */
     width: 100%;
-    z-index: 1;
+    z-index: 1050;
     top:0;
 }
 
@@ -70,9 +70,18 @@ body, html{
     background-color: white;
     position: -webkit-sticky;
     position: sticky;
-    top: 4rem;
+    top: 4.3rem;
     z-index: 1030;
 }
+
+.sticky-top3 {
+    background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4.2rem;
+    z-index: 1030;
+}
+
 
 .thin {
     background-color: #fff;
