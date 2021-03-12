@@ -49,6 +49,14 @@ body, html{
     top:0;
 }
 
+.login-btn{
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px;
+    display:inline;
+}
+
 .thin {
     background-color: #fff;
 }
@@ -139,10 +147,6 @@ body, html{
 
 .google-sign-in{
     width: 22px;
-}
-
-.btn-google{
-    padding: 12px 10px;
 }
 
 .not-register > a {
@@ -570,3 +574,14 @@ footer a {
 }
 
 /* MEDIA-QUERIES */
+
+@media all and (max-width: 634px) {
+
+    .login-btn{
+        display: block;
+    }
+    .btn-google {
+        margin-left: 10px;
+    }
+    
+}
