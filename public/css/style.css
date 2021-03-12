@@ -50,6 +50,18 @@ body, html{
     top:0;
 }
 
+#fake-candidate {
+    z-index: -1;
+}
+
+.sticky-top2 {
+    background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4rem;
+    z-index: 1030;
+}
+
 .thin {
     background-color: #fff;
 }
