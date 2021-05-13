@@ -88,20 +88,11 @@ HireHack is structured as a server-side rendered application whose endpoints are
 ## Frontend
 Hirehack is rendered into the frontend using _Handlebars_ and includes the following features:
 
-- A **Signup/Login** page with different options:
-  - __Login__
-  - __Signup__
-  - _Go to email validation_
-  - _Email validated_
-  - __Finish profile__
-- A **Meal** page where you can display the main food diary, which has two main subsections:
-  - _Total Calories and Macros Summary_
-  - _Recipes List_
-- A **Single Recipe** page to display the details of a recipe the user clicked on. The user can add a recipe to its menu from this page.
-- A **Sport** page to display the live running/walking tracker which has two options:
-  - _Activity summary whenever an activity has been logged for the specific date_
-  - _Activity tracker where the user can start an activity whenever there is no activity logged_
-- A **Profile** page to show a form where the user can edit his parameters and personal information.
+<img src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" data-canonical-src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" width="25%" />
+
+<img src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" data-canonical-src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" width="25%" />
+
+<img src="https://i.ibb.co/yyYcP6g/Gestionar-candidatos.gif" data-canonical-src="https://i.ibb.co/yyYcP6g/Gestionar-candidatos.gif" width="25%" />
 
 ## Setup
 - Fork this repo
