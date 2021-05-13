@@ -88,11 +88,11 @@ HireHack is structured as a server-side rendered application whose endpoints are
 ## Frontend
 Hirehack is rendered into the frontend using _Handlebars_ and includes the following features:
 
-<img src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" data-canonical-src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" width="25%" />
+<img src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" data-canonical-src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" width="50%" />
 
-<img src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" data-canonical-src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" width="25%" />
+<img src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" data-canonical-src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" width="50%" />
 
-<img src="https://i.ibb.co/yyYcP6g/Gestionar-candidatos.gif" data-canonical-src="https://i.ibb.co/yyYcP6g/Gestionar-candidatos.gif" width="25%" />
+<img src="https://i.ibb.co/WgnxDbR/Application.gif" data-canonical-src="https://i.ibb.co/WgnxDbR/Application.gif" width="50%"/>
 
 ## Setup
 - Fork this repo
