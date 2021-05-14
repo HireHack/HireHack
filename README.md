@@ -110,7 +110,7 @@ Hirehack is rendered into the frontend using _Handlebars_ and includes the follo
 
 
 #### - How to publish an offer as a company?
-<img src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" data-canonical-src="https://i.ibb.co/XJpMVK7/Create-Offer.gif" width="50%" />
+<img src="https://i.ibb.co/DKkTLv9/Create-Offer.gif" data-canonical-src="https://i.ibb.co/DKkTLv9/Create-Offer.gif" width="50%" />
 
 
 #### - Find the perfect candidate among all applicants: 
