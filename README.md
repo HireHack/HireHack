@@ -5,6 +5,7 @@
 ### Developers: Ángela Herrador López & Javier Repilado López.
 <p>HireHack is a job hunt portal developed as a responsive full-stack web application.</p>
 <p>If you want to check it out go to <a href="https://hire-hack.herokuapp.com/">HireHack</a>
+<p>To watch the full live demo on YouTube <a href="https://www.youtube.com/watch?v=8TWo-3_LpZA" target="_blank">click here</a>
 
 ## Technologies
 - **Server:** Node.js with Express
@@ -101,7 +102,7 @@ HireHack is structured as a server-side rendered application whose endpoints are
 | GET    | /search  | Search offers from main manu                                                                                                           | ![image](https://user-images.githubusercontent.com/70661191/118108909-d86cfe80-b3e0-11eb-8ef1-f76295aa55ea.png)|
 
 
-
+<br/>
 ## Frontend
 Hirehack is rendered into the frontend using _Handlebars_ and includes the following features:
 
@@ -110,7 +111,7 @@ Hirehack is rendered into the frontend using _Handlebars_ and includes the follo
 
 
 #### - How to publish an offer as a company?
-<img src="https://i.ibb.co/DKkTLv9/Create-Offer.gif" data-canonical-src="https://i.ibb.co/DKkTLv9/Create-Offer.gif" width="50%" />
+<img src="https://raw.githubusercontent.com/HireHack/HireHack/main/public/img/CreateOffer.gif" data-canonical-src="https://raw.githubusercontent.com/HireHack/HireHack/main/public/img/CreateOffer.gif" width="50%" />
 
 
 #### - Find the perfect candidate among all applicants: 
