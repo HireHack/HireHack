@@ -94,15 +94,12 @@ HireHack is structured as a server-side rendered application whose endpoints are
 | POST    | /apply/:id        | A logged in candidate applies to offer                                                                                                          |![image](https://user-images.githubusercontent.com/70661191/118108893-d440e100-b3e0-11eb-8e9e-857e9883e2c8.png)|
 | GET    | /application-search  | Filters to select the candidates                                                                                                        | ![image](https://user-images.githubusercontent.com/70661191/118108893-d440e100-b3e0-11eb-8e9e-857e9883e2c8.png)|
 
-
 ### Misc
 | Method | Endpoint            | Action                                                                                                                                  | Passport Auth |
 | ------ | ------------------- | ------------------------------------------------------  | ---- |
 | GET    | /        | Go home                                                                                                           |![image](https://user-images.githubusercontent.com/70661191/118108909-d86cfe80-b3e0-11eb-8ef1-f76295aa55ea.png) |
 | GET    | /search  | Search offers from main manu                                                                                                           | ![image](https://user-images.githubusercontent.com/70661191/118108909-d86cfe80-b3e0-11eb-8ef1-f76295aa55ea.png)|
 
-
-<br/>
 ## Frontend
 Hirehack is rendered into the frontend using _Handlebars_ and includes the following features:
 
