@@ -11,7 +11,7 @@
 - **Server:** Node.js with Express
 - **Data base:** MongoDB with Mongoose
 - **Server-side** rendering with **Handlebars**
-- Authentication with Passport: local, googleOauth2 and linkedingOauth2
+- Authentication with Passport: local, googleOauth2 and linkedinOauth2
 - Design with CSS and Bootstrap V5
 - External API’s: Stripe and Google Maps (geocoder)
 - Cloudinary
