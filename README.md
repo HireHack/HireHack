@@ -104,15 +104,15 @@ HireHack is structured as a server-side rendered application whose endpoints are
 Hirehack is rendered into the frontend using _Handlebars_ and includes the following features:
 
 #### - Find suitable job opportunities as a candidate among thousands of offers and apply to them:
-<img src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" data-canonical-src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" width="50%" />
+<img src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" data-canonical-src="https://i.ibb.co/bJj8zLQ/Offer-Candidate.gif" width="75%" />
 
 
 #### - How to publish an offer as a company?
-<img src="https://raw.githubusercontent.com/HireHack/HireHack/main/public/img/CreateOffer.gif" data-canonical-src="https://raw.githubusercontent.com/HireHack/HireHack/main/public/img/CreateOffer.gif" width="50%" />
+<img src="https://raw.githubusercontent.com/HireHack/HireHack/main/public/img/CreateOffer.gif" data-canonical-src="https://raw.githubusercontent.com/HireHack/HireHack/main/public/img/CreateOffer.gif" width="75%" />
 
 
 #### - Find the perfect candidate among all applicants: 
-<img src="https://i.ibb.co/WgnxDbR/Application.gif" data-canonical-src="https://i.ibb.co/WgnxDbR/Application.gif" width="50%"/>
+<img src="https://i.ibb.co/WgnxDbR/Application.gif" data-canonical-src="https://i.ibb.co/WgnxDbR/Application.gif" width="%"/>
 
 ## Setup
 - Fork this repo
